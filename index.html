@@ -370,7 +370,7 @@
     <div class="container">
         <div class="header">
             <h1>📊 Análisis Unificado de Transacciones</h1>
-            <p>Período: 14 de Diciembre 2025 - 28 de Diciembre 2025</p>
+            <p>Período: 14 de Diciembre 2025 - 29 de Diciembre 2025</p>
         </div>
 
         <div class="tabs">
@@ -386,13 +386,13 @@
             <div class="cards">
                 <div class="card card-blue">
                     <div class="card-header">Total Transacciones</div>
-                    <div class="card-value">3.09M</div>
-                    <div class="card-label">15 días analizados</div>
+                    <div class="card-value">3.28M</div>
+                    <div class="card-label">16 días analizados</div>
                 </div>
                 <div class="card card-red">
                     <div class="card-header">Total Errores</div>
-                    <div class="card-value">307K</div>
-                    <div class="card-label">245,669 errores promedio</div>
+                    <div class="card-value">327K</div>
+                    <div class="card-label">Período completo</div>
                 </div>
                 <div class="card card-purple">
                     <div class="card-header">Tasa Error Promedio</div>
@@ -414,10 +414,10 @@
             <div class="info-box">
                 <h4>📌 Hallazgos Principales</h4>
                 <p>
-                    Durante el período analizado se procesaron más de 3 millones de transacciones con una tasa de error promedio de 9.93%. 
+                    Durante el período analizado se procesaron más de 3.2 millones de transacciones con una tasa de error promedio de 9.98%. 
                     El día con mayor volumen fue el 19 de diciembre con 280,062 transacciones, mientras que el 25 de diciembre 
                     (día festivo) registró el menor volumen con 94,348 transacciones. Se identificaron 203 tipos únicos de errores, 
-                    siendo H03 (35.2%) y H23 (20.4%) los más frecuentes.
+                    siendo H03 (35.2%) y H23 (20.4%) los más frecuentes. El 29 de diciembre mostró una recuperación con 189,068 transacciones.
                 </p>
             </div>
         </div>
@@ -603,6 +603,44 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Comparativo Domingo: 22 Dic vs 29 Dic -->
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <div class="comparison-title">🔄 Domingo 22 Dic vs 29 Dic</div>
+                        <div class="comparison-badge badge-positive">↓ -28.3% errores</div>
+                    </div>
+                    <div class="comparison-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">Total Transacciones</span>
+                            <div>
+                                <span class="stat-value">268,639 → 189,068</span>
+                                <span class="stat-change change-negative">-29.6%</span>
+                            </div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Total Errores</span>
+                            <div>
+                                <span class="stat-value">27,798 → 19,937</span>
+                                <span class="stat-change change-positive">-28.3%</span>
+                            </div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Tasa de Error</span>
+                            <div>
+                                <span class="stat-value">10.35% → 10.55%</span>
+                                <span class="stat-change change-negative">+0.20pp</span>
+                            </div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Tipos Únicos de Error</span>
+                            <div>
+                                <span class="stat-value">193 → 181</span>
+                                <span class="stat-change change-positive">-6.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="chart-container">
@@ -615,13 +653,19 @@
                 <canvas id="comparison2Chart"></canvas>
             </div>
 
+            <div class="chart-container">
+                <div class="chart-title">Comparativo Visual: 22 Dic vs 29 Dic</div>
+                <canvas id="comparison3Chart"></canvas>
+            </div>
+
             <div class="alert-box">
                 <h4>⚠️ Análisis de Comparativos</h4>
                 <ul>
                     <li><strong>Viernes (20 vs 27):</strong> A pesar de tener un 9.5% menos de transacciones, los errores aumentaron 6.5%, elevando la tasa de error en 1.68 puntos porcentuales. Esto sugiere problemas de estabilidad en la segunda semana.</li>
                     <li><strong>Sábado (21 vs 28):</strong> Mejor comportamiento con reducción de errores del 4.3% aunque las transacciones bajaron 12.7%. La tasa de error aumentó solo 0.83pp, lo que es más manejable.</li>
-                    <li><strong>Patrón observado:</strong> Los sábados muestran mejor rendimiento que los viernes en términos de control de errores, posiblemente por menor carga operativa.</li>
-                    <li><strong>Diversidad de errores:</strong> Los viernes incrementan los tipos de error únicos, mientras que los sábados los reducen.</li>
+                    <li><strong>Domingo (22 vs 29):</strong> Reducción significativa tanto en transacciones (-29.6%) como en errores (-28.3%). La tasa de error se mantuvo relativamente estable (+0.20pp), indicando que el sistema manejó mejor la carga reducida.</li>
+                    <li><strong>Patrón observado:</strong> Los fines de semana muestran mejor consistencia. El domingo 29 tuvo menor carga que el 22, posiblemente por estar más cerca de fin de año.</li>
+                    <li><strong>Diversidad de errores:</strong> Los viernes incrementan los tipos de error únicos, mientras que los sábados y domingos tienden a reducirlos.</li>
                 </ul>
             </div>
         </div>
@@ -713,11 +757,11 @@
     <script>
         // Datos consolidados
         const dailyData = {
-            labels: ['14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic', '21-Dic', '22-Dic', '23-Dic', '24-Dic', '25-Dic', '26-Dic', '27-Dic', '28-Dic'],
-            totalTrx: [169437, 241682, 237653, 240926, 221928, 280062, 189876, 140913, 268639, 277621, 234766, 94348, 196449, 171927, 122983],
-            errorTrx: [11589, 33486, 21668, 22390, 20336, 31813, 18072, 12055, 27798, 27743, 22268, 9264, 17626, 19253, 11542],
-            errorRate: [6.84, 13.86, 9.12, 9.29, 9.16, 11.36, 9.52, 8.56, 10.35, 9.99, 9.48, 9.82, 8.97, 11.20, 9.39],
-            uniqueErrors: [157, 171, 175, 181, 173, 188, 168, 162, 193, 182, 165, 143, 171, 177, 158]
+            labels: ['14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic', '21-Dic', '22-Dic', '23-Dic', '24-Dic', '25-Dic', '26-Dic', '27-Dic', '28-Dic', '29-Dic'],
+            totalTrx: [169437, 241682, 237653, 240926, 221928, 280062, 189876, 140913, 268639, 277621, 234766, 94348, 196449, 171927, 122983, 189068],
+            errorTrx: [11589, 33486, 21668, 22390, 20336, 31813, 18072, 12055, 27798, 27743, 22268, 9264, 17626, 19253, 11542, 19937],
+            errorRate: [6.84, 13.86, 9.12, 9.29, 9.16, 11.36, 9.52, 8.56, 10.35, 9.99, 9.48, 9.82, 8.97, 11.20, 9.39, 10.55],
+            uniqueErrors: [157, 171, 175, 181, 173, 188, 168, 162, 193, 182, 165, 143, 171, 177, 158, 181]
         };
 
         function switchView(view) {
@@ -908,6 +952,31 @@
                     label: '28 Diciembre',
                     data: [122983, 11542, 9.39, 158],
                     backgroundColor: '#10b981',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: { legend: { position: 'top' } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        // Comparison 3: 22 vs 29 Dic
+        new Chart(document.getElementById('comparison3Chart'), {
+            type: 'bar',
+            data: {
+                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
+                datasets: [{
+                    label: '22 Diciembre',
+                    data: [268639, 27798, 10.35, 193],
+                    backgroundColor: '#3b82f6',
+                    borderRadius: 8
+                }, {
+                    label: '29 Diciembre',
+                    data: [189068, 19937, 10.55, 181],
+                    backgroundColor: '#a855f7',
                     borderRadius: 8
                 }]
             },
