@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,8 +87,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .cards {
@@ -141,10 +149,21 @@
             margin-bottom: 8px;
         }
 
-        .card-red .card-value { color: #dc2626; }
-        .card-green .card-value { color: #16a34a; }
-        .card-blue .card-value { color: #2563eb; }
-        .card-purple .card-value { color: #9333ea; }
+        .card-red .card-value {
+            color: #dc2626;
+        }
+
+        .card-green .card-value {
+            color: #16a34a;
+        }
+
+        .card-blue .card-value {
+            color: #2563eb;
+        }
+
+        .card-purple .card-value {
+            color: #9333ea;
+        }
 
         .card-label {
             font-size: 0.9rem;
@@ -360,12 +379,15 @@
                 font-size: 1.8rem;
             }
 
-            .cards, .week-cards, .comparison-container {
+            .cards,
+            .week-cards,
+            .comparison-container {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -414,15 +436,22 @@
             <div class="info-box">
                 <h4>📌 Hallazgos Principales</h4>
                 <p>
-                    Durante el período analizado se procesaron más de 4.8 millones de transacciones en 24 días con una tasa de error promedio de 9.12%. 
-                    El día con mayor volumen fue el <strong>19 de diciembre con 280,062 transacciones</strong>, mientras que el 25 de diciembre 
-                    (día festivo) registró el menor volumen con 94,348 transacciones. Se identificaron hasta 203 tipos únicos de errores durante el pico de diciembre, 
+                    Durante el período analizado se procesaron más de 4.8 millones de transacciones en 24 días con una
+                    tasa de error promedio de 9.12%.
+                    El día con mayor volumen fue el <strong>19 de diciembre con 280,062 transacciones</strong>, mientras
+                    que el 25 de diciembre
+                    (día festivo) registró el menor volumen con 94,348 transacciones. Se identificaron hasta 203 tipos
+                    únicos de errores durante el pico de diciembre,
                     siendo H03 (35.2%) y H23 (20.4%) los más frecuentes en el análisis histórico.
                     <br><br>
-                    <strong>Tendencia destacada de mejora:</strong> Los primeros días de enero 2026 muestran una clara mejora en la estabilidad del sistema. 
-                    La <strong>Semana 3 (29 dic - 04 ene)</strong> logró la mejor tasa de error del período con <strong>8.11%</strong>, y el 
-                    <strong>06 de enero alcanzó la marca más baja con 6.67%</strong>, representando una reducción de más de 7 puntos porcentuales 
-                    respecto al pico del 15 de diciembre (13.86%). Los tipos únicos de error también disminuyeron a 138 en el día 06, 
+                    <strong>Tendencia destacada de mejora:</strong> Los primeros días de enero 2026 muestran una clara
+                    mejora en la estabilidad del sistema.
+                    La <strong>Semana 3 (29 dic - 04 ene)</strong> logró la mejor tasa de error del período con
+                    <strong>8.11%</strong>, y el
+                    <strong>06 de enero alcanzó la marca más baja con 6.67%</strong>, representando una reducción de más
+                    de 7 puntos porcentuales
+                    respecto al pico del 15 de diciembre (13.86%). Los tipos únicos de error también disminuyeron a 138
+                    en el día 06,
                     evidenciando las optimizaciones implementadas en el nuevo año y mejor control operativo del sistema.
                 </p>
             </div>
@@ -548,13 +577,18 @@
             <div class="info-box">
                 <h4>📊 Análisis Comparativo Semanal</h4>
                 <p>
-                    La Semana 2 muestra una reducción del <strong>20.7%</strong> en transacciones totales y <strong>20.9%</strong> en errores respecto a la Semana 1. 
+                    La Semana 2 muestra una reducción del <strong>20.7%</strong> en transacciones totales y
+                    <strong>20.9%</strong> en errores respecto a la Semana 1.
                     La tasa de error se mantuvo prácticamente estable (9.95% vs 9.92%, -0.03pp).
                     <br><br>
-                    <strong>La Semana 3 (29 Dic - 04 Ene) marca un punto de inflexión importante:</strong> aunque las transacciones aumentaron 3.8% respecto a la Semana 2, 
-                    los errores se redujeron dramáticamente en <strong>15.1%</strong>, resultando en la mejor tasa de error del período (<strong>8.11%</strong>). 
-                    Esto representa una mejora de 1.84 puntos porcentuales respecto a la Semana 1 y 1.81pp respecto a la Semana 2, 
-                    evidenciando las optimizaciones implementadas durante el fin de año e inicio de 2026. La reducción en tipos únicos de error (203 → 184) 
+                    <strong>La Semana 3 (29 Dic - 04 Ene) marca un punto de inflexión importante:</strong> aunque las
+                    transacciones aumentaron 3.8% respecto a la Semana 2,
+                    los errores se redujeron dramáticamente en <strong>15.1%</strong>, resultando en la mejor tasa de
+                    error del período (<strong>8.11%</strong>).
+                    Esto representa una mejora de 1.84 puntos porcentuales respecto a la Semana 1 y 1.81pp respecto a la
+                    Semana 2,
+                    evidenciando las optimizaciones implementadas durante el fin de año e inicio de 2026. La reducción
+                    en tipos únicos de error (203 → 184)
                     también sugiere una mejor estabilidad y control del sistema.
                 </p>
             </div>
@@ -1040,18 +1074,33 @@
             <div class="alert-box">
                 <h4>⚠️ Análisis de Comparativos</h4>
                 <ul>
-                    <li><strong>Viernes (20 vs 27):</strong> A pesar de tener un 9.5% menos de transacciones, los errores aumentaron 6.5%, elevando la tasa de error en 1.68 puntos porcentuales. Esto sugiere problemas de estabilidad en la segunda semana.</li>
-                    <li><strong>Sábado (21 vs 28):</strong> Mejor comportamiento con reducción de errores del 4.3% aunque las transacciones bajaron 12.7%. La tasa de error aumentó solo 0.83pp, lo que es más manejable.</li>
-                    <li><strong>Domingo (22 vs 29):</strong> Reducción significativa tanto en transacciones (-29.6%) como en errores (-28.3%). La tasa de error se mantuvo relativamente estable (+0.20pp).</li>
-                    <li><strong>Lunes (23 vs 30):</strong> Reducción moderada en transacciones (-8.4%) con errores disminuyendo levemente (-2.6%). La tasa de error aumentó 0.64pp.</li>
-                    <li><strong>Martes (24 vs 31):</strong> ¡Excelente mejora! Reducción de 51.5% en errores superando ampliamente la reducción de transacciones (32.6%). La tasa de error bajó de 9.48% a 6.83%.</li>
-                    <li><strong>Miércoles (25 vs 01 Ene):</strong> Recuperación post-festivo con aumento de transacciones (+66.4%). Los errores aumentaron 18.1% pero la tasa bajó de 9.82% a 6.97%.</li>
-                    <li><strong>Jueves (26 vs 02 Ene):</strong> Incremento proporcional de transacciones (+22.7%) y errores (+21.1%). Tasa de error se mantuvo estable en 8.85-8.97%.</li>
-                    <li><strong>Viernes (27 vs 03 Ene):</strong> Gran aumento de transacciones (+54.8%) con incremento controlado de errores (+15.5%). Tasa bajó significativamente de 11.20% a 8.35%.</li>
-                    <li><strong>Sábado (28 vs 04 Ene):</strong> Aumento de transacciones (+24.3%) con reducción de errores (-3.9%). Tasa mejoró de 9.39% a 7.26%.</li>
-                    <li><strong>Domingo (29 vs 05 Ene):</strong> Incremento de transacciones (+35.9%) y errores (+15.7%). Tasa mejoró de 10.55% a 8.98%.</li>
-                    <li><strong>Lunes (30 vs 06 Ene):</strong> ¡Mejora espectacular! Reducción masiva de errores (-64.2%) con tasa bajando de 10.63% a 6.67%, la mejor del período de enero.</li>
-                    <li><strong>Patrón general:</strong> Enero 2026 muestra mejor estabilidad que diciembre, con tasas de error consistentemente por debajo del 9%, especialmente destacando el 06 de enero con 6.67%.</li>
+                    <li><strong>Viernes (20 vs 27):</strong> A pesar de tener un 9.5% menos de transacciones, los
+                        errores aumentaron 6.5%, elevando la tasa de error en 1.68 puntos porcentuales. Esto sugiere
+                        problemas de estabilidad en la segunda semana.</li>
+                    <li><strong>Sábado (21 vs 28):</strong> Mejor comportamiento con reducción de errores del 4.3%
+                        aunque las transacciones bajaron 12.7%. La tasa de error aumentó solo 0.83pp, lo que es más
+                        manejable.</li>
+                    <li><strong>Domingo (22 vs 29):</strong> Reducción significativa tanto en transacciones (-29.6%)
+                        como en errores (-28.3%). La tasa de error se mantuvo relativamente estable (+0.20pp).</li>
+                    <li><strong>Lunes (23 vs 30):</strong> Reducción moderada en transacciones (-8.4%) con errores
+                        disminuyendo levemente (-2.6%). La tasa de error aumentó 0.64pp.</li>
+                    <li><strong>Martes (24 vs 31):</strong> ¡Excelente mejora! Reducción de 51.5% en errores superando
+                        ampliamente la reducción de transacciones (32.6%). La tasa de error bajó de 9.48% a 6.83%.</li>
+                    <li><strong>Miércoles (25 vs 01 Ene):</strong> Recuperación post-festivo con aumento de
+                        transacciones (+66.4%). Los errores aumentaron 18.1% pero la tasa bajó de 9.82% a 6.97%.</li>
+                    <li><strong>Jueves (26 vs 02 Ene):</strong> Incremento proporcional de transacciones (+22.7%) y
+                        errores (+21.1%). Tasa de error se mantuvo estable en 8.85-8.97%.</li>
+                    <li><strong>Viernes (27 vs 03 Ene):</strong> Gran aumento de transacciones (+54.8%) con incremento
+                        controlado de errores (+15.5%). Tasa bajó significativamente de 11.20% a 8.35%.</li>
+                    <li><strong>Sábado (28 vs 04 Ene):</strong> Aumento de transacciones (+24.3%) con reducción de
+                        errores (-3.9%). Tasa mejoró de 9.39% a 7.26%.</li>
+                    <li><strong>Domingo (29 vs 05 Ene):</strong> Incremento de transacciones (+35.9%) y errores
+                        (+15.7%). Tasa mejoró de 10.55% a 8.98%.</li>
+                    <li><strong>Lunes (30 vs 06 Ene):</strong> ¡Mejora espectacular! Reducción masiva de errores
+                        (-64.2%) con tasa bajando de 10.63% a 6.67%, la mejor del período de enero.</li>
+                    <li><strong>Patrón general:</strong> Enero 2026 muestra mejor estabilidad que diciembre, con tasas
+                        de error consistentemente por debajo del 9%, especialmente destacando el 06 de enero con 6.67%.
+                    </li>
                 </ul>
             </div>
         </div>
@@ -1130,32 +1179,65 @@
             <div class="alert-box">
                 <h4>⚠️ Hallazgos Clave de Errores</h4>
                 <ul>
-                    <li>El error <strong>H03</strong> representa el 35.2% de todos los errores - indica problemas de comunicación con el host</li>
-                    <li>Los errores de timeout (<strong>H23</strong>) son el segundo más común con 20.4% - sugiere latencia en las respuestas</li>
-                    <li>La transacción <strong>3352 (ABONOG_findMTCN)</strong> tiene 26,846 errores con 61.5% de tasa - requiere atención urgente</li>
-                    <li>Los procesos de encuesta (<strong>4411, 4462</strong>) tienen 100% de tasa de error - posiblemente servicios inactivos</li>
-                    <li>El 25 de Diciembre tuvo el menor volumen por ser festivo, útil como línea base de operación mínima</li>
-                    <li><strong>Tendencia positiva en Enero 2026:</strong> Los primeros 6 días del año muestran una reducción consistente en la tasa de error, con el 06 de enero alcanzando apenas 6.67%, la mejor marca del período analizado</li>
-                    <li>Los tipos únicos de error se redujeron de 190 (30-dic) a 138 (06-ene), indicando mejor control y estabilidad del sistema en el nuevo año</li>
+                    <li>El error <strong>H03</strong> representa el 35.2% de todos los errores - indica problemas de
+                        comunicación con el host</li>
+                    <li>Los errores de timeout (<strong>H23</strong>) son el segundo más común con 20.4% - sugiere
+                        latencia en las respuestas</li>
+                    <li>La transacción <strong>3352 (ABONOG_findMTCN)</strong> tiene 26,846 errores con 61.5% de tasa -
+                        requiere atención urgente</li>
+                    <li>Los procesos de encuesta (<strong>4411, 4462</strong>) tienen 100% de tasa de error -
+                        posiblemente servicios inactivos</li>
+                    <li>El 25 de Diciembre tuvo el menor volumen por ser festivo, útil como línea base de operación
+                        mínima</li>
+                    <li><strong>Tendencia positiva en Enero 2026:</strong> Los primeros 6 días del año muestran una
+                        reducción consistente en la tasa de error, con el 06 de enero alcanzando apenas 6.67%, la mejor
+                        marca del período analizado</li>
+                    <li>Los tipos únicos de error se redujeron de 190 (30-dic) a 138 (06-ene), indicando mejor control y
+                        estabilidad del sistema en el nuevo año</li>
                 </ul>
             </div>
         </div>
     </div>
 
     <script>
-        // Datos consolidados
+        // ===== DATOS COMPLETOS: 24 DÍAS (14 DIC - 06 ENE) =====
         const dailyData = {
-            labels: ['14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic', '21-Dic', '22-Dic', '23-Dic', '24-Dic', '25-Dic', '26-Dic', '27-Dic', '28-Dic', '29-Dic', '30-Dic', '31-Dic', '01-Ene'],
-            totalTrx: [169437, 241682, 237653, 240926, 221928, 280062, 189876, 140913, 268639, 277621, 234766, 94348, 196449, 171927, 122983, 189068, 254301, 158257, 156938],
-            errorTrx: [11589, 33486, 21668, 22390, 20336, 31813, 18072, 12055, 27798, 27743, 22268, 9264, 17626, 19253, 11542, 19937, 27028, 10805, 10939],
-            errorRate: [6.84, 13.86, 9.12, 9.29, 9.16, 11.36, 9.52, 8.56, 10.35, 9.99, 9.48, 9.82, 8.97, 11.20, 9.39, 10.55, 10.63, 6.83, 6.97],
-            uniqueErrors: [157, 171, 175, 181, 173, 188, 168, 162, 193, 182, 165, 143, 171, 177, 158, 181, 190, 167, 148]
+            labels: [
+                '14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic',
+                '21-Dic', '22-Dic', '23-Dic', '24-Dic', '25-Dic', '26-Dic', '27-Dic',
+                '28-Dic', '29-Dic', '30-Dic', '31-Dic', '01-Ene', '02-Ene', '03-Ene',
+                '04-Ene', '05-Ene', '06-Ene'
+            ],
+            totalTrx: [
+                169437, 241682, 237653, 240926, 221928, 280062, 189876,
+                140913, 268639, 277621, 234766, 94348, 196449, 171927,
+                122983, 189068, 254301, 158257, 156938, 241087, 266156,
+                152893, 256925, 145228
+            ],
+            errorTrx: [
+                11589, 33486, 21668, 22390, 20336, 31813, 18072,
+                12055, 27798, 27743, 22268, 9264, 17626, 19253,
+                11542, 19937, 27028, 10805, 10939, 21341, 22237,
+                11094, 23072, 9687
+            ],
+            errorRate: [
+                6.84, 13.86, 9.12, 9.29, 9.16, 11.36, 9.52,
+                8.56, 10.35, 9.99, 9.48, 9.82, 8.97, 11.20,
+                9.39, 10.55, 10.63, 6.83, 6.97, 8.85, 8.35,
+                7.26, 8.98, 6.67
+            ],
+            uniqueErrors: [
+                157, 171, 175, 181, 173, 188, 168,
+                162, 193, 182, 165, 143, 171, 177,
+                158, 181, 190, 167, 148, 182, 175,
+                158, 184, 138
+            ]
         };
 
         function switchView(view) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            
+
             document.getElementById(`${view}-view`).classList.add('active');
             event.target.classList.add('active');
         }
@@ -1642,4 +1724,5 @@
         });
     </script>
 </body>
+
 </html>
