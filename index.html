@@ -385,12 +385,30 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .logo-container:hover {
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="header">
+            <div class="logo-container">
+                <img src="LOGO.png" alt="Banco Unión S.A." class="logo">
+            </div>
             <h1>📊 Análisis Unificado de Transacciones</h1>
             <p>Período: 14 de Diciembre 2025 - 06 de Enero 2026</p>
         </div>
@@ -1726,3 +1744,4 @@
 </body>
 
 </html>
+
