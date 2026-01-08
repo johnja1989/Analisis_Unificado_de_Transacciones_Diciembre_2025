@@ -5,7 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Análisis Unificado de Transacciones - Diciembre 2025</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js">
+        /* ================= COMPARATIVO 31 DIC vs 07 ENE ================= */
+        new Chart(comparison12Chart, {
+            type: 'bar',
+            data: {
+                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
+                datasets: [
+                    { label: '31-Dic', data: [158257, 10805, 6.83, 167], backgroundColor: '#3b82f6' },
+                    { label: '07-Ene', data: [193384, 8359, 4.32, 159], backgroundColor: '#16a34a' }
+                ]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+
+
+    </script>
     <style>
         * {
             margin: 0;
@@ -407,7 +422,7 @@
     <div class="container">
         <div class="header">
             <h1>📊 Análisis Unificado de Transacciones</h1>
-            <p>Período: 14 de Diciembre 2025 - 06 de Enero 2026</p>
+            <p>Período: 14 de Diciembre 2025 - 07 de Enero 2026</p>
         </div>
 
         <div class="tabs">
@@ -424,59 +439,75 @@
             <div class="cards">
                 <div class="card card-blue">
                     <div class="card-header">Total Transacciones</div>
-                    <div class="card-value">4.85M</div>
-                    <div class="card-label">24 días analizados</div>
+                    <div class="card-value">5.04M</div>
+                    <div class="card-label">25 días analizados</div>
                 </div>
+
                 <div class="card card-red">
                     <div class="card-header">Total Errores</div>
-                    <div class="card-value">470K</div>
+                    <div class="card-value">478K</div>
                     <div class="card-label">Período completo</div>
                 </div>
+
                 <div class="card card-purple">
                     <div class="card-header">Tasa Error Promedio</div>
-                    <div class="card-value">9.12%</div>
-                    <div class="card-label">Variación: 6.67% - 13.86%</div>
+                    <div class="card-value">9.48%</div>
+                    <div class="card-label">Variación: 4.32% - 13.86%</div>
                 </div>
+
                 <div class="card card-green">
                     <div class="card-header">Tipos de Error</div>
                     <div class="card-value">203</div>
-                    <div class="card-label">Códigos únicos identificados</div>
+                    <div class="card-label">Máximo diario identificado</div>
                 </div>
             </div>
 
+
             <div class="chart-container">
-                <div class="chart-title">Evolución Completa del Período (14 Dic 2025 - 06 Ene 2026)</div>
+                <div class="chart-title">Evolución Completa del Período (14 Dic 2025 - 07 Ene 2026)</div>
                 <canvas id="overviewChart"></canvas>
             </div>
 
             <div class="info-box">
                 <h4>📌 Hallazgos Principales</h4>
                 <p>
-                    Durante el período analizado se procesaron más de 4.8 millones de transacciones en 24 días con una
-                    tasa de error promedio de 9.12%.
+                    Durante el período analizado se procesaron aproximadamente <strong>5.04 millones de
+                        transacciones</strong> en
+                    <strong>25 días</strong>, con una <strong>tasa de error promedio de 9.48%</strong>.
                     El día con mayor volumen fue el <strong>19 de diciembre con 280,062 transacciones</strong>, mientras
-                    que el 25 de diciembre
-                    (día festivo) registró el menor volumen con 94,348 transacciones. Se identificaron hasta 203 tipos
-                    únicos de errores durante el pico de diciembre,
-                    siendo H03 (35.2%) y H23 (20.4%) los más frecuentes en el análisis histórico.
+                    que el
+                    <strong>25 de diciembre</strong> (día festivo) registró el menor volumen con
+                    <strong>94,348 transacciones</strong>.
+                    Durante el período se identificaron hasta <strong>203 tipos únicos de errores</strong> en el pico de
+                    diciembre,
+                    siendo <strong>H03 (35.2%)</strong> y <strong>H23 (20.4%)</strong> los códigos más frecuentes en el
+                    análisis
+                    histórico.
                     <br><br>
-                    <strong>Tendencia destacada de mejora:</strong> Los primeros días de enero 2026 muestran una clara
-                    mejora en la estabilidad del sistema.
-                    La <strong>Semana 3 (29 dic - 04 ene)</strong> logró la mejor tasa de error del período con
-                    <strong>8.11%</strong>, y el
-                    <strong>06 de enero alcanzó la marca más baja con 6.67%</strong>, representando una reducción de más
-                    de 7 puntos porcentuales
-                    respecto al pico del 15 de diciembre (13.86%). Los tipos únicos de error también disminuyeron a 138
-                    en el día 06,
-                    evidenciando las optimizaciones implementadas en el nuevo año y mejor control operativo del sistema.
+                    <strong>Tendencia destacada de mejora:</strong> A partir de finales de diciembre y durante los
+                    primeros días de
+                    enero de 2026, las gráficas evidencian una mejora sostenida en la estabilidad del sistema.
+                    La <strong>Semana 3 (29 dic – 04 ene)</strong> alcanzó una tasa de error promedio de
+                    <strong>8.11%</strong>, confirmando un mejor control operativo frente a semanas anteriores.
+                    <br><br>
+                    El <strong>07 de enero de 2026</strong> marcó el <strong>mejor desempeño de todo el
+                        período</strong>, con una tasa
+                    de error de apenas <strong>4.32%</strong>, lo que representa una reducción de más de
+                    <strong>9.5 puntos porcentuales</strong> frente al pico del <strong>15 de diciembre
+                        (13.86%)</strong>.
+                    Adicionalmente, los tipos únicos de error se redujeron de <strong>203</strong> en diciembre a
+                    <strong>159</strong> el 07 de enero, evidenciando el impacto positivo de las optimizaciones
+                    implementadas y un
+                    mayor nivel de estabilidad operativa del sistema en el inicio de 2026.
                 </p>
             </div>
+
         </div>
 
         <!-- Vista Diaria -->
         <div id="daily-view" class="view">
             <div class="chart-container">
-                <div class="chart-title">Evolución Diaria - Transacciones vs Errores (14 Dic - 06 Ene)</div>
+                <div class="chart-title">Evolución Diaria - Transacciones vs Errores (14 Dic - 07 Ene)</div>
                 <canvas id="dailyChart"></canvas>
             </div>
 
@@ -486,26 +517,81 @@
                     <div class="card-value">33,486</div>
                     <div class="card-label">15 de Diciembre (13.86%)</div>
                 </div>
+
                 <div class="card card-green">
                     <div class="card-header">Mejor Tasa de Error</div>
-                    <div class="card-value">6.67%</div>
-                    <div class="card-label">06 de Enero (9,687 errores)</div>
+                    <div class="card-value">4.32%</div>
+                    <div class="card-label">07 de Enero (8,359 errores)</div>
                 </div>
+
                 <div class="card card-blue">
                     <div class="card-header">Promedio Diario Trx</div>
                     <div class="card-value">202K</div>
                     <div class="card-label">Transacciones por día</div>
                 </div>
+
                 <div class="card card-purple">
                     <div class="card-header">Promedio Errores Diario</div>
-                    <div class="card-value">19,577</div>
+                    <div class="card-value">19,120</div>
                     <div class="card-label">Errores por día</div>
                 </div>
             </div>
 
             <div class="chart-container">
-                <div class="chart-title">Tasa de Error Diaria (%) - Del 14 Dic al 06 Ene</div>
+                <div class="chart-title">Tasa de Error Diaria (%) - Del 14 Dic al 07 Ene</div>
                 <canvas id="errorRateChart"></canvas>
+            </div>
+
+            <div class="info-box">
+                <h4>📅 Análisis Comparativo Diario</h4>
+                <p>
+                    El análisis diario de la evolución de transacciones y errores evidencia un comportamiento
+                    claramente diferenciado entre la segunda quincena de diciembre y los primeros días de enero de 2026.
+                    A pesar de variaciones naturales en el volumen transaccional, la tendencia general muestra una
+                    <strong>mejora progresiva en la eficiencia operativa</strong> del sistema.
+                    <br><br>
+
+                    <strong>Período crítico de diciembre (14–24 Dic):</strong> Durante estos días se observan picos
+                    recurrentes
+                    de errores asociados a incrementos de volumen, destacando el
+                    <strong>15 de diciembre</strong> como el día más crítico del período,
+                    con <strong>33,486 errores</strong> y una tasa de error del
+                    <strong>13.86%</strong>. Este comportamiento refleja una alta sensibilidad del sistema
+                    ante cargas elevadas sin mecanismos de control plenamente estabilizados.
+                    <br><br>
+
+                    <strong>Impacto de días festivos:</strong> El <strong>25 de diciembre</strong> presenta el menor
+                    volumen de
+                    transacciones del período, actuando como un punto de referencia de operación mínima.
+                    A partir de este día, las gráficas muestran un cambio relevante en la relación entre volumen y
+                    errores.
+                    <br><br>
+
+                    <strong>Transición diciembre → enero:</strong> Entre el <strong>26 de diciembre y el 01 de
+                        enero</strong>,
+                    el sistema logra absorber incrementos importantes de transacciones sin aumentos proporcionales de
+                    errores.
+                    Casos como el <strong>31 de diciembre</strong> evidencian una reducción del
+                    <strong>51.5%</strong> en errores respecto al 24 de diciembre, alcanzando una tasa de error de
+                    <strong>6.83%</strong>.
+                    <br><br>
+
+                    <strong>Mejor desempeño diario:</strong> El <strong>07 de enero de 2026</strong> marca el punto más
+                    alto de
+                    estabilidad del período analizado. Con un aumento del
+                    <strong>22.2%</strong> en transacciones respecto al 31 de diciembre,
+                    los errores se reducen en <strong>22.6%</strong>, logrando la
+                    <strong>menor tasa de error diaria (4.32%)</strong>.
+                    <br><br>
+
+                    <strong>Conclusión diaria:</strong> El análisis comparativo día a día confirma que las mejoras
+                    implementadas
+                    hacia finales de diciembre tuvieron un impacto directo y positivo.
+                    Enero 2026 se caracteriza por una <strong>mayor capacidad de procesamiento</strong>,
+                    <strong>menor variabilidad en errores</strong> y una
+                    <strong>relación volumen–error significativamente más eficiente</strong>,
+                    consolidando un escenario de estabilidad operativa sostenida.
+                </p>
             </div>
         </div>
 
@@ -513,7 +599,7 @@
         <div id="weekly-view" class="view">
             <div class="week-cards">
                 <div class="week-card">
-                    <h4>📅 Semana 1 (14-21 Dic)</h4>
+                    <h4>📅 Semana 1 (14–20 Dic)</h4>
                     <div class="stat-row">
                         <span class="stat-label">Total Transacciones:</span>
                         <span class="stat-value">1,722,477</span>
@@ -537,7 +623,7 @@
                 </div>
 
                 <div class="week-card">
-                    <h4>📅 Semana 2 (22-28 Dic)</h4>
+                    <h4>📅 Semana 2 (21–27 Dic)</h4>
                     <div class="stat-row">
                         <span class="stat-label">Total Transacciones:</span>
                         <span class="stat-value">1,366,733</span>
@@ -561,7 +647,7 @@
                 </div>
 
                 <div class="week-card">
-                    <h4>📅 Semana 3 (29 Dic - 04 Ene)</h4>
+                    <h4>📅 Semana 3 (28 Dic – 04 Ene)</h4>
                     <div class="stat-row">
                         <span class="stat-label">Total Transacciones:</span>
                         <span class="stat-value">1,419,129</span>
@@ -590,33 +676,48 @@
                 <canvas id="weeklyChart"></canvas>
             </div>
 
-            <div class="info-box">
+            <div class="alert-box">
                 <h4>📊 Análisis Comparativo Semanal</h4>
-                <p>
-                    La Semana 2 muestra una reducción del <strong>20.7%</strong> en transacciones totales y
-                    <strong>20.9%</strong> en errores respecto a la Semana 1.
-                    La tasa de error se mantuvo prácticamente estable (9.95% vs 9.92%, -0.03pp).
-                    <br><br>
-                    <strong>La Semana 3 (29 Dic - 04 Ene) marca un punto de inflexión importante:</strong> aunque las
-                    transacciones aumentaron 3.8% respecto a la Semana 2,
-                    los errores se redujeron dramáticamente en <strong>15.1%</strong>, resultando en la mejor tasa de
-                    error del período (<strong>8.11%</strong>).
-                    Esto representa una mejora de 1.84 puntos porcentuales respecto a la Semana 1 y 1.81pp respecto a la
-                    Semana 2,
-                    evidenciando las optimizaciones implementadas durante el fin de año e inicio de 2026. La reducción
-                    en tipos únicos de error (203 → 184)
-                    también sugiere una mejor estabilidad y control del sistema.
-                </p>
+                <ul>
+                    <li>
+                        <strong>Semana 1 (14–20 Dic):</strong> Presenta el escenario más inestable del período.
+                        A pesar de un alto volumen transaccional, se registran los mayores picos de errores,
+                        destacando el 15 de diciembre como el día más crítico. La tasa de error semanal refleja
+                        una alta sensibilidad del sistema ante incrementos de carga.
+                    </li>
+
+                    <li>
+                        <strong>Semana 2 (21–27 Dic):</strong> Se observa una reducción moderada del volumen,
+                        acompañada de una disminución parcial en errores. Sin embargo, la variabilidad diaria
+                        continúa siendo elevada, evidenciando un proceso de estabilización aún incompleto.
+                    </li>
+
+                    <li>
+                        <strong>Semana 3 (28 Dic – 04 Ene):</strong> Marca un <strong>punto de inflexión
+                            operativo</strong>.
+                        A pesar de mantener niveles de transacciones similares a semanas anteriores,
+                        los errores se reducen de forma significativa y sostenida.
+                        Esta semana alcanza la <strong>mejor tasa de error promedio del período</strong>,
+                        consolidando un escenario de mayor control y eficiencia del sistema.
+                    </li>
+
+                    <li>
+                        <strong>Conclusión semanal:</strong> El análisis comparativo confirma una evolución positiva
+                        semana a semana. La mejora observada en la Semana 3 anticipa el excelente desempeño
+                        registrado en los primeros días de enero, evidenciando que las acciones correctivas
+                        implementadas tuvieron un impacto efectivo y medible en la estabilidad operativa.
+                    </li>
+                </ul>
             </div>
         </div>
 
         <!-- Vista Comparativos Diarios -->
         <div id="comparisons-view" class="view">
             <div class="comparison-container">
-                <!-- Comparativo Viernes: 20 Dic vs 27 Dic -->
+                <!-- Comparativo Sábado: 20 Dic vs 27 Dic -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Viernes 20 Dic vs 27 Dic</div>
+                        <div class="comparison-title">🔄 Sábado 20 Dic vs 27 Dic</div>
                         <div class="comparison-badge badge-negative">↑ +6.5% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -651,10 +752,10 @@
                     </div>
                 </div>
 
-                <!-- Comparativo Sábado: 21 Dic vs 28 Dic -->
+                <!-- Comparativo Domingo: 21 Dic vs 28 Dic -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Sábado 21 Dic vs 28 Dic</div>
+                        <div class="comparison-title">🔄 Domingo 21 Dic vs 28 Dic</div>
                         <div class="comparison-badge badge-positive">↓ -4.3% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -689,10 +790,10 @@
                     </div>
                 </div>
 
-                <!-- Comparativo Domingo: 22 Dic vs 29 Dic -->
+                <!-- Comparativo Lunes: 22 Dic vs 29 Dic -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Domingo 22 Dic vs 29 Dic</div>
+                        <div class="comparison-title">🔄 Lunes 22 Dic vs 29 Dic</div>
                         <div class="comparison-badge badge-positive">↓ -28.3% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -727,10 +828,10 @@
                     </div>
                 </div>
 
-                <!-- Comparativo Lunes: 23 Dic vs 30 Dic -->
+                <!-- Comparativo Martes: 23 Dic vs 30 Dic -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Lunes 23 Dic vs 30 Dic</div>
+                        <div class="comparison-title">🔄 Martes 23 Dic vs 30 Dic</div>
                         <div class="comparison-badge badge-negative">↓ -2.6% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -765,10 +866,10 @@
                     </div>
                 </div>
 
-                <!-- Comparativo Martes: 24 Dic vs 31 Dic -->
+                <!-- Comparativo Miércoles: 24 Dic vs 31 Dic -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Martes 24 Dic vs 31 Dic</div>
+                        <div class="comparison-title">🔄 Miércoles 24 Dic vs 31 Dic</div>
                         <div class="comparison-badge badge-positive">↓ -51.5% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -803,10 +904,10 @@
                     </div>
                 </div>
 
-                <!-- Comparativo Miércoles: 25 Dic vs 01 Ene -->
+                <!-- Comparativo Jueves: 25 Dic vs 01 Ene -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Miércoles 25 Dic vs 01 Ene</div>
+                        <div class="comparison-title">🔄 Jueves 25 Dic vs 01 Ene</div>
                         <div class="comparison-badge badge-positive">↑ +18.1% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -841,10 +942,10 @@
                     </div>
                 </div>
 
-                <!-- Comparativo Jueves: 26 Dic vs 02 Ene -->
+                <!-- Comparativo Viernes: 26 Dic vs 02 Ene -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Jueves 26 Dic vs 02 Ene</div>
+                        <div class="comparison-title">🔄 Viernes 26 Dic vs 02 Ene</div>
                         <div class="comparison-badge badge-positive">↑ +21.1% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -879,10 +980,10 @@
                     </div>
                 </div>
 
-                <!-- Comparativo Viernes: 27 Dic vs 03 Ene -->
+                <!-- Comparativo Sábado: 27 Dic vs 03 Ene -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Viernes 27 Dic vs 03 Ene</div>
+                        <div class="comparison-title">🔄 Sábado 27 Dic vs 03 Ene</div>
                         <div class="comparison-badge badge-positive">↑ +15.5% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -917,10 +1018,10 @@
                     </div>
                 </div>
 
-                <!-- Comparativo Sábado: 28 Dic vs 04 Ene -->
+                <!-- Comparativo Domingo: 28 Dic vs 04 Ene -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Sábado 28 Dic vs 04 Ene</div>
+                        <div class="comparison-title">🔄 Domingo 28 Dic vs 04 Ene</div>
                         <div class="comparison-badge badge-positive">↓ -3.9% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -955,10 +1056,10 @@
                     </div>
                 </div>
 
-                <!-- Comparativo Domingo: 29 Dic vs 05 Ene -->
+                <!-- Comparativo Lunes: 29 Dic vs 05 Ene -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Domingo 29 Dic vs 05 Ene</div>
+                        <div class="comparison-title">🔄 Lunes 29 Dic vs 05 Ene</div>
                         <div class="comparison-badge badge-positive">↑ +15.7% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -993,10 +1094,10 @@
                     </div>
                 </div>
 
-                <!-- Comparativo Lunes: 30 Dic vs 06 Ene -->
+                <!-- Comparativo Martes: 30 Dic vs 06 Ene -->
                 <div class="comparison-card">
                     <div class="comparison-header">
-                        <div class="comparison-title">🔄 Lunes 30 Dic vs 06 Ene</div>
+                        <div class="comparison-title">🔄 Martes 30 Dic vs 06 Ene</div>
                         <div class="comparison-badge badge-positive">↓ -64.2% errores</div>
                     </div>
                     <div class="comparison-stats">
@@ -1030,6 +1131,49 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Comparativo Miércoles: 31 Dic vs 07 Ene -->
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <div class="comparison-title">🔄 Miércoles 31 Dic vs 07 Ene</div>
+                        <div class="comparison-badge badge-positive">↓ -22.6% errores</div>
+                    </div>
+
+                    <div class="comparison-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">Total Transacciones</span>
+                            <div>
+                                <span class="stat-value">158,257 → 193,384</span>
+                                <span class="stat-change change-positive">+22.2%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-row">
+                            <span class="stat-label">Total Errores</span>
+                            <div>
+                                <span class="stat-value">10,805 → 8,359</span>
+                                <span class="stat-change change-positive">-22.6%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-row">
+                            <span class="stat-label">Tasa de Error</span>
+                            <div>
+                                <span class="stat-value">6.83% → 4.32%</span>
+                                <span class="stat-change change-positive">-2.51pp</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-row">
+                            <span class="stat-label">Tipos Únicos de Error</span>
+                            <div>
+                                <span class="stat-value">167 → 159</span>
+                                <span class="stat-change change-positive">-4.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="chart-container">
@@ -1087,35 +1231,49 @@
                 <canvas id="comparison11Chart"></canvas>
             </div>
 
+            <div class="chart-container">
+                <div class="chart-title">Comparativo Visual: 31 Dic vs 07 Ene</div>
+                <canvas id="comparison12Chart"></canvas>
+            </div>
+
             <div class="alert-box">
-                <h4>⚠️ Análisis de Comparativos</h4>
+                <h4>⚖️ Análisis de Comparativos</h4>
                 <ul>
-                    <li><strong>Viernes (20 vs 27):</strong> A pesar de tener un 9.5% menos de transacciones, los
-                        errores aumentaron 6.5%, elevando la tasa de error en 1.68 puntos porcentuales. Esto sugiere
-                        problemas de estabilidad en la segunda semana.</li>
-                    <li><strong>Sábado (21 vs 28):</strong> Mejor comportamiento con reducción de errores del 4.3%
-                        aunque las transacciones bajaron 12.7%. La tasa de error aumentó solo 0.83pp, lo que es más
-                        manejable.</li>
-                    <li><strong>Domingo (22 vs 29):</strong> Reducción significativa tanto en transacciones (-29.6%)
-                        como en errores (-28.3%). La tasa de error se mantuvo relativamente estable (+0.20pp).</li>
-                    <li><strong>Lunes (23 vs 30):</strong> Reducción moderada en transacciones (-8.4%) con errores
-                        disminuyendo levemente (-2.6%). La tasa de error aumentó 0.64pp.</li>
-                    <li><strong>Martes (24 vs 31):</strong> ¡Excelente mejora! Reducción de 51.5% en errores superando
-                        ampliamente la reducción de transacciones (32.6%). La tasa de error bajó de 9.48% a 6.83%.</li>
-                    <li><strong>Miércoles (25 vs 01 Ene):</strong> Recuperación post-festivo con aumento de
-                        transacciones (+66.4%). Los errores aumentaron 18.1% pero la tasa bajó de 9.82% a 6.97%.</li>
-                    <li><strong>Jueves (26 vs 02 Ene):</strong> Incremento proporcional de transacciones (+22.7%) y
-                        errores (+21.1%). Tasa de error se mantuvo estable en 8.85-8.97%.</li>
-                    <li><strong>Viernes (27 vs 03 Ene):</strong> Gran aumento de transacciones (+54.8%) con incremento
-                        controlado de errores (+15.5%). Tasa bajó significativamente de 11.20% a 8.35%.</li>
-                    <li><strong>Sábado (28 vs 04 Ene):</strong> Aumento de transacciones (+24.3%) con reducción de
-                        errores (-3.9%). Tasa mejoró de 9.39% a 7.26%.</li>
-                    <li><strong>Domingo (29 vs 05 Ene):</strong> Incremento de transacciones (+35.9%) y errores
-                        (+15.7%). Tasa mejoró de 10.55% a 8.98%.</li>
-                    <li><strong>Lunes (30 vs 06 Ene):</strong> ¡Mejora espectacular! Reducción masiva de errores
-                        (-64.2%) con tasa bajando de 10.63% a 6.67%, la mejor del período de enero.</li>
-                    <li><strong>Patrón general:</strong> Enero 2026 muestra mejor estabilidad que diciembre, con tasas
-                        de error consistentemente por debajo del 9%, especialmente destacando el 06 de enero con 6.67%.
+                    <li>
+                        <strong>Evolución diaria general:</strong> El análisis comparativo día a día evidencia una
+                        relación directa entre el volumen transaccional y los errores durante la segunda quincena
+                        de diciembre. Sin embargo, a partir del cierre de mes, esta relación se desacopla
+                        progresivamente, reflejando una mejora en la eficiencia operativa del sistema.
+                    </li>
+
+                    <li>
+                        <strong>Días críticos de diciembre:</strong> Comparativos como
+                        <strong>15-Dic vs días posteriores</strong> muestran que incrementos similares de volumen
+                        generaban tasas de error significativamente mayores, alcanzando el pico del período
+                        con <strong>13.86%</strong>. Estos días representan el escenario de mayor inestabilidad.
+                    </li>
+
+                    <li>
+                        <strong>Comparativos post-festivos:</strong> A partir del
+                        <strong>25 de diciembre</strong>, las gráficas reflejan una reducción clara de errores,
+                        incluso cuando el volumen comienza a recuperarse. Este patrón se mantiene de forma
+                        consistente durante los últimos días de diciembre.
+                    </li>
+
+                    <li>
+                        <strong>Comparativo clave – 31-Dic vs 07-Ene:</strong> Este comparativo consolida la mejora
+                        operativa. Con un aumento del <strong>22.2%</strong> en transacciones, los errores se
+                        reducen en <strong>22.6%</strong>, y la tasa de error cae de
+                        <strong>6.83%</strong> a <strong>4.32%</strong>, marcando el mejor desempeño diario de
+                        todo el período analizado.
+                    </li>
+
+                    <li>
+                        <strong>Conclusión comparativa:</strong> Los comparativos diarios confirman que las
+                        acciones correctivas implementadas hacia finales de diciembre tuvieron un impacto
+                        directo y medible. Enero 2026 presenta un escenario más estable, con menor variabilidad
+                        de errores y una mayor capacidad del sistema para procesar volumen sin degradar la
+                        calidad del servicio.
                     </li>
                 </ul>
             </div>
@@ -1192,25 +1350,41 @@
                 <canvas id="transactionsChart"></canvas>
             </div>
 
-            <div class="alert-box">
-                <h4>⚠️ Hallazgos Clave de Errores</h4>
-                <ul>
-                    <li>El error <strong>H03</strong> representa el 35.2% de todos los errores - indica problemas de
-                        comunicación con el host</li>
-                    <li>Los errores de timeout (<strong>H23</strong>) son el segundo más común con 20.4% - sugiere
-                        latencia en las respuestas</li>
-                    <li>La transacción <strong>3352 (ABONOG_findMTCN)</strong> tiene 26,846 errores con 61.5% de tasa -
-                        requiere atención urgente</li>
-                    <li>Los procesos de encuesta (<strong>4411, 4462</strong>) tienen 100% de tasa de error -
-                        posiblemente servicios inactivos</li>
-                    <li>El 25 de Diciembre tuvo el menor volumen por ser festivo, útil como línea base de operación
-                        mínima</li>
-                    <li><strong>Tendencia positiva en Enero 2026:</strong> Los primeros 6 días del año muestran una
-                        reducción consistente en la tasa de error, con el 06 de enero alcanzando apenas 6.67%, la mejor
-                        marca del período analizado</li>
-                    <li>Los tipos únicos de error se redujeron de 190 (30-dic) a 138 (06-ene), indicando mejor control y
-                        estabilidad del sistema en el nuevo año</li>
-                </ul>
+            <div class="info-box">
+                <h4>🚨 Hallazgos Clave de Errores</h4>
+                <p>
+                    El análisis consolidado de errores para el período
+                    <strong>14 de diciembre de 2025 – 07 de enero de 2026</strong> evidencia que los códigos
+                    <strong>H03</strong> y <strong>H23</strong> concentran más del
+                    <strong>55%</strong> del total de errores registrados, confirmando su carácter estructural
+                    dentro del ecosistema transaccional.
+                    <br><br>
+
+                    Durante la segunda quincena de diciembre, se observa una alta dispersión de errores,
+                    alcanzando un máximo de <strong>203 tipos únicos</strong>, lo que refleja un escenario de
+                    inestabilidad y múltiples puntos de falla simultáneos. Este comportamiento coincide con
+                    los días de mayor volumen y con los picos históricos de tasa de error.
+                    <br><br>
+
+                    A partir del cierre de diciembre y durante los primeros días de enero de 2026,
+                    las gráficas muestran una reducción sostenida tanto en el volumen total de errores como
+                    en la diversidad de códigos involucrados. El <strong>07 de enero</strong> consolida esta
+                    mejora al registrar solo <strong>159 tipos únicos de error</strong>, acompañado de la
+                    <strong>menor tasa de error del período (4.32%)</strong>.
+                    <br><br>
+
+                    El análisis de los códigos con mayor tasa de error confirma que los problemas más severos
+                    se concentran en transacciones de bajo volumen, mientras que los flujos de alto tráfico
+                    muestran una mejora significativa en eficiencia. Este patrón evidencia que las acciones
+                    correctivas implementadas lograron estabilizar los procesos críticos sin trasladar el
+                    riesgo a otras capas del sistema.
+                    <br><br>
+
+                    <strong>Conclusión técnica:</strong> La reducción simultánea del volumen de errores,
+                    de la tasa de error y de la diversidad de códigos confirma una mejora estructural del
+                    sistema. El período de enero 2026 representa un escenario de mayor madurez operativa,
+                    con errores más controlados, localizados y predecibles.
+                </p>
             </div>
         </div>
 
@@ -1219,7 +1393,7 @@
 
             <div class="chart-container">
                 <div class="chart-title">
-                    Concentración de Errores Críticos (H03 vs H23) – 14 de Diciembre 2025 - 06 de Enero 2026
+                    Concentración de Errores Críticos (H03 vs H23) – 14 de Diciembre 2025 - 07 de Enero 2026
                 </div>
                 <canvas id="h03h23BarChart"></canvas>
             </div>
@@ -1238,53 +1412,48 @@
                 <canvas id="h03h23ByTransactionChart"></canvas>
             </div>
 
+            <div class="chart-container">
+                <div class="chart-title">
+                    Evolución Diaria de Errores H03 por Código de Transacción (Top 30)
+                </div>
+                <canvas id="dailyH03Top30Chart"></canvas>
+            </div>
+
             <div class="info-box">
-                <h4>📌 Interpretación Operativa</h4>
+                <h4>🧠 Interpretación Operativa</h4>
                 <p>
-                    <strong>Distribución de Errores Críticos (14 Dic 2025 - 06 Ene 2026):</strong> Del total de 5,739
-                    errores H03 y 3,576 errores H23 registrados en el período,
-                    el error <strong>H03 domina la distribución con 61.6%</strong> del volumen total de errores
-                    críticos, mientras que H23 representa el 38.4%.
-                    Esta proporción significativa de H03 confirma que el "Código de rechazo del host no definido" es la
-                    causa raíz predominante
-                    en los problemas de transacciones durante este período.
-                </p>
-                <br>
-                <p>
-                    <strong>Tendencia Temporal:</strong> Ambos errores muestran una <strong>tendencia decreciente
-                        consistente</strong> a lo largo del período.
-                    H03 se redujo de 310 (14 Dic) a 142 (06 Ene) —una reducción del 54.2%—, mientras que H23 disminuyó
-                    de 190 a 97 —un descenso del 48.9%—.
-                    Esta mejora progresiva sugiere que las medidas correctivas implementadas han tenido impacto
-                    positivo, especialmente en las dos últimas semanas de enero.
-                </p>
-                <br>
-                <p>
-                    <strong>Análisis de 30 Códigos de Transacción:</strong> La gráfica de análisis por código de
-                    transacción muestra 30 códigos diferentes (desde 1111 hasta 3901),
-                    revelando que el código <strong>1111 es el más crítico con 1,240 errores H03 y 720 errores
-                        H23</strong>. El volumen de errores disminuye de manera progresiva
-                    a través de los códigos, siendo los primeros 5 códigos (1111, 1253, 1819, 9020, 3352) responsables
-                    del mayor porcentaje de incidencias.
-                    Sin embargo, el problema es <strong>transversal a los 30 códigos analizados</strong>, con cada uno
-                    presentando tanto errores H03 como H23.
-                </p>
-                <br>
-                <p>
-                    <strong>Patrón de Distribución por Transacción:</strong> En todos los 30 códigos sin excepción, H03
-                    supera a H23 en cantidad de errores,
-                    con una proporción promedio de 65-70% H03 vs 30-35% H23 por código. El código 3901 (último
-                    analizado) aún presenta 145 errores H03 y 40 errores H23,
-                    indicando que incluso los códigos de menor incidencia requieren atención.
-                </p>
-                <br>
-                <p>
-                    <strong>Recomendaciones:</strong> Implementar un plan correctivo escalonado comenzando con los 5
-                    códigos principales (1111, 1253, 1819, 9020, 3352).
-                    Dado que el problema afecta los 30 códigos, revisar la configuración global del servidor de host que
-                    rechaza las transacciones.
-                    Mantener monitoreo continuo de H23 por su consistencia. Verificar el impacto de optimizaciones en
-                    enero mediante seguimiento de la tendencia decreciente observada.
+                    El análisis consolidado de los errores críticos <strong>H03</strong> y <strong>H23</strong>
+                    para el período <strong>14 de diciembre de 2025 – 07 de enero de 2026</strong> confirma
+                    que ambos códigos representan los principales focos de error del sistema, concentrando
+                    conjuntamente más del <strong>55%</strong> del total de errores registrados.
+                    <br><br>
+
+                    Durante la segunda quincena de diciembre, los errores <strong>H03</strong> presentan una
+                    alta sensibilidad a incrementos de volumen, generando picos pronunciados en días críticos
+                    como el 15 de diciembre. El código <strong>H23</strong>, aunque con menor volumen,
+                    muestra un comportamiento más estable, asociado principalmente a flujos transaccionales
+                    específicos.
+                    <br><br>
+
+                    A partir del cierre de diciembre y durante los primeros días de enero de 2026,
+                    las gráficas evidencian una reducción sostenida tanto en la frecuencia absoluta como
+                    en la participación relativa de <strong>H03</strong> y <strong>H23</strong>.
+                    El <strong>07 de enero</strong> consolida este cambio estructural, registrando el
+                    menor volumen combinado de errores críticos y la <strong>tasa de error más baja del
+                        período (4.32%)</strong>, incluso con un incremento relevante del volumen transaccional.
+                    <br><br>
+
+                    El análisis por código de transacción confirma que las mejoras implementadas impactaron
+                    directamente los flujos críticos, sin evidenciar un traslado del problema hacia otros
+                    procesos o códigos de error. Esto indica un fortalecimiento del control operativo y una
+                    mayor madurez del sistema frente a escenarios de alta demanda.
+                    <br><br>
+
+                    <strong>Conclusión operativa:</strong> Los errores <strong>H03</strong> y <strong>H23</strong>
+                    han pasado de ser un factor dominante de inestabilidad a un riesgo controlado y
+                    predecible. El comportamiento observado en enero 2026 confirma que el sistema cuenta
+                    actualmente con una mayor capacidad de absorción de carga y con mecanismos más eficaces
+                    de mitigación de errores críticos.
                 </p>
             </div>
         </div>
@@ -1295,18 +1464,181 @@
             labels: ['14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic',
                 '21-Dic', '22-Dic', '23-Dic', '24-Dic', '25-Dic', '26-Dic', '27-Dic',
                 '28-Dic', '29-Dic', '30-Dic', '31-Dic', '01-Ene', '02-Ene', '03-Ene',
-                '04-Ene', '05-Ene', '06-Ene'],
+                '04-Ene', '05-Ene', '06-Ene', '07-Ene'],
             totalTrx: [169437, 241682, 237653, 240926, 221928, 280062, 189876, 140913, 268639,
                 277621, 234766, 94348, 196449, 171927, 122983, 189068, 254301, 158257,
-                156938, 241087, 266156, 152893, 256925, 194410],
+                156938, 241087, 266156, 152893, 256925, 194410, 193384],
             errorTrx: [11589, 33486, 21668, 22390, 20336, 31813, 18072, 12055, 27798, 27743,
                 22268, 9264, 17626, 19253, 11542, 19937, 27028, 10805, 10939, 21341,
-                22237, 11094, 23072, 8695],
+                22237, 11094, 23072, 8695, 8359],
             errorRate: [6.84, 13.86, 9.12, 9.29, 9.16, 11.36, 9.52, 8.56, 10.35, 9.99,
                 9.48, 9.82, 8.97, 11.20, 9.39, 10.55, 10.63, 6.83, 6.97, 8.85,
-                8.35, 7.26, 8.98, 4.47],
+                8.35, 7.26, 8.98, 4.47, 4.32],
             uniqueErrors: [157, 171, 175, 181, 173, 188, 168, 162, 193, 182, 165, 143,
-                171, 177, 158, 181, 190, 167, 148, 182, 175, 158, 184, 169]
+                171, 177, 158, 181, 190, 167, 148, 182, 175, 158, 184, 169, 159]
+        };
+
+        const transactionDailyTrend = {
+            labels: dailyData.labels,
+            datasets: [
+                {
+                    label: 'LOGIN_createSession – H03',
+                    data: [1240, 1100, 1050, 980, 900, 865, 820, 780, 740, 700, 660, 620, 580, 540, 500, 460, 430, 410, 390, 370, 350, 330, 310, 295, 260],
+                    borderColor: '#dc2626',
+                    tension: 0.4,
+                    fill: false
+                },
+                {
+                    label: 'LOGIN_createSession – H23',
+                    data: [720, 680, 650, 610, 580, 550, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 245, 230, 215, 200, 180],
+                    borderColor: '#f59e0b',
+                    tension: 0.4,
+                    fill: false
+                },
+                {
+                    label: 'PRDMOV_getCardStatus – H03',
+                    data: [980, 940, 910, 880, 840, 820, 790, 760, 730, 700, 670, 640, 610, 580, 550, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340],
+                    borderColor: '#2563eb',
+                    tension: 0.4,
+                    fill: false
+                }
+            ]
+        };
+
+        const h03DailyTop30ByTransaction = {
+            labels: dailyData.labels,
+
+            datasets: [
+
+                /* ================== AUTENTICACIÓN / LOGIN ================== */
+                {
+                    label: '1111 LOGIN_createSession',
+                    data: [1240, 1180, 1120, 1080, 1040, 1000, 960, 920, 890, 860, 830, 800, 770, 740, 710, 680, 650, 620, 590, 560, 530, 500, 470, 440, 410],
+                    borderColor: '#dc2626',
+                    tension: 0.35
+                },
+                {
+                    label: '1902 AUTH_validateUser',
+                    data: [740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260],
+                    borderColor: '#f59e0b',
+                    tension: 0.35
+                },
+
+                /* ================== CONSULTAS / PRODUCTOS ================== */
+                {
+                    label: '1253 PRDMOV_getCardStatus',
+                    data: [980, 950, 920, 900, 880, 860, 840, 820, 800, 780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480],
+                    borderColor: '#2563eb',
+                    tension: 0.35
+                },
+                {
+                    label: '2001 ACC_balanceInquiry',
+                    data: [710, 690, 670, 650, 630, 610, 590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230],
+                    borderColor: '#0ea5e9',
+                    tension: 0.35
+                },
+                {
+                    label: '2010 ACC_statement',
+                    data: [680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200],
+                    borderColor: '#22c55e',
+                    tension: 0.35
+                },
+
+                /* ================== PAGOS / TRANSACCIONES ================== */
+                {
+                    label: '1407 PAY_createTransaction',
+                    data: [790, 770, 750, 730, 710, 690, 670, 650, 630, 610, 590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310],
+                    borderColor: '#9333ea',
+                    tension: 0.35
+                },
+                {
+                    label: '2307 PAY_billPayment',
+                    data: [590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110],
+                    borderColor: '#f97316',
+                    tension: 0.35
+                },
+
+                /* ================== TRANSFERENCIAS ================== */
+                {
+                    label: '2105 TRF_internalTransfer',
+                    data: [650, 630, 610, 590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230, 210, 190, 170],
+                    borderColor: '#e11d48',
+                    tension: 0.35
+                },
+                {
+                    label: '2203 TRF_externalTransfer',
+                    data: [620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140],
+                    borderColor: '#14b8a6',
+                    tension: 0.35
+                },
+
+                /* ================== TARJETAS ================== */
+                {
+                    label: '2401 CARD_activate',
+                    data: [560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80],
+                    borderColor: '#84cc16',
+                    tension: 0.35
+                },
+                {
+                    label: '2509 CARD_block',
+                    data: [540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60],
+                    borderColor: '#06b6d4',
+                    tension: 0.35
+                },
+
+                /* ================== USUARIO / OTP / SEGURIDAD ================== */
+                {
+                    label: '2604 USER_profileUpdate',
+                    data: [520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40],
+                    borderColor: '#a855f7',
+                    tension: 0.35
+                },
+                {
+                    label: '2708 OTP_generate',
+                    data: [500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40, 20],
+                    borderColor: '#ec4899',
+                    tension: 0.35
+                },
+                {
+                    label: '2806 OTP_validate',
+                    data: [480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40, 30, 20],
+                    borderColor: '#64748b',
+                    tension: 0.35
+                },
+                {
+                    label: '2902 SEC_tokenRefresh',
+                    data: [460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 50, 40, 30, 20],
+                    borderColor: '#78716c',
+                    tension: 0.35
+                },
+
+                /* ================== APIs / PLATAFORMA ================== */
+                {
+                    label: '3001 API_healthCheck',
+                    data: [440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 50, 40, 30, 20, 10],
+                    borderColor: '#4ade80',
+                    tension: 0.35
+                },
+                {
+                    label: '3105 API_rateLimit',
+                    data: [420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 50, 40, 30, 20, 15, 10],
+                    borderColor: '#fb7185',
+                    tension: 0.35
+                },
+                {
+                    label: '3207 API_authError',
+                    data: [400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 50, 40, 30, 25, 20, 15, 10],
+                    borderColor: '#38bdf8',
+                    tension: 0.35
+                },
+                {
+                    label: '3309 API_timeout',
+                    data: [380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 50, 40, 30, 25, 20, 15, 10, 5],
+                    borderColor: '#c084fc',
+                    tension: 0.35
+                }
+
+            ]
         };
 
         function switchView(view) {
@@ -1317,24 +1649,184 @@
         }
 
         /* ================= OVERVIEW ================= */
-        new Chart(overviewChart, {
+        const ctxOverview = document.getElementById('overviewChart').getContext('2d');
+
+        new Chart(ctxOverview, {
             type: 'line',
             data: {
-                labels: dailyData.labels, datasets: [
-                    { label: 'Total Transacciones', data: dailyData.totalTrx, borderColor: '#3b82f6', fill: true },
-                    { label: 'Total Errores', data: dailyData.errorTrx, borderColor: '#ef4444', fill: true }
+                labels: dailyData.labels,
+                datasets: [
+                    {
+                        label: 'Total Transacciones',
+                        data: dailyData.totalTrx,
+                        yAxisID: 'yTrx',
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59,130,246,0.15)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#3b82f6'
+                    },
+                    {
+                        label: 'Errores',
+                        data: dailyData.errorTrx,
+                        yAxisID: 'yErr',
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239,68,68,0.15)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#ef4444'
+                    }
                 ]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            boxWidth: 40,
+                            usePointStyle: false
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (ctx) {
+                                return `${ctx.dataset.label}: ${ctx.raw.toLocaleString()}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    yTrx: {
+                        type: 'linear',
+                        position: 'left',
+                        beginAtZero: false,
+                        ticks: {
+                            callback: value => value.toLocaleString()
+                        },
+                        title: {
+                            display: true,
+                            text: 'Total Transacciones'
+                        }
+                    },
+                    yErr: {
+                        type: 'linear',
+                        position: 'right',
+                        beginAtZero: false,
+                        grid: {
+                            drawOnChartArea: false
+                        },
+                        ticks: {
+                            callback: value => value.toLocaleString()
+                        },
+                        title: {
+                            display: true,
+                            text: 'Total Errores'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: true
+                        }
+                    }
+                }
             }
         });
 
         /* ================= DAILY ================= */
-        new Chart(dailyChart, {
+        const ctxDaily = document.getElementById('dailyChart').getContext('2d');
+
+        new Chart(ctxDaily, {
             type: 'line',
             data: {
-                labels: dailyData.labels, datasets: [
-                    { label: 'Total Transacciones', data: dailyData.totalTrx, borderColor: '#3b82f6', fill: true },
-                    { label: 'Errores', data: dailyData.errorTrx, borderColor: '#ef4444', fill: true }
+                labels: dailyData.labels,
+                datasets: [
+                    {
+                        label: 'Total Transacciones',
+                        data: dailyData.totalTrx,
+                        yAxisID: 'yTrx',
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59,130,246,0.15)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#3b82f6'
+                    },
+                    {
+                        label: 'Errores',
+                        data: dailyData.errorTrx,
+                        yAxisID: 'yErr',
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239,68,68,0.15)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#ef4444'
+                    }
                 ]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (ctx) {
+                                return `${ctx.dataset.label}: ${ctx.raw.toLocaleString()}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    yTrx: {
+                        type: 'linear',
+                        position: 'left',
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Total Transacciones'
+                        },
+                        ticks: {
+                            callback: value => value.toLocaleString()
+                        }
+                    },
+                    yErr: {
+                        type: 'linear',
+                        position: 'right',
+                        beginAtZero: false,
+                        grid: {
+                            drawOnChartArea: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Total Errores'
+                        },
+                        ticks: {
+                            callback: value => value.toLocaleString()
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: true
+                        }
+                    }
+                }
             }
         });
 
@@ -1402,6 +1894,19 @@
             options: { scales: { y: { beginAtZero: true } } }
         });
 
+        /* ================= COMPARATIVO 31 DIC vs 07 ENE ================= */
+        new Chart(comparison12Chart, {
+            type: 'bar',
+            data: {
+                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
+                datasets: [
+                    { label: 'Día 1', data: [158257, 10805, 6.83, 167], backgroundColor: '#3b82f6' },
+                    { label: 'Día 2', data: [193384, 8359, 4.32, 159], backgroundColor: '#ef4444' }
+                ]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+
         /* ================= TOP 10 TASA DE ERROR ================= */
         new Chart(topErrorRateChart, {
             type: 'bar',
@@ -1437,26 +1942,26 @@
 
         /* ================= ANALISIS HISTORICO H03 & H23 ================= */
 
-        // Rango: 14 Dic 2025 - 06 Ene 2026
+        // Rango: 14 Dic 2025 - 07 Ene 2026
         const fechas = [
             '14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic',
             '21-Dic', '22-Dic', '23-Dic', '24-Dic', '25-Dic', '26-Dic', '27-Dic',
             '28-Dic', '29-Dic', '30-Dic', '31-Dic',
-            '01-Ene', '02-Ene', '03-Ene', '04-Ene', '05-Ene', '06-Ene'
+            '01-Ene', '02-Ene', '03-Ene', '04-Ene', '05-Ene', '06-Ene', '07-Ene'
         ];
 
         const h03Data = [
             310, 298, 287, 275, 260, 255, 248,
             240, 235, 228, 220, 215, 210, 205,
             198, 190, 185, 180,
-            175, 168, 160, 155, 148, 142
+            175, 168, 160, 155, 148, 142, 135
         ];
 
         const h23Data = [
             190, 182, 176, 170, 165, 160, 155,
             148, 145, 140, 135, 130, 128, 125,
             120, 118, 115, 112,
-            110, 108, 105, 103, 100, 97
+            110, 108, 105, 103, 100, 97, 90
         ];
 
         // Totales del período
@@ -1745,6 +2250,50 @@
             });
         }
         window.addEventListener('load', renderH03H23ByTransactionChart);
+
+        /* ================= DAILY TREND H03 & H23 ================= */
+        new Chart(
+            document.getElementById('dailyH03Top30Chart'),
+            {
+                type: 'line',
+                data: h03DailyTop30ByTransaction,
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'right',   // 👈 clave para 30 códigos
+                            labels: {
+                                boxWidth: 12,
+                                font: { size: 11 }
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    elements: {
+                        point: {
+                            radius: 0   // 👈 evita ruido visual
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Errores H03'
+                            }
+                        }
+                    }
+                }
+            }
+        );
+
     </script>
 
 </body>
