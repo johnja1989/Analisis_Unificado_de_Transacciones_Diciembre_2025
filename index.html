@@ -1241,35 +1241,50 @@
             <div class="info-box">
                 <h4>📌 Interpretación Operativa</h4>
                 <p>
-                    <strong>Distribución de Errores Críticos (14 Dic 2025 - 06 Ene 2026):</strong> Del total de 5,739 errores H03 y 3,576 errores H23 registrados en el período, 
-                    el error <strong>H03 domina la distribución con 61.6%</strong> del volumen total de errores críticos, mientras que H23 representa el 38.4%. 
-                    Esta proporción significativa de H03 confirma que el "Código de rechazo del host no definido" es la causa raíz predominante 
+                    <strong>Distribución de Errores Críticos (14 Dic 2025 - 06 Ene 2026):</strong> Del total de 5,739
+                    errores H03 y 3,576 errores H23 registrados en el período,
+                    el error <strong>H03 domina la distribución con 61.6%</strong> del volumen total de errores
+                    críticos, mientras que H23 representa el 38.4%.
+                    Esta proporción significativa de H03 confirma que el "Código de rechazo del host no definido" es la
+                    causa raíz predominante
                     en los problemas de transacciones durante este período.
                 </p>
                 <br>
                 <p>
-                    <strong>Tendencia Temporal:</strong> Ambos errores muestran una <strong>tendencia decreciente consistente</strong> a lo largo del período. 
-                    H03 se redujo de 310 (14 Dic) a 142 (06 Ene) —una reducción del 54.2%—, mientras que H23 disminuyó de 190 a 97 —un descenso del 48.9%—. 
-                    Esta mejora progresiva sugiere que las medidas correctivas implementadas han tenido impacto positivo, especialmente en las dos últimas semanas de enero.
+                    <strong>Tendencia Temporal:</strong> Ambos errores muestran una <strong>tendencia decreciente
+                        consistente</strong> a lo largo del período.
+                    H03 se redujo de 310 (14 Dic) a 142 (06 Ene) —una reducción del 54.2%—, mientras que H23 disminuyó
+                    de 190 a 97 —un descenso del 48.9%—.
+                    Esta mejora progresiva sugiere que las medidas correctivas implementadas han tenido impacto
+                    positivo, especialmente en las dos últimas semanas de enero.
                 </p>
                 <br>
                 <p>
-                    <strong>Análisis de 30 Códigos de Transacción:</strong> La gráfica de análisis por código de transacción muestra 30 códigos diferentes (desde 1111 hasta 3901), 
-                    revelando que el código <strong>1111 es el más crítico con 1,240 errores H03 y 720 errores H23</strong>. El volumen de errores disminuye de manera progresiva 
-                    a través de los códigos, siendo los primeros 5 códigos (1111, 1253, 1819, 9020, 3352) responsables del mayor porcentaje de incidencias. 
-                    Sin embargo, el problema es <strong>transversal a los 30 códigos analizados</strong>, con cada uno presentando tanto errores H03 como H23.
+                    <strong>Análisis de 30 Códigos de Transacción:</strong> La gráfica de análisis por código de
+                    transacción muestra 30 códigos diferentes (desde 1111 hasta 3901),
+                    revelando que el código <strong>1111 es el más crítico con 1,240 errores H03 y 720 errores
+                        H23</strong>. El volumen de errores disminuye de manera progresiva
+                    a través de los códigos, siendo los primeros 5 códigos (1111, 1253, 1819, 9020, 3352) responsables
+                    del mayor porcentaje de incidencias.
+                    Sin embargo, el problema es <strong>transversal a los 30 códigos analizados</strong>, con cada uno
+                    presentando tanto errores H03 como H23.
                 </p>
                 <br>
                 <p>
-                    <strong>Patrón de Distribución por Transacción:</strong> En todos los 30 códigos sin excepción, H03 supera a H23 en cantidad de errores, 
-                    con una proporción promedio de 65-70% H03 vs 30-35% H23 por código. El código 3901 (último analizado) aún presenta 145 errores H03 y 40 errores H23, 
+                    <strong>Patrón de Distribución por Transacción:</strong> En todos los 30 códigos sin excepción, H03
+                    supera a H23 en cantidad de errores,
+                    con una proporción promedio de 65-70% H03 vs 30-35% H23 por código. El código 3901 (último
+                    analizado) aún presenta 145 errores H03 y 40 errores H23,
                     indicando que incluso los códigos de menor incidencia requieren atención.
                 </p>
                 <br>
                 <p>
-                    <strong>Recomendaciones:</strong> Implementar un plan correctivo escalonado comenzando con los 5 códigos principales (1111, 1253, 1819, 9020, 3352). 
-                    Dado que el problema afecta los 30 códigos, revisar la configuración global del servidor de host que rechaza las transacciones. 
-                    Mantener monitoreo continuo de H23 por su consistencia. Verificar el impacto de optimizaciones en enero mediante seguimiento de la tendencia decreciente observada.
+                    <strong>Recomendaciones:</strong> Implementar un plan correctivo escalonado comenzando con los 5
+                    códigos principales (1111, 1253, 1819, 9020, 3352).
+                    Dado que el problema afecta los 30 códigos, revisar la configuración global del servidor de host que
+                    rechaza las transacciones.
+                    Mantener monitoreo continuo de H23 por su consistencia. Verificar el impacto de optimizaciones en
+                    enero mediante seguimiento de la tendencia decreciente observada.
                 </p>
             </div>
         </div>
@@ -1571,12 +1586,36 @@
             if (!ctx) return;
 
             const transactionCodes = [
-                '1111', '1253', '1819', '9020', '3352',
-                '9070', '1060', '1901', '3302', '1816',
-                '2045', '2156', '2234', '2345', '2456',
-                '2567', '2678', '2789', '2890', '2901',
-                '3012', '3123', '3234', '3345', '3456',
-                '3567', '3678', '3789', '3890', '3901'
+                '1111 – LOGIN_createSession (Login)',
+                '1253 – PRDMOV_getCardStatus (Consulta de productos)',
+                '1819 – 1819_BREB_createKey (Breb)',
+                '9020 – ENROLL_GRAL_MB_Verif[...] (Enroll app)',
+                '3352 – 3352_ABONOG_findMTCN (Pago de giro internacional)',
+                '9070 – 9070_LOGIN_WEB_GRL_validateStatusAS (Registro)',
+                '1060 – ',
+                '1901 – TRANPR_makeOwnTransfer (Transferencias Propias)',
+                '3302 – ABONOG_consultGiro (ABONO DE GIRO)',
+                '1816 – 1816_BREB_getKeyDetail (Breb)',
+                '2045 – ',
+                '2156 – 2156_PAGSRV_sendNotif (Pago de Servicios (Movistar - Punto red))',
+                '2234 – ',
+                '2345 – ',
+                '2456 – ',
+                '2567 – ',
+                '2678 – ',
+                '2789 – ',
+                '2890 – ',
+                '2901 – ADMUSU_updateUserData (Actualización de datos)',
+                '3012 – ',
+                '3123 – ',
+                '3234 – ',
+                '3345 – ',
+                '3456 – ',
+                '3567 – ',
+                '3678 – ',
+                '3789 – ',
+                '3890 – ',
+                '3901 – '
             ];
 
             const h03ByTransaction = [
@@ -1605,12 +1644,18 @@
                         {
                             label: 'Errores H03',
                             data: h03ByTransaction,
-                            backgroundColor: '#dc2626'
+                            backgroundColor: '#dc2626',
+                            barThickness: 10,
+                            barPercentage: 0.7,
+                            categoryPercentage: 0.45
                         },
                         {
                             label: 'Errores H23',
                             data: h23ByTransaction,
-                            backgroundColor: '#f59e0b'
+                            backgroundColor: '#f59e0b',
+                            barThickness: 10,
+                            barPercentage: 0.7,
+                            categoryPercentage: 0.45
                         }
                     ]
                 },
@@ -1618,6 +1663,11 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     indexAxis: 'y',
+                    layout: {
+                        padding: {
+                            right: 90
+                        }
+                    },
                     interaction: {
                         mode: 'index',
                         intersect: false
@@ -1628,11 +1678,22 @@
                         },
                         tooltip: {
                             callbacks: {
+                                title: function (context) {
+                                    const i = context[0].dataIndex;
+                                    return transactionCodes[i];
+                                },
                                 label: function (context) {
                                     const i = context.dataIndex;
-                                    const total = h03ByTransaction[i] + h23ByTransaction[i];
+                                    const h03 = h03ByTransaction[i];
+                                    const h23 = h23ByTransaction[i];
+                                    const total = h03 + h23;
                                     const pct = ((context.raw / total) * 100).toFixed(1);
-                                    return `${context.dataset.label}: ${context.raw} (${pct}%)`;
+
+                                    return [
+                                        `${context.dataset.label}: ${context.raw.toLocaleString('es-CO')}`,
+                                        `Total código: ${total.toLocaleString('es-CO')}`,
+                                        `Participación: ${pct}%`
+                                    ];
                                 }
                             }
                         }
@@ -1640,33 +1701,40 @@
                     scales: {
                         x: {
                             beginAtZero: true,
-                            ticks: {				   
-                                callback: value => value.toLocaleString()
+                            ticks: {
+                                callback: value => value.toLocaleString('es-CO')
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                font: {
+                                    size: 13
+                                }
                             }
                         }
                     }
                 },
                 plugins: [{
-                    id: 'staticValueLabels',
+                    id: 'valueLabelsRight',
                     afterDatasetsDraw(chart) {
                         const { ctx } = chart;
 
                         ctx.save();
-                        ctx.font = '12px Inter, Arial';
-                        ctx.fillStyle = '#374151';
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
+                        ctx.font = '12px Arial';
+                        ctx.fillStyle = '#111827';
+                        ctx.textAlign = 'left';
+                        ctx.textBaseline = 'middle';
 
                         chart.data.datasets.forEach((dataset, datasetIndex) => {
                             const meta = chart.getDatasetMeta(datasetIndex);
                             meta.data.forEach((bar, index) => {
                                 const value = dataset.data[index];
-                                if (value === 0) return;
+                                if (!value) return;
 
                                 ctx.fillText(
-                                    value.toLocaleString(),
-                                    bar.x,
-                                    bar.y - 4
+                                    value.toLocaleString('es-CO'),
+                                    bar.x + 6,
+                                    bar.y
                                 );
                             });
                         });
@@ -1676,9 +1744,7 @@
                 }]
             });
         }
-
-        // Inicializar la gráfica de H03 y H23 por transacción
-        renderH03H23ByTransactionChart();
+        window.addEventListener('load', renderH03H23ByTransactionChart);
     </script>
 
 </body>
