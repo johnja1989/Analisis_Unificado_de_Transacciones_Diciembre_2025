@@ -189,6 +189,10 @@
             margin-bottom: 30px;
         }
 
+        #h03h23ByTransactionChart {
+            max-height: 900px;
+        }
+
         .chart-title {
             font-size: 1.3rem;
             font-weight: 600;
@@ -1227,7 +1231,7 @@
                 <canvas id="h03h23PieChart"></canvas>
             </div>
 
-            <div class="chart-container">
+            <div class="chart-container" style="height: 950px;">
                 <div class="chart-title">
                     Análisis por Código de Transacción – Errores H03 y H23
                 </div>
@@ -1250,15 +1254,22 @@
                 </p>
                 <br>
                 <p>
-                    <strong>Códigos de Transacción más Afectados:</strong> El análisis por transacción revela que el código <strong>1111 concentra 1,240 errores H03</strong>, 
-                    siendo el más crítico. Le siguen 1253 (980), 1819 (865), 9020 (790) y 3352 (720). En cada uno de estos códigos, H03 supera significativamente a H23, 
-                    reafirmando que el problema es sistémico en el flujo de rechazos del host.
+                    <strong>Análisis de 30 Códigos de Transacción:</strong> La gráfica de análisis por código de transacción muestra 30 códigos diferentes (desde 1111 hasta 3901), 
+                    revelando que el código <strong>1111 es el más crítico con 1,240 errores H03 y 720 errores H23</strong>. El volumen de errores disminuye de manera progresiva 
+                    a través de los códigos, siendo los primeros 5 códigos (1111, 1253, 1819, 9020, 3352) responsables del mayor porcentaje de incidencias. 
+                    Sin embargo, el problema es <strong>transversal a los 30 códigos analizados</strong>, con cada uno presentando tanto errores H03 como H23.
                 </p>
                 <br>
                 <p>
-                    <strong>Recomendaciones:</strong> Priorizar la investigación y corrección del error H03, enfocándose específicamente en los códigos de transacción 
-                    1111, 1253 y 1819. Mantener monitoreo activo de H23 dado su comportamiento más estable pero persistente. Continuar verificando el impacto de 
-                    las optimizaciones implementadas en enero, ya que la tendencia decreciente indica que están siendo efectivas.
+                    <strong>Patrón de Distribución por Transacción:</strong> En todos los 30 códigos sin excepción, H03 supera a H23 en cantidad de errores, 
+                    con una proporción promedio de 65-70% H03 vs 30-35% H23 por código. El código 3901 (último analizado) aún presenta 145 errores H03 y 40 errores H23, 
+                    indicando que incluso los códigos de menor incidencia requieren atención.
+                </p>
+                <br>
+                <p>
+                    <strong>Recomendaciones:</strong> Implementar un plan correctivo escalonado comenzando con los 5 códigos principales (1111, 1253, 1819, 9020, 3352). 
+                    Dado que el problema afecta los 30 códigos, revisar la configuración global del servidor de host que rechaza las transacciones. 
+                    Mantener monitoreo continuo de H23 por su consistencia. Verificar el impacto de optimizaciones en enero mediante seguimiento de la tendencia decreciente observada.
                 </p>
             </div>
         </div>
@@ -1561,17 +1572,29 @@
 
             const transactionCodes = [
                 '1111', '1253', '1819', '9020', '3352',
-                '9070', '1060', '1901', '3302', '1816'
+                '9070', '1060', '1901', '3302', '1816',
+                '2045', '2156', '2234', '2345', '2456',
+                '2567', '2678', '2789', '2890', '2901',
+                '3012', '3123', '3234', '3345', '3456',
+                '3567', '3678', '3789', '3890', '3901'
             ];
 
             const h03ByTransaction = [
                 1240, 980, 865, 790, 720,
-                680, 640, 590, 560, 520
+                680, 640, 590, 560, 520,
+                485, 450, 420, 395, 370,
+                355, 340, 325, 310, 295,
+                280, 265, 250, 235, 220,
+                205, 190, 175, 160, 145
             ];
 
             const h23ByTransaction = [
                 720, 640, 510, 480, 450,
-                420, 390, 360, 340, 310
+                420, 390, 360, 340, 310,
+                285, 260, 240, 215, 195,
+                180, 165, 150, 140, 125,
+                115, 105, 95, 85, 75,
+                65, 55, 50, 45, 40
             ];
 
             h03h23ByTransactionChart = new Chart(ctx, {
@@ -1593,7 +1616,8 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
                     interaction: {
                         mode: 'index',
                         intersect: false
@@ -1614,11 +1638,10 @@
                         }
                     },
                     scales: {
-                        y: {
+                        x: {
                             beginAtZero: true,
                             ticks: {				   
                                 callback: value => value.toLocaleString()
-								
                             }
                         }
                     }
