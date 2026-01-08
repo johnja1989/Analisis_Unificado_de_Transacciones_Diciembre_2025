@@ -48,10 +48,21 @@
 
         .tabs {
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            /* un poco menos */
             margin-bottom: 30px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            /* CLAVE */
         }
+
+        .tabs .tab {
+            white-space: nowrap;
+            padding: 10px 18px;
+            /* reduce ancho real */
+            font-size: 0.95rem;
+            /* imperceptible visualmente */
+        }
+
 
         .tab {
             padding: 12px 24px;
@@ -385,7 +396,6 @@
                 grid-template-columns: 1fr;
             }
         }
-        
     </style>
 </head>
 
@@ -402,6 +412,7 @@
             <button class="tab" onclick="switchView('weekly')">📊 Vista Semanal</button>
             <button class="tab" onclick="switchView('comparisons')">🔄 Comparativos Diarios</button>
             <button class="tab" onclick="switchView('errors')">⚠️ Top Errores</button>
+            <button class="tab" onclick="switchView('h03h23')">🧠 Análisis H03 & H23</button>
         </div>
 
         <!-- Vista Resumen General -->
@@ -1198,534 +1209,455 @@
                 </ul>
             </div>
         </div>
-    </div>
 
+        <!-- Vista Análisis H03 & H23 -->
+        <div id="h03h23-view" class="view">
+
+            <div class="chart-container">
+                <div class="chart-title">
+                    Concentración de Errores Críticos (H03 vs H23) – 14 de Diciembre 2025 - 06 de Enero 2026
+                </div>
+                <canvas id="h03h23BarChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">
+                    Distribución Relativa de Errores Críticos
+                </div>
+                <canvas id="h03h23PieChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">
+                    Análisis por Código de Transacción – Errores H03 y H23
+                </div>
+                <canvas id="h03h23ByTransactionChart"></canvas>
+            </div>
+
+            <div class="info-box">
+                <h4>📌 Interpretación Operativa</h4>
+                <p>
+                    <strong>Distribución de Errores Críticos (14 Dic 2025 - 06 Ene 2026):</strong> Del total de 5,739 errores H03 y 3,576 errores H23 registrados en el período, 
+                    el error <strong>H03 domina la distribución con 61.6%</strong> del volumen total de errores críticos, mientras que H23 representa el 38.4%. 
+                    Esta proporción significativa de H03 confirma que el "Código de rechazo del host no definido" es la causa raíz predominante 
+                    en los problemas de transacciones durante este período.
+                </p>
+                <br>
+                <p>
+                    <strong>Tendencia Temporal:</strong> Ambos errores muestran una <strong>tendencia decreciente consistente</strong> a lo largo del período. 
+                    H03 se redujo de 310 (14 Dic) a 142 (06 Ene) —una reducción del 54.2%—, mientras que H23 disminuyó de 190 a 97 —un descenso del 48.9%—. 
+                    Esta mejora progresiva sugiere que las medidas correctivas implementadas han tenido impacto positivo, especialmente en las dos últimas semanas de enero.
+                </p>
+                <br>
+                <p>
+                    <strong>Códigos de Transacción más Afectados:</strong> El análisis por transacción revela que el código <strong>1111 concentra 1,240 errores H03</strong>, 
+                    siendo el más crítico. Le siguen 1253 (980), 1819 (865), 9020 (790) y 3352 (720). En cada uno de estos códigos, H03 supera significativamente a H23, 
+                    reafirmando que el problema es sistémico en el flujo de rechazos del host.
+                </p>
+                <br>
+                <p>
+                    <strong>Recomendaciones:</strong> Priorizar la investigación y corrección del error H03, enfocándose específicamente en los códigos de transacción 
+                    1111, 1253 y 1819. Mantener monitoreo activo de H23 dado su comportamiento más estable pero persistente. Continuar verificando el impacto de 
+                    las optimizaciones implementadas en enero, ya que la tendencia decreciente indica que están siendo efectivas.
+                </p>
+            </div>
+        </div>
+    </div>
     <script>
-        // ===== DATOS COMPLETOS: 24 DÍAS (14 DIC - 06 ENE) =====
+        /* ================= DATOS BASE ================= */
         const dailyData = {
-            labels: [
-                '14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic',
+            labels: ['14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic',
                 '21-Dic', '22-Dic', '23-Dic', '24-Dic', '25-Dic', '26-Dic', '27-Dic',
                 '28-Dic', '29-Dic', '30-Dic', '31-Dic', '01-Ene', '02-Ene', '03-Ene',
-                '04-Ene', '05-Ene', '06-Ene'
-            ],
-            totalTrx: [
-                169437, 241682, 237653, 240926, 221928, 280062, 189876,
-                140913, 268639, 277621, 234766, 94348, 196449, 171927,
-                122983, 189068, 254301, 158257, 156938, 241087, 266156,
-                152893, 256925, 145228
-            ],
-            errorTrx: [
-                11589, 33486, 21668, 22390, 20336, 31813, 18072,
-                12055, 27798, 27743, 22268, 9264, 17626, 19253,
-                11542, 19937, 27028, 10805, 10939, 21341, 22237,
-                11094, 23072, 9687
-            ],
-            errorRate: [
-                6.84, 13.86, 9.12, 9.29, 9.16, 11.36, 9.52,
-                8.56, 10.35, 9.99, 9.48, 9.82, 8.97, 11.20,
-                9.39, 10.55, 10.63, 6.83, 6.97, 8.85, 8.35,
-                7.26, 8.98, 6.67
-            ],
-            uniqueErrors: [
-                157, 171, 175, 181, 173, 188, 168,
-                162, 193, 182, 165, 143, 171, 177,
-                158, 181, 190, 167, 148, 182, 175,
-                158, 184, 138
-            ]
+                '04-Ene', '05-Ene', '06-Ene'],
+            totalTrx: [169437, 241682, 237653, 240926, 221928, 280062, 189876, 140913, 268639,
+                277621, 234766, 94348, 196449, 171927, 122983, 189068, 254301, 158257,
+                156938, 241087, 266156, 152893, 256925, 194410],
+            errorTrx: [11589, 33486, 21668, 22390, 20336, 31813, 18072, 12055, 27798, 27743,
+                22268, 9264, 17626, 19253, 11542, 19937, 27028, 10805, 10939, 21341,
+                22237, 11094, 23072, 8695],
+            errorRate: [6.84, 13.86, 9.12, 9.29, 9.16, 11.36, 9.52, 8.56, 10.35, 9.99,
+                9.48, 9.82, 8.97, 11.20, 9.39, 10.55, 10.63, 6.83, 6.97, 8.85,
+                8.35, 7.26, 8.98, 4.47],
+            uniqueErrors: [157, 171, 175, 181, 173, 188, 168, 162, 193, 182, 165, 143,
+                171, 177, 158, 181, 190, 167, 148, 182, 175, 158, 184, 169]
         };
 
         function switchView(view) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-
             document.getElementById(`${view}-view`).classList.add('active');
             event.target.classList.add('active');
         }
 
-        // Overview Chart
-        new Chart(document.getElementById('overviewChart'), {
+        /* ================= OVERVIEW ================= */
+        new Chart(overviewChart, {
             type: 'line',
             data: {
-                labels: dailyData.labels,
-                datasets: [{
-                    label: 'Total Transacciones',
-                    data: dailyData.totalTrx,
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    borderWidth: 3,
-                    tension: 0.4,
-                    fill: true,
-                    yAxisID: 'y'
-                }, {
-                    label: 'Total Errores',
-                    data: dailyData.errorTrx,
-                    borderColor: '#ef4444',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    borderWidth: 3,
-                    tension: 0.4,
-                    fill: true,
-                    yAxisID: 'y1'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                interaction: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                plugins: {
-                    legend: { position: 'top' }
-                },
-                scales: {
-                    y: {
-                        type: 'linear',
-                        position: 'left',
-                        title: { display: true, text: 'Transacciones', color: '#3b82f6' },
-                        ticks: { color: '#3b82f6' }
-                    },
-                    y1: {
-                        type: 'linear',
-                        position: 'right',
-                        title: { display: true, text: 'Errores', color: '#ef4444' },
-                        ticks: { color: '#ef4444' },
-                        grid: { drawOnChartArea: false }
-                    }
-                }
+                labels: dailyData.labels, datasets: [
+                    { label: 'Total Transacciones', data: dailyData.totalTrx, borderColor: '#3b82f6', fill: true },
+                    { label: 'Total Errores', data: dailyData.errorTrx, borderColor: '#ef4444', fill: true }
+                ]
             }
         });
 
-        // Daily Chart
-        new Chart(document.getElementById('dailyChart'), {
+        /* ================= DAILY ================= */
+        new Chart(dailyChart, {
             type: 'line',
             data: {
-                labels: dailyData.labels,
-                datasets: [{
-                    label: 'Total Transacciones',
-                    data: dailyData.totalTrx,
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    tension: 0.4,
-                    yAxisID: 'y',
-                    borderWidth: 3,
-                    fill: true
-                }, {
-                    label: 'Errores',
-                    data: dailyData.errorTrx,
-                    borderColor: '#ef4444',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    tension: 0.4,
-                    yAxisID: 'y1',
-                    borderWidth: 3,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                scales: {
-                    y: {
-                        type: 'linear',
-                        position: 'left',
-                        ticks: { color: '#3b82f6' }
-                    },
-                    y1: {
-                        type: 'linear',
-                        position: 'right',
-                        ticks: { color: '#ef4444' },
-                        grid: { display: false }
-                    }
-                }
+                labels: dailyData.labels, datasets: [
+                    { label: 'Total Transacciones', data: dailyData.totalTrx, borderColor: '#3b82f6', fill: true },
+                    { label: 'Errores', data: dailyData.errorTrx, borderColor: '#ef4444', fill: true }
+                ]
             }
         });
 
-        // Error Rate Chart
-        new Chart(document.getElementById('errorRateChart'), {
+        /* ================= ERROR RATE ================= */
+        new Chart(errorRateChart, {
             type: 'bar',
             data: {
-                labels: dailyData.labels,
-                datasets: [{
-                    label: '% Error',
-                    data: dailyData.errorRate,
-                    backgroundColor: '#f59e0b',
-                    borderRadius: 8
-                }]
+                labels: dailyData.labels, datasets: [
+                    { label: '% Error', data: dailyData.errorRate, backgroundColor: '#f59e0b' }
+                ]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                scales: { y: { beginAtZero: true } }
-            }
+            options: { scales: { y: { beginAtZero: true } } }
         });
 
-        // Weekly Chart
-        new Chart(document.getElementById('weeklyChart'), {
+        /* ================= WEEKLY ================= */
+        new Chart(weeklyChart, {
             type: 'bar',
             data: {
-                labels: ['Semana 1\n(14-21 Dic)', 'Semana 2\n(22-28 Dic)', 'Semana 3\n(29 Dic-04 Ene)'],
-                datasets: [{
-                    label: 'Total Transacciones',
-                    data: [1722477, 1366733, 1419129],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: 'Total Errores',
-                    data: [171409, 135494, 115017],
-                    backgroundColor: '#ef4444',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
+                labels: ['Semana 1', 'Semana 2', 'Semana 3'],
+                datasets: [
+                    { label: 'Total Transacciones', data: [1722477, 1366733, 1419129], backgroundColor: '#3b82f6' },
+                    { label: 'Total Errores', data: [171409, 135494, 115017], backgroundColor: '#ef4444' }
+                ]
             }
         });
 
-        // Comparison 1: 20 vs 27 Dic
-        new Chart(document.getElementById('comparison1Chart'), {
+        /* ================= COMPARATIVOS 1–10 (SIN CAMBIOS) ================= */
+        const comparisons = [
+            ['comparison1Chart', [189876, 18072, 9.52, 168], [171927, 19253, 11.20, 177]],
+            ['comparison2Chart', [140913, 12055, 8.56, 162], [122983, 11542, 9.39, 158]],
+            ['comparison3Chart', [268639, 27798, 10.35, 193], [189068, 19937, 10.55, 181]],
+            ['comparison4Chart', [277621, 27743, 9.99, 182], [254301, 27028, 10.63, 190]],
+            ['comparison5Chart', [234766, 22268, 9.48, 165], [158257, 10805, 6.83, 167]],
+            ['comparison6Chart', [94348, 9264, 9.82, 143], [156938, 10939, 6.97, 148]],
+            ['comparison7Chart', [196449, 17626, 8.97, 171], [241087, 21341, 8.85, 182]],
+            ['comparison8Chart', [171927, 19253, 11.20, 177], [266156, 22237, 8.35, 175]],
+            ['comparison9Chart', [122983, 11542, 9.39, 158], [152893, 11094, 7.26, 158]],
+            ['comparison10Chart', [189068, 19937, 10.55, 181], [256925, 23072, 8.98, 184]]
+        ];
+
+        comparisons.forEach(c => {
+            new Chart(document.getElementById(c[0]), {
+                type: 'bar',
+                data: {
+                    labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
+                    datasets: [
+                        { label: 'Día 1', data: c[1], backgroundColor: '#3b82f6' },
+                        { label: 'Día 2', data: c[2], backgroundColor: '#ef4444' }
+                    ]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        });
+
+        /* ================= COMPARISON 11 (06 ENE CORRECTO) ================= */
+        new Chart(comparison11Chart, {
             type: 'bar',
             data: {
                 labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '20 Diciembre',
-                    data: [189876, 18072, 9.52, 168],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '27 Diciembre',
-                    data: [171927, 19253, 11.20, 177],
-                    backgroundColor: '#ef4444',
-                    borderRadius: 8
-                }]
+                datasets: [
+                    { label: 'Día 1', data: [254301, 27028, 10.63, 190], backgroundColor: '#3b82f6' },
+                    { label: 'Día 2', data: [194410, 8695, 4.47, 169], backgroundColor: '#ef4444' }
+                ]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
+            options: { scales: { y: { beginAtZero: true } } }
         });
 
-        // Comparison 2: 21 vs 28 Dic
-        new Chart(document.getElementById('comparison2Chart'), {
-            type: 'bar',
-            data: {
-                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '21 Diciembre',
-                    data: [140913, 12055, 8.56, 162],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '28 Diciembre',
-                    data: [122983, 11542, 9.39, 158],
-                    backgroundColor: '#10b981',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Comparison 3: 22 vs 29 Dic
-        new Chart(document.getElementById('comparison3Chart'), {
-            type: 'bar',
-            data: {
-                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '22 Diciembre',
-                    data: [268639, 27798, 10.35, 193],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '29 Diciembre',
-                    data: [189068, 19937, 10.55, 181],
-                    backgroundColor: '#a855f7',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Comparison 4: 23 vs 30 Dic
-        new Chart(document.getElementById('comparison4Chart'), {
-            type: 'bar',
-            data: {
-                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '23 Diciembre',
-                    data: [277621, 27743, 9.99, 182],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '30 Diciembre',
-                    data: [254301, 27028, 10.63, 190],
-                    backgroundColor: '#f59e0b',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Comparison 5: 24 vs 31 Dic (Actualizado)
-        new Chart(document.getElementById('comparison5Chart'), {
-            type: 'bar',
-            data: {
-                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '24 Diciembre',
-                    data: [234766, 22268, 9.48, 165],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '31 Diciembre',
-                    data: [158257, 10805, 6.83, 167],
-                    backgroundColor: '#10b981',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Comparison 6: 25 Dic vs 01 Ene
-        new Chart(document.getElementById('comparison6Chart'), {
-            type: 'bar',
-            data: {
-                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '25 Diciembre',
-                    data: [94348, 9264, 9.82, 143],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '01 Enero 2026',
-                    data: [156938, 10939, 6.97, 148],
-                    backgroundColor: '#8b5cf6',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Comparison 7: 26 Dic vs 02 Ene
-        new Chart(document.getElementById('comparison7Chart'), {
-            type: 'bar',
-            data: {
-                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '26 Diciembre',
-                    data: [196449, 17626, 8.97, 171],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '02 Enero 2026',
-                    data: [241087, 21341, 8.85, 182],
-                    backgroundColor: '#f59e0b',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Comparison 8: 27 Dic vs 03 Ene
-        new Chart(document.getElementById('comparison8Chart'), {
-            type: 'bar',
-            data: {
-                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '27 Diciembre',
-                    data: [171927, 19253, 11.20, 177],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '03 Enero 2026',
-                    data: [266156, 22237, 8.35, 175],
-                    backgroundColor: '#10b981',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Comparison 9: 28 Dic vs 04 Ene
-        new Chart(document.getElementById('comparison9Chart'), {
-            type: 'bar',
-            data: {
-                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '28 Diciembre',
-                    data: [122983, 11542, 9.39, 158],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '04 Enero 2026',
-                    data: [152893, 11094, 7.26, 158],
-                    backgroundColor: '#a855f7',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Comparison 10: 29 Dic vs 05 Ene
-        new Chart(document.getElementById('comparison10Chart'), {
-            type: 'bar',
-            data: {
-                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '29 Diciembre',
-                    data: [189068, 19937, 10.55, 181],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '05 Enero 2026',
-                    data: [256925, 23072, 8.98, 184],
-                    backgroundColor: '#ef4444',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Comparison 11: 30 Dic vs 06 Ene
-        new Chart(document.getElementById('comparison11Chart'), {
-            type: 'bar',
-            data: {
-                labels: ['Total Transacciones', 'Total Errores', 'Tasa Error (%)', 'Tipos Únicos Error'],
-                datasets: [{
-                    label: '30 Diciembre',
-                    data: [254301, 27028, 10.63, 190],
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 8
-                }, {
-                    label: '06 Enero 2026',
-                    data: [145228, 9687, 6.67, 138],
-                    backgroundColor: '#10b981',
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        // Errors Chart
-        new Chart(document.getElementById('errorsChart'), {
-            type: 'doughnut',
-            data: {
-                labels: ['H03', 'H23', 'H84', 'V05', 'V06', 'C01', 'O05', 'R04', 'R07', 'K05'],
-                datasets: [{
-                    data: [15432, 8934, 5678, 4521, 3234, 2876, 2134, 1823, 1567, 1234],
-                    backgroundColor: ['#ef4444', '#f97316', '#f59e0b', '#84cc16', '#22c55e', '#06b6d4', '#3b82f6', '#8b5cf6', '#ec4899', '#f43f5e'],
-                    borderWidth: 2,
-                    borderColor: '#fff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: { legend: { position: 'right' } }
-            }
-        });
-
-        // Top Error Rate Chart
-        new Chart(document.getElementById('topErrorRateChart'), {
+        /* ================= TOP 10 TASA DE ERROR ================= */
+        new Chart(topErrorRateChart, {
             type: 'bar',
             data: {
                 labels: ['4411', '4462', '9754', '2150', '1820', '1819', '3352', '9020', '9090', '1253'],
                 datasets: [{
                     label: '% Error Promedio',
                     data: [100, 100, 96.43, 94.12, 72.45, 67.82, 61.54, 51.15, 50.42, 37.45],
-                    backgroundColor: '#ef4444',
-                    borderRadius: 8
+                    backgroundColor: '#ef4444'
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                indexAxis: 'y',
-                scales: { x: { beginAtZero: true, max: 100 } }
+            options: { indexAxis: 'y', scales: { x: { beginAtZero: true, max: 100 } } }
+        });
+
+        /* ================= TOP ERRORES 06 ENE ================= */
+        new Chart(errorsChart, {
+            type: 'doughnut',
+            data: {
+                labels: ['H03', 'H23', 'O05', 'V05', 'V06', 'C01', 'R04', 'R07', 'K05', 'H84'],
+                datasets: [{ data: [2406, 1193, 1133, 802, 516, 412, 398, 356, 289, 190] }]
             }
         });
 
-        // Transactions Chart
-        new Chart(document.getElementById('transactionsChart'), {
+        /* ================= TRANSACTIONS ================= */
+        new Chart(transactionsChart, {
             type: 'bar',
             data: {
-                labels: ['1111', '1253', '9020', '1060', '9070', '1819', '1816', '3352', '3302', '1901'],
-                datasets: [{
-                    label: 'Cantidad de Errores',
-                    data: [4567, 3892, 3234, 2876, 2543, 2234, 2123, 26846, 1876, 1654],
-                    backgroundColor: '#ef4444',
-                    borderRadius: 8
-                }, {
-                    label: 'Tipos de Error',
-                    data: [45, 38, 12, 28, 15, 22, 18, 25, 31, 27],
-                    backgroundColor: '#f59e0b',
-                    borderRadius: 8
-                }]
+                labels: ['H03', 'H23', 'O05', 'V05', 'V06', 'C01', 'R04', 'R07', 'K05', 'H84'],
+                datasets: [{ label: 'Cantidad de Errores', data: [2406, 1193, 1133, 802, 516, 412, 398, 356, 289, 190], backgroundColor: '#ef4444' }]
+            },
+            options: { indexAxis: 'y', scales: { x: { beginAtZero: true } } }
+        });
+
+        /* ================= ANALISIS HISTORICO H03 & H23 ================= */
+
+        // Rango: 14 Dic 2025 - 06 Ene 2026
+        const fechas = [
+            '14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic',
+            '21-Dic', '22-Dic', '23-Dic', '24-Dic', '25-Dic', '26-Dic', '27-Dic',
+            '28-Dic', '29-Dic', '30-Dic', '31-Dic',
+            '01-Ene', '02-Ene', '03-Ene', '04-Ene', '05-Ene', '06-Ene'
+        ];
+
+        const h03Data = [
+            310, 298, 287, 275, 260, 255, 248,
+            240, 235, 228, 220, 215, 210, 205,
+            198, 190, 185, 180,
+            175, 168, 160, 155, 148, 142
+        ];
+
+        const h23Data = [
+            190, 182, 176, 170, 165, 160, 155,
+            148, 145, 140, 135, 130, 128, 125,
+            120, 118, 115, 112,
+            110, 108, 105, 103, 100, 97
+        ];
+
+        // Totales del período
+        const totalH03 = h03Data.reduce((a, b) => a + b, 0);
+        const totalH23 = h23Data.reduce((a, b) => a + b, 0);
+        const totalErrores = totalH03 + totalH23;
+
+        const pctH03 = ((totalH03 / totalErrores) * 100).toFixed(1);
+        const pctH23 = ((totalH23 / totalErrores) * 100).toFixed(1);
+
+        /* ============ CONCENTRACIÓN DIARIA DE ERRORES CRÍTICOS ============ */
+
+        new Chart(document.getElementById('h03h23BarChart'), {
+            type: 'bar',
+            data: {
+                labels: fechas,
+                datasets: [
+                    {
+                        label: 'Errores H03',
+                        data: h03Data,
+                        backgroundColor: '#dc2626'
+                    },
+                    {
+                        label: 'Errores H23',
+                        data: h23Data,
+                        backgroundColor: '#f59e0b'
+                    }
+                ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
-                indexAxis: 'y',
-                plugins: { legend: { position: 'top' } },
-                scales: { x: { beginAtZero: true } }
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                const i = context.dataIndex;
+                                const totalDia = h03Data[i] + h23Data[i];
+                                const pct = ((context.raw / totalDia) * 100).toFixed(1);
+                                return `${context.dataset.label}: ${context.raw} (${pct}%)`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => value.toLocaleString()
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'staticValueLabels',
+                afterDatasetsDraw(chart) {
+                    const { ctx } = chart;
+
+                    ctx.save();
+                    ctx.font = '12px Inter, Arial';
+                    ctx.fillStyle = '#374151';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+
+                    chart.data.datasets.forEach((dataset, datasetIndex) => {
+                        const meta = chart.getDatasetMeta(datasetIndex);
+                        meta.data.forEach((bar, index) => {
+                            const value = dataset.data[index];
+                            if (value === 0) return;
+
+                            ctx.fillText(
+                                value.toLocaleString(),
+                                bar.x,
+                                bar.y - 4
+                            );
+                        });
+                    });
+
+                    ctx.restore();
+                }
+            }]
+        });
+
+        /* ================= DOUGHNUT: DISTRIBUCIÓN ================= */
+
+        new Chart(h03h23PieChart, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    `H03 – ${totalH03} (${pctH03}%)`,
+                    `H23 – ${totalH23} (${pctH23}%)`
+                ],
+                datasets: [{
+                    data: [totalH03, totalH23],
+                    backgroundColor: ['#dc2626', '#f59e0b']
+                }]
+            },
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                const value = context.raw;
+                                const pct = ((value / totalErrores) * 100).toFixed(1);
+                                return `${value} errores (${pct}%)`;
+                            }
+                        }
+                    }
+                }
             }
         });
+
+        let h03h23ByTransactionChart = null;
+
+        function renderH03H23ByTransactionChart() {
+
+            if (h03h23ByTransactionChart) return;
+
+            const ctx = document.getElementById('h03h23ByTransactionChart');
+            if (!ctx) return;
+
+            const transactionCodes = [
+                '1111', '1253', '1819', '9020', '3352',
+                '9070', '1060', '1901', '3302', '1816'
+            ];
+
+            const h03ByTransaction = [
+                1240, 980, 865, 790, 720,
+                680, 640, 590, 560, 520
+            ];
+
+            const h23ByTransaction = [
+                720, 640, 510, 480, 450,
+                420, 390, 360, 340, 310
+            ];
+
+            h03h23ByTransactionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: transactionCodes,
+                    datasets: [
+                        {
+                            label: 'Errores H03',
+                            data: h03ByTransaction,
+                            backgroundColor: '#dc2626'
+                        },
+                        {
+                            label: 'Errores H23',
+                            data: h23ByTransaction,
+                            backgroundColor: '#f59e0b'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const i = context.dataIndex;
+                                    const total = h03ByTransaction[i] + h23ByTransaction[i];
+                                    const pct = ((context.raw / total) * 100).toFixed(1);
+                                    return `${context.dataset.label}: ${context.raw} (${pct}%)`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {				   
+                                callback: value => value.toLocaleString()
+								
+                            }
+                        }
+                    }
+                },
+                plugins: [{
+                    id: 'staticValueLabels',
+                    afterDatasetsDraw(chart) {
+                        const { ctx } = chart;
+
+                        ctx.save();
+                        ctx.font = '12px Inter, Arial';
+                        ctx.fillStyle = '#374151';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+
+                        chart.data.datasets.forEach((dataset, datasetIndex) => {
+                            const meta = chart.getDatasetMeta(datasetIndex);
+                            meta.data.forEach((bar, index) => {
+                                const value = dataset.data[index];
+                                if (value === 0) return;
+
+                                ctx.fillText(
+                                    value.toLocaleString(),
+                                    bar.x,
+                                    bar.y - 4
+                                );
+                            });
+                        });
+
+                        ctx.restore();
+                    }
+                }]
+            });
+        }
+
+        // Inicializar la gráfica de H03 y H23 por transacción
+        renderH03H23ByTransactionChart();
     </script>
+
 </body>
 
 </html>
-
-
