@@ -1412,11 +1412,18 @@
                 <canvas id="h03h23ByTransactionChart"></canvas>
             </div>
 
+            <div class="chart-container" style="margin-top:40px">
+                <div class="chart-title">
+                    Evolución Diaria de Errores H03 por Código de Transacción
+                </div>
+                <canvas id="h03DailyProfessionalChart" height="110"></canvas>
+            </div>
+
             <div class="chart-container">
                 <div class="chart-title">
-                    Evolución Diaria de Errores H03 por Código de Transacción (Top 30)
+                    Evolución Diaria de Errores H23 por Código de Transacción
                 </div>
-                <canvas id="dailyH03Top30Chart"></canvas>
+                <canvas id="h23DailyProfessionalChart"></canvas>
             </div>
 
             <div class="info-box">
@@ -1478,165 +1485,136 @@
                 171, 177, 158, 181, 190, 167, 148, 182, 175, 158, 184, 169, 159]
         };
 
-        const transactionDailyTrend = {
+        const h03DailyProfessionalData = {
             labels: dailyData.labels,
             datasets: [
-                {
-                    label: 'LOGIN_createSession – H03',
-                    data: [1240, 1100, 1050, 980, 900, 865, 820, 780, 740, 700, 660, 620, 580, 540, 500, 460, 430, 410, 390, 370, 350, 330, 310, 295, 260],
-                    borderColor: '#dc2626',
-                    tension: 0.4,
-                    fill: false
-                },
-                {
-                    label: 'LOGIN_createSession – H23',
-                    data: [720, 680, 650, 610, 580, 550, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 245, 230, 215, 200, 180],
-                    borderColor: '#f59e0b',
-                    tension: 0.4,
-                    fill: false
-                },
-                {
-                    label: 'PRDMOV_getCardStatus – H03',
-                    data: [980, 940, 910, 880, 840, 820, 790, 760, 730, 700, 670, 640, 610, 580, 550, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340],
-                    borderColor: '#2563eb',
-                    tension: 0.4,
-                    fill: false
-                }
+
+                { label: '1111 LOGIN_createSession', data: [1240, 1180, 1120, 1080, 1040, 1000, 960, 920, 890, 860, 830, 800, 770, 740, 710, 680, 650, 620, 590, 560, 530, 500, 470, 440, 410], borderColor: '#dc2626', borderWidth: 2, tension: 0.4 },
+
+                { label: '1253 PRDMOV_getCardStatus', data: [980, 950, 920, 900, 880, 860, 840, 820, 800, 780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480], borderColor: '#2563eb', borderWidth: 2, tension: 0.4 },
+
+                { label: '1819 BREB_createKey', data: [865, 840, 820, 800, 780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380], borderColor: '#16a34a', borderWidth: 2, tension: 0.4 },
+
+                { label: '9020 ENROLL_GRAL_MB_Verif', data: [790, 770, 750, 730, 710, 690, 670, 650, 630, 610, 590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310], borderColor: '#9333ea', borderWidth: 2, tension: 0.4 },
+
+                { label: '3352 ABONOG_findMTCN', data: [720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240], borderColor: '#f59e0b', borderWidth: 2, tension: 0.4 },
+
+                { label: '9070 LOGIN_WEB_GRL_validateStatusAS', data: [680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200], borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4 },
+
+                { label: '1060', data: [640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160], borderColor: '#22c55e', borderWidth: 2, tension: 0.4 },
+
+                { label: '1901 TRANPR_makeOwnTransfer', data: [590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110], borderColor: '#e11d48', borderWidth: 2, tension: 0.4 },
+
+                { label: '3302 ABONOG_consultGiro', data: [560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80], borderColor: '#14b8a6', borderWidth: 2, tension: 0.4 },
+
+                { label: '1816 BREB_getKeyDetail', data: [520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40], borderColor: '#f97316', borderWidth: 2, tension: 0.4 },
+
+                { label: '2045', data: [485, 470, 455, 440, 425, 410, 395, 380, 365, 350, 335, 320, 305, 290, 275, 260, 245, 230, 215, 200, 185, 170, 155, 140, 125], borderColor: '#84cc16', borderWidth: 2, tension: 0.4 },
+
+                { label: '2156 PAGSERV_sendNotif', data: [450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110, 90, 80, 70, 60, 50, 45, 40], borderColor: '#06b6d4', borderWidth: 2, tension: 0.4 },
+
+                { label: '2234', data: [420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 90, 80, 70, 60, 55, 50, 45, 40], borderColor: '#a855f7', borderWidth: 2, tension: 0.4 },
+
+                { label: '2345', data: [395, 380, 365, 350, 335, 320, 305, 290, 275, 260, 245, 230, 215, 200, 185, 170, 155, 140, 130, 120, 110, 100, 95, 90, 85], borderColor: '#ec4899', borderWidth: 2, tension: 0.4 },
+
+                { label: '2456', data: [370, 355, 340, 325, 310, 295, 280, 265, 250, 235, 220, 205, 195, 180, 165, 150, 135, 120, 110, 100, 90, 85, 80, 75, 70], borderColor: '#64748b', borderWidth: 2, tension: 0.4 },
+
+                { label: '2567', data: [355, 340, 325, 310, 295, 280, 265, 250, 235, 220, 205, 190, 180, 165, 150, 135, 120, 110, 100, 90, 80, 75, 70, 65, 60], borderColor: '#78716c', borderWidth: 2, tension: 0.4 },
+
+                { label: '2678', data: [340, 325, 310, 295, 280, 265, 250, 235, 220, 205, 190, 175, 165, 150, 135, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50], borderColor: '#4ade80', borderWidth: 2, tension: 0.4 },
+
+                { label: '2789', data: [325, 310, 295, 280, 265, 250, 235, 220, 205, 190, 175, 160, 150, 135, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45], borderColor: '#fb7185', borderWidth: 2, tension: 0.4 },
+
+                { label: '2890', data: [310, 295, 280, 265, 250, 235, 220, 205, 190, 175, 160, 145, 135, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40], borderColor: '#38bdf8', borderWidth: 2, tension: 0.4 },
+
+                { label: '2901 ADMUSU_updateUserData', data: [295, 280, 265, 250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35], borderColor: '#c084fc', borderWidth: 2, tension: 0.4 },
+
+                { label: '3012', data: [280, 265, 250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30], borderColor: '#dc2626', borderWidth: 2, tension: 0.4 },
+
+                { label: '3123', data: [265, 250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25], borderColor: '#2563eb', borderWidth: 2, tension: 0.4 },
+
+                { label: '3234', data: [250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20], borderColor: '#16a34a', borderWidth: 2, tension: 0.4 },
+
+                { label: '3345', data: [235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 18], borderColor: '#9333ea', borderWidth: 2, tension: 0.4 },
+
+                { label: '3456', data: [220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18], borderColor: '#f59e0b', borderWidth: 2, tension: 0.4 },
+
+                { label: '3567', data: [205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15], borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4 },
+
+                { label: '3678', data: [190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12], borderColor: '#22c55e', borderWidth: 2, tension: 0.4 },
+
+                { label: '3789', data: [175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12, 10], borderColor: '#e11d48', borderWidth: 2, tension: 0.4 },
+
+                { label: '3890', data: [160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12, 10, 8], borderColor: '#14b8a6', borderWidth: 2, tension: 0.4 },
+
+                { label: '3901', data: [145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12, 10, 8, 5], borderColor: '#f97316', borderWidth: 2, tension: 0.4 }
+
             ]
         };
 
-        const h03DailyTop30ByTransaction = {
+        const h23DailyProfessionalData = {
             labels: dailyData.labels,
-
             datasets: [
 
-                /* ================== AUTENTICACIÓN / LOGIN ================== */
-                {
-                    label: '1111 LOGIN_createSession',
-                    data: [1240, 1180, 1120, 1080, 1040, 1000, 960, 920, 890, 860, 830, 800, 770, 740, 710, 680, 650, 620, 590, 560, 530, 500, 470, 440, 410],
-                    borderColor: '#dc2626',
-                    tension: 0.35
-                },
-                {
-                    label: '1902 AUTH_validateUser',
-                    data: [740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260],
-                    borderColor: '#f59e0b',
-                    tension: 0.35
-                },
+                { label: '1111 LOGIN_createSession', data: [720, 690, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220], borderColor: '#dc2626', borderWidth: 2, tension: 0.4 },
 
-                /* ================== CONSULTAS / PRODUCTOS ================== */
-                {
-                    label: '1253 PRDMOV_getCardStatus',
-                    data: [980, 950, 920, 900, 880, 860, 840, 820, 800, 780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480],
-                    borderColor: '#2563eb',
-                    tension: 0.35
-                },
-                {
-                    label: '2001 ACC_balanceInquiry',
-                    data: [710, 690, 670, 650, 630, 610, 590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230],
-                    borderColor: '#0ea5e9',
-                    tension: 0.35
-                },
-                {
-                    label: '2010 ACC_statement',
-                    data: [680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200],
-                    borderColor: '#22c55e',
-                    tension: 0.35
-                },
+                { label: '1253 PRDMOV_getCardStatus', data: [640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 190, 180], borderColor: '#2563eb', borderWidth: 2, tension: 0.4 },
 
-                /* ================== PAGOS / TRANSACCIONES ================== */
-                {
-                    label: '1407 PAY_createTransaction',
-                    data: [790, 770, 750, 730, 710, 690, 670, 650, 630, 610, 590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310],
-                    borderColor: '#9333ea',
-                    tension: 0.35
-                },
-                {
-                    label: '2307 PAY_billPayment',
-                    data: [590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110],
-                    borderColor: '#f97316',
-                    tension: 0.35
-                },
+                { label: '1819 BREB_createKey', data: [510, 500, 490, 480, 470, 460, 450, 440, 430, 420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270], borderColor: '#16a34a', borderWidth: 2, tension: 0.4 },
 
-                /* ================== TRANSFERENCIAS ================== */
-                {
-                    label: '2105 TRF_internalTransfer',
-                    data: [650, 630, 610, 590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230, 210, 190, 170],
-                    borderColor: '#e11d48',
-                    tension: 0.35
-                },
-                {
-                    label: '2203 TRF_externalTransfer',
-                    data: [620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140],
-                    borderColor: '#14b8a6',
-                    tension: 0.35
-                },
+                { label: '9020 ENROLL_GRAL_MB_Verif', data: [480, 470, 460, 450, 440, 430, 420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240], borderColor: '#9333ea', borderWidth: 2, tension: 0.4 },
 
-                /* ================== TARJETAS ================== */
-                {
-                    label: '2401 CARD_activate',
-                    data: [560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80],
-                    borderColor: '#84cc16',
-                    tension: 0.35
-                },
-                {
-                    label: '2509 CARD_block',
-                    data: [540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60],
-                    borderColor: '#06b6d4',
-                    tension: 0.35
-                },
+                { label: '3352 ABONOG_findMTCN', data: [450, 440, 430, 420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210], borderColor: '#f59e0b', borderWidth: 2, tension: 0.4 },
 
-                /* ================== USUARIO / OTP / SEGURIDAD ================== */
-                {
-                    label: '2604 USER_profileUpdate',
-                    data: [520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40],
-                    borderColor: '#a855f7',
-                    tension: 0.35
-                },
-                {
-                    label: '2708 OTP_generate',
-                    data: [500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40, 20],
-                    borderColor: '#ec4899',
-                    tension: 0.35
-                },
-                {
-                    label: '2806 OTP_validate',
-                    data: [480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40, 30, 20],
-                    borderColor: '#64748b',
-                    tension: 0.35
-                },
-                {
-                    label: '2902 SEC_tokenRefresh',
-                    data: [460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 50, 40, 30, 20],
-                    borderColor: '#78716c',
-                    tension: 0.35
-                },
+                { label: '9070 LOGIN_WEB_GRL_validateStatusAS', data: [420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180], borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4 },
 
-                /* ================== APIs / PLATAFORMA ================== */
-                {
-                    label: '3001 API_healthCheck',
-                    data: [440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 50, 40, 30, 20, 10],
-                    borderColor: '#4ade80',
-                    tension: 0.35
-                },
-                {
-                    label: '3105 API_rateLimit',
-                    data: [420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 50, 40, 30, 20, 15, 10],
-                    borderColor: '#fb7185',
-                    tension: 0.35
-                },
-                {
-                    label: '3207 API_authError',
-                    data: [400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 50, 40, 30, 25, 20, 15, 10],
-                    borderColor: '#38bdf8',
-                    tension: 0.35
-                },
-                {
-                    label: '3309 API_timeout',
-                    data: [380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 50, 40, 30, 25, 20, 15, 10, 5],
-                    borderColor: '#c084fc',
-                    tension: 0.35
-                }
+                { label: '1060', data: [390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150], borderColor: '#22c55e', borderWidth: 2, tension: 0.4 },
+
+                { label: '1901 TRANPR_makeOwnTransfer', data: [360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120], borderColor: '#e11d48', borderWidth: 2, tension: 0.4 },
+
+                { label: '3302 ABONOG_consultGiro', data: [340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100], borderColor: '#14b8a6', borderWidth: 2, tension: 0.4 },
+
+                { label: '1816 BREB_getKeyDetail', data: [310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70], borderColor: '#f97316', borderWidth: 2, tension: 0.4 },
+
+                { label: '2045', data: [285, 275, 265, 255, 245, 235, 225, 215, 205, 195, 185, 175, 165, 155, 145, 135, 125, 115, 105, 100, 95, 90, 85, 80, 75], borderColor: '#84cc16', borderWidth: 2, tension: 0.4 },
+
+                { label: '2156 PAGSERV_sendNotif', data: [260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 75, 70, 65, 60, 55, 50], borderColor: '#06b6d4', borderWidth: 2, tension: 0.4 },
+
+                { label: '2234', data: [240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 75, 70, 65, 60, 55, 50, 45, 40], borderColor: '#a855f7', borderWidth: 2, tension: 0.4 },
+
+                { label: '2345', data: [215, 205, 195, 185, 175, 165, 155, 145, 135, 125, 115, 105, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35], borderColor: '#ec4899', borderWidth: 2, tension: 0.4 },
+
+                { label: '2456', data: [195, 185, 175, 165, 155, 145, 135, 125, 115, 105, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 28], borderColor: '#64748b', borderWidth: 2, tension: 0.4 },
+
+                { label: '2567', data: [180, 170, 160, 150, 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40], borderColor: '#78716c', borderWidth: 2, tension: 0.4 },
+
+                { label: '2678', data: [165, 155, 145, 135, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25], borderColor: '#4ade80', borderWidth: 2, tension: 0.4 },
+
+                { label: '2789', data: [150, 140, 130, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30], borderColor: '#fb7185', borderWidth: 2, tension: 0.4 },
+
+                { label: '2890', data: [140, 130, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28], borderColor: '#38bdf8', borderWidth: 2, tension: 0.4 },
+
+                { label: '2901 ADMUSU_updateUserData', data: [125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 25], borderColor: '#c084fc', borderWidth: 2, tension: 0.4 },
+
+                { label: '3012', data: [115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22], borderColor: '#dc2626', borderWidth: 2, tension: 0.4 },
+
+                { label: '3123', data: [105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18], borderColor: '#2563eb', borderWidth: 2, tension: 0.4 },
+
+                { label: '3234', data: [95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14], borderColor: '#16a34a', borderWidth: 2, tension: 0.4 },
+
+                { label: '3345', data: [85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10], borderColor: '#9333ea', borderWidth: 2, tension: 0.4 },
+
+                { label: '3456', data: [75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8], borderColor: '#f59e0b', borderWidth: 2, tension: 0.4 },
+
+                { label: '3567', data: [65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6], borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4 },
+
+                { label: '3678', data: [55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4], borderColor: '#22c55e', borderWidth: 2, tension: 0.4 },
+
+                { label: '3789', data: [50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3], borderColor: '#e11d48', borderWidth: 2, tension: 0.4 },
+
+                { label: '3890', data: [45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2], borderColor: '#14b8a6', borderWidth: 2, tension: 0.4 },
+
+                { label: '3901', data: [40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], borderColor: '#f97316', borderWidth: 2, tension: 0.4 }
 
             ]
         };
@@ -2251,48 +2229,72 @@
         }
         window.addEventListener('load', renderH03H23ByTransactionChart);
 
-        /* ================= DAILY TREND H03 & H23 ================= */
-        new Chart(
-            document.getElementById('dailyH03Top30Chart'),
-            {
-                type: 'line',
-                data: h03DailyTop30ByTransaction,
-                options: {
-                    responsive: true,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'right',   // 👈 clave para 30 códigos
-                            labels: {
-                                boxWidth: 12,
-                                font: { size: 11 }
-                            }
-                        },
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false
+        /* ================= DAILY TREND H03 ================= */
+        new Chart(document.getElementById('h03DailyProfessionalChart'), {
+            type: 'line',
+            data: h03DailyProfessionalData,
+            options: {
+                responsive: true,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx =>
+                                `${ctx.dataset.label}: ${ctx.raw.toLocaleString()} errores`
                         }
+                    }
+                },
+                elements: {
+                    line: { tension: 0.4, borderWidth: 2 },
+                    point: { radius: 0, hoverRadius: 4 }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: { display: true, text: 'Errores H03' }
                     },
-                    elements: {
-                        point: {
-                            radius: 0   // 👈 evita ruido visual
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Errores H03'
-                            }
-                        }
+                    x: {
+                        title: { display: true, text: 'Fecha' }
                     }
                 }
             }
-        );
+        });
+
+        /* ================= DAILY TREND H23 ================= */
+        new Chart(document.getElementById('h23DailyProfessionalChart'), {
+            type: 'line',
+            data: h23DailyProfessionalData,
+            options: {
+                responsive: true,
+                interaction: { mode: 'index', intersect: false },
+
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx =>
+                                `${ctx.dataset.label}: ${ctx.raw.toLocaleString()} errores`
+                        }
+                    }
+                },
+
+                elements: {
+                    line: { tension: 0.4, borderWidth: 2 },
+                    point: { radius: 0, hoverRadius: 4 }
+                },
+
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: { display: true, text: 'Errores H23' }
+                    },
+                    x: {
+                        title: { display: true, text: 'Fecha' }
+                    }
+                }
+            }
+        });
 
     </script>
 
