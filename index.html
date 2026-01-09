@@ -1649,7 +1649,7 @@
                     {
                         label: 'Errores',
                         data: dailyData.errorTrx,
-                        yAxisID: 'yErr',
+                        yAxisID: 'yTrx', // 👈 MISMO EJE
                         borderColor: '#ef4444',
                         backgroundColor: 'rgba(239,68,68,0.15)',
                         tension: 0.4,
@@ -1695,21 +1695,6 @@
                             text: 'Total Transacciones'
                         }
                     },
-                    yErr: {
-                        type: 'linear',
-                        position: 'right',
-                        beginAtZero: false,
-                        grid: {
-                            drawOnChartArea: false
-                        },
-                        ticks: {
-                            callback: value => value.toLocaleString()
-                        },
-                        title: {
-                            display: true,
-                            text: 'Total Errores'
-                        }
-                    },
                     x: {
                         grid: {
                             display: true
@@ -1742,7 +1727,7 @@
                     {
                         label: 'Errores',
                         data: dailyData.errorTrx,
-                        yAxisID: 'yErr',
+                        yAxisID: 'yTrx', // 👈 MISMO EJE
                         borderColor: '#ef4444',
                         backgroundColor: 'rgba(239,68,68,0.15)',
                         tension: 0.4,
@@ -1779,21 +1764,6 @@
                         title: {
                             display: true,
                             text: 'Total Transacciones'
-                        },
-                        ticks: {
-                            callback: value => value.toLocaleString()
-                        }
-                    },
-                    yErr: {
-                        type: 'linear',
-                        position: 'right',
-                        beginAtZero: false,
-                        grid: {
-                            drawOnChartArea: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'Total Errores'
                         },
                         ticks: {
                             callback: value => value.toLocaleString()
