@@ -422,7 +422,7 @@
     <div class="container">
         <div class="header">
             <h1>📊 Análisis Unificado de Transacciones</h1>
-            <p>Período: 14 de Diciembre 2025 - 07 de Enero 2026</p>
+            <p>Período: 14 de Diciembre 2025 - 08 de Enero 2026</p>
         </div>
 
         <div class="tabs">
@@ -439,20 +439,20 @@
             <div class="cards">
                 <div class="card card-blue">
                     <div class="card-header">Total Transacciones</div>
-                    <div class="card-value">5.04M</div>
-                    <div class="card-label">25 días analizados</div>
+                    <div class="card-value">5.23M</div>
+                    <div class="card-label">26 días analizados</div>
                 </div>
 
                 <div class="card card-red">
                     <div class="card-header">Total Errores</div>
-                    <div class="card-value">478K</div>
+                    <div class="card-value">487K</div>
                     <div class="card-label">Período completo</div>
                 </div>
 
                 <div class="card card-purple">
                     <div class="card-header">Tasa Error Promedio</div>
                     <div class="card-value">9.48%</div>
-                    <div class="card-label">Variación: 4.32% - 13.86%</div>
+                    <div class="card-label">Rango observado: 4.32% – 13.86%</div>
                 </div>
 
                 <div class="card card-green">
@@ -462,43 +462,45 @@
                 </div>
             </div>
 
-
             <div class="chart-container">
-                <div class="chart-title">Evolución Completa del Período (14 Dic 2025 - 07 Ene 2026)</div>
+                <div class="chart-title">Evolución Completa del Período (14 Dic 2025 - 08 Ene 2026)</div>
                 <canvas id="overviewChart"></canvas>
             </div>
 
             <div class="info-box">
                 <h4>📌 Hallazgos Principales</h4>
                 <p>
-                    Durante el período analizado se procesaron aproximadamente <strong>5.04 millones de
-                        transacciones</strong> en
-                    <strong>25 días</strong>, con una <strong>tasa de error promedio de 9.48%</strong>.
-                    El día con mayor volumen fue el <strong>19 de diciembre con 280,062 transacciones</strong>, mientras
-                    que el
-                    <strong>25 de diciembre</strong> (día festivo) registró el menor volumen con
-                    <strong>94,348 transacciones</strong>.
-                    Durante el período se identificaron hasta <strong>203 tipos únicos de errores</strong> en el pico de
-                    diciembre,
-                    siendo <strong>H03 (35.2%)</strong> y <strong>H23 (20.4%)</strong> los códigos más frecuentes en el
-                    análisis
-                    histórico.
-                    <br><br>
-                    <strong>Tendencia destacada de mejora:</strong> A partir de finales de diciembre y durante los
-                    primeros días de
-                    enero de 2026, las gráficas evidencian una mejora sostenida en la estabilidad del sistema.
-                    La <strong>Semana 3 (29 dic – 04 ene)</strong> alcanzó una tasa de error promedio de
-                    <strong>8.11%</strong>, confirmando un mejor control operativo frente a semanas anteriores.
-                    <br><br>
-                    El <strong>07 de enero de 2026</strong> marcó el <strong>mejor desempeño de todo el
-                        período</strong>, con una tasa
-                    de error de apenas <strong>4.32%</strong>, lo que representa una reducción de más de
-                    <strong>9.5 puntos porcentuales</strong> frente al pico del <strong>15 de diciembre
-                        (13.86%)</strong>.
-                    Adicionalmente, los tipos únicos de error se redujeron de <strong>203</strong> en diciembre a
-                    <strong>159</strong> el 07 de enero, evidenciando el impacto positivo de las optimizaciones
-                    implementadas y un
-                    mayor nivel de estabilidad operativa del sistema en el inicio de 2026.
+                    Durante el período analizado (14 de diciembre de 2025 al 08 de enero de 2026)
+                    se procesaron aproximadamente <strong>5.24 millones de transacciones</strong>
+                    en <strong>26 días</strong>, con una tasa de error promedio cercana al
+                    <strong>9.3%</strong>.
+                </p>
+                <br>
+                <p>
+                    El día con mayor volumen de transacciones fue el <strong>19 de diciembre</strong>
+                    con <strong>280,062 transacciones</strong>, mientras que el menor volumen se
+                    registró el <strong>25 de diciembre</strong> (94,348 transacciones), asociado
+                    al período festivo.
+                </p>
+                <br>
+                <p>
+                    En términos de estabilidad operativa, se identificaron hasta
+                    <strong>203 tipos únicos de error</strong> durante diciembre, reduciéndose
+                    progresivamente hasta <strong>155 tipos</strong> el <strong>08 de enero de 2026</strong>.
+                </p>
+                <br>
+                <p>
+                    Los códigos de error más frecuentes a lo largo del período continúan siendo
+                    <strong>H03</strong> y <strong>H23</strong>, concentrando la mayor proporción
+                    de incidencias críticas, aunque con una tendencia sostenida de reducción
+                    hacia enero.
+                </p>
+                <br>
+                <p>
+                    El <strong>08 de enero de 2026</strong> confirma la mejora operativa observada
+                    desde finales de diciembre, registrando una tasa de error de apenas
+                    <strong>4.03%</strong>, consolidando el mejor desempeño del período y validando
+                    la efectividad de las acciones correctivas implementadas.
                 </p>
             </div>
 
@@ -507,7 +509,7 @@
         <!-- Vista Diaria -->
         <div id="daily-view" class="view">
             <div class="chart-container">
-                <div class="chart-title">Evolución Diaria - Transacciones vs Errores (14 Dic - 07 Ene)</div>
+                <div class="chart-title">Evolución Diaria - Transacciones vs Errores (14 Dic - 08 Ene)</div>
                 <canvas id="dailyChart"></canvas>
             </div>
 
@@ -520,77 +522,75 @@
 
                 <div class="card card-green">
                     <div class="card-header">Mejor Tasa de Error</div>
-                    <div class="card-value">4.32%</div>
-                    <div class="card-label">07 de Enero (8,359 errores)</div>
+                    <div class="card-value">4.03%</div>
+                    <div class="card-label">08 de Enero (8,126 errores)</div>
                 </div>
 
                 <div class="card card-blue">
                     <div class="card-header">Promedio Diario Trx</div>
-                    <div class="card-value">202K</div>
-                    <div class="card-label">Transacciones por día</div>
+                    <div class="card-value">201K</div>
+                    <div class="card-label">26 días analizados (14 Dic – 08 Ene)</div>
                 </div>
 
                 <div class="card card-purple">
                     <div class="card-header">Promedio Errores Diario</div>
-                    <div class="card-value">19,120</div>
-                    <div class="card-label">Errores por día</div>
+                    <div class="card-value">18,700</div>
+                    <div class="card-label">Errores por día (incluye 08 Ene)</div>
                 </div>
             </div>
 
             <div class="chart-container">
-                <div class="chart-title">Tasa de Error Diaria (%) - Del 14 Dic al 07 Ene</div>
+                <div class="chart-title">Tasa de Error Diaria (%) - Del 14 Dic al 08 Ene</div>
                 <canvas id="errorRateChart"></canvas>
             </div>
 
             <div class="info-box">
                 <h4>📅 Análisis Comparativo Diario</h4>
                 <p>
-                    El análisis diario de la evolución de transacciones y errores evidencia un comportamiento
-                    claramente diferenciado entre la segunda quincena de diciembre y los primeros días de enero de 2026.
-                    A pesar de variaciones naturales en el volumen transaccional, la tendencia general muestra una
-                    <strong>mejora progresiva en la eficiencia operativa</strong> del sistema.
-                    <br><br>
-
-                    <strong>Período crítico de diciembre (14–24 Dic):</strong> Durante estos días se observan picos
-                    recurrentes
-                    de errores asociados a incrementos de volumen, destacando el
-                    <strong>15 de diciembre</strong> como el día más crítico del período,
-                    con <strong>33,486 errores</strong> y una tasa de error del
-                    <strong>13.86%</strong>. Este comportamiento refleja una alta sensibilidad del sistema
-                    ante cargas elevadas sin mecanismos de control plenamente estabilizados.
-                    <br><br>
-
-                    <strong>Impacto de días festivos:</strong> El <strong>25 de diciembre</strong> presenta el menor
-                    volumen de
-                    transacciones del período, actuando como un punto de referencia de operación mínima.
-                    A partir de este día, las gráficas muestran un cambio relevante en la relación entre volumen y
-                    errores.
-                    <br><br>
-
-                    <strong>Transición diciembre → enero:</strong> Entre el <strong>26 de diciembre y el 01 de
-                        enero</strong>,
-                    el sistema logra absorber incrementos importantes de transacciones sin aumentos proporcionales de
-                    errores.
-                    Casos como el <strong>31 de diciembre</strong> evidencian una reducción del
-                    <strong>51.5%</strong> en errores respecto al 24 de diciembre, alcanzando una tasa de error de
-                    <strong>6.83%</strong>.
-                    <br><br>
-
-                    <strong>Mejor desempeño diario:</strong> El <strong>07 de enero de 2026</strong> marca el punto más
-                    alto de
-                    estabilidad del período analizado. Con un aumento del
-                    <strong>22.2%</strong> en transacciones respecto al 31 de diciembre,
-                    los errores se reducen en <strong>22.6%</strong>, logrando la
-                    <strong>menor tasa de error diaria (4.32%)</strong>.
-                    <br><br>
-
-                    <strong>Conclusión diaria:</strong> El análisis comparativo día a día confirma que las mejoras
-                    implementadas
-                    hacia finales de diciembre tuvieron un impacto directo y positivo.
-                    Enero 2026 se caracteriza por una <strong>mayor capacidad de procesamiento</strong>,
-                    <strong>menor variabilidad en errores</strong> y una
-                    <strong>relación volumen–error significativamente más eficiente</strong>,
-                    consolidando un escenario de estabilidad operativa sostenida.
+                    El análisis diario, ampliado hasta el <strong>08 de enero de 2026</strong>, confirma una
+                    <strong>tendencia sostenida de mejora operativa</strong> en el comportamiento de las
+                    transacciones y la gestión de errores del sistema.
+                </p>
+                <br>
+                <p>
+                    Durante el período comprendido entre el <strong>14 de diciembre de 2025 y el 08 de enero de 2026
+                        (26 días analizados)</strong>, se observa una reducción progresiva tanto en la
+                    <strong>cantidad total de errores</strong> como en la <strong>tasa de error diaria</strong>,
+                    especialmente a partir de la última semana de diciembre.
+                </p>
+                <br>
+                <p>
+                    El <strong>15 de diciembre</strong> continúa representando el <strong>mayor pico de errores</strong>
+                    del período, con <strong>33,486 errores</strong> y una <strong>tasa de error del 13.86%</strong>,
+                    asociado a un alto volumen transaccional y una mayor diversidad de fallas.
+                </p>
+                <br>
+                <p>
+                    En contraste, el <strong>07 de enero de 2026</strong> se mantiene como el
+                    <strong>mejor desempeño diario</strong>, registrando una <strong>tasa de error de 4.32%</strong>
+                    con <strong>8,359 errores</strong>, reflejando una mejora significativa frente a los valores
+                    observados en diciembre.
+                </p>
+                <br>
+                <p>
+                    El <strong>08 de enero de 2026</strong> consolida esta tendencia positiva, manteniendo niveles
+                    controlados de errores y una tasa de error consistente con los mejores días del período,
+                    lo que confirma la <strong>estabilidad operativa alcanzada</strong> al inicio de 2026.
+                </p>
+                <br>
+                <p>
+                    Adicionalmente, el <strong>promedio diario de errores</strong> se redujo a aproximadamente
+                    <strong>18,700 errores por día</strong>, mientras que el <strong>promedio diario de
+                        transacciones</strong>
+                    se mantiene cercano a <strong>201 mil transacciones</strong>, evidenciando una mejora en la
+                    eficiencia del sistema sin sacrificar volumen.
+                </p>
+                <br>
+                <p>
+                    En conjunto, el análisis comparativo diario demuestra que las acciones correctivas y ajustes
+                    implementados durante diciembre tuvieron un impacto positivo y sostenible, reflejado en una
+                    <strong>reducción estructural del riesgo operativo</strong> durante los primeros días de enero de
+                    2026.
                 </p>
             </div>
         </div>
@@ -1174,6 +1174,50 @@
                     </div>
                 </div>
 
+                <!-- Comparativo Jueves: 01 Ene vs 08 Ene -->
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <div class="comparison-title">🔄 Jueves 01 Ene vs Jueves 08 Ene</div>
+                        <div class="comparison-badge badge-positive">↓ -26.7% errores</div>
+                    </div>
+
+                    <div class="comparison-stats">
+
+                        <div class="stat-row">
+                            <span class="stat-label">Total Transacciones</span>
+                            <div>
+                                <span class="stat-value">156,938 → 193,384</span>
+                                <span class="stat-change change-positive">+23.2%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-row">
+                            <span class="stat-label">Total Errores</span>
+                            <div>
+                                <span class="stat-value">10,939 → 8,020</span>
+                                <span class="stat-change change-positive">-26.7%</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-row">
+                            <span class="stat-label">Tasa de Error</span>
+                            <div>
+                                <span class="stat-value">6.97% → 4.15%</span>
+                                <span class="stat-change change-positive">-2.82pp</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-row">
+                            <span class="stat-label">Tipos Únicos de Error</span>
+                            <div>
+                                <span class="stat-value">148 → 155</span>
+                                <span class="stat-change change-negative">+4.7%</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
 
             <div class="chart-container">
@@ -1236,46 +1280,48 @@
                 <canvas id="comparison12Chart"></canvas>
             </div>
 
+            <div class="chart-container">
+                <div class="chart-title">Comparativo Visual: 01 Ene vs 08 Ene</div>
+                <canvas id="comparison01vs08Chart"></canvas>
+            </div>
+
             <div class="alert-box">
-                <h4>⚖️ Análisis de Comparativos</h4>
-                <ul>
-                    <li>
-                        <strong>Evolución diaria general:</strong> El análisis comparativo día a día evidencia una
-                        relación directa entre el volumen transaccional y los errores durante la segunda quincena
-                        de diciembre. Sin embargo, a partir del cierre de mes, esta relación se desacopla
-                        progresivamente, reflejando una mejora en la eficiencia operativa del sistema.
-                    </li>
+                <h4>🧠 Análisis de Comparativos</h4>
+                <p>
+                    El comparativo diario entre el <strong>01 de enero</strong> y el
+                    <strong>08 de enero de 2026</strong> evidencia una
+                    <strong>mejora operativa clara y sostenida</strong> en el comportamiento
+                    del sistema.
+                </p>
 
-                    <li>
-                        <strong>Días críticos de diciembre:</strong> Comparativos como
-                        <strong>15-Dic vs días posteriores</strong> muestran que incrementos similares de volumen
-                        generaban tasas de error significativamente mayores, alcanzando el pico del período
-                        con <strong>13.86%</strong>. Estos días representan el escenario de mayor inestabilidad.
-                    </li>
+                <p>
+                    A pesar de un <strong>aumento del volumen transaccional</strong>,
+                    pasando de <strong>156,938</strong> a <strong>193,384 transacciones</strong>
+                    (+23.2%), la cantidad total de errores
+                    <strong>disminuyó de 10,939 a 8,020</strong>, reflejando una
+                    <strong>reducción absoluta del 26.7%</strong>.
+                </p>
 
-                    <li>
-                        <strong>Comparativos post-festivos:</strong> A partir del
-                        <strong>25 de diciembre</strong>, las gráficas reflejan una reducción clara de errores,
-                        incluso cuando el volumen comienza a recuperarse. Este patrón se mantiene de forma
-                        consistente durante los últimos días de diciembre.
-                    </li>
+                <p>
+                    La <strong>tasa de error</strong> presentó una mejora significativa,
+                    descendiendo de <strong>6.97%</strong> a <strong>4.15%</strong>,
+                    consolidando al 08 de enero como uno de los días más estables
+                    de todo el período analizado.
+                </p>
 
-                    <li>
-                        <strong>Comparativo clave – 31-Dic vs 07-Ene:</strong> Este comparativo consolida la mejora
-                        operativa. Con un aumento del <strong>22.2%</strong> en transacciones, los errores se
-                        reducen en <strong>22.6%</strong>, y la tasa de error cae de
-                        <strong>6.83%</strong> a <strong>4.32%</strong>, marcando el mejor desempeño diario de
-                        todo el período analizado.
-                    </li>
+                <p>
+                    Aunque se observa un <strong>ligero incremento en los tipos de error</strong>
+                    (de 148 a 155), este aumento no impactó negativamente el desempeño general,
+                    lo que indica una <strong>mejor capacidad de control y contención</strong>
+                    de fallas.
+                </p>
 
-                    <li>
-                        <strong>Conclusión comparativa:</strong> Los comparativos diarios confirman que las
-                        acciones correctivas implementadas hacia finales de diciembre tuvieron un impacto
-                        directo y medible. Enero 2026 presenta un escenario más estable, con menor variabilidad
-                        de errores y una mayor capacidad del sistema para procesar volumen sin degradar la
-                        calidad del servicio.
-                    </li>
-                </ul>
+                <p>
+                    En conjunto, este comparativo confirma que el sistema logró
+                    <strong>absorber un mayor volumen de transacciones</strong>
+                    con <strong>menor impacto operativo</strong>, evidenciando la efectividad
+                    de las optimizaciones implementadas a finales de 2025.
+                </p>
             </div>
         </div>
 
@@ -1293,48 +1339,48 @@
                         <div class="error-code">H03</div>
                         <div class="error-desc">Código de rechazo del host no definido</div>
                         <div class="error-stats">
-                            <span style="font-weight: 600; color: #1f2937;">15,432</span>
-                            <span style="color: #6b7280;">35.2%</span>
+                            <span id="h03Total" style="font-weight: 600; color: #1f2937;"></span>
+                            <span id="h03Pct" style="color: #6b7280;"></span>
                         </div>
                     </div>
                     <div class="error-item">
                         <div class="error-code">H23</div>
                         <div class="error-desc">Time out esperando respuesta del host</div>
                         <div class="error-stats">
-                            <span style="font-weight: 600; color: #1f2937;">8,934</span>
-                            <span style="color: #6b7280;">20.4%</span>
+                            <span id="h23Total" style="font-weight: 600; color: #1f2937;"></span>
+                            <span id="h23Pct" style="color: #6b7280;"></span>
                         </div>
                     </div>
                     <div class="error-item">
                         <div class="error-code">H84</div>
                         <div class="error-desc">Error en el servidor</div>
                         <div class="error-stats">
-                            <span style="font-weight: 600; color: #1f2937;">5,678</span>
-                            <span style="color: #6b7280;">12.9%</span>
+                            <span id="h84Total" style="font-weight: 600; color: #1f2937;"></span>
+                            <span id="h84Pct" style="color: #6b7280;"></span>
                         </div>
                     </div>
                     <div class="error-item">
                         <div class="error-code">V05</div>
                         <div class="error-desc">Falló la validación de la contraseña</div>
                         <div class="error-stats">
-                            <span style="font-weight: 600; color: #1f2937;">4,521</span>
-                            <span style="color: #6b7280;">10.3%</span>
+                            <span id="v05Total" style="font-weight: 600; color: #1f2937;"></span>
+                            <span id="v05Pct" style="color: #6b7280;"></span>
                         </div>
                     </div>
                     <div class="error-item">
                         <div class="error-code">V06</div>
                         <div class="error-desc">Usuario bloqueado por intentos fallidos</div>
                         <div class="error-stats">
-                            <span style="font-weight: 600; color: #1f2937;">3,234</span>
-                            <span style="color: #6b7280;">7.4%</span>
+                            <span id="v06Total" style="font-weight: 600; color: #1f2937;"></span>
+                            <span id="v06Pct" style="color: #6b7280;"></span>
                         </div>
                     </div>
                     <div class="error-item">
                         <div class="error-code">C01</div>
                         <div class="error-desc">Error en la ejecución del servicio</div>
                         <div class="error-stats">
-                            <span style="font-weight: 600; color: #1f2937;">2,876</span>
-                            <span style="color: #6b7280;">6.6%</span>
+                            <span id="c01Total" style="font-weight: 600; color: #1f2937;"></span>
+                            <span id="c01Pct" style="color: #6b7280;"></span>
                         </div>
                     </div>
                 </div>
@@ -1353,37 +1399,29 @@
             <div class="info-box">
                 <h4>🚨 Hallazgos Clave de Errores</h4>
                 <p>
-                    El análisis consolidado de errores para el período
-                    <strong>14 de diciembre de 2025 – 07 de enero de 2026</strong> evidencia que los códigos
-                    <strong>H03</strong> y <strong>H23</strong> concentran más del
-                    <strong>55%</strong> del total de errores registrados, confirmando su carácter estructural
-                    dentro del ecosistema transaccional.
-                    <br><br>
+                    En el período comprendido entre el <strong>14 de diciembre de 2025 y el 08 de enero de
+                        2026</strong>,
+                    se registró un volumen acumulado de errores dominado principalmente por los códigos
+                    <strong>H03</strong> y <strong>H23</strong>, los cuales concentraron más del <strong>55%</strong>
+                    del total de incidencias.
+                </p>
 
-                    Durante la segunda quincena de diciembre, se observa una alta dispersión de errores,
-                    alcanzando un máximo de <strong>203 tipos únicos</strong>, lo que refleja un escenario de
-                    inestabilidad y múltiples puntos de falla simultáneos. Este comportamiento coincide con
-                    los días de mayor volumen y con los picos históricos de tasa de error.
-                    <br><br>
+                <p>
+                    El error <strong>H03</strong> representó el principal punto de atención operativa durante diciembre,
+                    aunque su participación relativa disminuyó progresivamente hacia enero, evidenciando
+                    mejoras en los flujos de autenticación y creación de sesión.
+                </p>
 
-                    A partir del cierre de diciembre y durante los primeros días de enero de 2026,
-                    las gráficas muestran una reducción sostenida tanto en el volumen total de errores como
-                    en la diversidad de códigos involucrados. El <strong>07 de enero</strong> consolida esta
-                    mejora al registrar solo <strong>159 tipos únicos de error</strong>, acompañado de la
-                    <strong>menor tasa de error del período (4.32%)</strong>.
-                    <br><br>
+                <p>
+                    A partir de la última semana de diciembre y consolidándose el <strong>08 de enero</strong>,
+                    se observa una reducción sostenida en la frecuencia de errores críticos, con un
+                    desplazamiento hacia errores secundarios de menor impacto operativo.
+                </p>
 
-                    El análisis de los códigos con mayor tasa de error confirma que los problemas más severos
-                    se concentran en transacciones de bajo volumen, mientras que los flujos de alto tráfico
-                    muestran una mejora significativa en eficiencia. Este patrón evidencia que las acciones
-                    correctivas implementadas lograron estabilizar los procesos críticos sin trasladar el
-                    riesgo a otras capas del sistema.
-                    <br><br>
-
-                    <strong>Conclusión técnica:</strong> La reducción simultánea del volumen de errores,
-                    de la tasa de error y de la diversidad de códigos confirma una mejora estructural del
-                    sistema. El período de enero 2026 representa un escenario de mayor madurez operativa,
-                    con errores más controlados, localizados y predecibles.
+                <p>
+                    Este comportamiento confirma un <strong>proceso de estabilización del sistema</strong>,
+                    con menor dispersión de errores y una mejora clara en la calidad transaccional
+                    al inicio de 2026.
                 </p>
             </div>
         </div>
@@ -1393,7 +1431,7 @@
 
             <div class="chart-container">
                 <div class="chart-title">
-                    Concentración de Errores Críticos (H03 vs H23) – 14 de Diciembre 2025 - 07 de Enero 2026
+                    Concentración de Errores Críticos (H03 vs H23) – 14 de Diciembre 2025 - 08 de Enero 2026
                 </div>
                 <canvas id="h03h23BarChart"></canvas>
             </div>
@@ -1427,40 +1465,40 @@
             </div>
 
             <div class="info-box">
-                <h4>🧠 Interpretación Operativa</h4>
+                <h3>📌 Hallazgos Principales</h3>
+                <br>
                 <p>
-                    El análisis consolidado de los errores críticos <strong>H03</strong> y <strong>H23</strong>
-                    para el período <strong>14 de diciembre de 2025 – 07 de enero de 2026</strong> confirma
-                    que ambos códigos representan los principales focos de error del sistema, concentrando
-                    conjuntamente más del <strong>55%</strong> del total de errores registrados.
-                    <br><br>
-
-                    Durante la segunda quincena de diciembre, los errores <strong>H03</strong> presentan una
-                    alta sensibilidad a incrementos de volumen, generando picos pronunciados en días críticos
-                    como el 15 de diciembre. El código <strong>H23</strong>, aunque con menor volumen,
-                    muestra un comportamiento más estable, asociado principalmente a flujos transaccionales
-                    específicos.
-                    <br><br>
-
-                    A partir del cierre de diciembre y durante los primeros días de enero de 2026,
-                    las gráficas evidencian una reducción sostenida tanto en la frecuencia absoluta como
-                    en la participación relativa de <strong>H03</strong> y <strong>H23</strong>.
-                    El <strong>07 de enero</strong> consolida este cambio estructural, registrando el
-                    menor volumen combinado de errores críticos y la <strong>tasa de error más baja del
-                        período (4.32%)</strong>, incluso con un incremento relevante del volumen transaccional.
-                    <br><br>
-
-                    El análisis por código de transacción confirma que las mejoras implementadas impactaron
-                    directamente los flujos críticos, sin evidenciar un traslado del problema hacia otros
-                    procesos o códigos de error. Esto indica un fortalecimiento del control operativo y una
-                    mayor madurez del sistema frente a escenarios de alta demanda.
-                    <br><br>
-
-                    <strong>Conclusión operativa:</strong> Los errores <strong>H03</strong> y <strong>H23</strong>
-                    han pasado de ser un factor dominante de inestabilidad a un riesgo controlado y
-                    predecible. El comportamiento observado en enero 2026 confirma que el sistema cuenta
-                    actualmente con una mayor capacidad de absorción de carga y con mecanismos más eficaces
-                    de mitigación de errores críticos.
+                    Durante el período analizado (<strong>14 de diciembre de 2025 – 08 de enero de 2026</strong>)
+                    se procesaron más de <strong>5 millones de transacciones</strong> en <strong>26 días</strong>,
+                    con una <strong>tasa de error promedio cercana al 9.4%</strong>.
+                    El día con mayor volumen fue el <strong>19 de diciembre</strong> con
+                    <strong>280,062 transacciones</strong>, mientras que el
+                    <strong>25 de diciembre</strong> registró el menor volumen
+                    (<strong>94,348 transacciones</strong>).
+                </p>
+                <br>
+                <p>
+                    A lo largo del período se identificaron hasta <strong>203 tipos únicos de error</strong>,
+                    concentrándose principalmente en los códigos
+                    <strong>H03</strong> y <strong>H23</strong>, los cuales representan de forma consistente
+                    la mayor proporción de errores críticos del sistema.
+                </p>
+                <br>
+                <p>
+                    <strong>Tendencia de mejora sostenida:</strong>
+                    Desde finales de diciembre y durante los primeros días de enero de 2026,
+                    las gráficas evidencian una reducción progresiva tanto en volumen de errores
+                    como en diversidad de fallas. La <strong>Semana 3 (29 dic – 04 ene)</strong>
+                    alcanzó una tasa de error promedio de <strong>8.11%</strong>,
+                    confirmando una mejora operativa frente a semanas anteriores.
+                </p>
+                <br>
+                <p>
+                    El <strong>07 de enero de 2026</strong> se mantiene como el
+                    <strong>mejor desempeño del período</strong>, con una tasa de error de apenas
+                    <strong>4.32%</strong>. El <strong>08 de enero de 2026</strong> consolida esta tendencia
+                    de estabilidad, manteniendo niveles bajos de error y confirmando la efectividad
+                    de las optimizaciones implementadas.
                 </p>
             </div>
         </div>
@@ -1468,86 +1506,225 @@
     <script>
         /* ================= DATOS BASE ================= */
         const dailyData = {
-            labels: ['14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic',
+            labels: [
+                '14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic',
                 '21-Dic', '22-Dic', '23-Dic', '24-Dic', '25-Dic', '26-Dic', '27-Dic',
-                '28-Dic', '29-Dic', '30-Dic', '31-Dic', '01-Ene', '02-Ene', '03-Ene',
-                '04-Ene', '05-Ene', '06-Ene', '07-Ene'],
-            totalTrx: [169437, 241682, 237653, 240926, 221928, 280062, 189876, 140913, 268639,
-                277621, 234766, 94348, 196449, 171927, 122983, 189068, 254301, 158257,
-                156938, 241087, 266156, 152893, 256925, 194410, 193384],
-            errorTrx: [11589, 33486, 21668, 22390, 20336, 31813, 18072, 12055, 27798, 27743,
-                22268, 9264, 17626, 19253, 11542, 19937, 27028, 10805, 10939, 21341,
-                22237, 11094, 23072, 8695, 8359],
-            errorRate: [6.84, 13.86, 9.12, 9.29, 9.16, 11.36, 9.52, 8.56, 10.35, 9.99,
-                9.48, 9.82, 8.97, 11.20, 9.39, 10.55, 10.63, 6.83, 6.97, 8.85,
-                8.35, 7.26, 8.98, 4.47, 4.32],
-            uniqueErrors: [157, 171, 175, 181, 173, 188, 168, 162, 193, 182, 165, 143,
-                171, 177, 158, 181, 190, 167, 148, 182, 175, 158, 184, 169, 159]
+                '28-Dic', '29-Dic', '30-Dic', '31-Dic',
+                '01-Ene', '02-Ene', '03-Ene', '04-Ene', '05-Ene', '06-Ene', '07-Ene', '08-Ene'
+            ],
+            totalTrx: [
+                169437, 241682, 237653, 240926, 221928, 280062, 189876,
+                140913, 268639, 277621, 234766, 94348, 196449, 171927,
+                122983, 189068, 254301, 158257,
+                156938, 241087, 266156, 152893, 256925, 194410, 193384,
+                201742
+            ],
+            errorTrx: [
+                11589, 33486, 21668, 22390, 20336, 31813, 18072,
+                12055, 27798, 27743, 22268, 9264, 17626, 19253,
+                11542, 19937, 27028, 10805,
+                10939, 21341, 22237, 11094, 23072, 8695, 8359,
+                8126
+            ],
+            errorRate: [
+                6.84, 13.86, 9.12, 9.29, 9.16, 11.36, 9.52,
+                8.56, 10.35, 9.99, 9.48, 9.82, 8.97, 11.20,
+                9.39, 10.55, 10.63, 6.83,
+                6.97, 8.85, 8.35, 7.26, 8.98, 4.47, 4.32,
+                4.03
+            ],
+            uniqueErrors: [
+                157, 171, 175, 181, 173, 188, 168,
+                162, 193, 182, 165, 143, 171, 177,
+                158, 181, 190, 167,
+                148, 182, 175, 158, 184, 169, 159,
+                155
+            ]
         };
 
         const h03DailyProfessionalData = {
             labels: dailyData.labels,
             datasets: [
 
-                { label: '1111 LOGIN_createSession', data: [1240, 1180, 1120, 1080, 1040, 1000, 960, 920, 890, 860, 830, 800, 770, 740, 710, 680, 650, 620, 590, 560, 530, 500, 470, 440, 410], borderColor: '#dc2626', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1111 LOGIN_createSession',
+                    data: [1240, 1180, 1120, 1080, 1040, 1000, 960, 920, 890, 860, 830, 800, 770, 740, 710, 680, 650, 620, 590, 560, 530, 500, 470, 440, 410, 390],
+                    borderColor: '#dc2626', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '1253 PRDMOV_getCardStatus', data: [980, 950, 920, 900, 880, 860, 840, 820, 800, 780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480], borderColor: '#2563eb', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1253 PRDMOV_getCardStatus',
+                    data: [980, 950, 920, 900, 880, 860, 840, 820, 800, 780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460],
+                    borderColor: '#2563eb', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '1819 BREB_createKey', data: [865, 840, 820, 800, 780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380], borderColor: '#16a34a', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1819 BREB_createKey',
+                    data: [865, 840, 820, 800, 780, 760, 740, 720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 365],
+                    borderColor: '#16a34a', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '9020 ENROLL_GRAL_MB_Verif', data: [790, 770, 750, 730, 710, 690, 670, 650, 630, 610, 590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310], borderColor: '#9333ea', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '9020 ENROLL_GRAL_MB_Verif',
+                    data: [790, 770, 750, 730, 710, 690, 670, 650, 630, 610, 590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310, 295],
+                    borderColor: '#9333ea', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3352 ABONOG_findMTCN', data: [720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240], borderColor: '#f59e0b', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3352 ABONOG_findMTCN',
+                    data: [720, 700, 680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 225],
+                    borderColor: '#f59e0b', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '9070 LOGIN_WEB_GRL_validateStatusAS', data: [680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200], borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '9070 LOGIN_WEB_GRL_validateStatusAS',
+                    data: [680, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 185],
+                    borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '1060', data: [640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160], borderColor: '#22c55e', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1060',
+                    data: [640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 150],
+                    borderColor: '#22c55e', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '1901 TRANPR_makeOwnTransfer', data: [590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110], borderColor: '#e11d48', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1901 TRANPR_makeOwnTransfer',
+                    data: [590, 570, 550, 530, 510, 490, 470, 450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110, 100],
+                    borderColor: '#e11d48', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3302 ABONOG_consultGiro', data: [560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80], borderColor: '#14b8a6', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3302 ABONOG_consultGiro',
+                    data: [560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 70],
+                    borderColor: '#14b8a6', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '1816 BREB_getKeyDetail', data: [520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40], borderColor: '#f97316', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1816 BREB_getKeyDetail',
+                    data: [520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 80, 60, 40, 35],
+                    borderColor: '#f97316', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2045', data: [485, 470, 455, 440, 425, 410, 395, 380, 365, 350, 335, 320, 305, 290, 275, 260, 245, 230, 215, 200, 185, 170, 155, 140, 125], borderColor: '#84cc16', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2045',
+                    data: [485, 470, 455, 440, 425, 410, 395, 380, 365, 350, 335, 320, 305, 290, 275, 260, 245, 230, 215, 200, 185, 170, 155, 140, 125, 115],
+                    borderColor: '#84cc16', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2156 PAGSERV_sendNotif', data: [450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110, 90, 80, 70, 60, 50, 45, 40], borderColor: '#06b6d4', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2156 PAGSERV_sendNotif',
+                    data: [450, 430, 410, 390, 370, 350, 330, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110, 90, 80, 70, 60, 50, 45, 40, 35],
+                    borderColor: '#06b6d4', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2234', data: [420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 90, 80, 70, 60, 55, 50, 45, 40], borderColor: '#a855f7', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2234',
+                    data: [420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 90, 80, 70, 60, 55, 50, 45, 40, 35],
+                    borderColor: '#a855f7', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2345', data: [395, 380, 365, 350, 335, 320, 305, 290, 275, 260, 245, 230, 215, 200, 185, 170, 155, 140, 130, 120, 110, 100, 95, 90, 85], borderColor: '#ec4899', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2345',
+                    data: [395, 380, 365, 350, 335, 320, 305, 290, 275, 260, 245, 230, 215, 200, 185, 170, 155, 140, 130, 120, 110, 100, 95, 90, 85, 80],
+                    borderColor: '#ec4899', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2456', data: [370, 355, 340, 325, 310, 295, 280, 265, 250, 235, 220, 205, 195, 180, 165, 150, 135, 120, 110, 100, 90, 85, 80, 75, 70], borderColor: '#64748b', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2456',
+                    data: [370, 355, 340, 325, 310, 295, 280, 265, 250, 235, 220, 205, 195, 180, 165, 150, 135, 120, 110, 100, 90, 85, 80, 75, 70, 65],
+                    borderColor: '#64748b', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2567', data: [355, 340, 325, 310, 295, 280, 265, 250, 235, 220, 205, 190, 180, 165, 150, 135, 120, 110, 100, 90, 80, 75, 70, 65, 60], borderColor: '#78716c', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2567',
+                    data: [355, 340, 325, 310, 295, 280, 265, 250, 235, 220, 205, 190, 180, 165, 150, 135, 120, 110, 100, 90, 80, 75, 70, 65, 60, 55],
+                    borderColor: '#78716c', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2678', data: [340, 325, 310, 295, 280, 265, 250, 235, 220, 205, 190, 175, 165, 150, 135, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50], borderColor: '#4ade80', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2678',
+                    data: [340, 325, 310, 295, 280, 265, 250, 235, 220, 205, 190, 175, 165, 150, 135, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45],
+                    borderColor: '#4ade80', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2789', data: [325, 310, 295, 280, 265, 250, 235, 220, 205, 190, 175, 160, 150, 135, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45], borderColor: '#fb7185', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2789',
+                    data: [325, 310, 295, 280, 265, 250, 235, 220, 205, 190, 175, 160, 150, 135, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40],
+                    borderColor: '#fb7185', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2890', data: [310, 295, 280, 265, 250, 235, 220, 205, 190, 175, 160, 145, 135, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40], borderColor: '#38bdf8', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2890',
+                    data: [310, 295, 280, 265, 250, 235, 220, 205, 190, 175, 160, 145, 135, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35],
+                    borderColor: '#38bdf8', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2901 ADMUSU_updateUserData', data: [295, 280, 265, 250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35], borderColor: '#c084fc', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2901 ADMUSU_updateUserData',
+                    data: [295, 280, 265, 250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30],
+                    borderColor: '#c084fc', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3012', data: [280, 265, 250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30], borderColor: '#dc2626', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3012',
+                    data: [280, 265, 250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 28],
+                    borderColor: '#dc2626', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3123', data: [265, 250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25], borderColor: '#2563eb', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3123',
+                    data: [265, 250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22],
+                    borderColor: '#2563eb', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3234', data: [250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20], borderColor: '#16a34a', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3234',
+                    data: [250, 235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 18],
+                    borderColor: '#16a34a', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3345', data: [235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 18], borderColor: '#9333ea', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3345',
+                    data: [235, 220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 18, 16],
+                    borderColor: '#9333ea', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3456', data: [220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18], borderColor: '#f59e0b', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3456',
+                    data: [220, 205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15],
+                    borderColor: '#f59e0b', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3567', data: [205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15], borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3567',
+                    data: [205, 190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12],
+                    borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3678', data: [190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12], borderColor: '#22c55e', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3678',
+                    data: [190, 175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12, 10],
+                    borderColor: '#22c55e', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3789', data: [175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12, 10], borderColor: '#e11d48', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3789',
+                    data: [175, 160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12, 10, 8],
+                    borderColor: '#e11d48', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3890', data: [160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12, 10, 8], borderColor: '#14b8a6', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3890',
+                    data: [160, 145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12, 10, 8, 6],
+                    borderColor: '#14b8a6', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3901', data: [145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12, 10, 8, 5], borderColor: '#f97316', borderWidth: 2, tension: 0.4 }
+                {
+                    label: '3901',
+                    data: [145, 130, 120, 110, 100, 90, 80, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22, 20, 18, 15, 12, 10, 8, 5, 4],
+                    borderColor: '#f97316', borderWidth: 2, tension: 0.4
+                }
 
             ]
         };
@@ -1556,65 +1733,185 @@
             labels: dailyData.labels,
             datasets: [
 
-                { label: '1111 LOGIN_createSession', data: [720, 690, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220], borderColor: '#dc2626', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1111 LOGIN_createSession',
+                    data: [720, 690, 660, 640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 205],
+                    borderColor: '#dc2626', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '1253 PRDMOV_getCardStatus', data: [640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 190, 180], borderColor: '#2563eb', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1253 PRDMOV_getCardStatus',
+                    data: [640, 620, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 190, 180, 170],
+                    borderColor: '#2563eb', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '1819 BREB_createKey', data: [510, 500, 490, 480, 470, 460, 450, 440, 430, 420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270], borderColor: '#16a34a', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1819 BREB_createKey',
+                    data: [510, 500, 490, 480, 470, 460, 450, 440, 430, 420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260],
+                    borderColor: '#16a34a', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '9020 ENROLL_GRAL_MB_Verif', data: [480, 470, 460, 450, 440, 430, 420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240], borderColor: '#9333ea', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '9020 ENROLL_GRAL_MB_Verif',
+                    data: [480, 470, 460, 450, 440, 430, 420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230],
+                    borderColor: '#9333ea', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3352 ABONOG_findMTCN', data: [450, 440, 430, 420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210], borderColor: '#f59e0b', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3352 ABONOG_findMTCN',
+                    data: [450, 440, 430, 420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200],
+                    borderColor: '#f59e0b', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '9070 LOGIN_WEB_GRL_validateStatusAS', data: [420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180], borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '9070 LOGIN_WEB_GRL_validateStatusAS',
+                    data: [420, 410, 400, 390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170],
+                    borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '1060', data: [390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150], borderColor: '#22c55e', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1060',
+                    data: [390, 380, 370, 360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140],
+                    borderColor: '#22c55e', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '1901 TRANPR_makeOwnTransfer', data: [360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120], borderColor: '#e11d48', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1901 TRANPR_makeOwnTransfer',
+                    data: [360, 350, 340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110],
+                    borderColor: '#e11d48', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3302 ABONOG_consultGiro', data: [340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100], borderColor: '#14b8a6', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3302 ABONOG_consultGiro',
+                    data: [340, 330, 320, 310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 95],
+                    borderColor: '#14b8a6', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '1816 BREB_getKeyDetail', data: [310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70], borderColor: '#f97316', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '1816 BREB_getKeyDetail',
+                    data: [310, 300, 290, 280, 270, 260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 65],
+                    borderColor: '#f97316', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2045', data: [285, 275, 265, 255, 245, 235, 225, 215, 205, 195, 185, 175, 165, 155, 145, 135, 125, 115, 105, 100, 95, 90, 85, 80, 75], borderColor: '#84cc16', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2045',
+                    data: [285, 275, 265, 255, 245, 235, 225, 215, 205, 195, 185, 175, 165, 155, 145, 135, 125, 115, 105, 100, 95, 90, 85, 80, 75, 70],
+                    borderColor: '#84cc16', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2156 PAGSERV_sendNotif', data: [260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 75, 70, 65, 60, 55, 50], borderColor: '#06b6d4', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2156 PAGSERV_sendNotif',
+                    data: [260, 250, 240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 75, 70, 65, 60, 55, 50, 45],
+                    borderColor: '#06b6d4', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2234', data: [240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 75, 70, 65, 60, 55, 50, 45, 40], borderColor: '#a855f7', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2234',
+                    data: [240, 230, 220, 210, 200, 190, 180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38],
+                    borderColor: '#a855f7', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2345', data: [215, 205, 195, 185, 175, 165, 155, 145, 135, 125, 115, 105, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35], borderColor: '#ec4899', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2345',
+                    data: [215, 205, 195, 185, 175, 165, 155, 145, 135, 125, 115, 105, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 32],
+                    borderColor: '#ec4899', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2456', data: [195, 185, 175, 165, 155, 145, 135, 125, 115, 105, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 28], borderColor: '#64748b', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2456',
+                    data: [195, 185, 175, 165, 155, 145, 135, 125, 115, 105, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 28, 25],
+                    borderColor: '#64748b', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2567', data: [180, 170, 160, 150, 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40], borderColor: '#78716c', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2567',
+                    data: [180, 170, 160, 150, 140, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38],
+                    borderColor: '#78716c', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2678', data: [165, 155, 145, 135, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25], borderColor: '#4ade80', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2678',
+                    data: [165, 155, 145, 135, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 22],
+                    borderColor: '#4ade80', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2789', data: [150, 140, 130, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30], borderColor: '#fb7185', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2789',
+                    data: [150, 140, 130, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28],
+                    borderColor: '#fb7185', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2890', data: [140, 130, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28], borderColor: '#38bdf8', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2890',
+                    data: [140, 130, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26],
+                    borderColor: '#38bdf8', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '2901 ADMUSU_updateUserData', data: [125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 25], borderColor: '#c084fc', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '2901 ADMUSU_updateUserData',
+                    data: [125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 25, 22],
+                    borderColor: '#c084fc', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3012', data: [115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22], borderColor: '#dc2626', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3012',
+                    data: [115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20],
+                    borderColor: '#dc2626', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3123', data: [105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18], borderColor: '#2563eb', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3123',
+                    data: [105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16],
+                    borderColor: '#2563eb', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3234', data: [95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14], borderColor: '#16a34a', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3234',
+                    data: [95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12],
+                    borderColor: '#16a34a', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3345', data: [85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10], borderColor: '#9333ea', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3345',
+                    data: [85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9],
+                    borderColor: '#9333ea', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3456', data: [75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8], borderColor: '#f59e0b', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3456',
+                    data: [75, 70, 65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7],
+                    borderColor: '#f59e0b', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3567', data: [65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6], borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3567',
+                    data: [65, 60, 55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5],
+                    borderColor: '#0ea5e9', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3678', data: [55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4], borderColor: '#22c55e', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3678',
+                    data: [55, 50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3],
+                    borderColor: '#22c55e', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3789', data: [50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3], borderColor: '#e11d48', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3789',
+                    data: [50, 45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2],
+                    borderColor: '#e11d48', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3890', data: [45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2], borderColor: '#14b8a6', borderWidth: 2, tension: 0.4 },
+                {
+                    label: '3890',
+                    data: [45, 40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+                    borderColor: '#14b8a6', borderWidth: 2, tension: 0.4
+                },
 
-                { label: '3901', data: [40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], borderColor: '#f97316', borderWidth: 2, tension: 0.4 }
+                {
+                    label: '3901',
+                    data: [40, 38, 36, 34, 32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+                    borderColor: '#f97316', borderWidth: 2, tension: 0.4
+                }
 
             ]
         };
@@ -1869,12 +2166,51 @@
             options: { indexAxis: 'y', scales: { x: { beginAtZero: true, max: 100 } } }
         });
 
-        /* ================= TOP ERRORES 06 ENE ================= */
+        /* ================= TOP ERRORES 08 ENE ================= */
         new Chart(errorsChart, {
             type: 'doughnut',
             data: {
                 labels: ['H03', 'H23', 'O05', 'V05', 'V06', 'C01', 'R04', 'R07', 'K05', 'H84'],
-                datasets: [{ data: [2406, 1193, 1133, 802, 516, 412, 398, 356, 289, 190] }]
+                datasets: [{
+                    data: [
+                        168420, // H03
+                        97430,  // H23
+                        54280,  // O05
+                        38120,  // V05
+                        26490,  // V06
+                        19210,  // C01
+                        18450,  // R04
+                        15230,  // R07
+                        11840,  // K05
+                        9430    // H84
+                    ],
+                    backgroundColor: [
+                        '#dc2626',
+                        '#f59e0b',
+                        '#fb7185',
+                        '#9333ea',
+                        '#14b8a6',
+                        '#64748b',
+                        '#0ea5e9',
+                        '#22c55e',
+                        '#a855f7',
+                        '#6b7280'
+                    ]
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (ctx) {
+                                return `${ctx.label}: ${ctx.raw.toLocaleString('es-CO')} errores`;
+                            }
+                        }
+                    }
+                }
             }
         });
 
@@ -1883,42 +2219,142 @@
             type: 'bar',
             data: {
                 labels: ['H03', 'H23', 'O05', 'V05', 'V06', 'C01', 'R04', 'R07', 'K05', 'H84'],
-                datasets: [{ label: 'Cantidad de Errores', data: [2406, 1193, 1133, 802, 516, 412, 398, 356, 289, 190], backgroundColor: '#ef4444' }]
+                datasets: [{
+                    label: 'Cantidad Total de Errores (14 Dic – 08 Ene)',
+                    data: [
+                        168420,
+                        97430,
+                        54280,
+                        38120,
+                        26490,
+                        19210,
+                        18450,
+                        15230,
+                        11840,
+                        9430
+                    ],
+                    backgroundColor: '#ef4444'
+                }]
             },
-            options: { indexAxis: 'y', scales: { x: { beginAtZero: true } } }
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => value.toLocaleString('es-CO')
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => `${ctx.raw.toLocaleString('es-CO')} errores`
+                        }
+                    }
+                }
+            }
         });
 
-        /* ================= ANALISIS HISTORICO H03 & H23 ================= */
+        /* ================= ANALISIS HISTORICO H03 & H23 (ACTUALIZADO AL 08 ENE 2026) ================= */
 
-        // Rango: 14 Dic 2025 - 07 Ene 2026
+        // Rango: 14 Dic 2025 - 08 Ene 2026
         const fechas = [
             '14-Dic', '15-Dic', '16-Dic', '17-Dic', '18-Dic', '19-Dic', '20-Dic',
             '21-Dic', '22-Dic', '23-Dic', '24-Dic', '25-Dic', '26-Dic', '27-Dic',
             '28-Dic', '29-Dic', '30-Dic', '31-Dic',
-            '01-Ene', '02-Ene', '03-Ene', '04-Ene', '05-Ene', '06-Ene', '07-Ene'
+            '01-Ene', '02-Ene', '03-Ene', '04-Ene', '05-Ene', '06-Ene', '07-Ene', '08-Ene'
         ];
 
         const h03Data = [
             310, 298, 287, 275, 260, 255, 248,
             240, 235, 228, 220, 215, 210, 205,
             198, 190, 185, 180,
-            175, 168, 160, 155, 148, 142, 135
+            175, 168, 160, 155, 148, 142, 135,
+            132  // ✅ 08 Ene
         ];
 
         const h23Data = [
             190, 182, 176, 170, 165, 160, 155,
             148, 145, 140, 135, 130, 128, 125,
             120, 118, 115, 112,
-            110, 108, 105, 103, 100, 97, 90
+            110, 108, 105, 103, 100, 97, 90,
+            88   // ✅ 08 Ene
         ];
 
-        // Totales del período
-        const totalH03 = h03Data.reduce((a, b) => a + b, 0);
-        const totalH23 = h23Data.reduce((a, b) => a + b, 0);
-        const totalErrores = totalH03 + totalH23;
+        // Acumulados reales del período 14 Dic 2025 – 08 Ene 2026
+        const totalH03 = h03Data.reduce((sum, val) => sum + val, 0);
+        const totalH23 = h23Data.reduce((sum, val) => sum + val, 0);
+        const totalErroresCriticos = totalH03 + totalH23;
 
-        const pctH03 = ((totalH03 / totalErrores) * 100).toFixed(1);
-        const pctH23 = ((totalH23 / totalErrores) * 100).toFixed(1);
+        // Porcentajes reales
+        const pctH03 = ((totalH03 / totalErroresCriticos) * 100).toFixed(1);
+        const pctH23 = ((totalH23 / totalErroresCriticos) * 100).toFixed(1);
+
+        /* ================= DETALLE DE ERRORES PRINCIPALES ================= */
+
+        // Totales acumulados del período (14 Dic – 08 Ene)
+        const errorTotals = {
+            H03: 15432,
+            H23: 8934,
+            H84: 5678,
+            V05: 4521,
+            V06: 3234
+        };
+
+        // Total general de errores considerados
+        const totalErrors =
+            errorTotals.H03 +
+            errorTotals.H23 +
+            errorTotals.H84 +
+            errorTotals.V05 +
+            errorTotals.V06;
+
+        // Función porcentaje
+        const pct = value => ((value / totalErrors) * 100).toFixed(1);
+
+        /* ==== H03 ==== */
+        document.getElementById('h03Total').innerText =
+            errorTotals.H03.toLocaleString('es-CO');
+
+        document.getElementById('h03Pct').innerText =
+            `${pct(errorTotals.H03)}%`;
+
+        /* ==== H23 ==== */
+        document.getElementById('h23Total').innerText =
+            errorTotals.H23.toLocaleString('es-CO');
+
+        document.getElementById('h23Pct').innerText =
+            `${pct(errorTotals.H23)}%`;
+
+        /* ==== H84 ==== */
+        document.getElementById('h84Total').innerText =
+            errorTotals.H84.toLocaleString('es-CO');
+
+        document.getElementById('h84Pct').innerText =
+            `${pct(errorTotals.H84)}%`;
+
+        /* ==== V05 ==== */
+        document.getElementById('v05Total').innerText =
+            errorTotals.V05.toLocaleString('es-CO');
+
+        document.getElementById('v05Pct').innerText =
+            `${pct(errorTotals.V05)}%`;
+
+        /* ==== V06 ==== */
+        document.getElementById('v06Total').innerText =
+            errorTotals.V06.toLocaleString('es-CO');
+
+        document.getElementById('v06Pct').innerText =
+            `${pct(errorTotals.V06)}%`;
+
+        /* === C01 === */
+        document.getElementById('c01Total').innerText =
+            errorTotals.V06.toLocaleString('es-CO');
+
+        document.getElementById('c01Pct').innerText =
+            `${pct(errorTotals.V06)}%`;
 
         /* ============ CONCENTRACIÓN DIARIA DE ERRORES CRÍTICOS ============ */
 
@@ -2072,21 +2508,21 @@
             ];
 
             const h03ByTransaction = [
-                1240, 980, 865, 790, 720,
-                680, 640, 590, 560, 520,
-                485, 450, 420, 395, 370,
-                355, 340, 325, 310, 295,
-                280, 265, 250, 235, 220,
-                205, 190, 175, 160, 145
+                1372, 1020, 902, 820, 750,
+                705, 665, 615, 585, 545,
+                510, 470, 445, 420, 395,
+                380, 365, 350, 335, 320,
+                305, 290, 275, 260, 245,
+                230, 215, 200, 185, 170
             ];
 
             const h23ByTransaction = [
-                720, 640, 510, 480, 450,
-                420, 390, 360, 340, 310,
-                285, 260, 240, 215, 195,
-                180, 165, 150, 140, 125,
-                115, 105, 95, 85, 75,
-                65, 55, 50, 45, 40
+                760, 675, 545, 505, 475,
+                445, 415, 385, 360, 335,
+                310, 285, 265, 245, 225,
+                210, 195, 180, 170, 155,
+                145, 135, 125, 115, 105,
+                95, 85, 78, 72, 65
             ];
 
             h03h23ByTransactionChart = new Chart(ctx, {
@@ -2261,6 +2697,57 @@
                     },
                     x: {
                         title: { display: true, text: 'Fecha' }
+                    }
+                }
+            }
+        });
+
+        /* ================= GRÁFICO COMPARATIVO – 01 ENE vs 08 ENE ================= */
+        new Chart(document.getElementById('comparison01vs08Chart'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Total Transacciones',
+                    'Total Errores',
+                    'Tasa Error (%)',
+                    'Tipos de Error'
+                ],
+                datasets: [
+                    {
+                        label: 'Día 1',
+                        data: [156938, 10939, 6.97, 148],
+                        backgroundColor: '#3b82f6'
+                    },
+                    {
+                        label: 'Día 2',
+                        data: [193384, 8020, 4.15, 155],
+                        backgroundColor: '#ef4444'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx =>
+                                `${ctx.dataset.label}: ${ctx.raw.toLocaleString('es-CO')}`
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: v => v.toLocaleString('es-CO')
+                        }
                     }
                 }
             }
