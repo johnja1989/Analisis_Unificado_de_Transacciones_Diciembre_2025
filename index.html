@@ -1130,9 +1130,33 @@
         }
 
         function clearSavedData() {
-            if (confirm('¿Estás seguro de que quieres eliminar los datos guardados y cargar archivos nuevos?')) {
+            if (confirm('¿Estás seguro de que quieres cargar archivos nuevos?')) {
+                // Limpiar los datos actuales
+                dailyData = [];
+                errorCodeData = [];
+                errorCodeDataByDate = [];
+                
+                // Limpiar localStorage
                 localStorage.removeItem('bankoDashboardData');
-                location.reload();
+                
+                // Mostrar pantalla de upload sin recargar la página
+                uploadSection.classList.remove('hidden');
+                dashboardContent.classList.add('hidden');
+                
+                // Remover botón de recarga
+                const reloadButton = document.getElementById('reloadButton');
+                if (reloadButton) reloadButton.remove();
+                
+                // Limpiar todos los gráficos
+                Object.values(charts).forEach(chart => {
+                    if (chart) chart.destroy();
+                });
+                charts = {};
+                
+                // Limpiar input de archivo para permitir seleccionar el mismo archivo de nuevo
+                fileInput.value = '';
+                
+                showNotification('Pantalla de carga lista. Selecciona tus archivos.');
             }
         }
 
