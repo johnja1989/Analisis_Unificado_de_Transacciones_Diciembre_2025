@@ -917,6 +917,99 @@
             }
         }
 
+        function generateExampleData() {
+            // Generar 30 días de datos de ejemplo
+            const today = new Date();
+            const days = 30;
+            
+            for (let i = days - 1; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                
+                // Generar datos variados
+                const baseErrorRate = 2.5 + Math.random() * 3; // Entre 2.5% y 5.5%
+                const totalTrx = Math.floor(50000 + Math.random() * 30000);
+                const totalErrors = Math.floor(totalTrx * (baseErrorRate / 100));
+                
+                dailyData.push({
+                    date: date,
+                    totalTrx: totalTrx,
+                    totalErrors: totalErrors,
+                    errorRate: (totalErrors / totalTrx * 100),
+                    uniqueErrorTypes: Math.floor(5 + Math.random() * 8)
+                });
+                
+                // Generar códigos de error para cada día
+                const errorCodes = ['H03', 'H23', 'H84', 'V05', 'V06', 'C01', 'T02', 'X10'];
+                const h03Count = Math.floor(totalErrors * (0.35 + Math.random() * 0.2));
+                const h23Count = Math.floor(totalErrors * (0.25 + Math.random() * 0.15));
+                
+                const dateKey = date.toISOString().split('T')[0];
+                const dayErrors = {
+                    date: date,
+                    h03Count: h03Count,
+                    h23Count: h23Count,
+                    allErrors: []
+                };
+                
+                // Distribuir errores entre códigos
+                let remainingErrors = totalErrors;
+                const errorDistribution = [];
+                
+                errorCodes.forEach((code, idx) => {
+                    let count = 0;
+                    if (code === 'H03') count = h03Count;
+                    else if (code === 'H23') count = h23Count;
+                    else count = Math.floor(remainingErrors * (0.15 - idx * 0.01));
+                    
+                    if (count > 0) {
+                        errorDistribution.push({
+                            code: code,
+                            count: count
+                        });
+                        dayErrors.allErrors.push({
+                            trxCode: 'TRX' + String(idx + 1).padStart(2, '0'),
+                            errorCode: code,
+                            count: count
+                        });
+                    }
+                });
+                
+                errorCodeDataByDate.push(dayErrors);
+                
+                // Agregar a datos globales
+                errorDistribution.forEach(ed => {
+                    const existing = errorCodeData.find(e => e.errorCode === ed.code);
+                    if (existing) {
+                        existing.count += ed.count;
+                    } else {
+                        errorCodeData.push({
+                            trxCode: 'TRX',
+                            errorCode: ed.code,
+                            description: getErrorDescription(ed.code),
+                            count: ed.count
+                        });
+                    }
+                });
+            }
+            
+            console.log('✅ Datos de ejemplo generados automáticamente');
+        }
+
+        function getErrorDescription(code) {
+            const descriptions = {
+                'H03': 'Error de conexión al servidor',
+                'H23': 'Timeout de operación',
+                'H84': 'Error de autenticación',
+                'V05': 'Validación de datos inválida',
+                'V06': 'Límite de transacción excedido',
+                'C01': 'Código de cliente no válido',
+                'T02': 'Error de base de datos',
+                'X10': 'Error de formato'
+            };
+            return descriptions[code] || 'Error desconocido';
+        }
+
         function loadSavedData() {
             try {
                 const savedDataStr = localStorage.getItem('bankoDashboardData');
@@ -957,11 +1050,39 @@
                             initializeDashboard();
                         }, 100);
                     }
+                } else {
+                    // Si no hay datos guardados, generar datos de ejemplo
+                    console.log('⚙️ Generando datos de ejemplo...');
+                    generateExampleData();
+                    
+                    // Guardar datos de ejemplo en localStorage
+                    saveData();
+                    
+                    // Mostrar dashboard automáticamente
+                    uploadSection.classList.add('hidden');
+                    dashboardContent.classList.remove('hidden');
+                    
+                    // Agregar botón para cargar nuevos datos
+                    showReloadButton();
+                    
+                    // Inicializar dashboard
+                    setTimeout(() => {
+                        initializeDashboard();
+                        showNotification('Dashboard cargado con datos de ejemplo. Puedes cargar tus propios datos cuando lo desees.');
+                    }, 100);
                 }
             } catch (error) {
                 console.error('Error cargando datos guardados:', error);
-                // Si hay error, limpiar localStorage y empezar de nuevo
-                localStorage.removeItem('bankoDashboardData');
+                // Si hay error, generar datos de ejemplo
+                generateExampleData();
+                saveData();
+                uploadSection.classList.add('hidden');
+                dashboardContent.classList.remove('hidden');
+                showReloadButton();
+                setTimeout(() => {
+                    initializeDashboard();
+                    showNotification('Dashboard cargado con datos de ejemplo.');
+                }, 100);
             }
         }
 
