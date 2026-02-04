@@ -1,957 +1,1050 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Comparativo Estadístico - Banco Unión S.A</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-        }
-
-        header {
-            background: linear-gradient(135deg, #003d6b 0%, #0059a3 100%);
-            color: white;
-            padding: 30px 40px;
-            margin: -40px -40px 30px -40px;
-            border-radius: 16px 16px 0 0;
-            border-bottom: 3px solid #3b82f6;
-        }
-
-        .header-content h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
-        .subtitle { font-size: 1.1rem; opacity: 0.95; font-weight: 300; }
-
-        .upload-section {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            margin-bottom: 30px;
-        }
-
-        .upload-area {
-            border: 3px dashed #3b82f6;
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 30%);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .upload-area:hover {
-            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 30%);
-            border-color: #2563eb;
-            transform: translateY(-2px);
-        }
-
-        .upload-area.dragover {
-            background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 30%);
-            border-color: #1d4ed8;
-        }
-
-        .file-input { display: none; }
-        .upload-icon { font-size: 3em; margin-bottom: 15px; }
-        .upload-text { font-size: 1.2em; color: #1f2937; margin-bottom: 10px; font-weight: 600; }
-        .upload-hint { color: #6b7280; font-size: 0.9em; }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            background: #3b82f6;
-            color: white;
-        }
-
-        .btn:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 30px;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            padding-bottom: 10px;
-        }
-
-        .nav-tab {
-            white-space: nowrap;
-            padding: 12px 24px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-            color: #4b5563;
-        }
-
-        .nav-tab:hover {
-            background: #f3f4f6;
-            transform: translateY(-2px);
-            border-color: #d1d5db;
-        }
-
-        .nav-tab.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .kpi-card {
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12); }
-
-        .kpi-card.primary { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-left: 4px solid #3b82f6; }
-        .kpi-card.success { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border-left: 4px solid #22c55e; }
-        .kpi-card.danger  { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border-left: 4px solid #ef4444; }
-        .kpi-card.warning { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 4px solid #f59e0b; }
-        .kpi-card.info    { background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); border-left: 4px solid #a855f7; }
-
-        .kpi-label { font-weight: 600; font-size: 1rem; margin-bottom: 12px; opacity: 0.9; color: #1f2937; }
-        .kpi-value { font-size: 2.5rem; font-weight: bold; margin-bottom: 8px; }
-
-        .kpi-card.primary .kpi-value { color: #2563eb; }
-        .kpi-card.success .kpi-value { color: #16a34a; }
-        .kpi-card.danger  .kpi-value { color: #dc2626; }
-        .kpi-card.warning .kpi-value { color: #d97706; }
-        .kpi-card.info    .kpi-value { color: #9333ea; }
-
-        .kpi-subtext { font-size: 0.9rem; opacity: 0.8; color: #4b5563; }
-
-        .chart-container {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            margin-bottom: 30px;
-        }
-
-        .chart-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e5e7eb;
-        }
-
-        .narrative-block {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            padding: 30px;
-            border-radius: 12px;
-            border-left: 5px solid #3b82f6;
-            margin-bottom: 30px;
-            line-height: 1.8;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-        }
-
-        .narrative-block h3 { color: #1f2937; margin-bottom: 15px; font-size: 1.3em; }
-        .narrative-block p { margin-bottom: 12px; color: #374151; }
-
-        .narrative-highlight {
-            background-color: #fef3c7;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-            color: #92400e;
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .comparison-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            transition: transform 0.3s ease;
-        }
-
-        .comparison-card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); }
-
-        .comparison-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e5e7eb;
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #1f2937;
-        }
-
-        .comparison-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #f3f4f6;
-        }
-
-        .comparison-label { font-weight: 500; color: #6b7280; }
-        .comparison-value { font-weight: 700; font-size: 1.1em; color: #1f2937; }
-
-        .badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-
-        .badge-success { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); color: #166534; }
-        .badge-danger  { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); color: #991b1b; }
-        .badge-warning { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); color: #92400e; }
-        .badge-info    { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); color: #1e40af; }
-
-        .week-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .week-card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); }
-
-        .week-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e5e7eb;
-        }
-
-        .week-title { font-size: 1.3em; font-weight: 600; color: #1f2937; }
-
-        .week-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .week-stat {
-            text-align: center;
-            padding: 15px;
-            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-        }
-
-        .week-stat-label {
-            font-size: 0.8em;
-            color: #6b7280;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .week-stat-value { font-size: 1.4em; font-weight: 700; color: #1f2937; }
-
-        .error-table {
-            width: 100%;
-            background: white;
-            border-collapse: collapse;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-        }
-
-        .error-table thead {
-            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-            color: white;
-        }
-
-        .error-table th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9em;
-            letter-spacing: 0.5px;
-        }
-
-        .error-table td {
-            padding: 15px;
-            border-bottom: 1px solid #f3f4f6;
-        }
-
-        .error-table tbody tr { transition: background-color 0.2s ease; }
-        .error-table tbody tr:hover { background-color: #f9fafb; }
-
-        .error-rank {
-            display: inline-block;
-            width: 35px;
-            height: 35px;
-            line-height: 35px;
-            text-align: center;
-            border-radius: 50%;
-            font-weight: 700;
-            color: white;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        }
-
-        .hidden { display: none !important; }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background-color: #e5e7eb;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
-            transition: width 0.3s ease;
-        }
-
-        .alert {
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 5px solid;
-        }
-
-        .alert-info {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-            border-left-color: #3b82f6;
-            color: #1e40af;
-        }
-
-        @media (max-width: 768px) {
-            .container { padding: 20px; }
-            header { margin: -20px -20px 20px -20px; padding: 20px; }
-            .header-content h1 { font-size: 1.6em; }
-            .kpi-grid { grid-template-columns: 1fr; }
-            .nav-tabs { flex-direction: column; }
-            .nav-tab { width: 100%; }
-            .comparison-grid { grid-template-columns: 1fr; }
-        }
-
-        .status-indicator {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin-left: 10px;
-            vertical-align: middle;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .status-green { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
-        .status-yellow { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .status-red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
-
-        .alert-banner {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-left: 5px solid #f59e0b;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            animation: slideDown 0.5s ease;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .alert-banner.critical {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border-left-color: #ef4444;
-        }
-
-        .alert-banner.success {
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
-            border-left-color: #22c55e;
-        }
-
-        .alert-content { flex: 1; font-weight: 600; color: #1f2937; font-size: 1.05em; }
-        .alert-icon { font-size: 1.5em; margin-right: 15px; }
-
-        .recommendations-box {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border: 2px solid #3b82f6;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .recommendations-box h3 { color: #1f2937; margin-bottom: 15px; font-size: 1.3em; }
-        .recommendations-box ul { list-style: none; padding: 0; }
-
-        .recommendations-box li {
-            padding: 10px 0;
-            padding-left: 30px;
-            position: relative;
-            color: #374151;
-            line-height: 1.6;
-        }
-
-        .recommendations-box li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #3b82f6;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .metric-context {
-            background: rgba(59, 130, 246, 0.1);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-size: 0.85em;
-            color: #1f2937;
-            border-left: 3px solid #3b82f6;
-        }
-
-        .print-button {
-            background: white;
-            color: #3b82f6;
-            border: 2px solid #3b82f6;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .print-button:hover { background: #3b82f6; color: white; }
-
-        @media print {
-            body { background: white; }
-            .upload-section, .nav-tabs, .print-button, .alert-banner { display: none !important; }
-        }
-
-        /* Estilos para sincronización GitHub */
-        .github-config {
-            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
-            border: 2px solid #a855f7;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-
-        .github-config h3 {
-            color: #1f2937;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.2em;
-        }
-
-        .config-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .config-field { display: flex; flex-direction: column; gap: 5px; }
-
-        .config-field label {
-            font-weight: 600;
-            color: #4b5563;
-            font-size: 0.9em;
-        }
-
-        .config-field input {
-            padding: 10px;
-            border: 2px solid #e5e7eb;
-            border-radius: 6px;
-            font-size: 0.9em;
-            transition: border-color 0.3s ease;
-        }
-
-        .config-field input:focus { outline: none; border-color: #a855f7; }
-
-        .config-status {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-
-        .status-connected { background: #dcfce7; color: #166534; }
-        .status-disconnected { background: #fee2e2; color: #991b1b; }
-
-        .help-text {
-            font-size: 0.85em;
-            color: #6b7280;
-            margin-top: 15px;
-            line-height: 1.6;
-        }
-
-        .help-link { color: #a855f7; text-decoration: none; font-weight: 600; }
-        .help-link:hover { text-decoration: underline; }
-
-        /* Overlay de sincronización (agregado) */
-        #generatingOverlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(17, 24, 39, 0.55);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 20000;
-            backdrop-filter: blur(6px);
-        }
-        #generatingBox {
-            background: white;
-            border-radius: 14px;
-            padding: 22px 26px;
-            min-width: 320px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-            border: 2px solid rgba(59,130,246,0.2);
-        }
-        #generatingTitle {
-            font-weight: 800;
-            color: #111827;
-            margin-bottom: 10px;
-            font-size: 1.05rem;
-        }
-        #generatingMsg {
-            color: #374151;
-            font-weight: 600;
-            margin-bottom: 14px;
-        }
-        .miniSpinner {
-            border: 4px solid #e5e7eb;
-            border-top: 4px solid #3b82f6;
-            border-radius: 50%;
-            width: 42px;
-            height: 42px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* Badge Sync (agregado) */
-        .sync-badge {
-            margin-top: 14px;
-            display: inline-flex;
-            gap: 8px;
-            align-items: center;
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.25);
-            font-size: 0.85em;
-            font-weight: 700;
-        }
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #22c55e;
-            box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
-        }
-        .dot.warn {
-            background: #f59e0b;
-            box-shadow: 0 0 0 3px rgba(245,158,11,0.15);
-        }
-        .dot.err {
-            background: #ef4444;
-            box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Comparativo Estadístico - Banco Unión S.A</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #003d6b 0%, #0059a3 100%);
+      color: white;
+      padding: 30px 40px;
+      margin: -40px -40px 30px -40px;
+      border-radius: 16px 16px 0 0;
+      border-bottom: 3px solid #3b82f6;
+    }
+
+    .header-content h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
+    .subtitle { font-size: 1.1rem; opacity: 0.95; font-weight: 300; }
+
+    .upload-section {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      margin-bottom: 30px;
+    }
+
+    .upload-area {
+      border: 3px dashed #3b82f6;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 30%);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .upload-area:hover {
+      background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 30%);
+      border-color: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    .upload-area.dragover {
+      background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 30%);
+      border-color: #1d4ed8;
+    }
+
+    .file-input { display: none; }
+    .upload-icon { font-size: 3em; margin-bottom: 15px; }
+    .upload-text { font-size: 1.2em; color: #1f2937; margin-bottom: 10px; font-weight: 600; }
+    .upload-hint { color: #6b7280; font-size: 0.9em; }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      background: #3b82f6;
+      color: white;
+    }
+
+    .btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 30px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .nav-tab {
+      white-space: nowrap;
+      padding: 12px 24px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: white;
+      color: #4b5563;
+    }
+
+    .nav-tab:hover {
+      background: #f3f4f6;
+      transform: translateY(-2px);
+      border-color: #d1d5db;
+    }
+
+    .nav-tab.active {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .kpi-card {
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .kpi-card.primary {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      border-left: 4px solid #3b82f6;
+    }
+
+    .kpi-card.success {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      border-left: 4px solid #22c55e;
+    }
+
+    .kpi-card.danger {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      border-left: 4px solid #ef4444;
+    }
+
+    .kpi-card.warning {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 4px solid #f59e0b;
+    }
+
+    .kpi-card.info {
+      background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+      border-left: 4px solid #a855f7;
+    }
+
+    .kpi-label {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      opacity: 0.9;
+      color: #1f2937;
+    }
+
+    .kpi-value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .kpi-card.primary .kpi-value { color: #2563eb; }
+    .kpi-card.success .kpi-value { color: #16a34a; }
+    .kpi-card.danger .kpi-value { color: #dc2626; }
+    .kpi-card.warning .kpi-value { color: #d97706; }
+    .kpi-card.info .kpi-value { color: #9333ea; }
+
+    .kpi-subtext { font-size: 0.9rem; opacity: 0.8; color: #4b5563; }
+
+    .chart-container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      margin-bottom: 30px;
+    }
+
+    .chart-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .narrative-block {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 5px solid #3b82f6;
+      margin-bottom: 30px;
+      line-height: 1.8;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    }
+
+    .narrative-block h3 { color: #1f2937; margin-bottom: 15px; font-size: 1.3em; }
+    .narrative-block p { margin-bottom: 12px; color: #374151; }
+
+    .narrative-highlight {
+      background-color: #fef3c7;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      color: #92400e;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .comparison-card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      transition: transform 0.3s ease;
+    }
+
+    .comparison-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .comparison-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e5e7eb;
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .comparison-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .comparison-label { font-weight: 500; color: #6b7280; }
+    .comparison-value { font-weight: 700; font-size: 1.1em; color: #1f2937; }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    .badge-success {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      color: #166534;
+    }
+
+    .badge-danger {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      color: #991b1b;
+    }
+
+    .badge-warning {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      color: #92400e;
+    }
+
+    .badge-info {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      color: #1e40af;
+    }
+
+    .week-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .week-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .week-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .week-title { font-size: 1.3em; font-weight: 600; color: #1f2937; }
+
+    .week-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .week-stat {
+      text-align: center;
+      padding: 15px;
+      background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .week-stat-label {
+      font-size: 0.8em;
+      color: #6b7280;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .week-stat-value { font-size: 1.4em; font-weight: 700; color: #1f2937; }
+
+    .error-table {
+      width: 100%;
+      background: white;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    }
+
+    .error-table thead {
+      background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+      color: white;
+    }
+
+    .error-table th {
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9em;
+      letter-spacing: 0.5px;
+    }
+
+    .error-table td {
+      padding: 15px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .error-table tbody tr { transition: background-color 0.2s ease; }
+    .error-table tbody tr:hover { background-color: #f9fafb; }
+
+    .error-rank {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      text-align: center;
+      border-radius: 50%;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    }
+
+    .hidden { display: none !important; }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background-color: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+      transition: width 0.3s ease;
+    }
+
+    .alert {
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border-left: 5px solid;
+    }
+
+    .alert-info {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      border-left-color: #3b82f6;
+      color: #1e40af;
+    }
+
+    /* Nuevos estilos para presentación ejecutiva */
+    .status-indicator {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-left: 10px;
+      vertical-align: middle;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .status-green { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+    .status-yellow { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .status-red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    .alert-banner {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 5px solid #f59e0b;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+      animation: slideDown 0.5s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .alert-banner.critical {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      border-left-color: #ef4444;
+    }
+
+    .alert-banner.success {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      border-left-color: #22c55e;
+    }
+
+    .alert-content { flex: 1; font-weight: 600; color: #1f2937; font-size: 1.05em; }
+    .alert-icon { font-size: 1.5em; margin-right: 15px; }
+
+    .recommendations-box {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 2px solid #3b82f6;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .recommendations-box h3 { color: #1f2937; margin-bottom: 15px; font-size: 1.3em; }
+    .recommendations-box ul { list-style: none; padding: 0; }
+
+    .recommendations-box li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .recommendations-box li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #3b82f6;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    .metric-context {
+      background: rgba(59, 130, 246, 0.1);
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 0.85em;
+      color: #1f2937;
+      border-left: 3px solid #3b82f6;
+    }
+
+    .print-button {
+      background: white;
+      color: #3b82f6;
+      border: 2px solid #3b82f6;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .print-button:hover { background: #3b82f6; color: white; }
+
+    @media print {
+      body { background: white; }
+      .upload-section, .nav-tabs, .print-button, .alert-banner { display: none !important; }
+    }
+
+    /* Estilos para sincronización GitHub */
+    .github-config {
+      background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+      border: 2px solid #a855f7;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .github-config h3 {
+      color: #1f2937;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2em;
+    }
+
+    .config-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .config-field { display: flex; flex-direction: column; gap: 5px; }
+
+    .config-field label {
+      font-weight: 600;
+      color: #4b5563;
+      font-size: 0.9em;
+    }
+
+    .config-field input {
+      padding: 10px;
+      border: 2px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 0.9em;
+      transition: border-color 0.3s ease;
+    }
+
+    .config-field input:focus { outline: none; border-color: #a855f7; }
+
+    .config-status {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+
+    .status-connected { background: #dcfce7; color: #166534; }
+    .status-disconnected { background: #fee2e2; color: #991b1b; }
+
+    .help-text {
+      font-size: 0.85em;
+      color: #6b7280;
+      margin-top: 15px;
+      line-height: 1.6;
+    }
+
+    .help-link { color: #a855f7; text-decoration: none; font-weight: 600; }
+    .help-link:hover { text-decoration: underline; }
+
+    /* Overlay de sincronización */
+    #generatingOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 20000;
+      backdrop-filter: blur(6px);
+    }
+    #generatingBox {
+      background: white;
+      border-radius: 14px;
+      padding: 22px 26px;
+      min-width: 320px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      border: 2px solid rgba(59,130,246,0.2);
+    }
+    #generatingTitle {
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+    #generatingMsg {
+      color: #374151;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .miniSpinner {
+      border: 4px solid #e5e7eb;
+      border-top: 4px solid #3b82f6;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* Badge Sync */
+    .sync-badge {
+      margin-top: 14px;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      font-size: 0.85em;
+      font-weight: 700;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+    }
+    .dot.warn {
+      background: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.15);
+    }
+    .dot.err {
+      background: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+    }
+
+    /* Bloques técnicos para insights */
+    .insights-tech {
+      background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
+      border-left: 5px solid #06b6d4;
+    }
+
+    .tech-metric {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      font-weight: 700;
+      margin: 0 4px;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 20px; }
+      header { margin: -20px -20px 20px -20px; padding: 20px; }
+      .header-content h1 { font-size: 1.6em; }
+      .kpi-grid { grid-template-columns: 1fr; }
+      .nav-tabs { flex-direction: column; }
+      .nav-tab { width: 100%; }
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 
 <body>
-<div class="container">
+  <div class="container">
     <header>
-        <div class="header-content">
-            <h1>📊 Dashboard Comparativo Estadístico</h1>
-            <p class="subtitle">Banco Unión S.A | Período: 14 Diciembre 2025 - 03 Febrero 2026</p>
+      <div class="header-content">
+        <h1>📊 Dashboard Comparativo Estadístico</h1>
+        <p class="subtitle">Banco Unión S.A | Período: 14 Diciembre 2025 - 21 Enero 2026</p>
 
-            <!-- Badge sincronización (agregado) -->
-            <div class="sync-badge" id="syncBadge" title="Auto-actualización desde GitHub">
-                <span class="dot" id="syncDot"></span>
-                <span id="syncText">Auto-sync activo</span>
-            </div>
+        <div class="sync-badge" id="syncBadge" title="Auto-actualización desde GitHub">
+          <span class="dot" id="syncDot"></span>
+          <span id="syncText">Auto-sync activo</span>
         </div>
+      </div>
     </header>
 
     <div class="upload-section" id="uploadSection">
-        <h2 style="margin-bottom: 20px; color: #1f2937; font-size: 1.5rem;">Cargar Archivos de Datos</h2>
+      <h2 style="margin-bottom: 20px; color: #1f2937; font-size: 1.5rem;">Cargar Archivos de Datos</h2>
 
-        <!-- Panel de configuración GitHub (ADMIN) -->
-        <div id="githubConfigPanel" class="github-config" style="display: none;">
-            <h3>
-                🔗 Sincronización Multi-Dispositivo con GitHub
-                <span id="githubStatus" class="config-status status-disconnected">No configurado</span>
-            </h3>
+      <!-- Panel de configuración GitHub (solo ADMIN via ?admin=1) -->
+      <div id="githubConfigPanel" class="github-config" style="display: none;">
+        <h3>
+          🔗 Sincronización Multi-Dispositivo con GitHub
+          <span id="githubStatus" class="config-status status-disconnected">No configurado</span>
+        </h3>
 
-            <div class="config-grid">
-                <div class="config-field">
-                    <label>Usuario de GitHub:</label>
-                    <input type="text" id="githubUser" placeholder="tu-usuario">
-                </div>
-                <div class="config-field">
-                    <label>Repositorio:</label>
-                    <input type="text" id="githubRepo" placeholder="nombre-repositorio">
-                </div>
-                <div class="config-field">
-                    <label>Rama (branch):</label>
-                    <input type="text" id="githubBranch" value="main" placeholder="main o gh-pages">
-                </div>
-                <div class="config-field">
-                    <label>Token Personal (PAT):</label>
-                    <input type="password" id="githubToken" placeholder="ghp_...">
-                </div>
-            </div>
-
-            <button onclick="testGitHubConnection()" class="btn" style="margin-right: 10px;">
-                🔍 Probar Conexión
-            </button>
-            <button onclick="saveGitHubConfig()" class="btn">
-                💾 Guardar Configuración
-            </button>
-
-            <div class="help-text">
-                <strong>💡 Admin:</strong> Solo el administrador debe configurar token.<br>
-                Todos los usuarios leerán datos desde GitHub automáticamente (sin token).<br><br>
-                1) Crea un <a href="https://github.com/settings/tokens/new" target="_blank" class="help-link">Personal Access Token</a> con permisos <strong>repo</strong><br>
-                2) Completa usuario/repo/branch/token<br>
-                3) Guarda configuración<br>
-                4) Carga tus ZIP y se guardarán en GitHub<br>
-                5) Los usuarios se actualizarán automáticamente
-            </div>
+        <div class="config-grid">
+          <div class="config-field">
+            <label>Usuario de GitHub:</label>
+            <input type="text" id="githubUser" placeholder="tu-usuario">
+          </div>
+          <div class="config-field">
+            <label>Repositorio:</label>
+            <input type="text" id="githubRepo" placeholder="nombre-repositorio">
+          </div>
+          <div class="config-field">
+            <label>Rama (branch):</label>
+            <input type="text" id="githubBranch" value="main" placeholder="main o gh-pages">
+          </div>
+          <div class="config-field">
+            <label>Token Personal (PAT):</label>
+            <input type="password" id="githubToken" placeholder="ghp_...">
+          </div>
         </div>
 
-        <div class="upload-area" id="uploadArea">
-            <div class="upload-icon">📁</div>
-            <div class="upload-text">Arrastra aquí los archivos ZIP o haz clic para seleccionar</div>
-            <div class="upload-hint">Necesitas cargar ambos archivos: transacciones diarias y códigos de error</div>
-            <input type="file" id="fileInput" class="file-input" accept=".zip" multiple>
-            <button class="btn" onclick="document.getElementById('fileInput').click()">
-                Seleccionar Archivos
-            </button>
-        </div>
+        <button onclick="testGitHubConnection()" class="btn" style="margin-right: 10px;">🔍 Probar Conexión</button>
+        <button onclick="saveGitHubConfig()" class="btn">💾 Guardar Configuración</button>
 
-        <div id="uploadProgress" class="hidden" style="margin-top: 20px;">
-            <p>Procesando archivos...</p>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-            </div>
+        <div class="help-text">
+          <strong>💡 Admin:</strong> Solo el administrador configura token.<br>
+          Todos los usuarios leerán datos desde GitHub automáticamente (sin token).<br><br>
+          1) Crea un <a href="https://github.com/settings/tokens/new" target="_blank" class="help-link">Personal Access Token</a> con permisos <strong>repo</strong><br>
+          2) Completa usuario/repo/branch/token<br>
+          3) Guarda configuración<br>
+          4) Carga ZIP y se guardará en GitHub<br>
+          5) Los usuarios se actualizan automáticamente
         </div>
+      </div>
 
-        <!-- Mensaje para usuarios no admin (agregado) -->
-        <div id="viewerHint" class="alert alert-info" style="display:none; margin-top: 20px;">
-            <strong>ℹ️ Información:</strong> Este dashboard se actualiza automáticamente desde GitHub.
-            Si aún no ves datos, espera a que el administrador publique la última carga.
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">📁</div>
+        <div class="upload-text">Arrastra aquí los archivos ZIP o haz clic para seleccionar</div>
+        <div class="upload-hint">Necesitas cargar ambos archivos: transacciones diarias y códigos de error</div>
+        <input type="file" id="fileInput" class="file-input" accept=".zip" multiple>
+        <button class="btn" onclick="document.getElementById('fileInput').click()">Seleccionar Archivos</button>
+      </div>
+
+      <div id="uploadProgress" class="hidden" style="margin-top: 20px;">
+        <p>Procesando archivos...</p>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
         </div>
+      </div>
+
+      <div id="viewerHint" class="alert alert-info" style="display:none; margin-top: 20px;">
+        <strong>ℹ️ Información:</strong> Este dashboard se actualiza automáticamente desde GitHub.
+        Si aún no ves datos, espera a que el administrador publique la última carga.
+      </div>
     </div>
 
     <div id="dashboardContent" class="hidden">
-        <nav class="nav-tabs">
-            <button class="nav-tab active" onclick="switchTab('resumen', this)">📈 Resumen General</button>
-            <button class="nav-tab" onclick="switchTab('diaria', this)">📅 Vista Diaria</button>
-            <button class="nav-tab" onclick="switchTab('semanal', this)">📊 Vista Semanal</button>
-            <button class="nav-tab" onclick="switchTab('comparativos', this)">🔄 Comparativos</button>
-            <button class="nav-tab" onclick="switchTab('errores', this)">⚠️ Top Errores</button>
-            <button class="nav-tab" onclick="switchTab('h03h23', this)">🔍 Análisis H03 & H23</button>
-        </nav>
+      <nav class="nav-tabs">
+        <button class="nav-tab active" onclick="switchTab('resumen', this)">📈 Resumen General</button>
+        <button class="nav-tab" onclick="switchTab('diaria', this)">📅 Vista Diaria</button>
+        <button class="nav-tab" onclick="switchTab('semanal', this)">📊 Vista Semanal</button>
+        <button class="nav-tab" onclick="switchTab('comparativos', this)">🔄 Comparativos</button>
+        <button class="nav-tab" onclick="switchTab('errores', this)">⚠️ Top Errores</button>
+        <button class="nav-tab" onclick="switchTab('h03h23', this)">🔍 Análisis H03 & H23</button>
+      </nav>
 
-        <!-- TAB 1 -->
-        <div id="tab-resumen" class="tab-content active">
-            <div class="kpi-grid">
-                <div class="kpi-card primary">
-                    <div class="kpi-label">Total Transacciones</div>
-                    <div class="kpi-value" id="kpi-total-trx">---</div>
-                    <div class="kpi-subtext">En el período completo</div>
-                </div>
-                <div class="kpi-card danger">
-                    <div class="kpi-label">Total Errores</div>
-                    <div class="kpi-value" id="kpi-total-errors">---</div>
-                    <div class="kpi-subtext">Transacciones fallidas</div>
-                </div>
-                <div class="kpi-card warning">
-                    <div class="kpi-label">Tasa Error Promedio</div>
-                    <div class="kpi-value" id="kpi-error-rate">---</div>
-                    <div class="kpi-subtext">Porcentaje de fallas</div>
-                </div>
-                <div class="kpi-card info">
-                    <div class="kpi-label">Tipos de Error (Max)</div>
-                    <div class="kpi-value" id="kpi-max-error-types">---</div>
-                    <div class="kpi-subtext">Diversidad máxima</div>
-                </div>
-            </div>
-
-            <div class="chart-container">
-                <h3 class="chart-title">Evolución Completa del Período</h3>
-                <canvas id="chart-evolution"></canvas>
-            </div>
-
-            <div class="narrative-block" id="narrative-block">
-                <h3>📋 Resumen Ejecutivo</h3>
-                <p>Cargando análisis automático...</p>
-            </div>
+      <!-- TAB 1: RESUMEN -->
+      <div id="tab-resumen" class="tab-content active">
+        <div class="kpi-grid">
+          <div class="kpi-card primary">
+            <div class="kpi-label">Total Transacciones</div>
+            <div class="kpi-value" id="kpi-total-trx">---</div>
+            <div class="kpi-subtext">En el período completo</div>
+          </div>
+          <div class="kpi-card danger">
+            <div class="kpi-label">Total Errores</div>
+            <div class="kpi-value" id="kpi-total-errors">---</div>
+            <div class="kpi-subtext">Transacciones fallidas</div>
+          </div>
+          <div class="kpi-card warning">
+            <div class="kpi-label">Tasa Error Promedio</div>
+            <div class="kpi-value" id="kpi-error-rate">---</div>
+            <div class="kpi-subtext">Porcentaje de fallas</div>
+          </div>
+          <div class="kpi-card info">
+            <div class="kpi-label">Tipos de Error (Max)</div>
+            <div class="kpi-value" id="kpi-max-error-types">---</div>
+            <div class="kpi-subtext">Diversidad máxima</div>
+          </div>
         </div>
 
-        <!-- TAB 2 -->
-        <div id="tab-diaria" class="tab-content">
-            <div class="kpi-grid">
-                <div class="kpi-card success">
-                    <div class="kpi-label">Mejor Día</div>
-                    <div class="kpi-value" id="kpi-best-day">---</div>
-                    <div class="kpi-subtext" id="kpi-best-day-rate">---</div>
-                </div>
-                <div class="kpi-card danger">
-                    <div class="kpi-label">Peor Día</div>
-                    <div class="kpi-value" id="kpi-worst-day">---</div>
-                    <div class="kpi-subtext" id="kpi-worst-day-rate">---</div>
-                </div>
-                <div class="kpi-card info">
-                    <div class="kpi-label">Promedio Diario Trx</div>
-                    <div class="kpi-value" id="kpi-avg-daily-trx">---</div>
-                    <div class="kpi-subtext">Transacciones por día</div>
-                </div>
-                <div class="kpi-card warning">
-                    <div class="kpi-label">Promedio Diario Errores</div>
-                    <div class="kpi-value" id="kpi-avg-daily-errors">---</div>
-                    <div class="kpi-subtext">Errores por día</div>
-                </div>
-            </div>
-
-            <div class="chart-container">
-                <h3 class="chart-title">Transacciones vs Errores por Día</h3>
-                <canvas id="chart-daily-comparison"></canvas>
-            </div>
-
-            <div class="chart-container">
-                <h3 class="chart-title">Tasa de Error Diaria (%)</h3>
-                <canvas id="chart-daily-error-rate"></canvas>
-            </div>
+        <div class="chart-container">
+          <h3 class="chart-title">Evolución Completa del Período</h3>
+          <canvas id="chart-evolution"></canvas>
         </div>
 
-        <!-- TAB 3 -->
-        <div id="tab-semanal" class="tab-content">
-            <div id="weekly-cards"></div>
-            <div class="chart-container">
-                <h3 class="chart-title">Comparativa Semanal</h3>
-                <canvas id="chart-weekly-comparison"></canvas>
-            </div>
+        <div class="narrative-block" id="narrative-block">
+          <h3>📋 Resumen Ejecutivo</h3>
+          <p>Cargando análisis automático...</p>
         </div>
 
-        <!-- TAB 4 -->
-        <div id="tab-comparativos" class="tab-content">
-            <div class="alert alert-info">
-                <strong>ℹ️ Nota:</strong> Se compara el mismo día de la semana contra la semana siguiente para identificar patrones y tendencias.
-            </div>
-            <div class="comparison-grid" id="comparison-grid"></div>
+        <!-- NUEVO: Insights técnicos -->
+        <div class="narrative-block insights-tech" id="insights-resumen">
+          <h3>🧠 Análisis Técnico (Resumen)</h3>
+          <p>Cargando insights...</p>
+        </div>
+      </div>
+
+      <!-- TAB 2: DIARIA -->
+      <div id="tab-diaria" class="tab-content">
+        <div class="kpi-grid">
+          <div class="kpi-card success">
+            <div class="kpi-label">Mejor Día</div>
+            <div class="kpi-value" id="kpi-best-day">---</div>
+            <div class="kpi-subtext" id="kpi-best-day-rate">---</div>
+          </div>
+          <div class="kpi-card danger">
+            <div class="kpi-label">Peor Día</div>
+            <div class="kpi-value" id="kpi-worst-day">---</div>
+            <div class="kpi-subtext" id="kpi-worst-day-rate">---</div>
+          </div>
+          <div class="kpi-card info">
+            <div class="kpi-label">Promedio Diario Trx</div>
+            <div class="kpi-value" id="kpi-avg-daily-trx">---</div>
+            <div class="kpi-subtext">Transacciones por día</div>
+          </div>
+          <div class="kpi-card warning">
+            <div class="kpi-label">Promedio Diario Errores</div>
+            <div class="kpi-value" id="kpi-avg-daily-errors">---</div>
+            <div class="kpi-subtext">Errores por día</div>
+          </div>
         </div>
 
-        <!-- TAB 5 -->
-        <div id="tab-errores" class="tab-content">
-            <div class="chart-container">
-                <h3 class="chart-title">Top 10 Códigos de Error Más Frecuentes</h3>
-                <canvas id="chart-top-errors"></canvas>
-            </div>
-            <div class="chart-container">
-                <h3 class="chart-title">Detalle de Errores Clave</h3>
-                <table class="error-table" id="error-table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Código Error</th>
-                        <th>Cantidad</th>
-                        <th>% del Total</th>
-                        <th>Descripción</th>
-                    </tr>
-                    </thead>
-                    <tbody id="error-table-body"></tbody>
-                </table>
-            </div>
+        <div class="chart-container">
+          <h3 class="chart-title">Transacciones vs Errores por Día</h3>
+          <canvas id="chart-daily-comparison"></canvas>
         </div>
 
-        <!-- TAB 6 -->
-        <div id="tab-h03h23" class="tab-content">
-            <div class="kpi-grid">
-                <div class="kpi-card danger">
-                    <div class="kpi-label">Total H03</div>
-                    <div class="kpi-value" id="kpi-h03-total">---</div>
-                    <div class="kpi-subtext" id="kpi-h03-percent">---</div>
-                </div>
-                <div class="kpi-card warning">
-                    <div class="kpi-label">Total H23</div>
-                    <div class="kpi-value" id="kpi-h23-total">---</div>
-                    <div class="kpi-subtext" id="kpi-h23-percent">---</div>
-                </div>
-            </div>
-
-            <div class="chart-container">
-                <h3 class="chart-title">Distribución H03 vs H23</h3>
-                <canvas id="chart-h03h23-pie"></canvas>
-            </div>
-
-            <div class="chart-container">
-                <h3 class="chart-title">Evolución Diaria H03 & H23</h3>
-                <canvas id="chart-h03h23-daily"></canvas>
-            </div>
-
-            <div class="chart-container">
-                <h3 class="chart-title">H03 & H23 por Código de Transacción (Top 10)</h3>
-                <canvas id="chart-h03h23-by-trx"></canvas>
-            </div>
+        <div class="chart-container">
+          <h3 class="chart-title">Tasa de Error Diaria (%)</h3>
+          <canvas id="chart-daily-error-rate"></canvas>
         </div>
+
+        <!-- NUEVO: Insights técnicos -->
+        <div class="narrative-block insights-tech" id="insights-diaria">
+          <h3>🧠 Análisis Técnico (Vista Diaria)</h3>
+          <p>Cargando insights...</p>
+        </div>
+      </div>
+
+      <!-- TAB 3: SEMANAL -->
+      <div id="tab-semanal" class="tab-content">
+        <div id="weekly-cards"></div>
+
+        <div class="chart-container">
+          <h3 class="chart-title">Comparativa Semanal</h3>
+          <canvas id="chart-weekly-comparison"></canvas>
+        </div>
+
+        <!-- NUEVO: Insights técnicos -->
+        <div class="narrative-block insights-tech" id="insights-semanal">
+          <h3>🧠 Análisis Técnico (Vista Semanal)</h3>
+          <p>Cargando insights...</p>
+        </div>
+      </div>
+
+      <!-- TAB 4: COMPARATIVOS -->
+      <div id="tab-comparativos" class="tab-content">
+        <div class="alert alert-info">
+          <strong>ℹ️ Nota:</strong> Se compara el mismo día de la semana contra la semana siguiente para identificar patrones y tendencias.
+        </div>
+
+        <div class="comparison-grid" id="comparison-grid"></div>
+
+        <!-- NUEVO: Insights técnicos -->
+        <div class="narrative-block insights-tech" id="insights-comparativos">
+          <h3>🧠 Análisis Técnico (Comparativos)</h3>
+          <p>Cargando insights...</p>
+        </div>
+      </div>
+
+      <!-- TAB 5: TOP ERRORES -->
+      <div id="tab-errores" class="tab-content">
+        <div class="chart-container">
+          <h3 class="chart-title">Top 10 Códigos de Error Más Frecuentes</h3>
+          <canvas id="chart-top-errors"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <h3 class="chart-title">Detalle de Errores Clave</h3>
+          <table class="error-table" id="error-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Código Error</th>
+                <th>Cantidad</th>
+                <th>% del Total</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody id="error-table-body"></tbody>
+          </table>
+        </div>
+
+        <!-- NUEVO: Insights técnicos -->
+        <div class="narrative-block insights-tech" id="insights-errores">
+          <h3>🧠 Análisis Técnico (Top Errores)</h3>
+          <p>Cargando insights...</p>
+        </div>
+      </div>
+
+      <!-- TAB 6: H03/H23 -->
+      <div id="tab-h03h23" class="tab-content">
+        <div class="kpi-grid">
+          <div class="kpi-card danger">
+            <div class="kpi-label">Total H03</div>
+            <div class="kpi-value" id="kpi-h03-total">---</div>
+            <div class="kpi-subtext" id="kpi-h03-percent">---</div>
+          </div>
+          <div class="kpi-card warning">
+            <div class="kpi-label">Total H23</div>
+            <div class="kpi-value" id="kpi-h23-total">---</div>
+            <div class="kpi-subtext" id="kpi-h23-percent">---</div>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <h3 class="chart-title">Distribución H03 vs H23</h3>
+          <canvas id="chart-h03h23-pie"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <h3 class="chart-title">Evolución Diaria H03 & H23</h3>
+          <canvas id="chart-h03h23-daily"></canvas>
+        </div>
+
+        <div class="chart-container">
+          <h3 class="chart-title">H03 & H23 por Código de Transacción (Top 10)</h3>
+          <canvas id="chart-h03h23-by-trx"></canvas>
+        </div>
+
+        <!-- NUEVO: Insights técnicos -->
+        <div class="narrative-block insights-tech" id="insights-h03h23">
+          <h3>🧠 Análisis Técnico (H03 & H23)</h3>
+          <p>Cargando insights...</p>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- Overlay sincronización (agregado) -->
-<div id="generatingOverlay">
+  <!-- Overlay sincronización -->
+  <div id="generatingOverlay">
     <div id="generatingBox">
-        <div id="generatingTitle">⏳ Procesando</div>
-        <div id="generatingMsg">Sincronizando...</div>
-        <div class="miniSpinner"></div>
+      <div id="generatingTitle">⏳ Procesando</div>
+      <div id="generatingMsg">Sincronizando...</div>
+      <div class="miniSpinner"></div>
     </div>
-</div>
+  </div>
 
-<script>
-/* =========================================================
-   ✅ SOLUCIÓN: SINCRONIZACIÓN PARA TODOS + AUTO-UPDATE
-   - Lectura pública desde GitHub para TODOS (sin token)
-   - Escritura solo admin con token (PAT)
-   - Polling para "tiempo real" (cada 60s)
-   - Panel admin solo con ?admin=1
-========================================================= */
+  <script>
+    // ==========================================================
+    // ✅ CONFIG PÚBLICA (EDITAR AQUÍ) - todos leen desde GitHub
+    // ==========================================================
+    const GITHUB_PUBLIC_READ = {
+      user: "TU_USUARIO_GITHUB",   // 👈 CAMBIA ESTO
+      repo: "TU_REPO_GITHUB",      // 👈 CAMBIA ESTO
+      branch: "main"               // 👈 main o gh-pages
+    };
 
-/* ====== CONFIGURACIÓN PÚBLICA (EDITAR AQUÍ) ====== */
-const GITHUB_PUBLIC_READ = {
-    user: "TU_USUARIO_GITHUB",   // 👈 CAMBIA ESTO
-    repo: "TU_REPO_GITHUB",      // 👈 CAMBIA ESTO
-    branch: "main"               // 👈 main o gh-pages
-};
+    // ==========================================================
+    // 🔧 UMBRALES TÉCNICOS (AJUSTABLES)
+    // ==========================================================
+    const TECH_THRESHOLDS = {
+      errorRateTarget: 3.0,      // meta recomendada (< 3%)
+      errorRateWarn: 3.0,        // warning desde 3%
+      errorRateCritical: 6.0,    // crítico desde 6%
+      anomalySigma: 2.0,         // anomalía si tasa > media + N*sigma
+      volSpikeFactor: 1.15,      // "volumen alto" si trx > 1.15 * promedio
+      ppMeaningful: 0.20         // cambio significativo en pp
+    };
 
-const GITHUB_CONFIG_KEY = 'github_dashboard_config'; // admin config en localStorage
-const DATA_FILE_NAME = 'dashboard-data.json';
+    const GITHUB_CONFIG_KEY = 'github_dashboard_config';
+    const DATA_FILE_NAME = 'dashboard-data.json';
 
-/* ====== ESTADO GLOBAL ====== */
-let githubConfig = null;
-let dailyData = [];
-let errorCodeData = [];
-let errorCodeDataByDate = [];
-let charts = {};
-let lastKnownSavedAt = null;
-let syncTimer = null;
+    let githubConfig = null;
+    let dailyData = [];
+    let errorCodeData = [];
+    let errorCodeDataByDate = [];
+    let charts = {};
+    let lastKnownSavedAt = null;
+    let syncTimer = null;
 
-/* ====== ELEMENTOS DOM ====== */
-const uploadArea = document.getElementById('uploadArea');
-const fileInput = document.getElementById('fileInput');
-const uploadSection = document.getElementById('uploadSection');
-const dashboardContent = document.getElementById('dashboardContent');
-const uploadProgress = document.getElementById('uploadProgress');
-const viewerHint = document.getElementById('viewerHint');
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const uploadSection = document.getElementById('uploadSection');
+    const dashboardContent = document.getElementById('dashboardContent');
+    const uploadProgress = document.getElementById('uploadProgress');
+    const viewerHint = document.getElementById('viewerHint');
 
-/* =========================================================
-   OVERLAY (faltaba en tu código y se usaba en test/save)
-========================================================= */
-function showGenerating(message = 'Procesando...') {
-    const overlay = document.getElementById('generatingOverlay');
-    const msg = document.getElementById('generatingMsg');
-    msg.textContent = message;
-    overlay.style.display = 'flex';
-}
-function hideGenerating() {
-    const overlay = document.getElementById('generatingOverlay');
-    overlay.style.display = 'none';
-}
+    // ==========================================================
+    // UI helpers
+    // ==========================================================
+    function showGenerating(message = 'Procesando...') {
+      const overlay = document.getElementById('generatingOverlay');
+      const msg = document.getElementById('generatingMsg');
+      msg.textContent = message;
+      overlay.style.display = 'flex';
+    }
+    function hideGenerating() {
+      document.getElementById('generatingOverlay').style.display = 'none';
+    }
 
-/* =========================================================
-   MODO ADMIN
-========================================================= */
-function isAdminMode() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('admin') === '1';
-}
+    function setSyncStatus(state, text) {
+      const dot = document.getElementById('syncDot');
+      const label = document.getElementById('syncText');
+      if (!dot || !label) return;
 
-/* =========================================================
-   BADGE SYNC UI
-========================================================= */
-function setSyncStatus(state, text) {
-    const dot = document.getElementById('syncDot');
-    const label = document.getElementById('syncText');
-    if (!dot || !label) return;
+      dot.classList.remove('warn', 'err');
+      if (state === 'warn') dot.classList.add('warn');
+      if (state === 'err') dot.classList.add('err');
+      label.textContent = text;
+    }
 
-    dot.classList.remove('warn', 'err');
-    if (state === 'warn') dot.classList.add('warn');
-    if (state === 'err') dot.classList.add('err');
-    label.textContent = text;
-}
-
-/* =========================================================
-   NOTIFICACIONES
-========================================================= */
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.style.cssText = `
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
@@ -965,346 +1058,331 @@ function showNotification(message) {
         animation: slideIn 0.3s ease;
         border: 2px solid rgba(255,255,255,0.3);
         backdrop-filter: blur(10px);
-    `;
-    notification.innerHTML = `✅ ${message}`;
-    document.body.appendChild(notification);
+      `;
+      notification.innerHTML = `✅ ${message}`;
+      document.body.appendChild(notification);
 
-    const style = document.createElement('style');
-    style.textContent = `
+      const style = document.createElement('style');
+      style.textContent = `
         @keyframes slideIn {
-            from { transform: translateX(400px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+          from { transform: translateX(400px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
         }
-    `;
-    document.head.appendChild(style);
+      `;
+      document.head.appendChild(style);
 
-    setTimeout(() => {
+      setTimeout(() => {
         notification.style.animation = 'slideIn 0.3s ease reverse';
         setTimeout(() => notification.remove(), 300);
-    }, 5000);
-}
+      }, 5000);
+    }
 
-/* =========================================================
-   CONFIG ADMIN (LOCAL)
-========================================================= */
-function loadGitHubConfig() {
-    const saved = localStorage.getItem(GITHUB_CONFIG_KEY);
-    if (saved) {
+    function isAdminMode() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('admin') === '1';
+    }
+
+    // ==========================================================
+    // GitHub Config (admin token) - local
+    // ==========================================================
+    function loadGitHubConfig() {
+      const saved = localStorage.getItem(GITHUB_CONFIG_KEY);
+      if (saved) {
         githubConfig = JSON.parse(saved);
         updateGitHubStatus(true);
         console.log('✅ Configuración Admin GitHub cargada');
         return true;
+      }
+      return false;
     }
-    return false;
-}
 
-function saveGitHubConfig() {
-    const config = {
+    function saveGitHubConfig() {
+      const config = {
         user: document.getElementById('githubUser').value.trim(),
         repo: document.getElementById('githubRepo').value.trim(),
         branch: document.getElementById('githubBranch').value.trim() || 'main',
         token: document.getElementById('githubToken').value.trim()
-    };
+      };
 
-    if (!config.user || !config.repo || !config.token) {
+      if (!config.user || !config.repo || !config.token) {
         alert('❌ Completa Usuario, Repositorio y Token');
         return;
+      }
+
+      localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify(config));
+      githubConfig = config;
+      updateGitHubStatus(true);
+      showNotification('✅ Configuración Admin guardada. Ya puedes cargar ZIP y se sincroniza con GitHub.');
     }
 
-    localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify(config));
-    githubConfig = config;
-    updateGitHubStatus(true);
-    showNotification('✅ Configuración Admin guardada. Ya puedes cargar ZIP y se sincroniza con GitHub.');
-}
-
-async function testGitHubConnection() {
-    const config = {
+    async function testGitHubConnection() {
+      const config = {
         user: document.getElementById('githubUser').value.trim(),
         repo: document.getElementById('githubRepo').value.trim(),
         token: document.getElementById('githubToken').value.trim()
-    };
+      };
 
-    if (!config.user || !config.repo || !config.token) {
+      if (!config.user || !config.repo || !config.token) {
         alert('❌ Completa Usuario, Repositorio y Token');
         return;
-    }
+      }
 
-    showGenerating('Probando conexión con GitHub...');
+      showGenerating('Probando conexión con GitHub...');
 
-    try {
+      try {
         const response = await fetch(`https://api.github.com/repos/${config.user}/${config.repo}`, {
-            headers: {
-                'Authorization': `token ${config.token}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
+          headers: {
+            'Authorization': `token ${config.token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
         });
 
         hideGenerating();
 
         if (response.ok) {
-            const repo = await response.json();
-            alert(`✅ Conexión OK!\n\nRepo: ${repo.full_name}\nVisibilidad: ${repo.private ? 'Privado' : 'Público'}`);
+          const repo = await response.json();
+          alert(`✅ Conexión OK!\n\nRepo: ${repo.full_name}\nVisibilidad: ${repo.private ? 'Privado' : 'Público'}`);
         } else if (response.status === 404) {
-            alert('❌ Repositorio no encontrado.');
+          alert('❌ Repositorio no encontrado.');
         } else if (response.status === 401) {
-            alert('❌ Token inválido o sin permisos.');
+          alert('❌ Token inválido o sin permisos.');
         } else {
-            alert(`❌ Error ${response.status}: ${response.statusText}`);
+          alert(`❌ Error ${response.status}: ${response.statusText}`);
         }
-    } catch (error) {
+      } catch (error) {
         hideGenerating();
         alert(`❌ Error: ${error.message}`);
+      }
     }
-}
 
-function updateGitHubStatus(connected) {
-    const statusEl = document.getElementById('githubStatus');
-    if (!statusEl) return;
+    function updateGitHubStatus(connected) {
+      const statusEl = document.getElementById('githubStatus');
+      if (!statusEl) return;
 
-    if (connected && githubConfig) {
+      if (connected && githubConfig) {
         statusEl.textContent = `✓ Admin (${githubConfig.user}/${githubConfig.repo})`;
         statusEl.className = 'config-status status-connected';
 
         document.getElementById('githubUser').value = githubConfig.user;
         document.getElementById('githubRepo').value = githubConfig.repo;
-        document.getElementById('githubBranch').value = githubConfig.branch;
+        document.getElementById('githubBranch').value = githubConfig.branch || 'main';
         document.getElementById('githubToken').value = githubConfig.token;
-    } else {
+      } else {
         statusEl.textContent = 'No configurado';
         statusEl.className = 'config-status status-disconnected';
-    }
-}
-
-function showGitHubConfigPanel() {
-    const panel = document.getElementById('githubConfigPanel');
-    if (panel) panel.style.display = 'block';
-}
-
-/* =========================================================
-   ✅ LECTURA PARA TODOS (SIN TOKEN)
-   - Siempre usa GITHUB_PUBLIC_READ como base
-   - Si el admin configuró otro repo/branch, también funciona
-========================================================= */
-function getReadConfig() {
-    // Si el admin configuró, usa eso; si no, usa el público
-    if (githubConfig?.user && githubConfig?.repo) {
-        return { user: githubConfig.user, repo: githubConfig.repo, branch: githubConfig.branch || 'main' };
-    }
-    return GITHUB_PUBLIC_READ;
-}
-
-async function loadDataFromGitHub({ noCache = false } = {}) {
-    const cfg = getReadConfig();
-    if (!cfg?.user || !cfg?.repo || !cfg?.branch) {
-        console.log('ℹ️ Configuración pública de lectura incompleta');
-        return null;
+      }
     }
 
-    try {
-        // Usamos RAW (mejor para rate limits)
+    function showGitHubConfigPanel() {
+      const panel = document.getElementById('githubConfigPanel');
+      if (panel) panel.style.display = 'block';
+    }
+
+    // ==========================================================
+    // ✅ Lectura para TODOS (sin token) - RAW
+    // ==========================================================
+    function getReadConfig() {
+      if (githubConfig?.user && githubConfig?.repo && githubConfig?.branch) {
+        return { user: githubConfig.user, repo: githubConfig.repo, branch: githubConfig.branch };
+      }
+      return GITHUB_PUBLIC_READ;
+    }
+
+    async function loadDataFromGitHub({ noCache = false } = {}) {
+      const cfg = getReadConfig();
+      if (!cfg?.user || !cfg?.repo || !cfg?.branch) return null;
+
+      try {
         let rawUrl = `https://raw.githubusercontent.com/${cfg.user}/${cfg.repo}/${cfg.branch}/${DATA_FILE_NAME}`;
         if (noCache) rawUrl += `?t=${Date.now()}`;
 
         const res = await fetch(rawUrl, { cache: 'no-store' });
         if (!res.ok) {
-            if (res.status === 404) return null;
-            throw new Error(`HTTP ${res.status}`);
+          if (res.status === 404) return null;
+          throw new Error(`HTTP ${res.status}`);
         }
-        const data = await res.json();
-        return data;
-    } catch (e) {
+        return await res.json();
+      } catch (e) {
         console.error('❌ Error leyendo GitHub:', e);
         return null;
+      }
     }
-}
 
-/* =========================================================
-   ESCRITURA SOLO ADMIN (requiere token)
-========================================================= */
-async function saveDataToGitHub(data) {
-    if (!githubConfig || !githubConfig.token) {
-        console.log('ℹ️ Sin token admin, no se puede escribir a GitHub');
+    // ==========================================================
+    // ✅ Escritura SOLO ADMIN (con token) - GitHub API
+    // ==========================================================
+    async function saveDataToGitHub(data) {
+      if (!githubConfig?.token || !githubConfig?.user || !githubConfig?.repo || !githubConfig?.branch) {
+        console.log('ℹ️ Sin token admin, no se publica a GitHub.');
         return false;
-    }
+      }
 
-    showGenerating('Sincronizando datos con GitHub...');
+      showGenerating('Sincronizando datos con GitHub...');
 
-    try {
-        // Obtener SHA si existe
+      try {
         const getUrl = `https://api.github.com/repos/${githubConfig.user}/${githubConfig.repo}/contents/${DATA_FILE_NAME}?ref=${githubConfig.branch}`;
         let sha = null;
 
         const getResponse = await fetch(getUrl, {
-            headers: {
-                'Authorization': `token ${githubConfig.token}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
+          headers: {
+            'Authorization': `token ${githubConfig.token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
         });
         if (getResponse.ok) {
-            const fileData = await getResponse.json();
-            sha = fileData.sha;
+          const fileData = await getResponse.json();
+          sha = fileData.sha;
         }
 
         const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
         const commitData = {
-            message: `Actualizar datos dashboard - ${new Date().toLocaleString('es-CO')}`,
-            content,
-            branch: githubConfig.branch
+          message: `Actualizar datos dashboard - ${new Date().toLocaleString('es-CO')}`,
+          content,
+          branch: githubConfig.branch
         };
         if (sha) commitData.sha = sha;
 
         const putUrl = `https://api.github.com/repos/${githubConfig.user}/${githubConfig.repo}/contents/${DATA_FILE_NAME}`;
         const response = await fetch(putUrl, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `token ${githubConfig.token}`,
-                'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(commitData)
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${githubConfig.token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(commitData)
         });
 
         hideGenerating();
 
         if (response.ok) {
-            showNotification('✅ Datos publicados en GitHub. Todos los usuarios se actualizarán automáticamente.');
-            setSyncStatus('ok', 'Auto-sync activo (GitHub)');
-            return true;
+          showNotification('✅ Datos publicados en GitHub. Todos los usuarios se actualizarán automáticamente.');
+          setSyncStatus('ok', 'Auto-sync activo (GitHub)');
+          return true;
         } else {
-            setSyncStatus('warn', 'Auto-sync con advertencia');
-            showNotification('⚠️ No se pudo publicar en GitHub. Datos guardados solo localmente.');
-            return false;
+          setSyncStatus('warn', 'Auto-sync con advertencia');
+          showNotification('⚠️ No se pudo publicar en GitHub. Datos guardados solo localmente.');
+          return false;
         }
-    } catch (e) {
+      } catch (e) {
         hideGenerating();
         setSyncStatus('err', 'Auto-sync con error');
         console.error('❌ Error escribiendo GitHub:', e);
         showNotification('⚠️ Error publicando en GitHub. Datos guardados solo localmente.');
         return false;
+      }
     }
-}
 
-/* =========================================================
-   GUARDADO LOCAL + PUBLICAR (ADMIN)
-========================================================= */
-function saveData() {
-    try {
+    // ==========================================================
+    // Guardar datos local + GitHub (si admin)
+    // ==========================================================
+    function saveData() {
+      try {
         const dataToSave = {
-            dailyData,
-            errorCodeData,
-            errorCodeDataByDate,
-            savedAt: new Date().toISOString()
+          dailyData,
+          errorCodeData,
+          errorCodeDataByDate,
+          savedAt: new Date().toISOString()
         };
 
         localStorage.setItem('bankoDashboardData', JSON.stringify(dataToSave));
         lastKnownSavedAt = dataToSave.savedAt;
 
-        if (githubConfig?.token) {
-            saveDataToGitHub(dataToSave);
-        }
-
-    } catch (e) {
+        if (githubConfig?.token) saveDataToGitHub(dataToSave);
+      } catch (e) {
         console.error('Error guardando datos:', e);
+      }
     }
-}
 
-/* =========================================================
-   ✅ AUTO-ACTUALIZACIÓN PARA TODOS (POLLING)
-========================================================= */
-async function checkForUpdates({ force = false } = {}) {
-    const remote = await loadDataFromGitHub({ noCache: true });
-    if (!remote?.savedAt) return;
+    // ==========================================================
+    // Auto-update (polling)
+    // ==========================================================
+    async function checkForUpdates({ force = false } = {}) {
+      const remote = await loadDataFromGitHub({ noCache: true });
+      if (!remote?.savedAt) return;
 
-    if (!lastKnownSavedAt) {
+      if (!lastKnownSavedAt) {
         lastKnownSavedAt = remote.savedAt;
         return;
-    }
+      }
 
-    const remoteTime = new Date(remote.savedAt).getTime();
-    const localTime = new Date(lastKnownSavedAt).getTime();
+      const remoteTime = new Date(remote.savedAt).getTime();
+      const localTime = new Date(lastKnownSavedAt).getTime();
 
-    if (force || remoteTime > localTime) {
+      if (force || remoteTime > localTime) {
         console.log('🔄 Actualización detectada desde GitHub:', remote.savedAt);
         applyLoadedData(remote, 'GitHub');
         showNotification(`🔄 Datos actualizados automáticamente (${new Date(remote.savedAt).toLocaleString('es-CO')})`);
+      }
     }
-}
 
-function startRealtimeSync() {
-    // 60s (ajusta si quieres)
-    if (syncTimer) clearInterval(syncTimer);
-    syncTimer = setInterval(() => checkForUpdates(), 60_000);
+    function startRealtimeSync() {
+      if (syncTimer) clearInterval(syncTimer);
+      syncTimer = setInterval(() => checkForUpdates(), 60_000);
 
-    document.addEventListener('visibilitychange', () => {
+      document.addEventListener('visibilitychange', () => {
         if (!document.hidden) checkForUpdates();
-    });
+      });
 
-    window.addEventListener('focus', () => checkForUpdates());
+      window.addEventListener('focus', () => checkForUpdates());
 
-    setSyncStatus('ok', 'Auto-sync activo');
-}
+      setSyncStatus('ok', 'Auto-sync activo');
+    }
 
-/* =========================================================
-   CARGA INICIAL: GitHub -> Local fallback
-========================================================= */
-async function loadSavedData() {
-    // 1) Intentar GitHub (para todos)
-    const githubData = await loadDataFromGitHub({ noCache: true });
-    if (githubData) {
+    // ==========================================================
+    // Carga inicial (GitHub -> fallback local)
+    // ==========================================================
+    async function loadSavedData() {
+      const githubData = await loadDataFromGitHub({ noCache: true });
+      if (githubData) {
         applyLoadedData(githubData, 'GitHub');
         return;
-    }
+      }
 
-    // 2) Fallback local
-    try {
+      try {
         const savedStr = localStorage.getItem('bankoDashboardData');
         if (savedStr) {
-            const saved = JSON.parse(savedStr);
-            applyLoadedData(saved, 'Local');
-            return;
+          const saved = JSON.parse(savedStr);
+          applyLoadedData(saved, 'Local');
+          return;
         }
-    } catch (e) {
+      } catch (e) {
         console.error('Error localStorage:', e);
+      }
+
+      if (!isAdminMode()) viewerHint.style.display = 'block';
     }
 
-    // 3) No data
-    if (!isAdminMode()) {
-        viewerHint.style.display = 'block';
-    }
-}
-
-function applyLoadedData(data, source) {
-    try {
+    function applyLoadedData(data, source) {
+      try {
         dailyData = (data.dailyData || []).map(d => ({ ...d, date: new Date(d.date) }));
         errorCodeData = data.errorCodeData || [];
         errorCodeDataByDate = (data.errorCodeDataByDate || []).map(d => ({ ...d, date: new Date(d.date) }));
-        lastKnownSavedAt = data.savedAt || new Date().toISOString();
 
+        lastKnownSavedAt = data.savedAt || new Date().toISOString();
         localStorage.setItem('bankoDashboardData', JSON.stringify(data));
 
         uploadSection.classList.add('hidden');
         dashboardContent.classList.remove('hidden');
 
         showReloadButton();
-
         setTimeout(() => initializeDashboard(), 50);
 
         if (source === 'GitHub') {
-            setSyncStatus('ok', `Auto-sync activo (GitHub: ${new Date(lastKnownSavedAt).toLocaleString('es-CO')})`);
+          setSyncStatus('ok', `Auto-sync activo (GitHub: ${new Date(lastKnownSavedAt).toLocaleString('es-CO')})`);
         } else {
-            setSyncStatus('warn', `Mostrando backup local (${new Date(lastKnownSavedAt).toLocaleString('es-CO')})`);
+          setSyncStatus('warn', `Mostrando backup local (${new Date(lastKnownSavedAt).toLocaleString('es-CO')})`);
         }
-
-    } catch (e) {
+      } catch (e) {
         console.error('applyLoadedData error:', e);
+      }
     }
-}
 
-/* =========================================================
-   BOTÓN RECARGA DATOS
-========================================================= */
-function clearSavedData() {
-    if (confirm('¿Estás seguro de que quieres cargar archivos nuevos?')) {
+    // ==========================================================
+    // UI: recargar datos
+    // ==========================================================
+    function clearSavedData() {
+      if (confirm('¿Estás seguro de que quieres cargar archivos nuevos?')) {
         dailyData = [];
         errorCodeData = [];
         errorCodeDataByDate = [];
@@ -1321,739 +1399,1284 @@ function clearSavedData() {
 
         fileInput.value = '';
         showNotification('Pantalla de carga lista. Selecciona tus archivos.');
+      }
     }
-}
 
-function showReloadButton() {
-    const header = document.querySelector('.header-content');
-    if (!document.getElementById('reloadButton')) {
+    function showReloadButton() {
+      const header = document.querySelector('.header-content');
+      if (!document.getElementById('reloadButton')) {
         const savedData = JSON.parse(localStorage.getItem('bankoDashboardData') || 'null');
         const savedDate = savedData?.savedAt ? new Date(savedData.savedAt).toLocaleString('es-CO', {
-            day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+          day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
         }) : 'Desconocido';
 
         const buttonHTML = `
-            <div id="reloadButton" style="margin-top: 18px; display:flex; align-items:center; gap: 12px; flex-wrap: wrap;">
-                <button onclick="clearSavedData()" style="
-                    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
-                    color: white;
-                    border: 2px solid rgba(255,255,255,0.5);
-                    padding: 10px 20px;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    font-size: 0.95em;
-                    transition: all 0.3s ease;
-                    font-weight: 700;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                ">
-                    🔄 Cargar Nuevos Datos
-                </button>
+          <div id="reloadButton" style="margin-top: 18px; display:flex; align-items:center; gap: 12px; flex-wrap: wrap;">
+            <button onclick="clearSavedData()" style="
+              background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+              color: white;
+              border: 2px solid rgba(255,255,255,0.5);
+              padding: 10px 20px;
+              border-radius: 8px;
+              cursor: pointer;
+              font-size: 0.95em;
+              transition: all 0.3s ease;
+              font-weight: 700;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            ">🔄 Cargar Nuevos Datos</button>
 
-                <div style="
-                    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
-                    padding: 10px 18px;
-                    border-radius: 8px;
-                    font-size: 0.85em;
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    border: 1px solid rgba(255,255,255,0.2);
-                    font-weight: 700;
-                ">
-                    <span style="font-size: 1.2em;">💾</span>
-                    <span>Última actualización: <strong>${savedDate}</strong></span>
-                </div>
-
-                <button onclick="checkForUpdates({force:true})" class="print-button" title="Forzar actualización desde GitHub">
-                    🔄 Forzar Sync
-                </button>
+            <div style="
+              background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+              padding: 10px 18px;
+              border-radius: 8px;
+              font-size: 0.85em;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              border: 1px solid rgba(255,255,255,0.2);
+              font-weight: 700;
+            ">
+              <span style="font-size: 1.2em;">💾</span>
+              <span>Última actualización: <strong>${savedDate}</strong></span>
             </div>
+
+            <button onclick="checkForUpdates({force:true})" class="print-button" title="Forzar actualización desde GitHub">
+              🔄 Forzar Sync
+            </button>
+          </div>
         `;
         header.insertAdjacentHTML('beforeend', buttonHTML);
+      }
     }
-}
 
-/* =========================================================
-   EVENTOS UPLOAD
-========================================================= */
-uploadArea.addEventListener('click', () => fileInput.click());
-uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('dragover'); });
-uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
-uploadArea.addEventListener('drop', (e) => {
-    e.preventDefault();
-    uploadArea.classList.remove('dragover');
-    handleFiles(e.dataTransfer.files);
-});
-fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+    // ==========================================================
+    // Upload ZIP: listeners
+    // ==========================================================
+    uploadArea.addEventListener('click', () => fileInput.click());
+    uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+    uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
 
-/* =========================================================
-   MANEJO ZIP (TU LÓGICA ORIGINAL)
-========================================================= */
-async function handleFiles(files) {
-    if (files.length < 2) {
+    async function handleFiles(files) {
+      if (files.length < 2) {
         alert('Por favor carga ambos archivos ZIP (transacciones y códigos de error)');
         return;
-    }
+      }
 
-    uploadProgress.classList.remove('hidden');
-    document.getElementById('progressFill').style.width = '20%';
+      uploadProgress.classList.remove('hidden');
+      document.getElementById('progressFill').style.width = '20%';
 
-    dailyData = [];
-    errorCodeData = [];
-    errorCodeDataByDate = [];
+      dailyData = [];
+      errorCodeData = [];
+      errorCodeDataByDate = [];
 
-    try {
+      try {
         for (const file of files) {
-            const zip = await JSZip.loadAsync(file);
-            const fileName = file.name.toLowerCase();
+          const zip = await JSZip.loadAsync(file);
+          const fileName = file.name.toLowerCase();
 
-            if (fileName.includes('total_transacciones') || fileName.includes('cantidad_con_errores')) {
-                await processDailyTransactions(zip);
-            } else if (fileName.includes('tasa_de_error') || fileName.includes('codigo')) {
-                await processErrorCodes(zip);
-            }
+          if (fileName.includes('total_transacciones') || fileName.includes('cantidad_con_errores')) {
+            await processDailyTransactions(zip);
+          } else if (fileName.includes('tasa_de_error') || fileName.includes('codigo')) {
+            await processErrorCodes(zip);
+          }
         }
 
         document.getElementById('progressFill').style.width = '80%';
 
         if (dailyData.length > 0 && errorCodeData.length > 0 && errorCodeDataByDate.length > 0) {
-            initializeDashboard();
-            uploadSection.classList.add('hidden');
-            dashboardContent.classList.remove('hidden');
-            document.getElementById('progressFill').style.width = '100%';
+          initializeDashboard();
+          uploadSection.classList.add('hidden');
+          dashboardContent.classList.remove('hidden');
+          document.getElementById('progressFill').style.width = '100%';
 
-            // Guardar y publicar (si admin)
-            saveData();
-
-            showNotification('Datos procesados correctamente. Se publicarán a GitHub si eres admin.');
-            showReloadButton();
+          saveData();
+          showNotification('Datos procesados correctamente. Si eres admin se publicarán a GitHub.');
+          showReloadButton();
         } else {
-            alert(`No se pudieron procesar los archivos.\n\n` +
-                `Días: ${dailyData.length}\nErrores: ${errorCodeData.length}\nErrores x fecha: ${errorCodeDataByDate.length}`);
+          alert(`No se pudieron procesar los archivos.\n\n` +
+            `Días: ${dailyData.length}\nErrores: ${errorCodeData.length}\nErrores x fecha: ${errorCodeDataByDate.length}`);
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Error procesando archivos:', error);
         alert('Error al procesar:\n' + error.message);
-    } finally {
+      } finally {
         uploadProgress.classList.add('hidden');
+      }
     }
-}
 
-async function processDailyTransactions(zip) {
-    const allFiles = Object.keys(zip.files);
-    const csvFiles = allFiles.filter(f => f.toLowerCase().endsWith('.csv') && !f.startsWith('__MACOSX'));
+    // ==========================================================
+    // Procesamiento CSV (igual a tu lógica)
+    // ==========================================================
+    async function processDailyTransactions(zip) {
+      const allFiles = Object.keys(zip.files);
+      const csvFiles = allFiles.filter(f => f.toLowerCase().endsWith('.csv') && !f.startsWith('__MACOSX'));
 
-    for (const fileName of csvFiles) {
+      for (const fileName of csvFiles) {
         try {
-            const content = await zip.files[fileName].async('text');
-            const date = extractDateFromFilename(fileName);
-            if (!date) continue;
+          const content = await zip.files[fileName].async('text');
+          const date = extractDateFromFilename(fileName);
+          if (!date) continue;
 
-            const cleanContent = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-            const lines = cleanContent.split('\n').filter(l => l.trim() && !l.startsWith('sep='));
-            if (lines.length < 2) continue;
+          const cleanContent = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+          const lines = cleanContent.split('\n').filter(l => l.trim() && !l.startsWith('sep='));
+          if (lines.length < 2) continue;
 
-            let totalTrx = 0;
-            let totalErrors = 0;
-            const errorTypes = new Set();
+          let totalTrx = 0;
+          let totalErrors = 0;
+          const errorTypes = new Set();
 
-            for (let i = 1; i < lines.length; i++) {
-                const line = lines[i].trim();
-                if (!line) continue;
+          for (let i = 1; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) continue;
 
-                const parts = parseCSVLine(line);
-                if (parts.length >= 4) {
-                    const trxCode = parts[0];
-                    const trxCount = parseInt((parts[2] || '').replace(/[^0-9]/g, '')) || 0;
-                    const errorCount = parseInt((parts[3] || '').replace(/[^0-9]/g, '')) || 0;
+            const parts = parseCSVLine(line);
+            if (parts.length >= 4) {
+              const trxCode = parts[0];
+              const trxCount = parseInt((parts[2] || '').replace(/[^0-9]/g, '')) || 0;
+              const errorCount = parseInt((parts[3] || '').replace(/[^0-9]/g, '')) || 0;
 
-                    totalTrx += trxCount;
-                    totalErrors += errorCount;
-                    if (errorCount > 0 && trxCode) errorTypes.add(trxCode);
-                }
+              totalTrx += trxCount;
+              totalErrors += errorCount;
+              if (errorCount > 0 && trxCode) errorTypes.add(trxCode);
             }
+          }
 
-            if (totalTrx > 0 || totalErrors > 0) {
-                dailyData.push({
-                    date,
-                    totalTrx,
-                    totalErrors,
-                    errorRate: totalTrx > 0 ? (totalErrors / totalTrx * 100) : 0,
-                    uniqueErrorTypes: errorTypes.size
-                });
-            }
+          if (totalTrx > 0 || totalErrors > 0) {
+            dailyData.push({
+              date,
+              totalTrx,
+              totalErrors,
+              errorRate: totalTrx > 0 ? (totalErrors / totalTrx * 100) : 0,
+              uniqueErrorTypes: errorTypes.size
+            });
+          }
         } catch (e) {
-            console.error('processDailyTransactions error:', e);
+          console.error('processDailyTransactions error:', e);
         }
+      }
+      dailyData.sort((a,b) => a.date - b.date);
     }
-    dailyData.sort((a,b) => a.date - b.date);
-}
 
-async function processErrorCodes(zip) {
-    const allFiles = Object.keys(zip.files);
-    const csvFiles = allFiles.filter(f => f.toLowerCase().endsWith('.csv') && !f.startsWith('__MACOSX'));
-    const errorCodeMap = {};
-    const errorsByDate = {};
+    async function processErrorCodes(zip) {
+      const allFiles = Object.keys(zip.files);
+      const csvFiles = allFiles.filter(f => f.toLowerCase().endsWith('.csv') && !f.startsWith('__MACOSX'));
+      const errorCodeMap = {};
+      const errorsByDate = {};
 
-    for (const fileName of csvFiles) {
+      for (const fileName of csvFiles) {
         try {
-            const content = await zip.files[fileName].async('text');
-            const date = extractDateFromFilename(fileName);
-            if (!date) continue;
+          const content = await zip.files[fileName].async('text');
+          const date = extractDateFromFilename(fileName);
+          if (!date) continue;
 
-            const dateKey = date.toISOString().split('T')[0];
-            if (!errorsByDate[dateKey]) {
-                errorsByDate[dateKey] = { date, h03Count: 0, h23Count: 0, allErrors: [] };
-            }
+          const dateKey = date.toISOString().split('T')[0];
+          if (!errorsByDate[dateKey]) {
+            errorsByDate[dateKey] = { date, h03Count: 0, h23Count: 0, allErrors: [] };
+          }
 
-            const cleanContent = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-            const lines = cleanContent.split('\n').filter(l => l.trim() && !l.startsWith('sep='));
-            if (lines.length < 2) continue;
+          const cleanContent = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+          const lines = cleanContent.split('\n').filter(l => l.trim() && !l.startsWith('sep='));
+          if (lines.length < 2) continue;
 
-            for (let i = 1; i < lines.length; i++) {
-                const line = lines[i].trim();
-                if (!line) continue;
+          for (let i = 1; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) continue;
 
-                const parts = parseCSVLine(line);
-                if (parts.length >= 4) {
-                    const trxCode = (parts[0] || '').trim();
-                    const errorCode = (parts[1] || '').trim();
-                    const description = (parts[2] || '').trim();
-                    const errorCount = parseInt((parts[3] || '').replace(/[^0-9]/g, '')) || 0;
+            const parts = parseCSVLine(line);
+            if (parts.length >= 4) {
+              const trxCode = (parts[0] || '').trim();
+              const errorCode = (parts[1] || '').trim();
+              const description = (parts[2] || '').trim();
+              const errorCount = parseInt((parts[3] || '').replace(/[^0-9]/g, '')) || 0;
 
-                    if (trxCode && errorCode && errorCount > 0) {
-                        const key = `${trxCode}|${errorCode}`;
-                        if (!errorCodeMap[key]) {
-                            errorCodeMap[key] = { trxCode, errorCode, description: description || 'Sin descripción', count: 0 };
-                        }
-                        errorCodeMap[key].count += errorCount;
-
-                        if (errorCode === 'H03') errorsByDate[dateKey].h03Count += errorCount;
-                        if (errorCode === 'H23') errorsByDate[dateKey].h23Count += errorCount;
-
-                        errorsByDate[dateKey].allErrors.push({ trxCode, errorCode, count: errorCount });
-                    }
+              if (trxCode && errorCode && errorCount > 0) {
+                const key = `${trxCode}|${errorCode}`;
+                if (!errorCodeMap[key]) {
+                  errorCodeMap[key] = { trxCode, errorCode, description: description || 'Sin descripción', count: 0 };
                 }
+                errorCodeMap[key].count += errorCount;
+
+                if (errorCode === 'H03') errorsByDate[dateKey].h03Count += errorCount;
+                if (errorCode === 'H23') errorsByDate[dateKey].h23Count += errorCount;
+
+                errorsByDate[dateKey].allErrors.push({ trxCode, errorCode, count: errorCount });
+              }
             }
+          }
         } catch (e) {
-            console.error('processErrorCodes error:', e);
+          console.error('processErrorCodes error:', e);
         }
+      }
+
+      errorCodeData = Object.values(errorCodeMap);
+      errorCodeDataByDate = Object.values(errorsByDate).sort((a,b) => a.date - b.date);
     }
 
-    errorCodeData = Object.values(errorCodeMap);
-    errorCodeDataByDate = Object.values(errorsByDate).sort((a,b) => a.date - b.date);
-}
+    function parseCSVLine(line) {
+      const result = [];
+      let current = '';
+      let inQuotes = false;
+      let i = 0;
 
-function parseCSVLine(line) {
-    const result = [];
-    let current = '';
-    let inQuotes = false;
-    let i = 0;
-
-    while (i < line.length) {
+      while (i < line.length) {
         const char = line[i];
         const nextChar = line[i + 1];
 
         if (char === '"') {
-            if (inQuotes && nextChar === '"') { current += '"'; i++; }
-            else inQuotes = !inQuotes;
+          if (inQuotes && nextChar === '"') { current += '"'; i++; }
+          else inQuotes = !inQuotes;
         } else if (char === ',' && !inQuotes) {
-            result.push(current.trim()); current = '';
+          result.push(current.trim()); current = '';
         } else current += char;
         i++;
-    }
-    result.push(current.trim());
+      }
+      result.push(current.trim());
 
-    return result.map(field => {
+      return result.map(field => {
         field = field.trim();
         if (field.startsWith('"') && field.endsWith('"')) return field.slice(1, -1).trim();
         return field;
-    });
-}
+      });
+    }
 
-function extractDateFromFilename(filename) {
-    const normalized = filename.toLowerCase();
-    const patterns = [
+    function extractDateFromFilename(filename) {
+      const normalized = filename.toLowerCase();
+      const patterns = [
         /(\d{2})[-_](\d{2})[-_](\d{4})/,
         /(\d{4})[-_](\d{2})[-_](\d{2})/
-    ];
+      ];
 
-    for (const pattern of patterns) {
+      for (const pattern of patterns) {
         const match = normalized.match(pattern);
         if (match) {
-            let day, month, year;
-            if (match[1].length === 4) {
-                year = parseInt(match[1]);
-                month = parseInt(match[2]) - 1;
-                day = parseInt(match[3]);
-            } else {
-                day = parseInt(match[1]);
-                month = parseInt(match[2]) - 1;
-                year = parseInt(match[3]);
-            }
+          let day, month, year;
 
-            if (year >= 2020 && year <= 2030 && month >= 0 && month <= 11 && day >= 1 && day <= 31) {
-                return new Date(year, month, day);
-            }
+          if (match[1].length === 4) {
+            year = parseInt(match[1]); month = parseInt(match[2]) - 1; day = parseInt(match[3]);
+          } else {
+            day = parseInt(match[1]); month = parseInt(match[2]) - 1; year = parseInt(match[3]);
+          }
+
+          if (year >= 2020 && year <= 2030 && month >= 0 && month <= 11 && day >= 1 && day <= 31) {
+            return new Date(year, month, day);
+          }
         }
+      }
+      return null;
     }
-    return null;
-}
 
-function formatDate(date) {
-    const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-    const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
-    return `${days[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`;
-}
+    function formatDate(date) {
+      const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+      const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+      return `${days[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`;
+    }
 
-function formatNumber(num) {
-    return Number(num || 0).toLocaleString('es-CO');
-}
+    function formatNumber(num) {
+      return Number(num || 0).toLocaleString('es-CO');
+    }
 
-/* ✅ FIX: switchTab usando elemento (no event global) */
-function switchTab(tabName, el) {
-    document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    // ✅ FIX: no depende de `event` global
+    function switchTab(tabName, el) {
+      document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      if (el) el.classList.add('active');
+      document.getElementById(`tab-${tabName}`).classList.add('active');
+    }
 
-    if (el) el.classList.add('active');
-    document.getElementById(`tab-${tabName}`).classList.add('active');
-}
+    // ==========================================================
+    // DASHBOARD RENDER (igual que tu lógica original)
+    // ==========================================================
+    function initializeDashboard() {
+      renderResumenGeneral();
+      renderVistaDiaria();
+      renderVistaSemanal();
+      renderComparativos();
+      renderTopErrores();
+      renderH03H23Analysis();
 
-/* =========================================================
-   DASHBOARD (TU LÓGICA ORIGINAL SIN CAMBIOS)
-========================================================= */
-function initializeDashboard() {
-    renderResumenGeneral();
-    renderVistaDiaria();
-    renderVistaSemanal();
-    renderComparativos();
-    renderTopErrores();
-    renderH03H23Analysis();
-}
+      // ✅ NUEVO: insights técnicos en todas las pestañas
+      renderInsightsAllTabs();
+    }
 
-/* ======== (A partir de aquí, tu render original) ======== */
-/* Para no cambiar tu lógica, pego lo esencial tal cual.
-   (Es igual a tu código original con mínimos ajustes en switchTab ya hecho). */
+    function renderResumenGeneral() {
+      const totalTrx = dailyData.reduce((sum, day) => sum + day.totalTrx, 0);
+      const totalErrors = dailyData.reduce((sum, day) => sum + day.totalErrors, 0);
+      const avgErrorRate = dailyData.reduce((sum, day) => sum + day.errorRate, 0) / (dailyData.length || 1);
+      const maxErrorTypes = Math.max(...dailyData.map(day => day.uniqueErrorTypes));
 
-function renderResumenGeneral() {
-    const totalTrx = dailyData.reduce((sum, day) => sum + day.totalTrx, 0);
-    const totalErrors = dailyData.reduce((sum, day) => sum + day.totalErrors, 0);
-    const avgErrorRate = dailyData.reduce((sum, day) => sum + day.errorRate, 0) / (dailyData.length || 1);
-    const maxErrorTypes = Math.max(...dailyData.map(day => day.uniqueErrorTypes));
+      let statusClass = 'status-green';
+      let alertType = 'success';
+      let alertIcon = '✅';
+      let alertMessage = `Excelente desempeño. La tasa de error está dentro del rango óptimo.`;
 
-    let statusClass = 'status-green';
-    let alertType = 'success';
-    let alertIcon = '✅';
-    let alertMessage = `Excelente desempeño. La tasa de error está dentro del rango óptimo.`;
-
-    if (avgErrorRate >= 6) {
+      if (avgErrorRate >= TECH_THRESHOLDS.errorRateCritical) {
         statusClass = 'status-red';
         alertType = 'critical';
         alertIcon = '🚨';
-        alertMessage = `ATENCIÓN: La tasa de error (${avgErrorRate.toFixed(2)}%) está por encima del umbral crítico (6%).`;
-    } else if (avgErrorRate >= 3) {
+        alertMessage = `ATENCIÓN: La tasa de error (${avgErrorRate.toFixed(2)}%) está por encima del umbral crítico (${TECH_THRESHOLDS.errorRateCritical}%).`;
+      } else if (avgErrorRate >= TECH_THRESHOLDS.errorRateWarn) {
         statusClass = 'status-yellow';
         alertType = 'warning';
         alertIcon = '⚠️';
-        alertMessage = `La tasa de error (${avgErrorRate.toFixed(2)}%) requiere atención. Meta: < 3%.`;
-    }
+        alertMessage = `La tasa de error (${avgErrorRate.toFixed(2)}%) requiere atención. Meta: < ${TECH_THRESHOLDS.errorRateTarget}%.`;
+      }
 
-    document.getElementById('kpi-total-trx').textContent = formatNumber(totalTrx);
-    document.getElementById('kpi-total-errors').textContent = formatNumber(totalErrors);
-    document.getElementById('kpi-error-rate').innerHTML = avgErrorRate.toFixed(2) + '%' +
+      document.getElementById('kpi-total-trx').textContent = formatNumber(totalTrx);
+      document.getElementById('kpi-total-errors').textContent = formatNumber(totalErrors);
+      document.getElementById('kpi-error-rate').innerHTML = avgErrorRate.toFixed(2) + '%' +
         `<span class="status-indicator ${statusClass}"></span>`;
-    document.getElementById('kpi-max-error-types').textContent = maxErrorTypes;
+      document.getElementById('kpi-max-error-types').textContent = maxErrorTypes;
 
-    const resumenTab = document.getElementById('tab-resumen');
-    let alertBanner = document.getElementById('alertBanner');
-    if (!alertBanner) {
+      const resumenTab = document.getElementById('tab-resumen');
+      let alertBanner = document.getElementById('alertBanner');
+      if (!alertBanner) {
         alertBanner = document.createElement('div');
         alertBanner.id = 'alertBanner';
         alertBanner.className = `alert-banner ${alertType === 'success' ? '' : alertType}`;
         resumenTab.insertBefore(alertBanner, resumenTab.firstChild);
-    } else {
+      } else {
         alertBanner.className = `alert-banner ${alertType === 'success' ? '' : alertType}`;
-    }
+      }
 
-    alertBanner.innerHTML = `
+      alertBanner.innerHTML = `
         <span class="alert-icon">${alertIcon}</span>
         <div class="alert-content">${alertMessage}</div>
-    `;
+      `;
 
-    const ctx = document.getElementById('chart-evolution').getContext('2d');
-    if (charts.evolution) charts.evolution.destroy();
+      const ctx = document.getElementById('chart-evolution').getContext('2d');
+      if (charts.evolution) charts.evolution.destroy();
 
-    charts.evolution = new Chart(ctx, {
+      charts.evolution = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: dailyData.map(d => formatDate(d.date)),
-            datasets: [
-                { label: 'Transacciones', data: dailyData.map(d => d.totalTrx), borderColor: '#003d6b', backgroundColor: 'rgba(0, 61, 107, 0.1)', tension: 0.3, yAxisID: 'y' },
-                { label: 'Errores', data: dailyData.map(d => d.totalErrors), borderColor: '#dc3545', backgroundColor: 'rgba(220, 53, 69, 0.1)', tension: 0.3, yAxisID: 'y' },
-                { label: 'Tasa de Error (%)', data: dailyData.map(d => d.errorRate), borderColor: '#ffc107', backgroundColor: 'rgba(255, 193, 7, 0.1)', tension: 0.3, yAxisID: 'y1' }
-            ]
+          labels: dailyData.map(d => formatDate(d.date)),
+          datasets: [
+            { label: 'Transacciones', data: dailyData.map(d => d.totalTrx), borderColor: '#003d6b', backgroundColor: 'rgba(0, 61, 107, 0.1)', tension: 0.3, yAxisID: 'y' },
+            { label: 'Errores', data: dailyData.map(d => d.totalErrors), borderColor: '#dc3545', backgroundColor: 'rgba(220, 53, 69, 0.1)', tension: 0.3, yAxisID: 'y' },
+            { label: 'Tasa de Error (%)', data: dailyData.map(d => d.errorRate), borderColor: '#ffc107', backgroundColor: 'rgba(255, 193, 7, 0.1)', tension: 0.3, yAxisID: 'y1' }
+          ]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            interaction: { mode: 'index', intersect: false },
-            scales: {
-                y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Cantidad' },
-                    ticks: { callback: v => formatNumber(v) } },
-                y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Tasa de Error (%)' },
-                    grid: { drawOnChartArea: false } }
+          responsive: true,
+          maintainAspectRatio: true,
+          interaction: { mode: 'index', intersect: false },
+          scales: {
+            y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              title: { display: true, text: 'Cantidad' },
+              ticks: { callback: (v) => formatNumber(v) }
             },
-            plugins: {
-                tooltip: { callbacks: { label: (context) => {
-                    let label = context.dataset.label || '';
-                    if (label) label += ': ';
-                    if (context.parsed.y != null) {
-                        label += label.includes('%') ? context.parsed.y.toFixed(2) + '%' : formatNumber(context.parsed.y);
-                    }
-                    return label;
-                } } }
+            y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: { display: true, text: 'Tasa de Error (%)' },
+              grid: { drawOnChartArea: false }
             }
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: (context) => {
+                  let label = context.dataset.label || '';
+                  if (label) label += ': ';
+                  if (context.parsed.y != null) {
+                    label += label.includes('%') ? context.parsed.y.toFixed(2) + '%' : formatNumber(context.parsed.y);
+                  }
+                  return label;
+                }
+              }
+            }
+          }
         }
-    });
+      });
 
-    // Narrativa (igual a tu lógica, compacta)
-    const bestDay = dailyData.reduce((min, day) => day.errorRate < min.errorRate ? day : min, dailyData[0] || {errorRate:0,date:new Date()});
-    const worstDay = dailyData.reduce((max, day) => day.errorRate > max.errorRate ? day : max, dailyData[0] || {errorRate:0,date:new Date()});
+      // Narrativa automática (se mantiene)
+      const bestDay = dailyData.reduce((min, day) => day.errorRate < min.errorRate ? day : min, dailyData[0]);
+      const worstDay = dailyData.reduce((max, day) => day.errorRate > max.errorRate ? day : max, dailyData[0]);
 
-    const narrative = `
+      const narrative = `
         <h3>📋 Resumen Ejecutivo</h3>
-        <p>Durante el período analizado (${dailyData.length} días), el sistema procesó
+        <p>Durante el período (${dailyData.length} días), se procesaron
         <span class="narrative-highlight">${formatNumber(totalTrx)} transacciones</span> con
-        <span class="narrative-highlight">${formatNumber(totalErrors)} errores</span>, para una tasa promedio de
-        <span class="narrative-highlight">${avgErrorRate.toFixed(2)}%</span>.</p>
-
+        <span class="narrative-highlight">${formatNumber(totalErrors)} errores</span>.
+        Tasa promedio: <span class="narrative-highlight">${avgErrorRate.toFixed(2)}%</span>.</p>
         <p>Mejor día: <strong>${formatDate(bestDay.date)}</strong> (${bestDay.errorRate.toFixed(2)}%).
         Peor día: <strong>${formatDate(worstDay.date)}</strong> (${worstDay.errorRate.toFixed(2)}%).</p>
-    `;
-    document.getElementById('narrative-block').innerHTML = narrative;
-}
-
-function renderVistaDiaria() {
-    const bestDay = dailyData.reduce((min, day) => day.errorRate < min.errorRate ? day : min, dailyData[0] || {errorRate:0,date:new Date()});
-    const worstDay = dailyData.reduce((max, day) => day.errorRate > max.errorRate ? day : max, dailyData[0] || {errorRate:0,date:new Date()});
-    const avgTrx = dailyData.reduce((sum, day) => sum + day.totalTrx, 0) / (dailyData.length || 1);
-    const avgErrors = dailyData.reduce((sum, day) => sum + day.totalErrors, 0) / (dailyData.length || 1);
-
-    document.getElementById('kpi-best-day').textContent = formatDate(bestDay.date);
-    document.getElementById('kpi-best-day-rate').textContent = `${bestDay.errorRate.toFixed(2)}% de error`;
-    document.getElementById('kpi-worst-day').textContent = formatDate(worstDay.date);
-    document.getElementById('kpi-worst-day-rate').textContent = `${worstDay.errorRate.toFixed(2)}% de error`;
-    document.getElementById('kpi-avg-daily-trx').textContent = formatNumber(Math.round(avgTrx));
-    document.getElementById('kpi-avg-daily-errors').textContent = formatNumber(Math.round(avgErrors));
-
-    const ctx1 = document.getElementById('chart-daily-comparison').getContext('2d');
-    if (charts.dailyComparison) charts.dailyComparison.destroy();
-
-    charts.dailyComparison = new Chart(ctx1, {
-        type: 'bar',
-        data: {
-            labels: dailyData.map(d => formatDate(d.date)),
-            datasets: [
-                { label: 'Transacciones', data: dailyData.map(d => d.totalTrx), backgroundColor: 'rgba(0, 61, 107, 0.7)', yAxisID: 'y' },
-                { label: 'Errores', data: dailyData.map(d => d.totalErrors), backgroundColor: 'rgba(220, 53, 69, 0.7)', yAxisID: 'y' }
-            ]
-        },
-        options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, title: { display: true, text: 'Cantidad' } } } }
-    });
-
-    const ctx2 = document.getElementById('chart-daily-error-rate').getContext('2d');
-    if (charts.dailyErrorRate) charts.dailyErrorRate.destroy();
-
-    charts.dailyErrorRate = new Chart(ctx2, {
-        type: 'line',
-        data: { labels: dailyData.map(d => formatDate(d.date)),
-            datasets: [{ label: 'Tasa de Error (%)', data: dailyData.map(d => d.errorRate), borderColor: '#ffc107', backgroundColor: 'rgba(255, 193, 7, 0.2)', fill: true, tension: 0.3 }] },
-        options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, title: { display: true, text: 'Porcentaje (%)' } } } }
-    });
-}
-
-function renderVistaSemanal() {
-    const weeks = [];
-    let currentWeek = [];
-    let weekNum = 1;
-
-    dailyData.forEach((day, index) => {
-        currentWeek.push(day);
-        if (currentWeek.length === 7 || index === dailyData.length - 1) {
-            const weekTotalTrx = currentWeek.reduce((sum, d) => sum + d.totalTrx, 0);
-            const weekTotalErrors = currentWeek.reduce((sum, d) => sum + d.totalErrors, 0);
-            const weekErrorRate = weekTotalTrx > 0 ? (weekTotalErrors / weekTotalTrx * 100) : 0;
-            const weekAvgDaily = weekTotalTrx / currentWeek.length;
-
-            weeks.push({
-                number: weekNum,
-                days: currentWeek.length,
-                totalTrx: weekTotalTrx,
-                totalErrors: weekTotalErrors,
-                errorRate: weekErrorRate,
-                avgDaily: weekAvgDaily,
-                uniqueErrorTypes: Math.max(...currentWeek.map(d => d.uniqueErrorTypes))
-            });
-
-            currentWeek = [];
-            weekNum++;
-        }
-    });
-
-    document.getElementById('weekly-cards').innerHTML = weeks.map(week => `
-        <div class="week-card">
-            <div class="week-header">
-                <div class="week-title">Semana ${week.number}</div>
-                <span class="badge badge-info">${week.days} días</span>
-            </div>
-            <div class="week-stats">
-                <div class="week-stat"><div class="week-stat-label">Total Trx</div><div class="week-stat-value">${formatNumber(week.totalTrx)}</div></div>
-                <div class="week-stat"><div class="week-stat-label">Total Errores</div><div class="week-stat-value">${formatNumber(week.totalErrors)}</div></div>
-                <div class="week-stat"><div class="week-stat-label">Tasa Error</div><div class="week-stat-value">${week.errorRate.toFixed(2)}%</div></div>
-                <div class="week-stat"><div class="week-stat-label">Promedio Diario</div><div class="week-stat-value">${formatNumber(Math.round(week.avgDaily))}</div></div>
-                <div class="week-stat"><div class="week-stat-label">Tipos Error</div><div class="week-stat-value">${week.uniqueErrorTypes}</div></div>
-            </div>
-        </div>
-    `).join('');
-
-    const ctx = document.getElementById('chart-weekly-comparison').getContext('2d');
-    if (charts.weeklyComparison) charts.weeklyComparison.destroy();
-
-    charts.weeklyComparison = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: weeks.map(w => `Semana ${w.number}`),
-            datasets: [
-                { label: 'Total Transacciones', data: weeks.map(w => w.totalTrx), backgroundColor: 'rgba(0, 61, 107, 0.7)', yAxisID: 'y' },
-                { label: 'Total Errores', data: weeks.map(w => w.totalErrors), backgroundColor: 'rgba(220, 53, 69, 0.7)', yAxisID: 'y' },
-                { label: 'Tasa de Error (%)', data: weeks.map(w => w.errorRate), type: 'line', borderColor: '#ffc107', backgroundColor: 'rgba(255, 193, 7, 0.2)', yAxisID: 'y1' }
-            ]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: true,
-            scales: {
-                y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Cantidad' } },
-                y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Tasa de Error (%)' }, grid: { drawOnChartArea: false } }
-            }
-        }
-    });
-}
-
-function renderComparativos() {
-    const comparisons = [];
-    const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-
-    const byDayOfWeek = {};
-    dailyData.forEach(day => {
-        const dow = day.date.getDay();
-        (byDayOfWeek[dow] ||= []).push(day);
-    });
-
-    Object.keys(byDayOfWeek).forEach(dow => {
-        const days = byDayOfWeek[dow];
-        for (let i = 0; i < days.length - 1; i++) {
-            const day1 = days[i], day2 = days[i+1];
-            const trxChange = day2.totalTrx - day1.totalTrx;
-            const trxChangePercent = day1.totalTrx > 0 ? (trxChange / day1.totalTrx * 100) : 0;
-            const errorChange = day2.totalErrors - day1.totalErrors;
-            const errorChangePercent = day1.totalErrors > 0 ? (errorChange / day1.totalErrors * 100) : 0;
-            const rateChange = day2.errorRate - day1.errorRate;
-            const typeChange = day2.uniqueErrorTypes - day1.uniqueErrorTypes;
-
-            comparisons.push({
-                dayName: dayNames[dow],
-                date1: formatDate(day1.date),
-                date2: formatDate(day2.date),
-                trxChange, trxChangePercent,
-                errorChange, errorChangePercent,
-                rateChange, typeChange
-            });
-        }
-    });
-
-    document.getElementById('comparison-grid').innerHTML = comparisons.map(comp => `
-        <div class="comparison-card">
-            <div class="comparison-header">${comp.dayName}: ${comp.date1} vs ${comp.date2}</div>
-
-            <div class="comparison-row">
-                <span class="comparison-label">Cambio en Transacciones</span>
-                <span class="comparison-value">
-                    ${formatNumber(comp.trxChange)}
-                    <span class="badge ${comp.trxChange >= 0 ? 'badge-success' : 'badge-danger'}">
-                        ${comp.trxChangePercent >= 0 ? '+' : ''}${comp.trxChangePercent.toFixed(1)}%
-                    </span>
-                </span>
-            </div>
-
-            <div class="comparison-row">
-                <span class="comparison-label">Cambio en Errores</span>
-                <span class="comparison-value">
-                    ${formatNumber(comp.errorChange)}
-                    <span class="badge ${comp.errorChange <= 0 ? 'badge-success' : 'badge-danger'}">
-                        ${comp.errorChangePercent >= 0 ? '+' : ''}${comp.errorChangePercent.toFixed(1)}%
-                    </span>
-                </span>
-            </div>
-
-            <div class="comparison-row">
-                <span class="comparison-label">Cambio en Tasa de Error</span>
-                <span class="comparison-value">
-                    ${comp.rateChange >= 0 ? '+' : ''}${comp.rateChange.toFixed(2)} pp
-                    <span class="badge ${comp.rateChange <= 0 ? 'badge-success' : 'badge-danger'}">
-                        ${comp.rateChange <= 0 ? '✓ Mejor' : '✗ Peor'}
-                    </span>
-                </span>
-            </div>
-
-            <div class="comparison-row">
-                <span class="comparison-label">Cambio en Tipos de Error</span>
-                <span class="comparison-value">
-                    ${comp.typeChange >= 0 ? '+' : ''}${comp.typeChange}
-                    <span class="badge ${comp.typeChange <= 0 ? 'badge-success' : 'badge-warning'}">
-                        ${comp.typeChange <= 0 ? '✓' : '⚠'}
-                    </span>
-                </span>
-            </div>
-        </div>
-    `).join('');
-}
-
-function renderTopErrores() {
-    const errorSummary = {};
-    errorCodeData.forEach(e => {
-        (errorSummary[e.errorCode] ||= { code: e.errorCode, count: 0, description: e.description }).count += e.count;
-    });
-
-    const sorted = Object.values(errorSummary).sort((a,b) => b.count - a.count);
-    const top10 = sorted.slice(0,10);
-    const total = sorted.reduce((s,e) => s + e.count, 0) || 1;
-
-    const ctx = document.getElementById('chart-top-errors').getContext('2d');
-    if (charts.topErrors) charts.topErrors.destroy();
-
-    charts.topErrors = new Chart(ctx, {
-        type: 'bar',
-        data: { labels: top10.map(e => e.code),
-            datasets: [{ label: 'Cantidad de Errores', data: top10.map(e => e.count), backgroundColor: 'rgba(220, 53, 69, 0.8)' }] },
-        options: { indexAxis:'y', responsive:true, maintainAspectRatio:true, plugins:{ legend:{ display:false } } }
-    });
-
-    document.getElementById('error-table-body').innerHTML = top10.map((e, idx) => `
-        <tr>
-            <td><span class="error-rank">${idx+1}</span></td>
-            <td><strong>${e.code}</strong></td>
-            <td>${formatNumber(e.count)}</td>
-            <td>${((e.count/total)*100).toFixed(2)}%</td>
-            <td>${e.description || 'N/A'}</td>
-        </tr>
-    `).join('');
-}
-
-function renderH03H23Analysis() {
-    const h03Total = errorCodeData.filter(e => e.errorCode === 'H03').reduce((s,e) => s + e.count, 0);
-    const h23Total = errorCodeData.filter(e => e.errorCode === 'H23').reduce((s,e) => s + e.count, 0);
-    const total = h03Total + h23Total;
-
-    const h03Percent = total > 0 ? (h03Total / total * 100).toFixed(2) : 0;
-    const h23Percent = total > 0 ? (h23Total / total * 100).toFixed(2) : 0;
-
-    document.getElementById('kpi-h03-total').textContent = formatNumber(h03Total);
-    document.getElementById('kpi-h03-percent').textContent = `${h03Percent}% del total H03+H23`;
-    document.getElementById('kpi-h23-total').textContent = formatNumber(h23Total);
-    document.getElementById('kpi-h23-percent').textContent = `${h23Percent}% del total H03+H23`;
-
-    const ctx1 = document.getElementById('chart-h03h23-pie').getContext('2d');
-    if (charts.h03h23Pie) charts.h03h23Pie.destroy();
-    charts.h03h23Pie = new Chart(ctx1, {
-        type:'pie',
-        data:{ labels:['H03','H23'], datasets:[{ data:[h03Total,h23Total], backgroundColor:['rgba(220,53,69,0.8)','rgba(255,193,7,0.8)'] }] },
-        options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ position:'bottom' } } }
-    });
-
-    const mapByDate = {};
-    errorCodeDataByDate.forEach(d => {
-        const k = d.date.toISOString().split('T')[0];
-        mapByDate[k] = { h03: d.h03Count || 0, h23: d.h23Count || 0 };
-    });
-
-    const dailyH03 = dailyData.map(d => mapByDate[d.date.toISOString().split('T')[0]]?.h03 || 0);
-    const dailyH23 = dailyData.map(d => mapByDate[d.date.toISOString().split('T')[0]]?.h23 || 0);
-
-    const ctx2 = document.getElementById('chart-h03h23-daily').getContext('2d');
-    if (charts.h03h23Daily) charts.h03h23Daily.destroy();
-
-    charts.h03h23Daily = new Chart(ctx2, {
-        type:'line',
-        data:{
-            labels: dailyData.map(d => formatDate(d.date)),
-            datasets:[
-                { label:'H03', data: dailyH03, borderColor:'rgba(220,53,69,1)', backgroundColor:'rgba(220,53,69,0.1)', tension:0.3, fill:true },
-                { label:'H23', data: dailyH23, borderColor:'rgba(255,193,7,1)', backgroundColor:'rgba(255,193,7,0.1)', tension:0.3, fill:true }
-            ]
-        },
-        options:{ responsive:true, maintainAspectRatio:true, scales:{ y:{ beginAtZero:true, title:{ display:true, text:'Cantidad' },
-            ticks:{ callback:v => formatNumber(v) } } } }
-    });
-
-    // Por TRX (Top10)
-    const byTrx = {};
-    errorCodeDataByDate.forEach(day => {
-        day.allErrors.forEach(e => {
-            if (e.errorCode === 'H03' || e.errorCode === 'H23') {
-                (byTrx[e.trxCode] ||= { h03:0, h23:0 });
-                if (e.errorCode === 'H03') byTrx[e.trxCode].h03 += e.count;
-                else byTrx[e.trxCode].h23 += e.count;
-            }
-        });
-    });
-
-    const top = Object.entries(byTrx)
-        .map(([trx, c]) => ({ trx, ...c, total: c.h03 + c.h23 }))
-        .sort((a,b) => b.total - a.total)
-        .slice(0,10);
-
-    const ctx3 = document.getElementById('chart-h03h23-by-trx').getContext('2d');
-    if (charts.h03h23ByTrx) charts.h03h23ByTrx.destroy();
-
-    charts.h03h23ByTrx = new Chart(ctx3, {
-        type:'bar',
-        data:{ labels: top.map(t => t.trx),
-            datasets:[
-                { label:'H03', data: top.map(t => t.h03), backgroundColor:'rgba(220,53,69,0.8)' },
-                { label:'H23', data: top.map(t => t.h23), backgroundColor:'rgba(255,193,7,0.8)' }
-            ] },
-        options:{ responsive:true, maintainAspectRatio:true, scales:{ x:{ stacked:true }, y:{ stacked:true, title:{ display:true, text:'Cantidad' },
-            ticks:{ callback:v => formatNumber(v) } } } }
-    });
-}
-
-/* =========================================================
-   BOOTSTRAP
-========================================================= */
-window.addEventListener('DOMContentLoaded', async () => {
-    // Admin config (si existe)
-    loadGitHubConfig();
-
-    // Panel solo en modo admin
-    if (isAdminMode()) {
-        showGitHubConfigPanel();
-        viewerHint.style.display = 'none';
-    } else {
-        // usuario normal
-        viewerHint.style.display = 'block';
+      `;
+      document.getElementById('narrative-block').innerHTML = narrative;
     }
 
-    // Cargar data (GitHub primero)
-    await loadSavedData();
+    function renderVistaDiaria() {
+      const bestDay = dailyData.reduce((min, day) => day.errorRate < min.errorRate ? day : min, dailyData[0]);
+      const worstDay = dailyData.reduce((max, day) => day.errorRate > max.errorRate ? day : max, dailyData[0]);
+      const avgTrx = dailyData.reduce((sum, day) => sum + day.totalTrx, 0) / (dailyData.length || 1);
+      const avgErrors = dailyData.reduce((sum, day) => sum + day.totalErrors, 0) / (dailyData.length || 1);
 
-    // Iniciar auto-sync (para todos)
-    startRealtimeSync();
+      document.getElementById('kpi-best-day').textContent = formatDate(bestDay.date);
+      document.getElementById('kpi-best-day-rate').textContent = `${bestDay.errorRate.toFixed(2)}% de error`;
+      document.getElementById('kpi-worst-day').textContent = formatDate(worstDay.date);
+      document.getElementById('kpi-worst-day-rate').textContent = `${worstDay.errorRate.toFixed(2)}% de error`;
+      document.getElementById('kpi-avg-daily-trx').textContent = formatNumber(Math.round(avgTrx));
+      document.getElementById('kpi-avg-daily-errors').textContent = formatNumber(Math.round(avgErrors));
 
-    // Primera verificación inmediata
-    setTimeout(() => checkForUpdates({force:false}), 1500);
-});
-</script>
+      const ctx1 = document.getElementById('chart-daily-comparison').getContext('2d');
+      if (charts.dailyComparison) charts.dailyComparison.destroy();
 
+      charts.dailyComparison = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: dailyData.map(d => formatDate(d.date)),
+          datasets: [
+            { label: 'Transacciones', data: dailyData.map(d => d.totalTrx), backgroundColor: 'rgba(0, 61, 107, 0.7)', yAxisID: 'y' },
+            { label: 'Errores', data: dailyData.map(d => d.totalErrors), backgroundColor: 'rgba(220, 53, 69, 0.7)', yAxisID: 'y' }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'Cantidad' } } }
+        }
+      });
+
+      const ctx2 = document.getElementById('chart-daily-error-rate').getContext('2d');
+      if (charts.dailyErrorRate) charts.dailyErrorRate.destroy();
+
+      charts.dailyErrorRate = new Chart(ctx2, {
+        type: 'line',
+        data: {
+          labels: dailyData.map(d => formatDate(d.date)),
+          datasets: [{
+            label: 'Tasa de Error (%)',
+            data: dailyData.map(d => d.errorRate),
+            borderColor: '#ffc107',
+            backgroundColor: 'rgba(255, 193, 7, 0.2)',
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: { y: { beginAtZero: true, title: { display: true, text: 'Porcentaje (%)' } } }
+        }
+      });
+    }
+
+    function renderVistaSemanal() {
+      const weeks = [];
+      let currentWeek = [];
+      let weekNum = 1;
+
+      dailyData.forEach((day, index) => {
+        currentWeek.push(day);
+
+        if (currentWeek.length === 7 || index === dailyData.length - 1) {
+          const weekTotalTrx = currentWeek.reduce((sum, d) => sum + d.totalTrx, 0);
+          const weekTotalErrors = currentWeek.reduce((sum, d) => sum + d.totalErrors, 0);
+          const weekErrorRate = weekTotalTrx > 0 ? (weekTotalErrors / weekTotalTrx * 100) : 0;
+          const weekAvgDaily = weekTotalTrx / currentWeek.length;
+
+          weeks.push({
+            number: weekNum,
+            days: currentWeek.length,
+            totalTrx: weekTotalTrx,
+            totalErrors: weekTotalErrors,
+            errorRate: weekErrorRate,
+            avgDaily: weekAvgDaily,
+            uniqueErrorTypes: Math.max(...currentWeek.map(d => d.uniqueErrorTypes))
+          });
+
+          currentWeek = [];
+          weekNum++;
+        }
+      });
+
+      document.getElementById('weekly-cards').innerHTML = weeks.map(week => `
+        <div class="week-card">
+          <div class="week-header">
+            <div class="week-title">Semana ${week.number}</div>
+            <span class="badge badge-info">${week.days} días</span>
+          </div>
+          <div class="week-stats">
+            <div class="week-stat">
+              <div class="week-stat-label">Total Trx</div>
+              <div class="week-stat-value">${formatNumber(week.totalTrx)}</div>
+            </div>
+            <div class="week-stat">
+              <div class="week-stat-label">Total Errores</div>
+              <div class="week-stat-value">${formatNumber(week.totalErrors)}</div>
+            </div>
+            <div class="week-stat">
+              <div class="week-stat-label">Tasa Error</div>
+              <div class="week-stat-value">${week.errorRate.toFixed(2)}%</div>
+            </div>
+            <div class="week-stat">
+              <div class="week-stat-label">Promedio Diario</div>
+              <div class="week-stat-value">${formatNumber(Math.round(week.avgDaily))}</div>
+            </div>
+            <div class="week-stat">
+              <div class="week-stat-label">Tipos Error</div>
+              <div class="week-stat-value">${week.uniqueErrorTypes}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      const ctx = document.getElementById('chart-weekly-comparison').getContext('2d');
+      if (charts.weeklyComparison) charts.weeklyComparison.destroy();
+
+      charts.weeklyComparison = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: weeks.map(w => `Semana ${w.number}`),
+          datasets: [
+            { label: 'Total Transacciones', data: weeks.map(w => w.totalTrx), backgroundColor: 'rgba(0, 61, 107, 0.7)', yAxisID: 'y' },
+            { label: 'Total Errores', data: weeks.map(w => w.totalErrors), backgroundColor: 'rgba(220, 53, 69, 0.7)', yAxisID: 'y' },
+            { label: 'Tasa de Error (%)', data: weeks.map(w => w.errorRate), type: 'line', borderColor: '#ffc107', backgroundColor: 'rgba(255, 193, 7, 0.2)', yAxisID: 'y1' }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Cantidad' } },
+            y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Tasa de Error (%)' }, grid: { drawOnChartArea: false } }
+          }
+        }
+      });
+    }
+
+    function renderComparativos() {
+      const comparisons = [];
+      const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+
+      const byDayOfWeek = {};
+      dailyData.forEach(day => {
+        const dayOfWeek = day.date.getDay();
+        if (!byDayOfWeek[dayOfWeek]) byDayOfWeek[dayOfWeek] = [];
+        byDayOfWeek[dayOfWeek].push(day);
+      });
+
+      Object.keys(byDayOfWeek).forEach(dayOfWeek => {
+        const days = byDayOfWeek[dayOfWeek];
+        for (let i = 0; i < days.length - 1; i++) {
+          const day1 = days[i];
+          const day2 = days[i + 1];
+
+          const trxChange = day2.totalTrx - day1.totalTrx;
+          const trxChangePercent = day1.totalTrx > 0 ? (trxChange / day1.totalTrx * 100) : 0;
+          const errorChange = day2.totalErrors - day1.totalErrors;
+          const errorChangePercent = day1.totalErrors > 0 ? (errorChange / day1.totalErrors * 100) : 0;
+          const rateChange = day2.errorRate - day1.errorRate;
+          const typeChange = day2.uniqueErrorTypes - day1.uniqueErrorTypes;
+
+          comparisons.push({
+            dayName: dayNames[dayOfWeek],
+            date1: formatDate(day1.date),
+            date2: formatDate(day2.date),
+            trxChange, trxChangePercent,
+            errorChange, errorChangePercent,
+            rateChange, typeChange
+          });
+        }
+      });
+
+      document.getElementById('comparison-grid').innerHTML = comparisons.map(comp => `
+        <div class="comparison-card">
+          <div class="comparison-header">
+            ${comp.dayName}: ${comp.date1} vs ${comp.date2}
+          </div>
+
+          <div class="comparison-row">
+            <span class="comparison-label">Cambio en Transacciones</span>
+            <span class="comparison-value">
+              ${formatNumber(comp.trxChange)}
+              <span class="badge ${comp.trxChange >= 0 ? 'badge-success' : 'badge-danger'}">
+                ${comp.trxChangePercent >= 0 ? '+' : ''}${comp.trxChangePercent.toFixed(1)}%
+              </span>
+            </span>
+          </div>
+
+          <div class="comparison-row">
+            <span class="comparison-label">Cambio en Errores</span>
+            <span class="comparison-value">
+              ${formatNumber(comp.errorChange)}
+              <span class="badge ${comp.errorChange <= 0 ? 'badge-success' : 'badge-danger'}">
+                ${comp.errorChangePercent >= 0 ? '+' : ''}${comp.errorChangePercent.toFixed(1)}%
+              </span>
+            </span>
+          </div>
+
+          <div class="comparison-row">
+            <span class="comparison-label">Cambio en Tasa de Error</span>
+            <span class="comparison-value">
+              ${comp.rateChange >= 0 ? '+' : ''}${comp.rateChange.toFixed(2)} pp
+              <span class="badge ${comp.rateChange <= 0 ? 'badge-success' : 'badge-danger'}">
+                ${comp.rateChange <= 0 ? '✓ Mejor' : '✗ Peor'}
+              </span>
+            </span>
+          </div>
+
+          <div class="comparison-row">
+            <span class="comparison-label">Cambio en Tipos de Error</span>
+            <span class="comparison-value">
+              ${comp.typeChange >= 0 ? '+' : ''}${comp.typeChange}
+              <span class="badge ${comp.typeChange <= 0 ? 'badge-success' : 'badge-warning'}">
+                ${comp.typeChange <= 0 ? '✓' : '⚠'}
+              </span>
+            </span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderTopErrores() {
+      const errorSummary = {};
+      errorCodeData.forEach(error => {
+        if (!errorSummary[error.errorCode]) {
+          errorSummary[error.errorCode] = {
+            code: error.errorCode,
+            count: 0,
+            description: error.description
+          };
+        }
+        errorSummary[error.errorCode].count += error.count;
+      });
+
+      const sortedErrors = Object.values(errorSummary).sort((a, b) => b.count - a.count);
+      const top10 = sortedErrors.slice(0, 10);
+      const totalErrors = sortedErrors.reduce((sum, e) => sum + e.count, 0) || 1;
+
+      const ctx = document.getElementById('chart-top-errors').getContext('2d');
+      if (charts.topErrors) charts.topErrors.destroy();
+
+      charts.topErrors = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: top10.map(e => e.code),
+          datasets: [{
+            label: 'Cantidad de Errores',
+            data: top10.map(e => e.count),
+            backgroundColor: [
+              'rgba(220, 53, 69, 0.8)',
+              'rgba(255, 193, 7, 0.8)',
+              'rgba(255, 152, 0, 0.8)',
+              'rgba(156, 39, 176, 0.8)',
+              'rgba(63, 81, 181, 0.8)',
+              'rgba(0, 150, 136, 0.8)',
+              'rgba(76, 175, 80, 0.8)',
+              'rgba(205, 220, 57, 0.8)',
+              'rgba(121, 85, 72, 0.8)',
+              'rgba(158, 158, 158, 0.8)'
+            ]
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      const tableHTML = top10.map((error, index) => {
+        const percent = (error.count / totalErrors * 100).toFixed(2);
+        return `
+          <tr>
+            <td><span class="error-rank">${index + 1}</span></td>
+            <td><strong>${error.code}</strong></td>
+            <td>${formatNumber(error.count)}</td>
+            <td>${percent}%</td>
+            <td>${error.description || 'N/A'}</td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('error-table-body').innerHTML = tableHTML;
+    }
+
+    function renderH03H23Analysis() {
+      const h03Errors = errorCodeData.filter(e => e.errorCode === 'H03');
+      const h23Errors = errorCodeData.filter(e => e.errorCode === 'H23');
+
+      const h03Total = h03Errors.reduce((sum, e) => sum + e.count, 0);
+      const h23Total = h23Errors.reduce((sum, e) => sum + e.count, 0);
+      const total = h03Total + h23Total;
+
+      const h03Percent = total > 0 ? (h03Total / total * 100).toFixed(2) : 0;
+      const h23Percent = total > 0 ? (h23Total / total * 100).toFixed(2) : 0;
+
+      document.getElementById('kpi-h03-total').textContent = formatNumber(h03Total);
+      document.getElementById('kpi-h03-percent').textContent = `${h03Percent}% del total H03+H23`;
+      document.getElementById('kpi-h23-total').textContent = formatNumber(h23Total);
+      document.getElementById('kpi-h23-percent').textContent = `${h23Percent}% del total H03+H23`;
+
+      const ctx1 = document.getElementById('chart-h03h23-pie').getContext('2d');
+      if (charts.h03h23Pie) charts.h03h23Pie.destroy();
+
+      charts.h03h23Pie = new Chart(ctx1, {
+        type: 'pie',
+        data: {
+          labels: ['H03', 'H23'],
+          datasets: [{
+            data: [h03Total, h23Total],
+            backgroundColor: ['rgba(220, 53, 69, 0.8)', 'rgba(255, 193, 7, 0.8)']
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom' } } }
+      });
+
+      const h03h23ByDate = {};
+      errorCodeDataByDate.forEach(dayData => {
+        const dateKey = dayData.date.toISOString().split('T')[0];
+        h03h23ByDate[dateKey] = { h03: dayData.h03Count || 0, h23: dayData.h23Count || 0 };
+      });
+
+      const dailyH03 = dailyData.map(day => {
+        const dateKey = day.date.toISOString().split('T')[0];
+        return h03h23ByDate[dateKey]?.h03 || 0;
+      });
+
+      const dailyH23 = dailyData.map(day => {
+        const dateKey = day.date.toISOString().split('T')[0];
+        return h03h23ByDate[dateKey]?.h23 || 0;
+      });
+
+      const ctx2 = document.getElementById('chart-h03h23-daily').getContext('2d');
+      if (charts.h03h23Daily) charts.h03h23Daily.destroy();
+
+      charts.h03h23Daily = new Chart(ctx2, {
+        type: 'line',
+        data: {
+          labels: dailyData.map(d => formatDate(d.date)),
+          datasets: [
+            { label: 'H03', data: dailyH03, borderColor: 'rgba(220, 53, 69, 1)', backgroundColor: 'rgba(220, 53, 69, 0.1)', tension: 0.3, fill: true },
+            { label: 'H23', data: dailyH23, borderColor: 'rgba(255, 193, 7, 1)', backgroundColor: 'rgba(255, 193, 7, 0.1)', tension: 0.3, fill: true }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: 'Cantidad' },
+              ticks: { callback: (v) => formatNumber(v) }
+            }
+          }
+        }
+      });
+
+      const byTrxCode = {};
+      errorCodeDataByDate.forEach(dayData => {
+        dayData.allErrors.forEach(error => {
+          if (error.errorCode === 'H03' || error.errorCode === 'H23') {
+            if (!byTrxCode[error.trxCode]) byTrxCode[error.trxCode] = { h03: 0, h23: 0 };
+            if (error.errorCode === 'H03') byTrxCode[error.trxCode].h03 += error.count;
+            else byTrxCode[error.trxCode].h23 += error.count;
+          }
+        });
+      });
+
+      const sortedByTrx = Object.entries(byTrxCode)
+        .map(([trx, counts]) => ({ trx, ...counts, total: counts.h03 + counts.h23 }))
+        .sort((a, b) => b.total - a.total)
+        .slice(0, 10);
+
+      const ctx3 = document.getElementById('chart-h03h23-by-trx').getContext('2d');
+      if (charts.h03h23ByTrx) charts.h03h23ByTrx.destroy();
+
+      charts.h03h23ByTrx = new Chart(ctx3, {
+        type: 'bar',
+        data: {
+          labels: sortedByTrx.map(t => t.trx),
+          datasets: [
+            { label: 'H03', data: sortedByTrx.map(t => t.h03), backgroundColor: 'rgba(220, 53, 69, 0.8)' },
+            { label: 'H23', data: sortedByTrx.map(t => t.h23), backgroundColor: 'rgba(255, 193, 7, 0.8)' }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          scales: {
+            x: { stacked: true },
+            y: {
+              stacked: true,
+              title: { display: true, text: 'Cantidad' },
+              ticks: { callback: (v) => formatNumber(v) }
+            }
+          }
+        }
+      });
+    }
+
+    // ==========================================================
+    // 🧠 INSIGHTS TÉCNICOS EN TODAS LAS PESTAÑAS
+    // ==========================================================
+    function mean(arr) {
+      if (!arr || !arr.length) return 0;
+      return arr.reduce((s, v) => s + v, 0) / arr.length;
+    }
+
+    function std(arr) {
+      if (!arr || arr.length < 2) return 0;
+      const m = mean(arr);
+      const variance = mean(arr.map(v => (v - m) ** 2));
+      return Math.sqrt(variance);
+    }
+
+    function pct(part, total) {
+      if (!total || total === 0) return 0;
+      return (part / total) * 100;
+    }
+
+    function quantile(sortedArr, q) {
+      if (!sortedArr.length) return 0;
+      const pos = (sortedArr.length - 1) * q;
+      const base = Math.floor(pos);
+      const rest = pos - base;
+      if ((sortedArr[base + 1] !== undefined)) {
+        return sortedArr[base] + rest * (sortedArr[base + 1] - sortedArr[base]);
+      } else {
+        return sortedArr[base];
+      }
+    }
+
+    function detectAnomaliesBySigma(dailyArr) {
+      const rates = dailyArr.map(d => d.errorRate);
+      const m = mean(rates);
+      const sd = std(rates);
+      const thr = m + TECH_THRESHOLDS.anomalySigma * sd;
+      const anomalies = dailyArr
+        .filter(d => d.errorRate > thr)
+        .sort((a, b) => b.errorRate - a.errorRate)
+        .slice(0, 6);
+      return { m, sd, thr, anomalies };
+    }
+
+    function computeWeeksFromDaily() {
+      const weeks = [];
+      let currentWeek = [];
+      let weekNum = 1;
+
+      dailyData.forEach((day, index) => {
+        currentWeek.push(day);
+        if (currentWeek.length === 7 || index === dailyData.length - 1) {
+          const trx = currentWeek.reduce((s, d) => s + d.totalTrx, 0);
+          const err = currentWeek.reduce((s, d) => s + d.totalErrors, 0);
+          const rate = trx > 0 ? (err / trx * 100) : 0;
+
+          weeks.push({
+            number: weekNum++,
+            days: currentWeek.length,
+            trx,
+            err,
+            rate
+          });
+          currentWeek = [];
+        }
+      });
+      return weeks;
+    }
+
+    function hhiFromShares(counts) {
+      const total = counts.reduce((s, v) => s + v, 0) || 1;
+      const shares = counts.map(v => (v / total));
+      return shares.reduce((s, p) => s + (p * p), 0);
+    }
+
+    function buildInsightsResumenTech() {
+      if (!dailyData?.length) return "<p>No hay datos para analizar.</p>";
+
+      const totalTrx = dailyData.reduce((s, d) => s + d.totalTrx, 0);
+      const totalErrors = dailyData.reduce((s, d) => s + d.totalErrors, 0);
+
+      const rates = dailyData.map(d => d.errorRate);
+      const ratesSorted = [...rates].sort((a,b)=>a-b);
+
+      const avg = mean(rates);
+      const sd = std(rates);
+      const cv = avg > 0 ? (sd / avg) : 0;
+
+      const p50 = quantile(ratesSorted, 0.50);
+      const p90 = quantile(ratesSorted, 0.90);
+      const p95 = quantile(ratesSorted, 0.95);
+
+      const overWarn = dailyData.filter(d => d.errorRate >= TECH_THRESHOLDS.errorRateWarn).length;
+      const overCrit = dailyData.filter(d => d.errorRate >= TECH_THRESHOLDS.errorRateCritical).length;
+
+      const an = detectAnomaliesBySigma(dailyData);
+
+      const bestDay = dailyData.reduce((min, d) => d.errorRate < min.errorRate ? d : min, dailyData[0]);
+      const worstDay = dailyData.reduce((max, d) => d.errorRate > max.errorRate ? d : max, dailyData[0]);
+
+      return `
+        <p>
+          Umbrales: 
+          <span class="tech-metric">Target &lt; ${TECH_THRESHOLDS.errorRateTarget.toFixed(1)}%</span>
+          <span class="tech-metric">Warn ≥ ${TECH_THRESHOLDS.errorRateWarn.toFixed(1)}%</span>
+          <span class="tech-metric">Critical ≥ ${TECH_THRESHOLDS.errorRateCritical.toFixed(1)}%</span>
+          <span class="tech-metric">Anomalía: μ + ${TECH_THRESHOLDS.anomalySigma}σ</span>
+        </p>
+
+        <h3>📊 Estadística de la tasa (Error Rate)</h3>
+        <p>
+          μ=<strong>${avg.toFixed(2)}%</strong>, σ=<strong>${sd.toFixed(2)}</strong>, CV=<strong>${(cv*100).toFixed(0)}%</strong>.
+          Percentiles: p50=<strong>${p50.toFixed(2)}%</strong>, p90=<strong>${p90.toFixed(2)}%</strong>, p95=<strong>${p95.toFixed(2)}%</strong>.
+        </p>
+
+        <h3>🚦 Cumplimiento de umbrales</h3>
+        <p>
+          Días ≥ Warn: <strong>${overWarn}</strong> / ${dailyData.length} (${pct(overWarn, dailyData.length).toFixed(0)}%).
+          Días ≥ Critical: <strong>${overCrit}</strong> / ${dailyData.length} (${pct(overCrit, dailyData.length).toFixed(0)}%).
+        </p>
+
+        <h3>📌 Resumen operativo</h3>
+        <p>
+          Total trx=<strong>${formatNumber(totalTrx)}</strong>, total errores=<strong>${formatNumber(totalErrors)}</strong>.
+          Mejor día=<strong>${formatDate(bestDay.date)}</strong> (${bestDay.errorRate.toFixed(2)}%),
+          Peor día=<strong>${formatDate(worstDay.date)}</strong> (${worstDay.errorRate.toFixed(2)}%).
+        </p>
+
+        <h3>🚩 Anomalías detectadas</h3>
+        ${
+          an.anomalies.length
+            ? `<p>Umbral anomalía: <strong>${an.thr.toFixed(2)}%</strong> (μ ${an.m.toFixed(2)}% + ${TECH_THRESHOLDS.anomalySigma}σ ${ (TECH_THRESHOLDS.anomalySigma*an.sd).toFixed(2) }%).</p>
+               <ul>${an.anomalies.map(x => `<li><strong>${formatDate(x.date)}</strong>: ${x.errorRate.toFixed(2)}% (Errores ${formatNumber(x.totalErrors)} / Trx ${formatNumber(x.totalTrx)})</li>`).join('')}</ul>`
+            : `<p>No se detectaron anomalías por criterio μ+${TECH_THRESHOLDS.anomalySigma}σ (umbral ${an.thr.toFixed(2)}%).</p>`
+        }
+
+        <div class="metric-context">
+          <strong>Lectura técnica:</strong> CV alto implica variabilidad significativa día a día. p95 indica “peor cola” típica.
+          Si hay anomalías, prioriza investigación en esas fechas (deploys, red, host, DB, saturación).
+        </div>
+      `;
+    }
+
+    function buildInsightsDiariaTech() {
+      if (!dailyData?.length) return "<p>No hay datos diarios.</p>";
+
+      const avgTrx = mean(dailyData.map(d => d.totalTrx));
+      const avgRate = mean(dailyData.map(d => d.errorRate));
+
+      // rachas sobre warn y critical
+      let streakWarn = 0, maxStreakWarn = 0;
+      let streakCrit = 0, maxStreakCrit = 0;
+
+      dailyData.forEach(d => {
+        if (d.errorRate >= TECH_THRESHOLDS.errorRateWarn) { streakWarn++; maxStreakWarn = Math.max(maxStreakWarn, streakWarn); }
+        else streakWarn = 0;
+
+        if (d.errorRate >= TECH_THRESHOLDS.errorRateCritical) { streakCrit++; maxStreakCrit = Math.max(maxStreakCrit, streakCrit); }
+        else streakCrit = 0;
+      });
+
+      // correlación simple de señal: peores días con volumen alto?
+      const topWorst = [...dailyData].sort((a,b)=>b.errorRate-a.errorRate).slice(0,3);
+      const highVolInWorst = topWorst.filter(d => d.totalTrx >= avgTrx * TECH_THRESHOLDS.volSpikeFactor).length;
+
+      const an = detectAnomaliesBySigma(dailyData);
+
+      return `
+        <p>
+          <strong>Promedios:</strong> trx μ=<strong>${formatNumber(Math.round(avgTrx))}</strong>, tasa μ=<strong>${avgRate.toFixed(2)}%</strong>.
+          <strong>Volumen alto</strong> si trx ≥ <strong>${TECH_THRESHOLDS.volSpikeFactor.toFixed(2)}×μ</strong>.
+        </p>
+
+        <h3>📈 Rachas sobre umbral</h3>
+        <p>
+          Max racha ≥ Warn (${TECH_THRESHOLDS.errorRateWarn.toFixed(1)}%): <strong>${maxStreakWarn}</strong> días.
+          Max racha ≥ Critical (${TECH_THRESHOLDS.errorRateCritical.toFixed(1)}%): <strong>${maxStreakCrit}</strong> días.
+        </p>
+
+        <h3>🔎 Señal carga vs fallo</h3>
+        <p>
+          En el Top 3 peores días (por tasa), <strong>${highVolInWorst}</strong> tuvieron volumen alto.
+          ${highVolInWorst ? '➡️ Indicio de saturación/capacidad.' : '➡️ Indicio de incidentes/timeout/red/host más que carga.'}
+        </p>
+
+        <h3>🚩 Anomalías (μ + ${TECH_THRESHOLDS.anomalySigma}σ)</h3>
+        ${
+          an.anomalies.length
+            ? `<p>Umbral anomalía: <strong>${an.thr.toFixed(2)}%</strong>.</p>
+               <ul>${an.anomalies.map(x => `<li><strong>${formatDate(x.date)}</strong>: ${x.errorRate.toFixed(2)}% (Errores ${formatNumber(x.totalErrors)} / Trx ${formatNumber(x.totalTrx)})</li>`).join('')}</ul>`
+            : `<p>No se detectaron anomalías por μ+${TECH_THRESHOLDS.anomalySigma}σ.</p>`
+        }
+
+        <div class="metric-context">
+          <strong>Lectura técnica:</strong> si la tasa sube sin subir trx → revisar timeouts/host/red. Si sube con trx → revisar capacidad/colas/DB.
+        </div>
+      `;
+    }
+
+    function buildInsightsSemanalTech() {
+      if (!dailyData?.length) return "<p>No hay datos para análisis semanal.</p>";
+
+      const weeks = computeWeeksFromDaily();
+      if (!weeks.length) return "<p>No hay semanas calculables.</p>";
+
+      const worst = weeks.reduce((max, w) => w.rate > max.rate ? w : max, weeks[0]);
+      const best = weeks.reduce((min, w) => w.rate < min.rate ? w : min, weeks[0]);
+
+      // Week-over-week deltas en pp
+      const deltas = [];
+      for (let i = 1; i < weeks.length; i++) {
+        deltas.push({
+          from: weeks[i-1].number,
+          to: weeks[i].number,
+          dpp: weeks[i].rate - weeks[i-1].rate
+        });
+      }
+
+      const maxUp = deltas.length ? [...deltas].sort((a,b)=>b.dpp-a.dpp)[0] : null;
+      const maxDown = deltas.length ? [...deltas].sort((a,b)=>a.dpp-b.dpp)[0] : null;
+
+      const rates = weeks.map(w => w.rate);
+      const avg = mean(rates);
+      const sd = std(rates);
+
+      return `
+        <p>
+          Semanas: <strong>${weeks.length}</strong>. Tasa semanal μ=<strong>${avg.toFixed(2)}%</strong>, σ=<strong>${sd.toFixed(2)}</strong>.
+        </p>
+
+        <h3>🏁 Mejor/Peor semana</h3>
+        <p>
+          Mejor: <strong>Semana ${best.number}</strong> (${best.rate.toFixed(2)}%, trx ${formatNumber(best.trx)}).
+          Peor: <strong>Semana ${worst.number}</strong> (${worst.rate.toFixed(2)}%, trx ${formatNumber(worst.trx)}).
+        </p>
+
+        <h3>🔁 Week-over-week (pp)</h3>
+        ${
+          deltas.length
+            ? `<p>
+                 Mayor deterioro: <strong>${maxUp.from}→${maxUp.to}</strong> (${maxUp.dpp>=0?'+':''}${maxUp.dpp.toFixed(2)} pp).
+                 Mayor mejora: <strong>${maxDown.from}→${maxDown.to}</strong> (${maxDown.dpp>=0?'+':''}${maxDown.dpp.toFixed(2)} pp).
+               </p>
+               <p>Significativo si |Δpp| ≥ <strong>${TECH_THRESHOLDS.ppMeaningful.toFixed(2)} pp</strong>.</p>`
+            : `<p>No hay suficientes semanas para comparar.</p>`
+        }
+
+        <div class="metric-context">
+          <strong>Lectura técnica:</strong> Δpp sostenidos suelen indicar cambios estructurales (capacidad/config/deploy).
+          Semana peor es el foco para cruzar con Top Errores y H03/H23.
+        </div>
+      `;
+    }
+
+    function buildInsightsComparativosTech() {
+      if (!dailyData?.length) return "<p>No hay datos para comparativos.</p>";
+
+      // replicar comparación por día de semana
+      const byDOW = {};
+      dailyData.forEach(d => (byDOW[d.date.getDay()] ||= []).push(d));
+
+      const comps = [];
+      Object.values(byDOW).forEach(days => {
+        for (let i = 0; i < days.length - 1; i++) {
+          const a = days[i], b = days[i+1];
+          comps.push({
+            dow: a.date.getDay(),
+            date1: a.date, date2: b.date,
+            dpp: b.errorRate - a.errorRate,
+            trxPct: a.totalTrx ? ((b.totalTrx - a.totalTrx) / a.totalTrx) * 100 : 0,
+            errPct: a.totalErrors ? ((b.totalErrors - a.totalErrors) / a.totalErrors) * 100 : 0
+          });
+        }
+      });
+
+      if (!comps.length) return "<p>No hay suficientes semanas consecutivas para comparativos.</p>";
+
+      const dayNames = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+
+      const worst = [...comps].sort((a,b)=>b.dpp-a.dpp)[0];
+      const best = [...comps].sort((a,b)=>a.dpp-b.dpp)[0];
+
+      const sig = comps.filter(x => Math.abs(x.dpp) >= TECH_THRESHOLDS.ppMeaningful).length;
+
+      return `
+        <p>
+          Comparaciones: <strong>${comps.length}</strong>. 
+          Cambios significativos (|Δpp| ≥ ${TECH_THRESHOLDS.ppMeaningful.toFixed(2)}): <strong>${sig}</strong>.
+        </p>
+
+        <h3>📈 Mayor deterioro (Δpp)</h3>
+        <p>
+          <strong>${dayNames[worst.dow]}</strong> ${formatDate(worst.date1)} → ${formatDate(worst.date2)}:
+          Δpp=<strong>+${worst.dpp.toFixed(2)}</strong>, Δtrx=<strong>${worst.trxPct>=0?'+':''}${worst.trxPct.toFixed(1)}%</strong>,
+          Δerr=<strong>${worst.errPct>=0?'+':''}${worst.errPct.toFixed(1)}%</strong>.
+        </p>
+
+        <h3>📉 Mayor mejora (Δpp)</h3>
+        <p>
+          <strong>${dayNames[best.dow]}</strong> ${formatDate(best.date1)} → ${formatDate(best.date2)}:
+          Δpp=<strong>${best.dpp.toFixed(2)}</strong>, Δtrx=<strong>${best.trxPct>=0?'+':''}${best.trxPct.toFixed(1)}%</strong>,
+          Δerr=<strong>${best.errPct>=0?'+':''}${best.errPct.toFixed(1)}%</strong>.
+        </p>
+
+        <div class="metric-context">
+          <strong>Lectura técnica:</strong> si Δpp empeora sin aumento de trx → sospecha degradación/timeout/red.
+          Si Δpp empeora con aumento trx → sospecha saturación/capacidad.
+        </div>
+      `;
+    }
+
+    function buildInsightsErroresTech() {
+      if (!errorCodeData?.length) return "<p>No hay datos de códigos de error.</p>";
+
+      const summary = {};
+      errorCodeData.forEach(e => {
+        (summary[e.errorCode] ||= { code: e.errorCode, count: 0, description: e.description })
+          .count += (e.count || 0);
+      });
+
+      const sorted = Object.values(summary).sort((a,b)=>b.count-a.count);
+      const total = sorted.reduce((s,e)=>s+e.count,0) || 1;
+
+      const top1 = sorted[0];
+      const top3 = sorted.slice(0,3);
+      const top1Pct = pct(top1.count, total);
+      const top3Pct = pct(top3.reduce((s,e)=>s+e.count,0), total);
+
+      const counts = sorted.map(x => x.count);
+      const hhi = hhiFromShares(counts); // 0..1
+
+      // recomendación técnica basada en concentración
+      let concMsg = '';
+      if (top1Pct >= 40) concMsg = 'Alta concentración en un solo código: atacar Top1 tiene alto ROI.';
+      else if (top3Pct >= 60) concMsg = 'Concentración Top3 alta: atacar Top3 reduce rápido tasa global.';
+      else concMsg = 'Distribución más dispersa: requiere plan multi-causa o segmentación por TRX/fecha.';
+
+      return `
+        <p>
+          Total errores (según códigos): <strong>${formatNumber(total)}</strong>.
+          <span class="tech-metric">Top1=${top1Pct.toFixed(1)}%</span>
+          <span class="tech-metric">Top3=${top3Pct.toFixed(1)}%</span>
+          <span class="tech-metric">HHI=${hhi.toFixed(3)}</span>
+        </p>
+
+        <h3>🔝 Dominancia y concentración</h3>
+        <p>
+          Top1: <strong>${top1.code}</strong> (${formatNumber(top1.count)} / ${top1Pct.toFixed(1)}%).
+          Top3: <strong>${top3.map(x=>x.code).join(', ')}</strong>.
+        </p>
+        <p>${concMsg}</p>
+
+        <div class="metric-context">
+          <strong>Lectura técnica:</strong> HHI cercano a 1 indica concentración extrema. Valores bajos implican dispersión.
+          Úsalo para decidir si atacar 1 causa (Top1) o varias (Top3/Top5).
+        </div>
+      `;
+    }
+
+    function buildInsightsH03H23Tech() {
+      if (!errorCodeData?.length) return "<p>No hay datos H03/H23.</p>";
+
+      const totalErrors = dailyData.reduce((s,d)=>s + d.totalErrors, 0) || 1;
+
+      const h03Total = errorCodeData.filter(e => e.errorCode === 'H03').reduce((s,e)=>s+(e.count||0),0);
+      const h23Total = errorCodeData.filter(e => e.errorCode === 'H23').reduce((s,e)=>s+(e.count||0),0);
+
+      const h03ShareAll = pct(h03Total, totalErrors);
+      const h23ShareAll = pct(h23Total, totalErrors);
+
+      const coverage = pct((errorCodeDataByDate || []).length, (dailyData || []).length);
+
+      const byDate = (errorCodeDataByDate || []).map(d => ({
+        date: new Date(d.date),
+        h03: Number(d.h03Count||0),
+        h23: Number(d.h23Count||0),
+        total: Number(d.h03Count||0) + Number(d.h23Count||0)
+      })).sort((a,b)=>b.total-a.total);
+
+      const topDates = byDate.slice(0, 4);
+
+      // Top TRX for H03/H23
+      const flat = [];
+      (errorCodeDataByDate || []).forEach(day => {
+        (day.allErrors || []).forEach(e => {
+          if (e.errorCode === 'H03' || e.errorCode === 'H23') flat.push(e);
+        });
+      });
+
+      const topTrxH03 = (() => {
+        const map = {};
+        flat.filter(e => e.errorCode === 'H03').forEach(e => map[e.trxCode] = (map[e.trxCode]||0) + e.count);
+        return Object.entries(map).map(([k,v])=>({k,v})).sort((a,b)=>b.v-a.v).slice(0,5);
+      })();
+
+      const topTrxH23 = (() => {
+        const map = {};
+        flat.filter(e => e.errorCode === 'H23').forEach(e => map[e.trxCode] = (map[e.trxCode]||0) + e.count);
+        return Object.entries(map).map(([k,v])=>({k,v})).sort((a,b)=>b.v-a.v).slice(0,5);
+      })();
+
+      return `
+        <p>
+          Cobertura por fecha H03/H23: <strong>${coverage.toFixed(0)}%</strong>.
+          Participación sobre <strong>errores totales</strong>:
+          <span class="tech-metric">H03=${h03ShareAll.toFixed(1)}%</span>
+          <span class="tech-metric">H23=${h23ShareAll.toFixed(1)}%</span>
+        </p>
+
+        <h3>📆 Fechas pico (H03+H23)</h3>
+        ${
+          topDates.length
+            ? `<ul>${topDates.map(x => `<li><strong>${formatDate(x.date)}</strong>: ${formatNumber(x.total)} (H03 ${formatNumber(x.h03)} / H23 ${formatNumber(x.h23)})</li>`).join('')}</ul>`
+            : `<p>No hay detalle por fecha.</p>`
+        }
+
+        <h3>🔝 TRX más incidentes</h3>
+        <p><strong>Top TRX H03:</strong> ${topTrxH03.map(x => `${x.k} (${formatNumber(x.v)})`).join(', ') || 'N/A'}</p>
+        <p><strong>Top TRX H23:</strong> ${topTrxH23.map(x => `${x.k} (${formatNumber(x.v)})`).join(', ') || 'N/A'}</p>
+
+        <div class="metric-context">
+          <strong>Lectura técnica:</strong> H03 suele asociarse a conectividad/host; H23 a timeouts/latencia backend.
+          Atacar 1–2 TRX top reduce rápido el total.
+        </div>
+      `;
+    }
+
+    function renderInsightsAllTabs() {
+      const set = (id, html) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = `<h3>${el.querySelector('h3')?.textContent || '🧠 Análisis Técnico'}</h3>` + html;
+      };
+
+      set("insights-resumen", buildInsightsResumenTech());
+      set("insights-diaria", buildInsightsDiariaTech());
+      set("insights-semanal", buildInsightsSemanalTech());
+      set("insights-comparativos", buildInsightsComparativosTech());
+      set("insights-errores", buildInsightsErroresTech());
+      set("insights-h03h23", buildInsightsH03H23Tech());
+    }
+
+    // ==========================================================
+    // Bootstrap
+    // ==========================================================
+    window.addEventListener('DOMContentLoaded', async () => {
+      loadGitHubConfig();
+
+      if (isAdminMode()) {
+        showGitHubConfigPanel();
+        viewerHint.style.display = 'none';
+      } else {
+        viewerHint.style.display = 'block';
+      }
+
+      await loadSavedData();
+      startRealtimeSync();
+      setTimeout(() => checkForUpdates({ force: false }), 1500);
+    });
+  </script>
 </body>
 </html>
-
