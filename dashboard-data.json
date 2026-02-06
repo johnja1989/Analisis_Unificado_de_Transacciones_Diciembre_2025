@@ -370,6 +370,13 @@
       "totalErrors": 9147,
       "errorRate": 4.4991072614322185,
       "uniqueErrorTypes": 147
+    },
+    {
+      "date": "2026-02-05T05:00:00.000Z",
+      "totalTrx": 169412,
+      "totalErrors": 7282,
+      "errorRate": 4.298396807782211,
+      "uniqueErrorTypes": 118
     }
   ],
   "errorCodeData": [
@@ -383,25 +390,25 @@
       "trxCode": "1111",
       "errorCode": "A47",
       "description": "Sin descripción",
-      "count": 310
+      "count": 316
     },
     {
       "trxCode": "1010",
       "errorCode": "A50",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 308
+      "count": 313
     },
     {
       "trxCode": "1108",
       "errorCode": "A50",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 124
+      "count": 126
     },
     {
       "trxCode": "1111",
       "errorCode": "A50",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 1873
+      "count": 1904
     },
     {
       "trxCode": "9016",
@@ -419,49 +426,49 @@
       "trxCode": "1820",
       "errorCode": "BR1",
       "description": "Sin descripción",
-      "count": 709
+      "count": 732
     },
     {
       "trxCode": "1900",
       "errorCode": "C01",
       "description": "Ocurrió un error en la ejecución del servicio, por favor revisar.",
-      "count": 9019
+      "count": 9208
     },
     {
       "trxCode": "1901",
       "errorCode": "C01",
       "description": "Ocurrió un error en la ejecución del servicio, por favor revisar.",
-      "count": 1490
+      "count": 1512
     },
     {
       "trxCode": "3302",
       "errorCode": "C02",
       "description": "Errores controlados no tipificados",
-      "count": 7670
+      "count": 7820
     },
     {
       "trxCode": "3303",
       "errorCode": "C02",
       "description": "Errores controlados no tipificados",
-      "count": 885
+      "count": 917
     },
     {
       "trxCode": "3352",
       "errorCode": "C02",
       "description": "Errores controlados no tipificados",
-      "count": 484
+      "count": 494
     },
     {
       "trxCode": "3353",
       "errorCode": "C02",
       "description": "Errores controlados no tipificados",
-      "count": 66
+      "count": 68
     },
     {
       "trxCode": "1604",
       "errorCode": "C06",
       "description": "Ocurrió un error en la ejecución del servicio, El usuario no cuenta con cuentas Habilitadas.",
-      "count": 431
+      "count": 439
     },
     {
       "trxCode": "2601",
@@ -473,7 +480,7 @@
       "trxCode": "9402",
       "errorCode": "C10",
       "description": "No pudimos abrir tu cuenta de ahorros",
-      "count": 482
+      "count": 502
     },
     {
       "trxCode": "1603",
@@ -485,37 +492,37 @@
       "trxCode": "2904",
       "errorCode": "E11",
       "description": "Error chequeando la respuesta",
-      "count": 191
+      "count": 196
     },
     {
       "trxCode": "9002",
       "errorCode": "E11",
       "description": "Error chequeando la respuesta",
-      "count": 136
+      "count": 140
     },
     {
       "trxCode": "1061",
       "errorCode": "E12",
       "description": "Error chequeando el número de sequencia",
-      "count": 1110
+      "count": 1142
     },
     {
       "trxCode": "1061",
       "errorCode": "E14",
       "description": "Error validando la versión de aplicación",
-      "count": 844
+      "count": 853
     },
     {
       "trxCode": "9002",
       "errorCode": "E14",
       "description": "Error validando la versión de aplicación",
-      "count": 1536
+      "count": 1589
     },
     {
       "trxCode": "9064",
       "errorCode": "E14",
       "description": "Error validando la versión de aplicación",
-      "count": 313
+      "count": 322
     },
     {
       "trxCode": "9075",
@@ -533,127 +540,127 @@
       "trxCode": "4200",
       "errorCode": "F08",
       "description": "Sin descripción",
-      "count": 1308
+      "count": 1323
     },
     {
       "trxCode": "4210",
       "errorCode": "F08",
       "description": "Sin descripción",
-      "count": 2442
+      "count": 2478
     },
     {
       "trxCode": "1010",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 471
+      "count": 488
     },
     {
       "trxCode": "1060",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 1944
+      "count": 1976
     },
     {
       "trxCode": "1101",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 2278
+      "count": 2301
     },
     {
       "trxCode": "1108",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 255
+      "count": 263
     },
     {
       "trxCode": "1111",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 13688
+      "count": 13787
     },
     {
       "trxCode": "1150",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 528
+      "count": 536
     },
     {
       "trxCode": "1253",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 24080
+      "count": 24601
     },
     {
       "trxCode": "1353",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 2488
+      "count": 2535
     },
     {
       "trxCode": "1602",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 1136
+      "count": 1170
     },
     {
       "trxCode": "1603",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 153
+      "count": 161
     },
     {
       "trxCode": "1816",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 638
+      "count": 640
     },
     {
       "trxCode": "1818",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 2907
+      "count": 2949
     },
     {
       "trxCode": "1819",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 2502
+      "count": 2553
     },
     {
       "trxCode": "1820",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 305
+      "count": 320
     },
     {
       "trxCode": "1901",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 2946
+      "count": 3025
     },
     {
       "trxCode": "2901",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 200
+      "count": 201
     },
     {
       "trxCode": "3303",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 727
+      "count": 742
     },
     {
       "trxCode": "3308",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 2480
+      "count": 2542
     },
     {
       "trxCode": "3352",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 2244
+      "count": 2271
     },
     {
       "trxCode": "4250",
@@ -671,7 +678,7 @@
       "trxCode": "4411",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 273
+      "count": 278
     },
     {
       "trxCode": "4461",
@@ -683,31 +690,31 @@
       "trxCode": "7002",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 139
+      "count": 147
     },
     {
       "trxCode": "7005",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 35
+      "count": 36
     },
     {
       "trxCode": "7010",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 372
+      "count": 384
     },
     {
       "trxCode": "7505",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 302
+      "count": 303
     },
     {
       "trxCode": "9000",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 204
+      "count": 205
     },
     {
       "trxCode": "9016",
@@ -731,13 +738,13 @@
       "trxCode": "9061",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 2109
+      "count": 2133
     },
     {
       "trxCode": "9070",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 12372
+      "count": 12486
     },
     {
       "trxCode": "9090",
@@ -749,19 +756,19 @@
       "trxCode": "9200",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 560
+      "count": 567
     },
     {
       "trxCode": "6001",
       "errorCode": "H09",
       "description": "Error al invocar transacción en el host.",
-      "count": 880
+      "count": 902
     },
     {
       "trxCode": "1010",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 1915
+      "count": 1918
     },
     {
       "trxCode": "1060",
@@ -779,7 +786,7 @@
       "trxCode": "1111",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 12274
+      "count": 12304
     },
     {
       "trxCode": "1112",
@@ -797,25 +804,25 @@
       "trxCode": "1250",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 883
+      "count": 884
     },
     {
       "trxCode": "1251",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 1927
+      "count": 1934
     },
     {
       "trxCode": "1253",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 2176
+      "count": 2181
     },
     {
       "trxCode": "1600",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 921
+      "count": 926
     },
     {
       "trxCode": "1601",
@@ -827,7 +834,7 @@
       "trxCode": "1816",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 262
+      "count": 263
     },
     {
       "trxCode": "1819",
@@ -839,7 +846,7 @@
       "trxCode": "1900",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 2064
+      "count": 2065
     },
     {
       "trxCode": "1901",
@@ -857,25 +864,25 @@
       "trxCode": "3300",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 7137
+      "count": 7151
     },
     {
       "trxCode": "3302",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 593
+      "count": 594
     },
     {
       "trxCode": "3305",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 433
+      "count": 436
     },
     {
       "trxCode": "3307",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 773
+      "count": 774
     },
     {
       "trxCode": "3308",
@@ -887,7 +894,7 @@
       "trxCode": "3350",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 2909
+      "count": 2912
     },
     {
       "trxCode": "3356",
@@ -899,31 +906,31 @@
       "trxCode": "5700",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 1157
+      "count": 1160
     },
     {
       "trxCode": "7002",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 220
+      "count": 231
     },
     {
       "trxCode": "7010",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 2992
+      "count": 3024
     },
     {
       "trxCode": "7506",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 767
+      "count": 775
     },
     {
       "trxCode": "9015",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 439
+      "count": 441
     },
     {
       "trxCode": "9051",
@@ -935,7 +942,7 @@
       "trxCode": "9061",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 1011
+      "count": 1012
     },
     {
       "trxCode": "9070",
@@ -983,13 +990,13 @@
       "trxCode": "9430",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 324
+      "count": 336
     },
     {
       "trxCode": "9431",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 524
+      "count": 538
     },
     {
       "trxCode": "1111",
@@ -1001,13 +1008,13 @@
       "trxCode": "1011",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 586
+      "count": 595
     },
     {
       "trxCode": "1060",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 154
+      "count": 158
     },
     {
       "trxCode": "1111",
@@ -1019,19 +1026,19 @@
       "trxCode": "1250",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 1248
+      "count": 1274
     },
     {
       "trxCode": "1251",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 1759
+      "count": 1783
     },
     {
       "trxCode": "1822",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 506
+      "count": 519
     },
     {
       "trxCode": "1900",
@@ -1043,7 +1050,7 @@
       "trxCode": "1901",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 178
+      "count": 180
     },
     {
       "trxCode": "2201",
@@ -1055,7 +1062,7 @@
       "trxCode": "2253",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 386
+      "count": 388
     },
     {
       "trxCode": "2600",
@@ -1067,13 +1074,13 @@
       "trxCode": "3300",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 854
+      "count": 855
     },
     {
       "trxCode": "3352",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 777
+      "count": 779
     },
     {
       "trxCode": "3353",
@@ -1139,31 +1146,31 @@
       "trxCode": "9444",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 571
+      "count": 594
     },
     {
       "trxCode": "9051",
       "errorCode": "ID1",
       "description": "Sin descripción",
-      "count": 2371
+      "count": 2426
     },
     {
       "trxCode": "1819",
       "errorCode": "K04",
       "description": "Sin descripción",
-      "count": 6476
+      "count": 6650
     },
     {
       "trxCode": "1816",
       "errorCode": "K05",
       "description": "Sin descripción",
-      "count": 15893
+      "count": 16309
     },
     {
       "trxCode": "1820",
       "errorCode": "K06",
       "description": "Sin descripción",
-      "count": 455
+      "count": 472
     },
     {
       "trxCode": "4402",
@@ -1175,7 +1182,7 @@
       "trxCode": "4408",
       "errorCode": "M01",
       "description": "Sin descripción",
-      "count": 336
+      "count": 341
     },
     {
       "trxCode": "4451",
@@ -1187,19 +1194,19 @@
       "trxCode": "4460",
       "errorCode": "M01",
       "description": "Sin descripción",
-      "count": 263
+      "count": 269
     },
     {
       "trxCode": "4463",
       "errorCode": "M01",
       "description": "Sin descripción",
-      "count": 1445
+      "count": 1461
     },
     {
       "trxCode": "4472",
       "errorCode": "M01",
       "description": "Sin descripción",
-      "count": 324
+      "count": 329
     },
     {
       "trxCode": "4408",
@@ -1211,19 +1218,19 @@
       "trxCode": "4402",
       "errorCode": "M08",
       "description": "Sin descripción",
-      "count": 392
+      "count": 394
     },
     {
       "trxCode": "4456",
       "errorCode": "M08",
       "description": "Sin descripción",
-      "count": 561
+      "count": 563
     },
     {
       "trxCode": "1253",
       "errorCode": "O03",
       "description": "Error inserting BatchJob.",
-      "count": 222
+      "count": 227
     },
     {
       "trxCode": "1353",
@@ -1235,139 +1242,139 @@
       "trxCode": "1253",
       "errorCode": "O05",
       "description": "Error initializing job.",
-      "count": 48894
+      "count": 49976
     },
     {
       "trxCode": "1353",
       "errorCode": "O05",
       "description": "Error initializing job.",
-      "count": 2931
+      "count": 2996
     },
     {
       "trxCode": "9754",
       "errorCode": "PQ4",
       "description": "Sin descripción",
-      "count": 194
+      "count": 201
     },
     {
       "trxCode": "3803",
       "errorCode": "Q01",
       "description": "Sin descripción",
-      "count": 450
+      "count": 454
     },
     {
       "trxCode": "3302",
       "errorCode": "R01",
       "description": "Revisa la información",
-      "count": 5042
+      "count": 5148
     },
     {
       "trxCode": "3352",
       "errorCode": "R01",
       "description": "Revisa la información",
-      "count": 707
+      "count": 720
     },
     {
       "trxCode": "3302",
       "errorCode": "R04",
       "description": "Este giro no está disponible",
-      "count": 5708
+      "count": 5850
     },
     {
       "trxCode": "3352",
       "errorCode": "R04",
       "description": "Este giro no está disponible",
-      "count": 40478
+      "count": 40497
     },
     {
       "trxCode": "3302",
       "errorCode": "R07",
       "description": "Algo ha ido mal con tu consulta.",
-      "count": 6536
+      "count": 6728
     },
     {
       "trxCode": "3303",
       "errorCode": "R07",
       "description": "Algo ha ido mal con tu consulta.",
-      "count": 876
+      "count": 910
     },
     {
       "trxCode": "3352",
       "errorCode": "R07",
       "description": "Algo ha ido mal con tu consulta.",
-      "count": 1646
+      "count": 1671
     },
     {
       "trxCode": "3303",
       "errorCode": "R09",
       "description": "No se ha podido completar tu transacción",
-      "count": 350
+      "count": 353
     },
     {
       "trxCode": "3306",
       "errorCode": "R10",
       "description": "Sin descripción",
-      "count": 302
+      "count": 315
     },
     {
       "trxCode": "9410",
       "errorCode": "S20",
       "description": "Sin descripción",
-      "count": 1182
+      "count": 1211
     },
     {
       "trxCode": "9418",
       "errorCode": "S20",
       "description": "Sin descripción",
-      "count": 815
+      "count": 820
     },
     {
       "trxCode": "9430",
       "errorCode": "S21",
       "description": "Sin descripción",
-      "count": 611
+      "count": 628
     },
     {
       "trxCode": "1852",
       "errorCode": "T01",
       "description": "Se ha presentado un error de negocio, reintente la transacción nuevamente.",
-      "count": 256
+      "count": 259
     },
     {
       "trxCode": "1901",
       "errorCode": "T01",
       "description": "Se ha presentado un error de negocio, reintente la transacción nuevamente.",
-      "count": 4293
+      "count": 4393
     },
     {
       "trxCode": "1010",
       "errorCode": "V01",
       "description": "Sesión abierta en otro dispositivo",
-      "count": 5460
+      "count": 5550
     },
     {
       "trxCode": "1111",
       "errorCode": "V01",
       "description": "Sesión abierta en otro dispositivo",
-      "count": 5483
+      "count": 5515
     },
     {
       "trxCode": "9015",
       "errorCode": "V01",
       "description": "Sesión abierta en otro dispositivo",
-      "count": 276
+      "count": 285
     },
     {
       "trxCode": "1154",
       "errorCode": "V03",
       "description": "El valor de la nueva password informada ya ha sido utilizado con anterioridad",
-      "count": 200
+      "count": 210
     },
     {
       "trxCode": "9068",
       "errorCode": "V03",
       "description": "El valor de la nueva password informada ya ha sido utilizado con anterioridad",
-      "count": 445
+      "count": 461
     },
     {
       "trxCode": "9076",
@@ -1379,25 +1386,25 @@
       "trxCode": "9210",
       "errorCode": "V03",
       "description": "El valor de la nueva password informada ya ha sido utilizado con anterioridad",
-      "count": 1092
+      "count": 1117
     },
     {
       "trxCode": "9350",
       "errorCode": "V03",
       "description": "El valor de la nueva password informada ya ha sido utilizado con anterioridad",
-      "count": 3893
+      "count": 3963
     },
     {
       "trxCode": "1111",
       "errorCode": "V04",
       "description": "Usuario no puede continuar con el proceso de login",
-      "count": 2353
+      "count": 2416
     },
     {
       "trxCode": "1010",
       "errorCode": "V05",
       "description": "Falló la validación de la contraseña del usuario.",
-      "count": 4658
+      "count": 4780
     },
     {
       "trxCode": "1015",
@@ -1409,13 +1416,13 @@
       "trxCode": "1108",
       "errorCode": "V05",
       "description": "Falló la validación de la contraseña del usuario.",
-      "count": 1130
+      "count": 1153
     },
     {
       "trxCode": "1111",
       "errorCode": "V05",
       "description": "Falló la validación de la contraseña del usuario.",
-      "count": 35812
+      "count": 36617
     },
     {
       "trxCode": "9016",
@@ -1433,49 +1440,49 @@
       "trxCode": "9200",
       "errorCode": "V05",
       "description": "Falló la validación de la contraseña del usuario.",
-      "count": 3109
+      "count": 3186
     },
     {
       "trxCode": "1060",
       "errorCode": "V06",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 19769
+      "count": 20342
     },
     {
       "trxCode": "1108",
       "errorCode": "V06",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 142
+      "count": 143
     },
     {
       "trxCode": "1111",
       "errorCode": "V06",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 2090
+      "count": 2143
     },
     {
       "trxCode": "9000",
       "errorCode": "V06",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 1968
+      "count": 2008
     },
     {
       "trxCode": "9063",
       "errorCode": "V06",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 588
+      "count": 639
     },
     {
       "trxCode": "9200",
       "errorCode": "V06",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 1164
+      "count": 1175
     },
     {
       "trxCode": "9200",
       "errorCode": "A50",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 212
+      "count": 217
     },
     {
       "trxCode": "9353",
@@ -1487,7 +1494,7 @@
       "trxCode": "1819",
       "errorCode": "BR1",
       "description": "Sin descripción",
-      "count": 146
+      "count": 148
     },
     {
       "trxCode": "1851",
@@ -1499,7 +1506,7 @@
       "trxCode": "2051",
       "errorCode": "C01",
       "description": "Ocurrió un error en la ejecución del servicio, por favor revisar.",
-      "count": 20
+      "count": 21
     },
     {
       "trxCode": "3306",
@@ -1511,37 +1518,37 @@
       "trxCode": "5700",
       "errorCode": "C11",
       "description": "Sin descripción",
-      "count": 856
+      "count": 857
     },
     {
       "trxCode": "1602",
       "errorCode": "D01",
       "description": "la cuenta a inscribir ya se encuentra inscrita",
-      "count": 283
+      "count": 285
     },
     {
       "trxCode": "1655",
       "errorCode": "D01",
       "description": "la cuenta a inscribir ya se encuentra inscrita",
-      "count": 16
+      "count": 18
     },
     {
       "trxCode": "1061",
       "errorCode": "E11",
       "description": "Error chequeando la respuesta",
-      "count": 511
+      "count": 522
     },
     {
       "trxCode": "9002",
       "errorCode": "E12",
       "description": "Error chequeando el número de sequencia",
-      "count": 96
+      "count": 109
     },
     {
       "trxCode": "9356",
       "errorCode": "E14",
       "description": "Error validando la versión de aplicación",
-      "count": 158
+      "count": 161
     },
     {
       "trxCode": "1061",
@@ -1559,13 +1566,13 @@
       "trxCode": "1254",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 58
+      "count": 59
     },
     {
       "trxCode": "1822",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 21
+      "count": 23
     },
     {
       "trxCode": "1851",
@@ -1577,7 +1584,7 @@
       "trxCode": "2201",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 412
+      "count": 424
     },
     {
       "trxCode": "2202",
@@ -1589,19 +1596,19 @@
       "trxCode": "2209",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 376
+      "count": 394
     },
     {
       "trxCode": "3803",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 132
+      "count": 134
     },
     {
       "trxCode": "4409",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 33
+      "count": 35
     },
     {
       "trxCode": "4456",
@@ -1613,13 +1620,13 @@
       "trxCode": "4462",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 238
+      "count": 241
     },
     {
       "trxCode": "4472",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 568
+      "count": 573
     },
     {
       "trxCode": "5700",
@@ -1631,19 +1638,19 @@
       "trxCode": "7506",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 257
+      "count": 267
     },
     {
       "trxCode": "9008",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 101
+      "count": 103
     },
     {
       "trxCode": "9063",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 218
+      "count": 234
     },
     {
       "trxCode": "9064",
@@ -1655,13 +1662,13 @@
       "trxCode": "9210",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 141
+      "count": 147
     },
     {
       "trxCode": "9353",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 45
+      "count": 46
     },
     {
       "trxCode": "9402",
@@ -1679,7 +1686,7 @@
       "trxCode": "3300",
       "errorCode": "H09",
       "description": "Error al invocar transacción en el host.",
-      "count": 94
+      "count": 95
     },
     {
       "trxCode": "1350",
@@ -1697,7 +1704,7 @@
       "trxCode": "1353",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 130
+      "count": 131
     },
     {
       "trxCode": "1602",
@@ -1715,13 +1722,13 @@
       "trxCode": "1815",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 418
+      "count": 419
     },
     {
       "trxCode": "1818",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 393
+      "count": 395
     },
     {
       "trxCode": "1851",
@@ -1769,7 +1776,7 @@
       "trxCode": "3352",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 307
+      "count": 309
     },
     {
       "trxCode": "4400",
@@ -1805,19 +1812,19 @@
       "trxCode": "7000",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 49
+      "count": 50
     },
     {
       "trxCode": "7003",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 39
+      "count": 41
     },
     {
       "trxCode": "7004",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 89
+      "count": 91
     },
     {
       "trxCode": "7500",
@@ -1841,7 +1848,7 @@
       "trxCode": "9201",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 88
+      "count": 89
     },
     {
       "trxCode": "9350",
@@ -1853,7 +1860,7 @@
       "trxCode": "9359",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 103
+      "count": 105
     },
     {
       "trxCode": "9400",
@@ -1901,7 +1908,7 @@
       "trxCode": "9432",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 187
+      "count": 192
     },
     {
       "trxCode": "9440",
@@ -1961,7 +1968,7 @@
       "trxCode": "4455",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 354
+      "count": 373
     },
     {
       "trxCode": "5700",
@@ -1973,7 +1980,7 @@
       "trxCode": "9052",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 69
+      "count": 70
     },
     {
       "trxCode": "9061",
@@ -1985,19 +1992,19 @@
       "trxCode": "9404",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 196
+      "count": 200
     },
     {
       "trxCode": "1820",
       "errorCode": "K08",
       "description": "Sin descripción",
-      "count": 56
+      "count": 62
     },
     {
       "trxCode": "4409",
       "errorCode": "M01",
       "description": "Sin descripción",
-      "count": 229
+      "count": 239
     },
     {
       "trxCode": "4461",
@@ -2009,13 +2016,13 @@
       "trxCode": "2150",
       "errorCode": "PS4",
       "description": "Sin descripción",
-      "count": 61
+      "count": 64
     },
     {
       "trxCode": "2151",
       "errorCode": "PS4",
       "description": "Sin descripción",
-      "count": 101
+      "count": 109
     },
     {
       "trxCode": "3353",
@@ -2027,13 +2034,13 @@
       "trxCode": "9449",
       "errorCode": "S20",
       "description": "Sin descripción",
-      "count": 282
+      "count": 285
     },
     {
       "trxCode": "9431",
       "errorCode": "S21",
       "description": "Sin descripción",
-      "count": 617
+      "count": 624
     },
     {
       "trxCode": "1061",
@@ -2045,43 +2052,43 @@
       "trxCode": "9002",
       "errorCode": "V02",
       "description": "El código que ingresaste no es correcto. Por favor verifícalo e inténtalo de nuevo.",
-      "count": 444
+      "count": 469
     },
     {
       "trxCode": "9004",
       "errorCode": "V03",
       "description": "El valor de la nueva password informada ya ha sido utilizado con anterioridad",
-      "count": 242
+      "count": 249
     },
     {
       "trxCode": "9353",
       "errorCode": "V05",
       "description": "Falló la validación de la contraseña del usuario.",
-      "count": 122
+      "count": 124
     },
     {
       "trxCode": "9001",
       "errorCode": "V06",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 120
+      "count": 122
     },
     {
       "trxCode": "9002",
       "errorCode": "V06",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
-      "count": 12
+      "count": 13
     },
     {
       "trxCode": "1111",
       "errorCode": "V07",
       "description": "Sin descripción",
-      "count": 463
+      "count": 536
     },
     {
       "trxCode": "9200",
       "errorCode": "V07",
       "description": "Sin descripción",
-      "count": 61
+      "count": 71
     },
     {
       "trxCode": "1010",
@@ -2093,13 +2100,13 @@
       "trxCode": "1821",
       "errorCode": "BR1",
       "description": "Sin descripción",
-      "count": 48
+      "count": 49
     },
     {
       "trxCode": "1604",
       "errorCode": "C01",
       "description": "Ocurrió un error en la ejecución del servicio, por favor revisar.",
-      "count": 69
+      "count": 73
     },
     {
       "trxCode": "1652",
@@ -2129,7 +2136,7 @@
       "trxCode": "9051",
       "errorCode": "C01",
       "description": "Ocurrió un error en la ejecución del servicio, por favor revisar.",
-      "count": 65
+      "count": 66
     },
     {
       "trxCode": "1652",
@@ -2141,13 +2148,13 @@
       "trxCode": "3308",
       "errorCode": "D01",
       "description": "la cuenta a inscribir ya se encuentra inscrita",
-      "count": 51
+      "count": 53
     },
     {
       "trxCode": "2904",
       "errorCode": "E14",
       "description": "Error validando la versión de aplicación",
-      "count": 69
+      "count": 70
     },
     {
       "trxCode": "1821",
@@ -2159,7 +2166,7 @@
       "trxCode": "3353",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 48
+      "count": 50
     },
     {
       "trxCode": "3354",
@@ -2189,19 +2196,19 @@
       "trxCode": "4455",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 262
+      "count": 270
     },
     {
       "trxCode": "7006",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 176
+      "count": 178
     },
     {
       "trxCode": "7500",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 54
+      "count": 56
     },
     {
       "trxCode": "9079",
@@ -2309,7 +2316,7 @@
       "trxCode": "4210",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 36
+      "count": 37
     },
     {
       "trxCode": "4250",
@@ -2363,7 +2370,7 @@
       "trxCode": "7005",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 34
+      "count": 35
     },
     {
       "trxCode": "9000",
@@ -2381,7 +2388,7 @@
       "trxCode": "9008",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 74
+      "count": 76
     },
     {
       "trxCode": "9009",
@@ -2411,7 +2418,7 @@
       "trxCode": "9063",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 72
+      "count": 73
     },
     {
       "trxCode": "9064",
@@ -2429,7 +2436,7 @@
       "trxCode": "9069",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 37
+      "count": 38
     },
     {
       "trxCode": "9072",
@@ -2471,7 +2478,7 @@
       "trxCode": "9410",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 54
+      "count": 56
     },
     {
       "trxCode": "9412",
@@ -2501,7 +2508,7 @@
       "trxCode": "9418",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 24
+      "count": 25
     },
     {
       "trxCode": "9419",
@@ -2573,19 +2580,19 @@
       "trxCode": "9455",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 42
+      "count": 84
     },
     {
       "trxCode": "4400",
       "errorCode": "M01",
       "description": "Sin descripción",
-      "count": 160
+      "count": 161
     },
     {
       "trxCode": "4407",
       "errorCode": "M01",
       "description": "Sin descripción",
-      "count": 76
+      "count": 78
     },
     {
       "trxCode": "4408",
@@ -2609,7 +2616,7 @@
       "trxCode": "3302",
       "errorCode": "R03",
       "description": "El valor del giro supera los límites transaccionales (En cuanto a monto) configurados en Banco Unión",
-      "count": 11
+      "count": 12
     },
     {
       "trxCode": "3302",
@@ -2627,7 +2634,7 @@
       "trxCode": "9408",
       "errorCode": "V03",
       "description": "El valor de la nueva password informada ya ha sido utilizado con anterioridad",
-      "count": 237
+      "count": 239
     },
     {
       "trxCode": "1655",
@@ -2651,13 +2658,13 @@
       "trxCode": "2601",
       "errorCode": "C07",
       "description": "Sin descripción",
-      "count": 57
+      "count": 58
     },
     {
       "trxCode": "9446",
       "errorCode": "E14",
       "description": "Error validando la versión de aplicación",
-      "count": 76
+      "count": 78
     },
     {
       "trxCode": "4211",
@@ -2669,7 +2676,7 @@
       "trxCode": "1015",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 19
+      "count": 20
     },
     {
       "trxCode": "1817",
@@ -2741,7 +2748,7 @@
       "trxCode": "1852",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 21
+      "count": 22
     },
     {
       "trxCode": "1853",
@@ -2783,13 +2790,13 @@
       "trxCode": "2902",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 16
+      "count": 17
     },
     {
       "trxCode": "3353",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 44
+      "count": 45
     },
     {
       "trxCode": "3354",
@@ -2831,7 +2838,7 @@
       "trxCode": "7006",
       "errorCode": "H23",
       "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 107
+      "count": 109
     },
     {
       "trxCode": "9002",
@@ -2963,7 +2970,7 @@
       "trxCode": "9068",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 35
+      "count": 37
     },
     {
       "trxCode": "9356",
@@ -2975,13 +2982,13 @@
       "trxCode": "9421",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 17
+      "count": 18
     },
     {
       "trxCode": "4455",
       "errorCode": "M01",
       "description": "Sin descripción",
-      "count": 32
+      "count": 35
     },
     {
       "trxCode": "1253",
@@ -3011,7 +3018,7 @@
       "trxCode": "9064",
       "errorCode": "V02",
       "description": "El código que ingresaste no es correcto. Por favor verifícalo e inténtalo de nuevo.",
-      "count": 63
+      "count": 67
     },
     {
       "trxCode": "9075",
@@ -3035,7 +3042,7 @@
       "trxCode": "2601",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 126
+      "count": 131
     },
     {
       "trxCode": "7504",
@@ -3113,7 +3120,7 @@
       "trxCode": "3354",
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
-      "count": 25
+      "count": 26
     },
     {
       "trxCode": "9002",
@@ -3161,7 +3168,7 @@
       "trxCode": "9446",
       "errorCode": "E12",
       "description": "Error chequeando el número de sequencia",
-      "count": 5
+      "count": 6
     },
     {
       "trxCode": "4205",
@@ -3329,7 +3336,7 @@
       "trxCode": "4461",
       "errorCode": "M06",
       "description": "Sin descripción",
-      "count": 21
+      "count": 22
     },
     {
       "trxCode": "2901",
@@ -3365,7 +3372,7 @@
       "trxCode": "9421",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
-      "count": 61
+      "count": 62
     },
     {
       "trxCode": "1821",
@@ -3642,6 +3649,48 @@
       "errorCode": "V04",
       "description": "Usuario no puede continuar con el proceso de login",
       "count": 64
+    },
+    {
+      "trxCode": "4201",
+      "errorCode": "F07",
+      "description": "Sin descripción",
+      "count": 5
+    },
+    {
+      "trxCode": "9201",
+      "errorCode": "H03",
+      "description": "Código de rechazo del host no definido.",
+      "count": 3
+    },
+    {
+      "trxCode": "9422",
+      "errorCode": "H03",
+      "description": "Código de rechazo del host no definido.",
+      "count": 4
+    },
+    {
+      "trxCode": "7007",
+      "errorCode": "H23",
+      "description": "Time out esperando respuesta del host. (transacción no monetaria)",
+      "count": 4
+    },
+    {
+      "trxCode": "2155",
+      "errorCode": "PS4",
+      "description": "Sin descripción",
+      "count": 4
+    },
+    {
+      "trxCode": "3803",
+      "errorCode": "Q04",
+      "description": "Sin descripción",
+      "count": 5
+    },
+    {
+      "trxCode": "9446",
+      "errorCode": "V02",
+      "description": "El código que ingresaste no es correcto. Por favor verifícalo e inténtalo de nuevo.",
+      "count": 15
     },
     {
       "trxCode": "1605",
@@ -4010,12 +4059,6 @@
       "count": 3
     },
     {
-      "trxCode": "9446",
-      "errorCode": "V02",
-      "description": "El código que ingresaste no es correcto. Por favor verifícalo e inténtalo de nuevo.",
-      "count": 14
-    },
-    {
       "trxCode": "2600",
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
@@ -4110,12 +4153,6 @@
       "errorCode": "H03",
       "description": "Código de rechazo del host no definido.",
       "count": 17
-    },
-    {
-      "trxCode": "9422",
-      "errorCode": "H03",
-      "description": "Código de rechazo del host no definido.",
-      "count": 3
     },
     {
       "trxCode": "9752",
@@ -4400,27 +4437,9 @@
       "count": 5
     },
     {
-      "trxCode": "7007",
-      "errorCode": "H23",
-      "description": "Time out esperando respuesta del host. (transacción no monetaria)",
-      "count": 3
-    },
-    {
       "trxCode": "3352",
       "errorCode": "R03",
       "description": "El valor del giro supera los límites transaccionales (En cuanto a monto) configurados en Banco Unión",
-      "count": 2
-    },
-    {
-      "trxCode": "4201",
-      "errorCode": "F07",
-      "description": "Sin descripción",
-      "count": 4
-    },
-    {
-      "trxCode": "9201",
-      "errorCode": "H03",
-      "description": "Código de rechazo del host no definido.",
       "count": 2
     },
     {
@@ -4586,12 +4605,6 @@
       "count": 1
     },
     {
-      "trxCode": "2155",
-      "errorCode": "PS4",
-      "description": "Sin descripción",
-      "count": 3
-    },
-    {
       "trxCode": "9354",
       "errorCode": "V06",
       "description": "El usuario se ha bloqueado por alcanzar límite de intentos fallidos de validación de clave",
@@ -4650,12 +4663,6 @@
       "errorCode": "H84",
       "description": "Se ha producido un error en el servidor",
       "count": 3
-    },
-    {
-      "trxCode": "3803",
-      "errorCode": "Q04",
-      "description": "Sin descripción",
-      "count": 4
     },
     {
       "trxCode": "4203",
@@ -81178,7 +81185,1119 @@
           "count": 12
         }
       ]
+    },
+    {
+      "date": "2026-02-05T05:00:00.000Z",
+      "h03Count": 1367,
+      "h23Count": 192,
+      "allErrors": [
+        {
+          "trxCode": "1111",
+          "errorCode": "A47",
+          "count": 6
+        },
+        {
+          "trxCode": "1010",
+          "errorCode": "A50",
+          "count": 5
+        },
+        {
+          "trxCode": "1108",
+          "errorCode": "A50",
+          "count": 2
+        },
+        {
+          "trxCode": "1111",
+          "errorCode": "A50",
+          "count": 31
+        },
+        {
+          "trxCode": "9200",
+          "errorCode": "A50",
+          "count": 5
+        },
+        {
+          "trxCode": "1819",
+          "errorCode": "BR1",
+          "count": 2
+        },
+        {
+          "trxCode": "1820",
+          "errorCode": "BR1",
+          "count": 23
+        },
+        {
+          "trxCode": "1821",
+          "errorCode": "BR1",
+          "count": 1
+        },
+        {
+          "trxCode": "1604",
+          "errorCode": "C01",
+          "count": 4
+        },
+        {
+          "trxCode": "1900",
+          "errorCode": "C01",
+          "count": 189
+        },
+        {
+          "trxCode": "1901",
+          "errorCode": "C01",
+          "count": 22
+        },
+        {
+          "trxCode": "2051",
+          "errorCode": "C01",
+          "count": 1
+        },
+        {
+          "trxCode": "9051",
+          "errorCode": "C01",
+          "count": 1
+        },
+        {
+          "trxCode": "3302",
+          "errorCode": "C02",
+          "count": 150
+        },
+        {
+          "trxCode": "3303",
+          "errorCode": "C02",
+          "count": 32
+        },
+        {
+          "trxCode": "3352",
+          "errorCode": "C02",
+          "count": 10
+        },
+        {
+          "trxCode": "3353",
+          "errorCode": "C02",
+          "count": 2
+        },
+        {
+          "trxCode": "1604",
+          "errorCode": "C06",
+          "count": 8
+        },
+        {
+          "trxCode": "2601",
+          "errorCode": "C07",
+          "count": 1
+        },
+        {
+          "trxCode": "9402",
+          "errorCode": "C10",
+          "count": 20
+        },
+        {
+          "trxCode": "5700",
+          "errorCode": "C11",
+          "count": 1
+        },
+        {
+          "trxCode": "1602",
+          "errorCode": "D01",
+          "count": 2
+        },
+        {
+          "trxCode": "1655",
+          "errorCode": "D01",
+          "count": 2
+        },
+        {
+          "trxCode": "3308",
+          "errorCode": "D01",
+          "count": 2
+        },
+        {
+          "trxCode": "1061",
+          "errorCode": "E11",
+          "count": 11
+        },
+        {
+          "trxCode": "2904",
+          "errorCode": "E11",
+          "count": 5
+        },
+        {
+          "trxCode": "9002",
+          "errorCode": "E11",
+          "count": 4
+        },
+        {
+          "trxCode": "1061",
+          "errorCode": "E12",
+          "count": 32
+        },
+        {
+          "trxCode": "9002",
+          "errorCode": "E12",
+          "count": 13
+        },
+        {
+          "trxCode": "9446",
+          "errorCode": "E12",
+          "count": 1
+        },
+        {
+          "trxCode": "1061",
+          "errorCode": "E14",
+          "count": 9
+        },
+        {
+          "trxCode": "2904",
+          "errorCode": "E14",
+          "count": 1
+        },
+        {
+          "trxCode": "9002",
+          "errorCode": "E14",
+          "count": 53
+        },
+        {
+          "trxCode": "9064",
+          "errorCode": "E14",
+          "count": 9
+        },
+        {
+          "trxCode": "9356",
+          "errorCode": "E14",
+          "count": 3
+        },
+        {
+          "trxCode": "9446",
+          "errorCode": "E14",
+          "count": 2
+        },
+        {
+          "trxCode": "4201",
+          "errorCode": "F07",
+          "count": 1
+        },
+        {
+          "trxCode": "4200",
+          "errorCode": "F08",
+          "count": 15
+        },
+        {
+          "trxCode": "4210",
+          "errorCode": "F08",
+          "count": 36
+        },
+        {
+          "trxCode": "1010",
+          "errorCode": "H03",
+          "count": 17
+        },
+        {
+          "trxCode": "1015",
+          "errorCode": "H03",
+          "count": 1
+        },
+        {
+          "trxCode": "1060",
+          "errorCode": "H03",
+          "count": 32
+        },
+        {
+          "trxCode": "1101",
+          "errorCode": "H03",
+          "count": 23
+        },
+        {
+          "trxCode": "1108",
+          "errorCode": "H03",
+          "count": 8
+        },
+        {
+          "trxCode": "1111",
+          "errorCode": "H03",
+          "count": 99
+        },
+        {
+          "trxCode": "1150",
+          "errorCode": "H03",
+          "count": 8
+        },
+        {
+          "trxCode": "1253",
+          "errorCode": "H03",
+          "count": 521
+        },
+        {
+          "trxCode": "1254",
+          "errorCode": "H03",
+          "count": 1
+        },
+        {
+          "trxCode": "1353",
+          "errorCode": "H03",
+          "count": 47
+        },
+        {
+          "trxCode": "1602",
+          "errorCode": "H03",
+          "count": 34
+        },
+        {
+          "trxCode": "1603",
+          "errorCode": "H03",
+          "count": 8
+        },
+        {
+          "trxCode": "1816",
+          "errorCode": "H03",
+          "count": 2
+        },
+        {
+          "trxCode": "1818",
+          "errorCode": "H03",
+          "count": 42
+        },
+        {
+          "trxCode": "1819",
+          "errorCode": "H03",
+          "count": 51
+        },
+        {
+          "trxCode": "1820",
+          "errorCode": "H03",
+          "count": 15
+        },
+        {
+          "trxCode": "1822",
+          "errorCode": "H03",
+          "count": 2
+        },
+        {
+          "trxCode": "1901",
+          "errorCode": "H03",
+          "count": 79
+        },
+        {
+          "trxCode": "2201",
+          "errorCode": "H03",
+          "count": 12
+        },
+        {
+          "trxCode": "2209",
+          "errorCode": "H03",
+          "count": 18
+        },
+        {
+          "trxCode": "2601",
+          "errorCode": "H03",
+          "count": 5
+        },
+        {
+          "trxCode": "2901",
+          "errorCode": "H03",
+          "count": 1
+        },
+        {
+          "trxCode": "3303",
+          "errorCode": "H03",
+          "count": 15
+        },
+        {
+          "trxCode": "3308",
+          "errorCode": "H03",
+          "count": 62
+        },
+        {
+          "trxCode": "3352",
+          "errorCode": "H03",
+          "count": 27
+        },
+        {
+          "trxCode": "3353",
+          "errorCode": "H03",
+          "count": 2
+        },
+        {
+          "trxCode": "3803",
+          "errorCode": "H03",
+          "count": 2
+        },
+        {
+          "trxCode": "4409",
+          "errorCode": "H03",
+          "count": 2
+        },
+        {
+          "trxCode": "4411",
+          "errorCode": "H03",
+          "count": 5
+        },
+        {
+          "trxCode": "4455",
+          "errorCode": "H03",
+          "count": 8
+        },
+        {
+          "trxCode": "4462",
+          "errorCode": "H03",
+          "count": 3
+        },
+        {
+          "trxCode": "4472",
+          "errorCode": "H03",
+          "count": 5
+        },
+        {
+          "trxCode": "7002",
+          "errorCode": "H03",
+          "count": 8
+        },
+        {
+          "trxCode": "7005",
+          "errorCode": "H03",
+          "count": 1
+        },
+        {
+          "trxCode": "7006",
+          "errorCode": "H03",
+          "count": 2
+        },
+        {
+          "trxCode": "7010",
+          "errorCode": "H03",
+          "count": 12
+        },
+        {
+          "trxCode": "7500",
+          "errorCode": "H03",
+          "count": 2
+        },
+        {
+          "trxCode": "7505",
+          "errorCode": "H03",
+          "count": 1
+        },
+        {
+          "trxCode": "7506",
+          "errorCode": "H03",
+          "count": 10
+        },
+        {
+          "trxCode": "9000",
+          "errorCode": "H03",
+          "count": 1
+        },
+        {
+          "trxCode": "9008",
+          "errorCode": "H03",
+          "count": 2
+        },
+        {
+          "trxCode": "9061",
+          "errorCode": "H03",
+          "count": 24
+        },
+        {
+          "trxCode": "9063",
+          "errorCode": "H03",
+          "count": 16
+        },
+        {
+          "trxCode": "9070",
+          "errorCode": "H03",
+          "count": 114
+        },
+        {
+          "trxCode": "9200",
+          "errorCode": "H03",
+          "count": 7
+        },
+        {
+          "trxCode": "9201",
+          "errorCode": "H03",
+          "count": 1
+        },
+        {
+          "trxCode": "9210",
+          "errorCode": "H03",
+          "count": 6
+        },
+        {
+          "trxCode": "9353",
+          "errorCode": "H03",
+          "count": 1
+        },
+        {
+          "trxCode": "9421",
+          "errorCode": "H03",
+          "count": 1
+        },
+        {
+          "trxCode": "9422",
+          "errorCode": "H03",
+          "count": 1
+        },
+        {
+          "trxCode": "3300",
+          "errorCode": "H09",
+          "count": 1
+        },
+        {
+          "trxCode": "6001",
+          "errorCode": "H09",
+          "count": 22
+        },
+        {
+          "trxCode": "1010",
+          "errorCode": "H23",
+          "count": 3
+        },
+        {
+          "trxCode": "1111",
+          "errorCode": "H23",
+          "count": 30
+        },
+        {
+          "trxCode": "1250",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "1251",
+          "errorCode": "H23",
+          "count": 7
+        },
+        {
+          "trxCode": "1253",
+          "errorCode": "H23",
+          "count": 5
+        },
+        {
+          "trxCode": "1353",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "1600",
+          "errorCode": "H23",
+          "count": 5
+        },
+        {
+          "trxCode": "1815",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "1816",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "1818",
+          "errorCode": "H23",
+          "count": 2
+        },
+        {
+          "trxCode": "1852",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "1900",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "2902",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "3300",
+          "errorCode": "H23",
+          "count": 14
+        },
+        {
+          "trxCode": "3302",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "3305",
+          "errorCode": "H23",
+          "count": 3
+        },
+        {
+          "trxCode": "3307",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "3350",
+          "errorCode": "H23",
+          "count": 3
+        },
+        {
+          "trxCode": "3352",
+          "errorCode": "H23",
+          "count": 2
+        },
+        {
+          "trxCode": "3353",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "4210",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "5700",
+          "errorCode": "H23",
+          "count": 3
+        },
+        {
+          "trxCode": "7000",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "7002",
+          "errorCode": "H23",
+          "count": 11
+        },
+        {
+          "trxCode": "7003",
+          "errorCode": "H23",
+          "count": 2
+        },
+        {
+          "trxCode": "7004",
+          "errorCode": "H23",
+          "count": 2
+        },
+        {
+          "trxCode": "7005",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "7006",
+          "errorCode": "H23",
+          "count": 2
+        },
+        {
+          "trxCode": "7007",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "7010",
+          "errorCode": "H23",
+          "count": 32
+        },
+        {
+          "trxCode": "7506",
+          "errorCode": "H23",
+          "count": 8
+        },
+        {
+          "trxCode": "9008",
+          "errorCode": "H23",
+          "count": 2
+        },
+        {
+          "trxCode": "9015",
+          "errorCode": "H23",
+          "count": 2
+        },
+        {
+          "trxCode": "9061",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "9063",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "9069",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "9201",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "9359",
+          "errorCode": "H23",
+          "count": 2
+        },
+        {
+          "trxCode": "9410",
+          "errorCode": "H23",
+          "count": 2
+        },
+        {
+          "trxCode": "9418",
+          "errorCode": "H23",
+          "count": 1
+        },
+        {
+          "trxCode": "9430",
+          "errorCode": "H23",
+          "count": 12
+        },
+        {
+          "trxCode": "9431",
+          "errorCode": "H23",
+          "count": 14
+        },
+        {
+          "trxCode": "9432",
+          "errorCode": "H23",
+          "count": 5
+        },
+        {
+          "trxCode": "1011",
+          "errorCode": "H84",
+          "count": 9
+        },
+        {
+          "trxCode": "1060",
+          "errorCode": "H84",
+          "count": 4
+        },
+        {
+          "trxCode": "1250",
+          "errorCode": "H84",
+          "count": 26
+        },
+        {
+          "trxCode": "1251",
+          "errorCode": "H84",
+          "count": 24
+        },
+        {
+          "trxCode": "1822",
+          "errorCode": "H84",
+          "count": 13
+        },
+        {
+          "trxCode": "1901",
+          "errorCode": "H84",
+          "count": 2
+        },
+        {
+          "trxCode": "2253",
+          "errorCode": "H84",
+          "count": 2
+        },
+        {
+          "trxCode": "3300",
+          "errorCode": "H84",
+          "count": 1
+        },
+        {
+          "trxCode": "3352",
+          "errorCode": "H84",
+          "count": 2
+        },
+        {
+          "trxCode": "3354",
+          "errorCode": "H84",
+          "count": 1
+        },
+        {
+          "trxCode": "4455",
+          "errorCode": "H84",
+          "count": 19
+        },
+        {
+          "trxCode": "9052",
+          "errorCode": "H84",
+          "count": 1
+        },
+        {
+          "trxCode": "9068",
+          "errorCode": "H84",
+          "count": 2
+        },
+        {
+          "trxCode": "9404",
+          "errorCode": "H84",
+          "count": 4
+        },
+        {
+          "trxCode": "9421",
+          "errorCode": "H84",
+          "count": 1
+        },
+        {
+          "trxCode": "9444",
+          "errorCode": "H84",
+          "count": 23
+        },
+        {
+          "trxCode": "9455",
+          "errorCode": "H84",
+          "count": 42
+        },
+        {
+          "trxCode": "9051",
+          "errorCode": "ID1",
+          "count": 55
+        },
+        {
+          "trxCode": "1819",
+          "errorCode": "K04",
+          "count": 174
+        },
+        {
+          "trxCode": "1816",
+          "errorCode": "K05",
+          "count": 416
+        },
+        {
+          "trxCode": "1820",
+          "errorCode": "K06",
+          "count": 17
+        },
+        {
+          "trxCode": "1820",
+          "errorCode": "K08",
+          "count": 6
+        },
+        {
+          "trxCode": "4400",
+          "errorCode": "M01",
+          "count": 1
+        },
+        {
+          "trxCode": "4407",
+          "errorCode": "M01",
+          "count": 2
+        },
+        {
+          "trxCode": "4408",
+          "errorCode": "M01",
+          "count": 5
+        },
+        {
+          "trxCode": "4409",
+          "errorCode": "M01",
+          "count": 10
+        },
+        {
+          "trxCode": "4455",
+          "errorCode": "M01",
+          "count": 3
+        },
+        {
+          "trxCode": "4460",
+          "errorCode": "M01",
+          "count": 6
+        },
+        {
+          "trxCode": "4463",
+          "errorCode": "M01",
+          "count": 16
+        },
+        {
+          "trxCode": "4472",
+          "errorCode": "M01",
+          "count": 5
+        },
+        {
+          "trxCode": "4461",
+          "errorCode": "M06",
+          "count": 1
+        },
+        {
+          "trxCode": "4402",
+          "errorCode": "M08",
+          "count": 2
+        },
+        {
+          "trxCode": "4456",
+          "errorCode": "M08",
+          "count": 2
+        },
+        {
+          "trxCode": "1253",
+          "errorCode": "O03",
+          "count": 5
+        },
+        {
+          "trxCode": "1253",
+          "errorCode": "O05",
+          "count": 1082
+        },
+        {
+          "trxCode": "1353",
+          "errorCode": "O05",
+          "count": 65
+        },
+        {
+          "trxCode": "9754",
+          "errorCode": "PQ4",
+          "count": 7
+        },
+        {
+          "trxCode": "2150",
+          "errorCode": "PS4",
+          "count": 3
+        },
+        {
+          "trxCode": "2151",
+          "errorCode": "PS4",
+          "count": 8
+        },
+        {
+          "trxCode": "2155",
+          "errorCode": "PS4",
+          "count": 1
+        },
+        {
+          "trxCode": "3803",
+          "errorCode": "Q01",
+          "count": 4
+        },
+        {
+          "trxCode": "3803",
+          "errorCode": "Q04",
+          "count": 1
+        },
+        {
+          "trxCode": "3302",
+          "errorCode": "R01",
+          "count": 106
+        },
+        {
+          "trxCode": "3352",
+          "errorCode": "R01",
+          "count": 13
+        },
+        {
+          "trxCode": "3302",
+          "errorCode": "R03",
+          "count": 1
+        },
+        {
+          "trxCode": "3302",
+          "errorCode": "R04",
+          "count": 142
+        },
+        {
+          "trxCode": "3352",
+          "errorCode": "R04",
+          "count": 19
+        },
+        {
+          "trxCode": "3302",
+          "errorCode": "R07",
+          "count": 192
+        },
+        {
+          "trxCode": "3303",
+          "errorCode": "R07",
+          "count": 34
+        },
+        {
+          "trxCode": "3352",
+          "errorCode": "R07",
+          "count": 25
+        },
+        {
+          "trxCode": "3303",
+          "errorCode": "R09",
+          "count": 3
+        },
+        {
+          "trxCode": "3306",
+          "errorCode": "R10",
+          "count": 13
+        },
+        {
+          "trxCode": "9410",
+          "errorCode": "S20",
+          "count": 29
+        },
+        {
+          "trxCode": "9418",
+          "errorCode": "S20",
+          "count": 5
+        },
+        {
+          "trxCode": "9449",
+          "errorCode": "S20",
+          "count": 3
+        },
+        {
+          "trxCode": "9430",
+          "errorCode": "S21",
+          "count": 17
+        },
+        {
+          "trxCode": "9431",
+          "errorCode": "S21",
+          "count": 7
+        },
+        {
+          "trxCode": "1852",
+          "errorCode": "T01",
+          "count": 3
+        },
+        {
+          "trxCode": "1901",
+          "errorCode": "T01",
+          "count": 100
+        },
+        {
+          "trxCode": "1010",
+          "errorCode": "V01",
+          "count": 90
+        },
+        {
+          "trxCode": "1111",
+          "errorCode": "V01",
+          "count": 32
+        },
+        {
+          "trxCode": "9015",
+          "errorCode": "V01",
+          "count": 9
+        },
+        {
+          "trxCode": "9002",
+          "errorCode": "V02",
+          "count": 25
+        },
+        {
+          "trxCode": "9064",
+          "errorCode": "V02",
+          "count": 4
+        },
+        {
+          "trxCode": "9446",
+          "errorCode": "V02",
+          "count": 1
+        },
+        {
+          "trxCode": "1154",
+          "errorCode": "V03",
+          "count": 10
+        },
+        {
+          "trxCode": "9004",
+          "errorCode": "V03",
+          "count": 7
+        },
+        {
+          "trxCode": "9068",
+          "errorCode": "V03",
+          "count": 16
+        },
+        {
+          "trxCode": "9210",
+          "errorCode": "V03",
+          "count": 25
+        },
+        {
+          "trxCode": "9350",
+          "errorCode": "V03",
+          "count": 70
+        },
+        {
+          "trxCode": "9408",
+          "errorCode": "V03",
+          "count": 2
+        },
+        {
+          "trxCode": "1111",
+          "errorCode": "V04",
+          "count": 63
+        },
+        {
+          "trxCode": "1010",
+          "errorCode": "V05",
+          "count": 122
+        },
+        {
+          "trxCode": "1108",
+          "errorCode": "V05",
+          "count": 23
+        },
+        {
+          "trxCode": "1111",
+          "errorCode": "V05",
+          "count": 805
+        },
+        {
+          "trxCode": "9200",
+          "errorCode": "V05",
+          "count": 77
+        },
+        {
+          "trxCode": "9353",
+          "errorCode": "V05",
+          "count": 2
+        },
+        {
+          "trxCode": "1060",
+          "errorCode": "V06",
+          "count": 573
+        },
+        {
+          "trxCode": "1108",
+          "errorCode": "V06",
+          "count": 1
+        },
+        {
+          "trxCode": "1111",
+          "errorCode": "V06",
+          "count": 53
+        },
+        {
+          "trxCode": "9000",
+          "errorCode": "V06",
+          "count": 40
+        },
+        {
+          "trxCode": "9001",
+          "errorCode": "V06",
+          "count": 2
+        },
+        {
+          "trxCode": "9002",
+          "errorCode": "V06",
+          "count": 1
+        },
+        {
+          "trxCode": "9063",
+          "errorCode": "V06",
+          "count": 51
+        },
+        {
+          "trxCode": "9200",
+          "errorCode": "V06",
+          "count": 11
+        },
+        {
+          "trxCode": "1111",
+          "errorCode": "V07",
+          "count": 73
+        },
+        {
+          "trxCode": "9200",
+          "errorCode": "V07",
+          "count": 10
+        }
+      ]
     }
   ],
-  "savedAt": "2026-02-05T20:53:42.939Z"
+  "savedAt": "2026-02-06T15:27:22.227Z"
 }
