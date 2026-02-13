@@ -508,13 +508,14 @@
     }
 
     .metric-context {
-      background: rgba(59, 130, 246, 0.1);
-      padding: 10px 15px;
-      border-radius: 8px;
-      margin-top: 10px;
-      font-size: 0.85em;
-      color: #1f2937;
-      border-left: 3px solid #3b82f6;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      padding: 14px 18px;
+      border-radius: 10px;
+      margin-top: 14px;
+      font-size: 0.9em;
+      color: #1e3a5f;
+      border-left: 4px solid #3b82f6;
+      line-height: 1.7;
     }
 
     .print-button {
@@ -671,18 +672,178 @@
 
     /* Bloques técnicos para insights */
     .insights-tech {
-      background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
-      border-left: 5px solid #06b6d4;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-left: 5px solid #0284c7;
+      padding: 32px 36px;
     }
 
     .tech-metric {
       display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(6, 182, 212, 0.12);
-      border: 1px solid rgba(6, 182, 212, 0.25);
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(2, 132, 199, 0.10);
+      border: 1px solid rgba(2, 132, 199, 0.22);
       font-weight: 700;
-      margin: 0 4px;
+      margin: 0 3px;
+      font-size: 0.95em;
+    }
+
+    .insights-tech h3 {
+      font-size: 1.25em;
+      color: #0c4a6e;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e0f2fe;
+    }
+
+    .insight-section {
+      margin-bottom: 22px;
+      padding: 18px 22px;
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .insight-section h4 {
+      font-size: 1.05em;
+      color: #1e3a5f;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .insight-section p {
+      color: #475569;
+      line-height: 1.75;
+      margin-bottom: 8px;
+      font-size: 0.95em;
+    }
+
+    .insight-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0 0;
+    }
+
+    .insight-section ul li {
+      padding: 8px 12px 8px 28px;
+      position: relative;
+      color: #475569;
+      line-height: 1.6;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .insight-section ul li:last-child {
+      border-bottom: none;
+    }
+
+    .insight-section ul li::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 14px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0284c7;
+    }
+
+    .insight-verdict {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 16px;
+    }
+
+    .insight-verdict h4 {
+      color: #1e40af;
+      margin-bottom: 8px;
+      font-size: 1em;
+    }
+
+    .insight-verdict p {
+      color: #1e3a5f;
+      line-height: 1.7;
+      margin: 0;
+      font-size: 0.93em;
+    }
+
+    .insight-kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .insight-kpi-item {
+      text-align: center;
+      padding: 14px 10px;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-radius: 8px;
+      border: 1px solid #bae6fd;
+    }
+
+    .insight-kpi-item .ik-label {
+      font-size: 0.78em;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .insight-kpi-item .ik-value {
+      font-size: 1.5em;
+      font-weight: 800;
+      color: #0c4a6e;
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.82em;
+      font-weight: 700;
+    }
+
+    .status-pill.good {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status-pill.warning {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status-pill.critical {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .anomaly-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .anomaly-card .ac-date {
+      font-weight: 700;
+      color: #9a3412;
+      min-width: 90px;
+    }
+
+    .anomaly-card .ac-detail {
+      color: #78350f;
+      font-size: 0.9em;
     }
 
     @media (max-width: 768px) {
@@ -1803,14 +1964,35 @@
       const bestDay = dailyData.reduce((min, day) => day.errorRate < min.errorRate ? day : min, dailyData[0]);
       const worstDay = dailyData.reduce((max, day) => day.errorRate > max.errorRate ? day : max, dailyData[0]);
 
+      const successRate = (100 - avgErrorRate).toFixed(2);
+      const errorDiff = worstDay.errorRate - bestDay.errorRate;
+      const narrativeStatusClass = avgErrorRate < TECH_THRESHOLDS.errorRateWarn ? 'good' : avgErrorRate < TECH_THRESHOLDS.errorRateCritical ? 'warning' : 'critical';
+      const statusText = avgErrorRate < TECH_THRESHOLDS.errorRateWarn ? 'Dentro de la meta' : avgErrorRate < TECH_THRESHOLDS.errorRateCritical ? 'Requiere atención' : 'Nivel crítico';
+
       const narrative = `
-        <h3>📋 Resumen Ejecutivo</h3>
-        <p>Durante el período (${dailyData.length} días), se procesaron
-        <span class="narrative-highlight">${formatNumber(totalTrx)} transacciones</span> con
-        <span class="narrative-highlight">${formatNumber(totalErrors)} errores</span>.
-        Tasa promedio: <span class="narrative-highlight">${avgErrorRate.toFixed(2)}%</span>.</p>
-        <p>Mejor día: <strong>${formatDate(bestDay.date)}</strong> (${bestDay.errorRate.toFixed(2)}%).
-        Peor día: <strong>${formatDate(worstDay.date)}</strong> (${worstDay.errorRate.toFixed(2)}%).</p>
+        <h3>📋 Resumen Ejecutivo del Período</h3>
+
+        <div class="insight-section">
+          <h4>📌 Panorama General</h4>
+          <p>Durante un período de <strong>${dailyData.length} días</strong>, el sistema procesó un total de
+          <span class="narrative-highlight">${formatNumber(totalTrx)} transacciones</span>, de las cuales
+          <span class="narrative-highlight">${formatNumber(totalErrors)}</span> presentaron algún tipo de error.</p>
+          <p>Esto representa una <strong>tasa de éxito del ${successRate}%</strong>, lo que significa que de cada 100 transacciones,
+          aproximadamente <strong>${avgErrorRate.toFixed(1)} fallaron</strong>.</p>
+          <p>Estado actual: <span class="status-pill ${narrativeStatusClass}">${statusText}</span></p>
+        </div>
+
+        <div class="insight-section">
+          <h4>📅 Días Destacados</h4>
+          <p><strong>Mejor rendimiento:</strong> El día <span class="narrative-highlight">${formatDate(bestDay.date)}</span>
+          fue el más estable, con solo un <strong>${bestDay.errorRate.toFixed(2)}%</strong> de errores
+          (${formatNumber(bestDay.totalErrors)} errores de ${formatNumber(bestDay.totalTrx)} transacciones).</p>
+          <p><strong>Mayor incidencia:</strong> El día <span class="narrative-highlight">${formatDate(worstDay.date)}</span>
+          registró la mayor tasa de fallos con <strong>${worstDay.errorRate.toFixed(2)}%</strong>
+          (${formatNumber(worstDay.totalErrors)} errores de ${formatNumber(worstDay.totalTrx)} transacciones).</p>
+          <p>La diferencia entre el mejor y el peor día es de <strong>${errorDiff.toFixed(2)} puntos porcentuales</strong>,
+          lo cual ${errorDiff > 10 ? 'indica una variabilidad alta que debe investigarse' : errorDiff > 5 ? 'sugiere variabilidad moderada' : 'indica un comportamiento relativamente estable'}.</p>
+        </div>
       `;
       document.getElementById('narrative-block').innerHTML = narrative;
     }
@@ -2319,45 +2501,97 @@
       const bestDay = dailyData.reduce((min, d) => d.errorRate < min.errorRate ? d : min, dailyData[0]);
       const worstDay = dailyData.reduce((max, d) => d.errorRate > max.errorRate ? d : max, dailyData[0]);
 
+      const stabilityLabel = cv < 0.3 ? 'estable' : cv < 0.6 ? 'moderadamente variable' : 'altamente inestable';
+      const stabilityClass = cv < 0.3 ? 'good' : cv < 0.6 ? 'warning' : 'critical';
+
       return `
-        <p>
-          Umbrales: 
-          <span class="tech-metric">Target &lt; ${TECH_THRESHOLDS.errorRateTarget.toFixed(1)}%</span>
-          <span class="tech-metric">Warn ≥ ${TECH_THRESHOLDS.errorRateWarn.toFixed(1)}%</span>
-          <span class="tech-metric">Critical ≥ ${TECH_THRESHOLDS.errorRateCritical.toFixed(1)}%</span>
-          <span class="tech-metric">Anomalía: μ + ${TECH_THRESHOLDS.anomalySigma}σ</span>
-        </p>
+        <div class="insight-section">
+          <h4>📊 Indicadores Estadísticos de la Tasa de Error</h4>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item">
+              <div class="ik-label">Promedio</div>
+              <div class="ik-value">${avg.toFixed(2)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Desviación</div>
+              <div class="ik-value">${sd.toFixed(2)}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Mediana (P50)</div>
+              <div class="ik-value">${p50.toFixed(2)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Percentil 90</div>
+              <div class="ik-value">${p90.toFixed(2)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Percentil 95</div>
+              <div class="ik-value">${p95.toFixed(2)}%</div>
+            </div>
+          </div>
+          <p>La tasa de error promedio fue de <strong>${avg.toFixed(2)}%</strong>. La mitad de los días registraron una tasa inferior a <strong>${p50.toFixed(2)}%</strong> (mediana).
+          En el <strong>10% de los peores días</strong>, la tasa superó el <strong>${p90.toFixed(2)}%</strong>, y en el 5% más crítico alcanzó el <strong>${p95.toFixed(2)}%</strong>.</p>
+          <p>Estabilidad del sistema: <span class="status-pill ${stabilityClass}">${stabilityLabel}</span>
+          — El coeficiente de variación es del <strong>${(cv*100).toFixed(0)}%</strong>, lo que indica que
+          ${cv < 0.3 ? 'la tasa de error se mantiene predecible y consistente día a día.' : cv < 0.6 ? 'existe cierta variación entre días, algunos factores externos afectan el rendimiento.' : 'la tasa fluctúa significativamente, hay días con comportamiento muy diferente al promedio.'}</p>
+        </div>
 
-        <h3>📊 Estadística de la tasa (Error Rate)</h3>
-        <p>
-          μ=<strong>${avg.toFixed(2)}%</strong>, σ=<strong>${sd.toFixed(2)}</strong>, CV=<strong>${(cv*100).toFixed(0)}%</strong>.
-          Percentiles: p50=<strong>${p50.toFixed(2)}%</strong>, p90=<strong>${p90.toFixed(2)}%</strong>, p95=<strong>${p95.toFixed(2)}%</strong>.
-        </p>
+        <div class="insight-section">
+          <h4>🚦 Cumplimiento de Umbrales Operativos</h4>
+          <p>Se definieron los siguientes umbrales para monitorear la salud del sistema:</p>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item">
+              <div class="ik-label">Meta objetivo</div>
+              <div class="ik-value" style="color:#16a34a">&lt; ${TECH_THRESHOLDS.errorRateTarget.toFixed(1)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Nivel de alerta</div>
+              <div class="ik-value" style="color:#d97706">≥ ${TECH_THRESHOLDS.errorRateWarn.toFixed(1)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Nivel crítico</div>
+              <div class="ik-value" style="color:#dc2626">≥ ${TECH_THRESHOLDS.errorRateCritical.toFixed(1)}%</div>
+            </div>
+          </div>
+          <p><strong>${overWarn} de ${dailyData.length} días</strong> (${pct(overWarn, dailyData.length).toFixed(0)}%) superaron el nivel de alerta.
+          De estos, <strong>${overCrit} días</strong> (${pct(overCrit, dailyData.length).toFixed(0)}%) alcanzaron el nivel crítico.</p>
+          <p>${overCrit === 0 ? '✅ No hubo días en nivel crítico — buen indicador de estabilidad.' :
+             overCrit <= 2 ? '⚠️ Se presentaron días aislados en nivel crítico; deben analizarse como incidentes puntuales.' :
+             '🔴 Múltiples días en nivel crítico indican un problema recurrente que requiere atención prioritaria.'}</p>
+        </div>
 
-        <h3>🚦 Cumplimiento de umbrales</h3>
-        <p>
-          Días ≥ Warn: <strong>${overWarn}</strong> / ${dailyData.length} (${pct(overWarn, dailyData.length).toFixed(0)}%).
-          Días ≥ Critical: <strong>${overCrit}</strong> / ${dailyData.length} (${pct(overCrit, dailyData.length).toFixed(0)}%).
-        </p>
+        <div class="insight-section">
+          <h4>📌 Resumen Operativo del Período</h4>
+          <p>Se procesaron <strong>${formatNumber(totalTrx)} transacciones</strong> con <strong>${formatNumber(totalErrors)} errores</strong> en <strong>${dailyData.length} días</strong>.</p>
+          <p>El <strong>mejor día</strong> fue <span class="tech-metric">${formatDate(bestDay.date)}</span> con <strong>${bestDay.errorRate.toFixed(2)}%</strong> de error.
+          El <strong>peor día</strong> fue <span class="tech-metric">${formatDate(worstDay.date)}</span> con <strong>${worstDay.errorRate.toFixed(2)}%</strong>.</p>
+        </div>
 
-        <h3>📌 Resumen operativo</h3>
-        <p>
-          Total trx=<strong>${formatNumber(totalTrx)}</strong>, total errores=<strong>${formatNumber(totalErrors)}</strong>.
-          Mejor día=<strong>${formatDate(bestDay.date)}</strong> (${bestDay.errorRate.toFixed(2)}%),
-          Peor día=<strong>${formatDate(worstDay.date)}</strong> (${worstDay.errorRate.toFixed(2)}%).
-        </p>
+        <div class="insight-section">
+          <h4>🚩 Detección de Anomalías</h4>
+          <p>Se identifican como anomalías los días donde la tasa supera significativamente lo esperado
+          (umbral: promedio + ${TECH_THRESHOLDS.anomalySigma} desviaciones = <strong>${an.thr.toFixed(2)}%</strong>).</p>
+          ${
+            an.anomalies.length
+              ? `<p>Se detectaron <strong>${an.anomalies.length} día(s) anómalos</strong>:</p>
+                 ${an.anomalies.map(x => `
+                   <div class="anomaly-card">
+                     <span class="ac-date">${formatDate(x.date)}</span>
+                     <span class="ac-detail">Tasa: <strong>${x.errorRate.toFixed(2)}%</strong> — ${formatNumber(x.totalErrors)} errores de ${formatNumber(x.totalTrx)} transacciones</span>
+                   </div>
+                 `).join('')}`
+              : `<p>✅ <strong>No se detectaron anomalías.</strong> Todos los días estuvieron dentro del rango esperado.</p>`
+          }
+        </div>
 
-        <h3>🚩 Anomalías detectadas</h3>
-        ${
-          an.anomalies.length
-            ? `<p>Umbral anomalía: <strong>${an.thr.toFixed(2)}%</strong> (μ ${an.m.toFixed(2)}% + ${TECH_THRESHOLDS.anomalySigma}σ ${ (TECH_THRESHOLDS.anomalySigma*an.sd).toFixed(2) }%).</p>
-               <ul>${an.anomalies.map(x => `<li><strong>${formatDate(x.date)}</strong>: ${x.errorRate.toFixed(2)}% (Errores ${formatNumber(x.totalErrors)} / Trx ${formatNumber(x.totalTrx)})</li>`).join('')}</ul>`
-            : `<p>No se detectaron anomalías por criterio μ+${TECH_THRESHOLDS.anomalySigma}σ (umbral ${an.thr.toFixed(2)}%).</p>`
-        }
-
-        <div class="metric-context">
-          <strong>Lectura técnica:</strong> CV alto implica variabilidad significativa día a día. p95 indica “peor cola” típica.
-          Si hay anomalías, prioriza investigación en esas fechas (deploys, red, host, DB, saturación).
+        <div class="insight-verdict">
+          <h4>💡 Conclusión y Recomendaciones</h4>
+          <p>${avg < TECH_THRESHOLDS.errorRateTarget
+            ? 'El sistema opera dentro de la meta. Se recomienda mantener monitoreo continuo y alertas preventivas para detectar desviaciones tempranas.'
+            : avg < TECH_THRESHOLDS.errorRateCritical
+            ? 'La tasa promedio supera la meta. Se recomienda: (1) Investigar los días anómalos, (2) Revisar los errores más frecuentes en "Top Errores", (3) Verificar si el volumen alto correlaciona con más fallos.'
+            : 'La tasa promedio está en nivel crítico. Acción inmediata requerida: (1) Escalar a infraestructura, (2) Analizar errores H03/H23 por problemas de conectividad, (3) Revisar capacidad en días de alto volumen.'
+          }</p>
         </div>
       `;
     }
@@ -2367,53 +2601,105 @@
 
       const avgTrx = mean(dailyData.map(d => d.totalTrx));
       const avgRate = mean(dailyData.map(d => d.errorRate));
+      const maxTrxDay = dailyData.reduce((max, d) => d.totalTrx > max.totalTrx ? d : max, dailyData[0]);
+      const minTrxDay = dailyData.reduce((min, d) => d.totalTrx < min.totalTrx ? d : min, dailyData[0]);
 
-      // rachas sobre warn y critical
       let streakWarn = 0, maxStreakWarn = 0;
       let streakCrit = 0, maxStreakCrit = 0;
 
       dailyData.forEach(d => {
         if (d.errorRate >= TECH_THRESHOLDS.errorRateWarn) { streakWarn++; maxStreakWarn = Math.max(maxStreakWarn, streakWarn); }
         else streakWarn = 0;
-
         if (d.errorRate >= TECH_THRESHOLDS.errorRateCritical) { streakCrit++; maxStreakCrit = Math.max(maxStreakCrit, streakCrit); }
         else streakCrit = 0;
       });
 
-      // correlación simple de señal: peores días con volumen alto?
       const topWorst = [...dailyData].sort((a,b)=>b.errorRate-a.errorRate).slice(0,3);
       const highVolInWorst = topWorst.filter(d => d.totalTrx >= avgTrx * TECH_THRESHOLDS.volSpikeFactor).length;
 
       const an = detectAnomaliesBySigma(dailyData);
 
       return `
-        <p>
-          <strong>Promedios:</strong> trx μ=<strong>${formatNumber(Math.round(avgTrx))}</strong>, tasa μ=<strong>${avgRate.toFixed(2)}%</strong>.
-          <strong>Volumen alto</strong> si trx ≥ <strong>${TECH_THRESHOLDS.volSpikeFactor.toFixed(2)}×μ</strong>.
-        </p>
+        <div class="insight-section">
+          <h4>📊 Volumen de Transacciones por Día</h4>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item">
+              <div class="ik-label">Promedio diario</div>
+              <div class="ik-value">${formatNumber(Math.round(avgTrx))}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Tasa promedio</div>
+              <div class="ik-value">${avgRate.toFixed(2)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Día más activo</div>
+              <div class="ik-value" style="font-size:1em">${formatDate(maxTrxDay.date)}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Día menos activo</div>
+              <div class="ik-value" style="font-size:1em">${formatDate(minTrxDay.date)}</div>
+            </div>
+          </div>
+          <p>En promedio, cada día se procesaron <strong>${formatNumber(Math.round(avgTrx))} transacciones</strong> con una tasa de error de <strong>${avgRate.toFixed(2)}%</strong>.
+          El día con mayor volumen fue el <strong>${formatDate(maxTrxDay.date)}</strong> con ${formatNumber(maxTrxDay.totalTrx)} transacciones,
+          mientras que el de menor actividad fue el <strong>${formatDate(minTrxDay.date)}</strong> con ${formatNumber(minTrxDay.totalTrx)} transacciones.</p>
+        </div>
 
-        <h3>📈 Rachas sobre umbral</h3>
-        <p>
-          Max racha ≥ Warn (${TECH_THRESHOLDS.errorRateWarn.toFixed(1)}%): <strong>${maxStreakWarn}</strong> días.
-          Max racha ≥ Critical (${TECH_THRESHOLDS.errorRateCritical.toFixed(1)}%): <strong>${maxStreakCrit}</strong> días.
-        </p>
+        <div class="insight-section">
+          <h4>📈 Rachas de Días Consecutivos con Problemas</h4>
+          <p>Se analizó cuántos días consecutivos la tasa de error estuvo por encima de los umbrales definidos:</p>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item">
+              <div class="ik-label">Racha máx. en alerta (≥${TECH_THRESHOLDS.errorRateWarn.toFixed(1)}%)</div>
+              <div class="ik-value">${maxStreakWarn} <span style="font-size:0.5em">días</span></div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Racha máx. en crítico (≥${TECH_THRESHOLDS.errorRateCritical.toFixed(1)}%)</div>
+              <div class="ik-value">${maxStreakCrit} <span style="font-size:0.5em">días</span></div>
+            </div>
+          </div>
+          <p>${maxStreakWarn <= 1 ? '✅ No se observaron rachas prolongadas en nivel de alerta. Los problemas fueron puntuales y se recuperaron rápidamente.' :
+             maxStreakWarn <= 3 ? '⚠️ Hubo rachas de hasta ' + maxStreakWarn + ' días consecutivos en nivel de alerta, lo que sugiere que algunos problemas tardaron en resolverse.' :
+             '🔴 Se detectaron rachas de ' + maxStreakWarn + ' días consecutivos en alerta. Esto indica problemas persistentes que no fueron atendidos a tiempo.'}</p>
+          <p>${maxStreakCrit === 0 ? 'No hubo rachas de días en nivel crítico.' :
+             '⚠️ La racha más larga en nivel crítico fue de ' + maxStreakCrit + ' día(s) consecutivos. Cada día en nivel crítico representa una degradación importante del servicio.'}</p>
+        </div>
 
-        <h3>🔎 Señal carga vs fallo</h3>
-        <p>
-          En el Top 3 peores días (por tasa), <strong>${highVolInWorst}</strong> tuvieron volumen alto.
-          ${highVolInWorst ? '➡️ Indicio de saturación/capacidad.' : '➡️ Indicio de incidentes/timeout/red/host más que carga.'}
-        </p>
+        <div class="insight-section">
+          <h4>🔎 Relación entre Volumen Alto y Fallos</h4>
+          <p>Se analizaron los <strong>3 peores días</strong> (por tasa de error) para determinar si los fallos coincidieron con picos de volumen:</p>
+          <ul>
+            ${topWorst.map(d => `<li><strong>${formatDate(d.date)}</strong>: Tasa ${d.errorRate.toFixed(2)}% — ${formatNumber(d.totalTrx)} transacciones ${d.totalTrx >= avgTrx * TECH_THRESHOLDS.volSpikeFactor ? '<span class="status-pill warning">Volumen alto</span>' : '<span class="status-pill good">Volumen normal</span>'}</li>`).join('')}
+          </ul>
+          <p>${highVolInWorst >= 2
+            ? '📌 <strong>Hallazgo:</strong> La mayoría de los peores días coincidieron con volumen alto. Esto sugiere que el sistema podría estar alcanzando su límite de capacidad. Se recomienda revisar la escalabilidad de la infraestructura.'
+            : highVolInWorst === 1
+            ? '📌 <strong>Hallazgo:</strong> Solo uno de los peores días tuvo volumen alto. Los fallos parecen estar más relacionados con incidentes específicos (errores de red, timeouts, mantenimientos) que con sobrecarga.'
+            : '📌 <strong>Hallazgo:</strong> Ninguno de los peores días tuvo volumen alto. Los fallos no están relacionados con la carga del sistema, sino con incidentes técnicos específicos como problemas de red, timeouts o errores de configuración.'}</p>
+        </div>
 
-        <h3>🚩 Anomalías (μ + ${TECH_THRESHOLDS.anomalySigma}σ)</h3>
-        ${
-          an.anomalies.length
-            ? `<p>Umbral anomalía: <strong>${an.thr.toFixed(2)}%</strong>.</p>
-               <ul>${an.anomalies.map(x => `<li><strong>${formatDate(x.date)}</strong>: ${x.errorRate.toFixed(2)}% (Errores ${formatNumber(x.totalErrors)} / Trx ${formatNumber(x.totalTrx)})</li>`).join('')}</ul>`
-            : `<p>No se detectaron anomalías por μ+${TECH_THRESHOLDS.anomalySigma}σ.</p>`
-        }
+        <div class="insight-section">
+          <h4>🚩 Días Anómalos Detectados</h4>
+          <p>Umbral de anomalía: <strong>${an.thr.toFixed(2)}%</strong> (superior al comportamiento normal esperado).</p>
+          ${
+            an.anomalies.length
+              ? `<p>Se identificaron <strong>${an.anomalies.length} día(s)</strong> con comportamiento anómalo:</p>
+                 ${an.anomalies.map(x => `
+                   <div class="anomaly-card">
+                     <span class="ac-date">${formatDate(x.date)}</span>
+                     <span class="ac-detail">Tasa: <strong>${x.errorRate.toFixed(2)}%</strong> — ${formatNumber(x.totalErrors)} errores de ${formatNumber(x.totalTrx)} transacciones</span>
+                   </div>
+                 `).join('')}`
+              : `<p>✅ No se detectaron días con comportamiento anómalo. Todos se mantuvieron dentro de los parámetros estadísticamente esperados.</p>`
+          }
+        </div>
 
-        <div class="metric-context">
-          <strong>Lectura técnica:</strong> si la tasa sube sin subir trx → revisar timeouts/host/red. Si sube con trx → revisar capacidad/colas/DB.
+        <div class="insight-verdict">
+          <h4>💡 Interpretación General</h4>
+          <p>${highVolInWorst >= 2
+            ? 'Los datos sugieren una posible saturación del sistema en días de alta demanda. Se recomienda: (1) Evaluar la capacidad máxima de procesamiento, (2) Implementar balanceo de carga o escalamiento automático, (3) Monitorear latencias en tiempo real durante picos.'
+            : 'Los errores parecen estar más asociados a incidentes técnicos que a la carga del sistema. Se recomienda: (1) Revisar logs de los días con mayor tasa de error, (2) Verificar la estabilidad de las conexiones de red, (3) Analizar si hubo cambios o despliegues en las fechas problemáticas.'
+          }</p>
         </div>
       `;
     }
@@ -2426,14 +2712,15 @@
 
       const worst = weeks.reduce((max, w) => w.rate > max.rate ? w : max, weeks[0]);
       const best = weeks.reduce((min, w) => w.rate < min.rate ? w : min, weeks[0]);
+      const totalTrxAllWeeks = weeks.reduce((s, w) => s + w.trx, 0);
 
-      // Week-over-week deltas en pp
       const deltas = [];
       for (let i = 1; i < weeks.length; i++) {
         deltas.push({
           from: weeks[i-1].number,
           to: weeks[i].number,
-          dpp: weeks[i].rate - weeks[i-1].rate
+          dpp: weeks[i].rate - weeks[i-1].rate,
+          trxChange: weeks[i-1].trx > 0 ? ((weeks[i].trx - weeks[i-1].trx) / weeks[i-1].trx * 100) : 0
         });
       }
 
@@ -2444,31 +2731,79 @@
       const avg = mean(rates);
       const sd = std(rates);
 
+      // trend: compare first half vs second half
+      const halfIdx = Math.ceil(weeks.length / 2);
+      const firstHalfAvg = mean(weeks.slice(0, halfIdx).map(w => w.rate));
+      const secondHalfAvg = mean(weeks.slice(halfIdx).map(w => w.rate));
+      const trendDiff = secondHalfAvg - firstHalfAvg;
+
       return `
-        <p>
-          Semanas: <strong>${weeks.length}</strong>. Tasa semanal μ=<strong>${avg.toFixed(2)}%</strong>, σ=<strong>${sd.toFixed(2)}</strong>.
-        </p>
+        <div class="insight-section">
+          <h4>📊 Resumen por Semanas</h4>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item">
+              <div class="ik-label">Total semanas</div>
+              <div class="ik-value">${weeks.length}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Tasa promedio</div>
+              <div class="ik-value">${avg.toFixed(2)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Variación entre semanas</div>
+              <div class="ik-value">${sd.toFixed(2)}</div>
+            </div>
+          </div>
+          <p>El período se dividió en <strong>${weeks.length} semanas</strong>. La tasa de error promedio semanal fue de <strong>${avg.toFixed(2)}%</strong>
+          con una variación (desviación estándar) de <strong>${sd.toFixed(2)}</strong> entre semanas.</p>
+        </div>
 
-        <h3>🏁 Mejor/Peor semana</h3>
-        <p>
-          Mejor: <strong>Semana ${best.number}</strong> (${best.rate.toFixed(2)}%, trx ${formatNumber(best.trx)}).
-          Peor: <strong>Semana ${worst.number}</strong> (${worst.rate.toFixed(2)}%, trx ${formatNumber(worst.trx)}).
-        </p>
+        <div class="insight-section">
+          <h4>🏆 Mejor y Peor Semana</h4>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item" style="border-color:#bbf7d0;background:linear-gradient(135deg,#f0fdf4,#dcfce7)">
+              <div class="ik-label">✅ Mejor semana</div>
+              <div class="ik-value" style="color:#16a34a">Semana ${best.number}</div>
+            </div>
+            <div class="insight-kpi-item" style="border-color:#fecaca;background:linear-gradient(135deg,#fef2f2,#fee2e2)">
+              <div class="ik-label">❌ Peor semana</div>
+              <div class="ik-value" style="color:#dc2626">Semana ${worst.number}</div>
+            </div>
+          </div>
+          <p><strong>Semana ${best.number}</strong> fue la de mejor rendimiento con una tasa de error de solo <strong>${best.rate.toFixed(2)}%</strong>
+          y un volumen de ${formatNumber(best.trx)} transacciones (${pct(best.trx, totalTrxAllWeeks).toFixed(1)}% del total).</p>
+          <p><strong>Semana ${worst.number}</strong> tuvo el peor desempeño con <strong>${worst.rate.toFixed(2)}%</strong> de tasa de error
+          y ${formatNumber(worst.trx)} transacciones. Se recomienda revisar los eventos ocurridos durante esta semana.</p>
+        </div>
 
-        <h3>🔁 Week-over-week (pp)</h3>
-        ${
-          deltas.length
-            ? `<p>
-                 Mayor deterioro: <strong>${maxUp.from}→${maxUp.to}</strong> (${maxUp.dpp>=0?'+':''}${maxUp.dpp.toFixed(2)} pp).
-                 Mayor mejora: <strong>${maxDown.from}→${maxDown.to}</strong> (${maxDown.dpp>=0?'+':''}${maxDown.dpp.toFixed(2)} pp).
-               </p>
-               <p>Significativo si |Δpp| ≥ <strong>${TECH_THRESHOLDS.ppMeaningful.toFixed(2)} pp</strong>.</p>`
-            : `<p>No hay suficientes semanas para comparar.</p>`
-        }
+        <div class="insight-section">
+          <h4>🔁 Evolución Semana a Semana</h4>
+          ${
+            deltas.length
+              ? `<p>Se comparó cada semana con la anterior para identificar mejoras o deterioros:</p>
+                 <ul>
+                   ${deltas.map(d => `<li>Semana ${d.from} → Semana ${d.to}: tasa de error <strong>${d.dpp >= 0 ? 'subió' : 'bajó'} ${Math.abs(d.dpp).toFixed(2)} puntos</strong> ${Math.abs(d.dpp) >= TECH_THRESHOLDS.ppMeaningful ? (d.dpp > 0 ? '<span class="status-pill critical">Deterioro significativo</span>' : '<span class="status-pill good">Mejora significativa</span>') : '<span class="status-pill warning">Cambio menor</span>'}, volumen ${d.trxChange >= 0 ? '+' : ''}${d.trxChange.toFixed(1)}%</li>`).join('')}
+                 </ul>
+                 ${maxUp ? `<p>📈 <strong>Mayor deterioro:</strong> Entre la Semana ${maxUp.from} y la Semana ${maxUp.to}, la tasa subió <strong>${maxUp.dpp.toFixed(2)} puntos porcentuales</strong>.</p>` : ''}
+                 ${maxDown ? `<p>📉 <strong>Mayor mejora:</strong> Entre la Semana ${maxDown.from} y la Semana ${maxDown.to}, la tasa bajó <strong>${Math.abs(maxDown.dpp).toFixed(2)} puntos porcentuales</strong>.</p>` : ''}`
+              : `<p>No hay suficientes semanas para realizar comparaciones.</p>`
+          }
+        </div>
 
-        <div class="metric-context">
-          <strong>Lectura técnica:</strong> Δpp sostenidos suelen indicar cambios estructurales (capacidad/config/deploy).
-          Semana peor es el foco para cruzar con Top Errores y H03/H23.
+        <div class="insight-section">
+          <h4>📈 Tendencia General del Período</h4>
+          <p>Comparando la primera mitad del período (promedio: <strong>${firstHalfAvg.toFixed(2)}%</strong>) con la segunda mitad (promedio: <strong>${secondHalfAvg.toFixed(2)}%</strong>):</p>
+          <p>${trendDiff < -0.5 ? '✅ <strong>Tendencia positiva:</strong> La tasa de error ha <strong>mejorado</strong> en ' + Math.abs(trendDiff).toFixed(2) + ' puntos porcentuales. El sistema muestra una tendencia de estabilización.' :
+             trendDiff > 0.5 ? '🔴 <strong>Tendencia negativa:</strong> La tasa de error ha <strong>empeorado</strong> en ' + trendDiff.toFixed(2) + ' puntos porcentuales. Se requiere investigar las causas del deterioro progresivo.' :
+             '⚪ <strong>Tendencia estable:</strong> No se observa un cambio significativo entre ambas mitades del período.' }</p>
+        </div>
+
+        <div class="insight-verdict">
+          <h4>💡 Conclusión Semanal</h4>
+          <p>La semana ${worst.number} debe ser el foco de investigación, cruzando con los datos de "Top Errores" y "H03/H23" para identificar causas raíz.
+          ${trendDiff > 0.5 ? 'La tendencia al alza en la tasa de error sugiere un deterioro progresivo que puede estar asociado a cambios en infraestructura, configuración o incremento sostenido de demanda.' :
+           trendDiff < -0.5 ? 'La tendencia a la baja es positiva y puede indicar que acciones correctivas previas están funcionando.' :
+           'La estabilidad entre semanas sugiere que los problemas son puntuales y no estructurales.'}</p>
         </div>
       `;
     }
@@ -2476,7 +2811,8 @@
     function buildInsightsComparativosTech() {
       if (!dailyData?.length) return "<p>No hay datos para comparativos.</p>";
 
-      // replicar comparación por día de semana
+      const dayNames = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+
       const byDOW = {};
       dailyData.forEach(d => (byDOW[d.date.getDay()] ||= []).push(d));
 
@@ -2496,36 +2832,111 @@
 
       if (!comps.length) return "<p>No hay suficientes semanas consecutivas para comparativos.</p>";
 
-      const dayNames = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-
       const worst = [...comps].sort((a,b)=>b.dpp-a.dpp)[0];
       const best = [...comps].sort((a,b)=>a.dpp-b.dpp)[0];
-
       const sig = comps.filter(x => Math.abs(x.dpp) >= TECH_THRESHOLDS.ppMeaningful).length;
+      const improved = comps.filter(x => x.dpp < 0).length;
+      const worsened = comps.filter(x => x.dpp > 0).length;
+
+      // aggregation by day of week
+      const dowAvg = {};
+      Object.entries(byDOW).forEach(([dow, days]) => {
+        dowAvg[dow] = { avg: mean(days.map(d => d.errorRate)), count: days.length };
+      });
+      const worstDow = Object.entries(dowAvg).sort((a,b) => b[1].avg - a[1].avg)[0];
+      const bestDow = Object.entries(dowAvg).sort((a,b) => a[1].avg - b[1].avg)[0];
 
       return `
-        <p>
-          Comparaciones: <strong>${comps.length}</strong>. 
-          Cambios significativos (|Δpp| ≥ ${TECH_THRESHOLDS.ppMeaningful.toFixed(2)}): <strong>${sig}</strong>.
-        </p>
+        <div class="insight-section">
+          <h4>📊 Resumen de Comparaciones</h4>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item">
+              <div class="ik-label">Total comparaciones</div>
+              <div class="ik-value">${comps.length}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Mejoraron</div>
+              <div class="ik-value" style="color:#16a34a">${improved}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Empeoraron</div>
+              <div class="ik-value" style="color:#dc2626">${worsened}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Cambios significativos</div>
+              <div class="ik-value">${sig}</div>
+            </div>
+          </div>
+          <p>Se realizaron <strong>${comps.length} comparaciones</strong> entre el mismo día de la semana en semanas consecutivas.
+          De estas, <strong>${improved} mostraron mejora</strong> (la tasa de error bajó) y <strong>${worsened} mostraron deterioro</strong>.
+          Se consideran significativos los cambios mayores a <strong>${TECH_THRESHOLDS.ppMeaningful.toFixed(2)} puntos porcentuales</strong>.</p>
+        </div>
 
-        <h3>📈 Mayor deterioro (Δpp)</h3>
-        <p>
-          <strong>${dayNames[worst.dow]}</strong> ${formatDate(worst.date1)} → ${formatDate(worst.date2)}:
-          Δpp=<strong>+${worst.dpp.toFixed(2)}</strong>, Δtrx=<strong>${worst.trxPct>=0?'+':''}${worst.trxPct.toFixed(1)}%</strong>,
-          Δerr=<strong>${worst.errPct>=0?'+':''}${worst.errPct.toFixed(1)}%</strong>.
-        </p>
+        <div class="insight-section">
+          <h4>📅 Rendimiento por Día de la Semana</h4>
+          <p>Promedio de tasa de error agrupado por día de la semana:</p>
+          <ul>
+            ${Object.entries(dowAvg).sort((a,b) => b[1].avg - a[1].avg).map(([dow, data]) =>
+              `<li><strong>${dayNames[dow]}</strong>: promedio de <strong>${data.avg.toFixed(2)}%</strong> de error (${data.count} observaciones)
+              ${Number(dow) === Number(worstDow[0]) ? '<span class="status-pill critical">Peor día</span>' : ''}
+              ${Number(dow) === Number(bestDow[0]) ? '<span class="status-pill good">Mejor día</span>' : ''}</li>`
+            ).join('')}
+          </ul>
+          <p>El día de la semana con mayor incidencia de errores es el <strong>${dayNames[worstDow[0]]}</strong> (promedio ${worstDow[1].avg.toFixed(2)}%),
+          mientras que el más estable es el <strong>${dayNames[bestDow[0]]}</strong> (promedio ${bestDow[1].avg.toFixed(2)}%).</p>
+        </div>
 
-        <h3>📉 Mayor mejora (Δpp)</h3>
-        <p>
-          <strong>${dayNames[best.dow]}</strong> ${formatDate(best.date1)} → ${formatDate(best.date2)}:
-          Δpp=<strong>${best.dpp.toFixed(2)}</strong>, Δtrx=<strong>${best.trxPct>=0?'+':''}${best.trxPct.toFixed(1)}%</strong>,
-          Δerr=<strong>${best.errPct>=0?'+':''}${best.errPct.toFixed(1)}%</strong>.
-        </p>
+        <div class="insight-section">
+          <h4>📈 Mayor Deterioro Detectado</h4>
+          <p>El cambio negativo más grande se dio el día <strong>${dayNames[worst.dow]}</strong>,
+          comparando <strong>${formatDate(worst.date1)}</strong> contra <strong>${formatDate(worst.date2)}</strong>:</p>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item" style="border-color:#fecaca;background:#fef2f2">
+              <div class="ik-label">Cambio en tasa</div>
+              <div class="ik-value" style="color:#dc2626">+${worst.dpp.toFixed(2)} pp</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Cambio en volumen</div>
+              <div class="ik-value">${worst.trxPct >= 0 ? '+' : ''}${worst.trxPct.toFixed(1)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Cambio en errores</div>
+              <div class="ik-value" style="color:#dc2626">${worst.errPct >= 0 ? '+' : ''}${worst.errPct.toFixed(1)}%</div>
+            </div>
+          </div>
+        </div>
 
-        <div class="metric-context">
-          <strong>Lectura técnica:</strong> si Δpp empeora sin aumento de trx → sospecha degradación/timeout/red.
-          Si Δpp empeora con aumento trx → sospecha saturación/capacidad.
+        <div class="insight-section">
+          <h4>📉 Mayor Mejora Detectada</h4>
+          <p>La mejora más notable se dio el día <strong>${dayNames[best.dow]}</strong>,
+          comparando <strong>${formatDate(best.date1)}</strong> contra <strong>${formatDate(best.date2)}</strong>:</p>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item" style="border-color:#bbf7d0;background:#f0fdf4">
+              <div class="ik-label">Cambio en tasa</div>
+              <div class="ik-value" style="color:#16a34a">${best.dpp.toFixed(2)} pp</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Cambio en volumen</div>
+              <div class="ik-value">${best.trxPct >= 0 ? '+' : ''}${best.trxPct.toFixed(1)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Cambio en errores</div>
+              <div class="ik-value" style="color:#16a34a">${best.errPct >= 0 ? '+' : ''}${best.errPct.toFixed(1)}%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight-verdict">
+          <h4>💡 Interpretación</h4>
+          <p>${improved > worsened
+            ? 'La tendencia general es positiva: más comparaciones mostraron mejora que deterioro. Esto indica que las transacciones se están procesando de manera más confiable con el paso de las semanas.'
+            : improved < worsened
+            ? 'La tendencia general es preocupante: más comparaciones mostraron deterioro que mejora. Se recomienda investigar los cambios realizados y verificar la estabilidad de la infraestructura.'
+            : 'Las comparaciones muestran un balance entre mejoras y deterioros, indicando un comportamiento mixto.'
+          }
+          ${Number(worstDow[0]) === 0 || Number(worstDow[0]) === 6 ? ' Los fines de semana tienden a presentar más problemas, posiblemente por menor supervisión operativa.' : ''}
+          ${worst.trxPct > 10 && worst.dpp > 1 ? ' El mayor deterioro coincidió con un aumento de volumen, lo que sugiere posibles problemas de capacidad.' :
+           worst.dpp > 1 ? ' El mayor deterioro ocurrió sin un aumento proporcional de volumen, sugiriendo un incidente técnico específico.' : ''}</p>
         </div>
       `;
     }
@@ -2541,39 +2952,81 @@
 
       const sorted = Object.values(summary).sort((a,b)=>b.count-a.count);
       const total = sorted.reduce((s,e)=>s+e.count,0) || 1;
+      const uniqueCodes = sorted.length;
 
       const top1 = sorted[0];
       const top3 = sorted.slice(0,3);
+      const top5 = sorted.slice(0,5);
       const top1Pct = pct(top1.count, total);
       const top3Pct = pct(top3.reduce((s,e)=>s+e.count,0), total);
+      const top5Pct = pct(top5.reduce((s,e)=>s+e.count,0), total);
 
       const counts = sorted.map(x => x.count);
-      const hhi = hhiFromShares(counts); // 0..1
+      const hhi = hhiFromShares(counts);
 
-      // recomendación técnica basada en concentración
-      let concMsg = '';
-      if (top1Pct >= 40) concMsg = 'Alta concentración en un solo código: atacar Top1 tiene alto ROI.';
-      else if (top3Pct >= 60) concMsg = 'Concentración Top3 alta: atacar Top3 reduce rápido tasa global.';
-      else concMsg = 'Distribución más dispersa: requiere plan multi-causa o segmentación por TRX/fecha.';
+      let concLevel = '';
+      let concClass = '';
+      if (top1Pct >= 40) { concLevel = 'Muy alta'; concClass = 'critical'; }
+      else if (top3Pct >= 60) { concLevel = 'Alta'; concClass = 'warning'; }
+      else { concLevel = 'Dispersa'; concClass = 'good'; }
 
       return `
-        <p>
-          Total errores (según códigos): <strong>${formatNumber(total)}</strong>.
-          <span class="tech-metric">Top1=${top1Pct.toFixed(1)}%</span>
-          <span class="tech-metric">Top3=${top3Pct.toFixed(1)}%</span>
-          <span class="tech-metric">HHI=${hhi.toFixed(3)}</span>
-        </p>
+        <div class="insight-section">
+          <h4>📊 Panorama General de Errores</h4>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item">
+              <div class="ik-label">Total errores</div>
+              <div class="ik-value">${formatNumber(total)}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Códigos únicos</div>
+              <div class="ik-value">${uniqueCodes}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Concentración</div>
+              <div class="ik-value"><span class="status-pill ${concClass}">${concLevel}</span></div>
+            </div>
+          </div>
+          <p>Se identificaron <strong>${uniqueCodes} códigos de error diferentes</strong> con un total de <strong>${formatNumber(total)} ocurrencias</strong>.
+          La concentración de errores es <strong>${concLevel.toLowerCase()}</strong>
+          ${top1Pct >= 40 ? ', lo que significa que un solo código concentra gran parte de los fallos.' :
+            top3Pct >= 60 ? ', lo que significa que los 3 principales códigos acumulan más de la mitad de todos los errores.' :
+            ', lo que indica que los errores están distribuidos entre múltiples causas.'}</p>
+        </div>
 
-        <h3>🔝 Dominancia y concentración</h3>
-        <p>
-          Top1: <strong>${top1.code}</strong> (${formatNumber(top1.count)} / ${top1Pct.toFixed(1)}%).
-          Top3: <strong>${top3.map(x=>x.code).join(', ')}</strong>.
-        </p>
-        <p>${concMsg}</p>
+        <div class="insight-section">
+          <h4>🔝 Concentración de Errores (Top 5)</h4>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item">
+              <div class="ik-label">Top 1</div>
+              <div class="ik-value">${top1Pct.toFixed(1)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Top 3</div>
+              <div class="ik-value">${top3Pct.toFixed(1)}%</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Top 5</div>
+              <div class="ik-value">${top5Pct.toFixed(1)}%</div>
+            </div>
+          </div>
+          <p><strong>Error más frecuente:</strong> <span class="tech-metric">${top1.code}</span> con ${formatNumber(top1.count)} ocurrencias (${top1Pct.toFixed(1)}% del total).
+          ${top1.description ? `<br>Descripción: <em>${top1.description}</em>` : ''}</p>
+          <p><strong>Top 3 errores:</strong></p>
+          <ul>
+            ${top3.map((e, i) => `<li><span class="tech-metric">${e.code}</span> — ${formatNumber(e.count)} ocurrencias (${pct(e.count, total).toFixed(1)}%)${e.description ? ': ' + e.description : ''}</li>`).join('')}
+          </ul>
+          <p>Los 3 principales errores representan el <strong>${top3Pct.toFixed(1)}%</strong> del total. ${top3Pct >= 60 ? 'Resolver estos 3 errores reduce significativamente la tasa global de fallos.' : 'Aunque son los más frecuentes, se necesitaría abordar más códigos para lograr una reducción relevante.'}</p>
+        </div>
 
-        <div class="metric-context">
-          <strong>Lectura técnica:</strong> HHI cercano a 1 indica concentración extrema. Valores bajos implican dispersión.
-          Úsalo para decidir si atacar 1 causa (Top1) o varias (Top3/Top5).
+        <div class="insight-verdict">
+          <h4>💡 Recomendación de Acción</h4>
+          <p>${top1Pct >= 40
+            ? `<strong>Prioridad máxima:</strong> El error <span class="tech-metric">${top1.code}</span> concentra el ${top1Pct.toFixed(1)}% de todos los fallos. Resolver esta única causa reducirá drásticamente la tasa de error global. Se recomienda un análisis de causa raíz específico para este código.`
+            : top3Pct >= 60
+            ? `<strong>Prioridad alta:</strong> Los códigos ${top3.map(e=>'<span class="tech-metric">' + e.code + '</span>').join(', ')} acumulan el ${top3Pct.toFixed(1)}% de todos los errores. Un plan de acción enfocado en estos 3 códigos tendrá el mayor impacto en la reducción de la tasa de error.`
+            : `<strong>Análisis segmentado necesario:</strong> Los errores están distribuidos entre múltiples códigos. Se recomienda segmentar por tipo de transacción y fecha para identificar patrones específicos, ya que no existe un único código dominante.`
+          }</p>
         </div>
       `;
     }
@@ -2585,11 +3038,14 @@
 
       const h03Total = errorCodeData.filter(e => e.errorCode === 'H03').reduce((s,e)=>s+(e.count||0),0);
       const h23Total = errorCodeData.filter(e => e.errorCode === 'H23').reduce((s,e)=>s+(e.count||0),0);
+      const combined = h03Total + h23Total;
 
       const h03ShareAll = pct(h03Total, totalErrors);
       const h23ShareAll = pct(h23Total, totalErrors);
+      const combinedShare = pct(combined, totalErrors);
 
-      const coverage = pct((errorCodeDataByDate || []).length, (dailyData || []).length);
+      const h03ShareCombined = combined > 0 ? pct(h03Total, combined) : 0;
+      const h23ShareCombined = combined > 0 ? pct(h23Total, combined) : 0;
 
       const byDate = (errorCodeDataByDate || []).map(d => ({
         date: new Date(d.date),
@@ -2598,9 +3054,8 @@
         total: Number(d.h03Count||0) + Number(d.h23Count||0)
       })).sort((a,b)=>b.total-a.total);
 
-      const topDates = byDate.slice(0, 4);
+      const topDates = byDate.slice(0, 5);
 
-      // Top TRX for H03/H23
       const flat = [];
       (errorCodeDataByDate || []).forEach(day => {
         (day.allErrors || []).forEach(e => {
@@ -2621,27 +3076,83 @@
       })();
 
       return `
-        <p>
-          Cobertura por fecha H03/H23: <strong>${coverage.toFixed(0)}%</strong>.
-          Participación sobre <strong>errores totales</strong>:
-          <span class="tech-metric">H03=${h03ShareAll.toFixed(1)}%</span>
-          <span class="tech-metric">H23=${h23ShareAll.toFixed(1)}%</span>
-        </p>
+        <div class="insight-section">
+          <h4>📊 Participación de H03 y H23 en los Errores Totales</h4>
+          <div class="insight-kpi-row">
+            <div class="insight-kpi-item" style="border-color:#fecaca;background:linear-gradient(135deg,#fef2f2,#fee2e2)">
+              <div class="ik-label">H03 (Conectividad/Host)</div>
+              <div class="ik-value" style="color:#dc2626">${formatNumber(h03Total)}</div>
+            </div>
+            <div class="insight-kpi-item" style="border-color:#fde68a;background:linear-gradient(135deg,#fffbeb,#fef3c7)">
+              <div class="ik-label">H23 (Timeout/Latencia)</div>
+              <div class="ik-value" style="color:#d97706">${formatNumber(h23Total)}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">Total H03 + H23</div>
+              <div class="ik-value">${formatNumber(combined)}</div>
+            </div>
+            <div class="insight-kpi-item">
+              <div class="ik-label">% de todos los errores</div>
+              <div class="ik-value">${combinedShare.toFixed(1)}%</div>
+            </div>
+          </div>
+          <p>Los errores <strong>H03</strong> y <strong>H23</strong> combinados representan el <strong>${combinedShare.toFixed(1)}%</strong> de todos los errores del período.</p>
+          <p><strong>H03</strong> (generalmente asociado a problemas de conectividad con el host) representa el <strong>${h03ShareAll.toFixed(1)}%</strong> del total de errores
+          (${h03ShareCombined.toFixed(1)}% dentro de H03+H23).</p>
+          <p><strong>H23</strong> (generalmente asociado a timeouts y latencia del backend) representa el <strong>${h23ShareAll.toFixed(1)}%</strong> del total de errores
+          (${h23ShareCombined.toFixed(1)}% dentro de H03+H23).</p>
+          <p>${h03Total > h23Total
+            ? '📌 <strong>H03 es predominante</strong>, lo que sugiere que los problemas principales están relacionados con la conectividad hacia los sistemas de destino.'
+            : h23Total > h03Total
+            ? '📌 <strong>H23 es predominante</strong>, lo que sugiere que los problemas principales están relacionados con tiempos de respuesta excesivos del backend.'
+            : '📌 Ambos errores tienen una participación similar, indicando problemas tanto de conectividad como de latencia.'}</p>
+        </div>
 
-        <h3>📆 Fechas pico (H03+H23)</h3>
-        ${
-          topDates.length
-            ? `<ul>${topDates.map(x => `<li><strong>${formatDate(x.date)}</strong>: ${formatNumber(x.total)} (H03 ${formatNumber(x.h03)} / H23 ${formatNumber(x.h23)})</li>`).join('')}</ul>`
-            : `<p>No hay detalle por fecha.</p>`
-        }
+        <div class="insight-section">
+          <h4>📅 Fechas con Mayor Incidencia de H03 + H23</h4>
+          <p>Los días con más errores H03 y H23 combinados fueron:</p>
+          ${
+            topDates.length
+              ? `${topDates.map((x, i) => `
+                   <div class="anomaly-card">
+                     <span class="ac-date">${i+1}. ${formatDate(x.date)}</span>
+                     <span class="ac-detail">
+                       Total: <strong>${formatNumber(x.total)}</strong>
+                       (H03: ${formatNumber(x.h03)} | H23: ${formatNumber(x.h23)})
+                     </span>
+                   </div>
+                 `).join('')}`
+              : `<p>No hay detalle disponible por fecha.</p>`
+          }
+          <p>Estas fechas deben revisarse en detalle para identificar si hubo eventos específicos (mantenimientos, caídas de red, despliegues) que causaron los picos.</p>
+        </div>
 
-        <h3>🔝 TRX más incidentes</h3>
-        <p><strong>Top TRX H03:</strong> ${topTrxH03.map(x => `${x.k} (${formatNumber(x.v)})`).join(', ') || 'N/A'}</p>
-        <p><strong>Top TRX H23:</strong> ${topTrxH23.map(x => `${x.k} (${formatNumber(x.v)})`).join(', ') || 'N/A'}</p>
+        <div class="insight-section">
+          <h4>🔝 Transacciones Más Afectadas</h4>
+          <p>Las transacciones que más generan errores H03 y H23 son:</p>
+          ${topTrxH03.length ? `
+            <p><strong>Top transacciones con H03:</strong></p>
+            <ul>
+              ${topTrxH03.map(x => `<li><span class="tech-metric">${x.k}</span> — ${formatNumber(x.v)} errores H03</li>`).join('')}
+            </ul>
+          ` : '<p>No hay datos de transacciones H03.</p>'}
+          ${topTrxH23.length ? `
+            <p><strong>Top transacciones con H23:</strong></p>
+            <ul>
+              ${topTrxH23.map(x => `<li><span class="tech-metric">${x.k}</span> — ${formatNumber(x.v)} errores H23</li>`).join('')}
+            </ul>
+          ` : '<p>No hay datos de transacciones H23.</p>'}
+        </div>
 
-        <div class="metric-context">
-          <strong>Lectura técnica:</strong> H03 suele asociarse a conectividad/host; H23 a timeouts/latencia backend.
-          Atacar 1–2 TRX top reduce rápido el total.
+        <div class="insight-verdict">
+          <h4>💡 Recomendaciones Específicas</h4>
+          <p>${h03Total > h23Total
+            ? '<strong>Priorizar la revisión de conectividad:</strong> Los errores H03 predominan, lo cual típicamente indica problemas con la comunicación hacia los hosts de destino. Acciones sugeridas: (1) Verificar estabilidad de las conexiones de red, (2) Revisar configuración de firewalls y balanceadores, (3) Validar disponibilidad de los servicios de destino.'
+            : h23Total > h03Total
+            ? '<strong>Priorizar la optimización de tiempos de respuesta:</strong> Los errores H23 predominan, lo cual indica que las respuestas del backend están tardando más de lo aceptable. Acciones sugeridas: (1) Revisar performance de bases de datos y servicios, (2) Evaluar si los timeouts están correctamente configurados, (3) Monitorear la latencia de los servicios críticos.'
+            : '<strong>Atender ambos frentes:</strong> Tanto H03 como H23 tienen participación significativa. Se recomienda un análisis integral que cubra conectividad (H03) y performance/tiempos de respuesta (H23).'
+          }</p>
+          <p>Focalizarse en las transacciones más afectadas (${topTrxH03.length ? topTrxH03[0].k : ''} para H03${topTrxH23.length ? ' y ' + topTrxH23[0].k + ' para H23' : ''}) generará el mayor impacto con el menor esfuerzo.</p>
         </div>
       `;
     }
@@ -2680,8 +3191,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
